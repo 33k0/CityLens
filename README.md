@@ -9,8 +9,9 @@ Civic Voice Map ingests them, classifies each by category and stance, resolves e
 plots them on a map of San José, and overlays census demographics to show **which neighborhoods are underheard** on
 each item, with fairness metrics from IBM AI Fairness 360.
 
-**Status: Milestones 0–1 done** (scaffold + real Granicus eComments scraper). The app currently renders every
-ingested comment; the map, fairness panels and assistant are later milestones.
+**Status:** scaffold, real Legistar letters ingest, census tracts + ACS, and the real 311 problems layer are done.
+The app renders every ingested letter and the 311 aggregates. Voice (letters, email, site) and Problems (311) are
+separate families and are never summed. The map, fairness panels and assistant are later milestones.
 
 ## Demo
 
@@ -18,7 +19,7 @@ ingested comment; the map, fairness panels and assistant are later milestones.
 npm install
 python3.11 -m venv .venv && .venv/bin/pip install aif360 && .venv/bin/pip install pandas geopandas shapely pyproj httpx beautifulsoup4 lxml rapidfuzz datasketch langdetect python-dotenv pillow pytest
 npm run demo          # offline: committed fixtures -> dev server at http://localhost:5173
-npm run demo:warm     # re-scrapes Granicus (1 req/s, ~1 min) then starts the dev server
+npm run demo:warm     # re-inventories Legistar and downloads/parses letter PDFs (1 req/s; OCR needs `brew install tesseract`)
 npm test              # vitest + pytest
 npm run build         # static build, zero keys needed
 ```
@@ -27,12 +28,19 @@ No API keys are needed for anything that exists today. See `.env.example` for th
 
 ## Data sources & provenance
 
-- **eComments (real):** `sanjose.granicusideas.com`, 4 City Council agenda items chosen by comment count
-  (2020-04-07 Rent Suspension; 2022-01-25 Gun Harm Reduction Ordinance; 2023-06-06 RV Communities / Emergency
-  Interim Housing; 2023-06-06 Berryessa Lease). **685 comments**, every one matching the site's declared count.
-  Commenter names, emails and addresses are dropped at ingest; raw HTML stays in gitignored `data/raw/`.
-  The site does not publish the neighborhood or zip fields, so eComment locations come from the text (Milestone 4).
-- **Emails:** mock, Milestone 2, every record carries `"mock": true`.
+- **Written comments (real):** the emailed **Letters from the Public** attached to City Council agenda items on
+  Legistar, 2025–2026, via the Legistar Web API (`webapi.legistar.com/v1/sanjose`). Inventory on 2026-10-23: 405
+  letter PDFs on 300 matters across 82 council meetings. **Currently ingested: 15 PDFs on 10 matters → 271 letters**
+  (local PDFs; `scripts/ingest_legistar.py` can inventory and download more). 93% of those letters are OCR'd scans
+  (early-2025 bundles); location coverage by tier is reported after Milestone 4. Sender names, emails and phone
+  numbers are removed at ingest; raw PDFs and signature addresses stay in gitignored `data/raw/`.
+- **311 service requests (real):** San José Open Data "311 Service Request Data" (CC0), 2025 and 2026 yearly CSVs,
+  window 2025-07-01 onward: 455,545 requests, 224,694 of them located to one of the city's 215 census tracts by
+  point-in-polygon (the other half have no coordinates in the source; mostly garbage-service requests). Coordinates
+  are discarded after the join; no address exists in the source.
+- **Tracts / demographics:** TIGER 2024 cartographic tracts clipped to the city limits (215 tracts), ACS 5-year 2024.
+- **Emails:** mock channel (Milestone 2), every record `"mock": true`, kept as a test fixture only if real letters
+  exceed ~150 (they do).
 
 Details and every assumption: [DECISIONS.md](DECISIONS.md).
 

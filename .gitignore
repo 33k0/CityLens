@@ -9,3 +9,4 @@ __pycache__/
 data/raw/
 .DS_Store
 *.log
+data/requests_311.csv

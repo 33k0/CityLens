@@ -1,0 +1,39 @@
+service_type,category_raw,category,note
+Junk pickup,*,sanitation_dumping,scheduled junk pickup requests (account-based; mostly no coordinates)
+Illegal Dumping,*,sanitation_dumping,
+Container Issues,*,sanitation_dumping,garbage/recycle cart issues
+Missed Collection,*,sanitation_dumping,
+Street Sweeping Service,*,sanitation_dumping,
+Start New Services,*,sanitation_dumping,garbage service sign-up
+Garbage and Recycling,*,sanitation_dumping,
+Graffiti,*,graffiti_blight,
+Vehicle Concerns,*,abandoned_vehicles_parking,
+Abandoned Vehicle,*,abandoned_vehicles_parking,
+Streetlight Outage,*,streets_infrastructure,
+Pothole,*,streets_infrastructure,
+Storm/Sewer Water,*,streets_infrastructure,
+Water,*,utilities_billing,water account/billing requests
+Encampment Concerns,*,homelessness_encampments,
+Eviction Prevention,*,housing,
+Illegal Fireworks,*,noise_nuisance,
+Community WiFi,*,other,
+Other Issues,Sidewalk,streets_infrastructure,
+Other Issues,Light Pole,streets_infrastructure,
+Other Issues,Utility Box,graffiti_blight,graffiti on utility boxes
+Other Issues,Painted Wall,graffiti_blight,
+Other Issues,Unpainted Wall,graffiti_blight,
+Other Issues,Wood Fence,graffiti_blight,
+Other Issues,Chain Link Fence,graffiti_blight,
+Other Issues,Streets Dispatch,streets_infrastructure,
+Other Issues,Tree,parks_trees,
+Other Issues,Park Picnic Table,parks_trees,
+Other Issues,Park Restroom Building,parks_trees,
+Other Issues,Homeless concerns,homelessness_encampments,
+Other Issues,Non-emergency police,public_safety,
+Other Issues,Vehicle complaint,abandoned_vehicles_parking,
+Other Issues,Parking permit,abandoned_vehicles_parking,
+Other Issues,Building permit,permits_code,
+Other Issues,Code Inquiry,permits_code,
+Other Issues,SewerSanitation/WasteWater,streets_infrastructure,
+Other Issues,*,other,
+RGR?CCC,*,utilities_billing,garbage/recycling customer-service and billing contacts

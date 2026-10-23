@@ -217,3 +217,35 @@ Dates are absolute. Newest at the bottom of each section.
 - "Problems without voice" panel is live in the 311 view. 65 tracts meet the 311 side (≥ 70th percentile of
   requests per 1k). The voice column reads "pending" because no letter has a tract yet; it fills in once
   `resolve_locations.py` (Milestone 4) writes `tract_id` on letters. Only percentiles are shown, never raw counts.
+
+## Milestone 2 — simulated email channel (`scripts/ingest_emails.py`, 2026-10-23)
+
+- **No emails are generated.** Per the user, the channel is exactly the user-supplied `sanjose_city_emails.csv`
+  (164 rows: from, to, date, subject, body, attachment). The raw CSV lives only in gitignored
+  `data/raw/emails/`; the committed fixture `public/data/fixtures/emails.json` is PII-free. Every row carries
+  `channel="email"`, `mock=true`. `scripts/generate_mock_emails.py` is not used.
+- **Simulated agenda items.** The CSV has no agenda item, so each email is assigned to one of 10 fictional items
+  (`MOCK-26-901`…`910`: Terra Verde data center, streetlight reliability on Story/King, Alma Ave pavement repair,
+  rental habitability, fourplex reform, rent-cap amendment, dumping/Coyote Creek, permitting, public safety budget,
+  Blossom Hill rezoning) or to `MOCK-GEN` general correspondence. Assignment is weighted keyword scoring: strong cues
+  that name the item count 3, thread-context cues count 1, highest wins, ties go to the earlier item. "renter" is
+  deliberately not a cue because renters write about both zoning and rent. Result: streetlights 40, rent cap 39,
+  Alma Ave 20, habitability 12, data center 11, fourplex 9, dumping 8, permitting 8, public safety 7,
+  Blossom Hill 2, general 6 (job loss, medical debt, downtown flooding, cost of living, senior center, air quality).
+  The item titles and meeting dates are invented and labeled simulated.
+- **eComment-portal rows.** 6 rows were sent to an "eComments Portal" address by people who also emailed. They are
+  kept with `submitted_via="ecomments_portal"` and `duplicate_of` pointing at the same sender's email on the same
+  item (identity hash = sha256 of the sender address). They are the cross-channel dedup test.
+- **PII.** Sender display names and addresses are dropped; `identity_hash` is kept for dedup. Body scrubbing removes
+  email addresses, phone numbers, the sender's full name, signature lines containing sender-name tokens, and
+  person-name lines right after a sign-off ("Respectfully,", "Atentamente,", "Trân trọng,"…) unless the line is a
+  title ("Executive Director", "Coordinator"). Organization names are not personal data and are kept (an
+  organization's subject line is never scrubbed). Audit on the output: 0 email addresses, 0 full sender names,
+  0 signer lines. Recipient offices ("District 7 Council Office") are kept because they are public roles.
+- `commenter_type`: `.org` sender or "(fictional)" organization → organization (6); property management →
+  developer_or_counsel (1); else resident (157). Languages by langdetect: en 149, es 9, vi 6.
+- **Attachments** (12) are recorded as metadata only (`kind`, `description`, `redacted=false`, `served=false`). The
+  Wikimedia image URLs stay in the raw CSV; nothing is downloaded or displayed until the redaction step processes it.
+- `public/data/inbox.json` feeds the Inbox panel: emails as received, newest first, sender shown as
+  "[name and address removed at ingest]".
+- Pipeline: step b in `scripts/data.sh`; `--offline` (or a missing raw CSV) rebuilds from the fixture.

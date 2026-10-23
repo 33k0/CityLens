@@ -7,7 +7,7 @@ PY=.venv/bin/python
 run() { if [ -f "scripts/$1" ]; then echo "== $1"; "$PY" "scripts/$1" "${@:2}"; else echo "-- $1 (not built yet, skipped)"; fi; }
 # a  Legistar crawl is NOT part of the default pipeline (local PDFs + items.csv instead; see ingest_letters.py --crawl)
 run ingest_letters.py "$@"             # a2 (split local Letters PDFs into comment rows)
-run generate_mock_emails.py           # b
+run ingest_emails.py "$@"              # b  (simulated email channel from the user-supplied CSV; no generation)
 run build_tracts.py "$@"              # c
 run ingest_311.py "$@"                 # a3 (311 service requests -> per-tract counts; needs tracts from c)
 run resolve_locations.py              # d

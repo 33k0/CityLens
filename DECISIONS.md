@@ -207,5 +207,13 @@ Dates are absolute. Newest at the bottom of each section.
   "Who we're not hearing from" uses voice only. The assistant's numbers object has separate `voice` and
   `requests_311` keys and its answers name the family.
 - Implemented so far: the viewer labels each panel by family, "All items" is voice-only, 311 is its own entry with
-  its own month slider, and every share or rank on the 311 panel is within 311 only. The map, fairness, Region
-  Summary and assistant rules apply when those milestones are built.
+  its own month slider, and every share or rank on the 311 panel is within 311 only.
+- Shared logic lives in `src/data/families.ts` with a Python mirror in `scripts/families.py`:
+  `sumWithinFamily` / `sum_within_family` throw if a count from the other family is added, shares are computed
+  within one family, rates are annualized per 1,000 residents, and percentiles use mid-rank ties
+  (`100 × (below + 0.5 × equal) / n`, tracts without population excluded). `tests/fixtures/families_parity.json` is
+  checked by both vitest and pytest so the two implementations cannot drift. Later steps (fairness, map, Region
+  Summary, assistant) must go through these functions rather than adding counts directly.
+- "Problems without voice" panel is live in the 311 view. 65 tracts meet the 311 side (≥ 70th percentile of
+  requests per 1k). The voice column reads "pending" because no letter has a tract yet; it fills in once
+  `resolve_locations.py` (Milestone 4) writes `tract_id` on letters. Only percentiles are shown, never raw counts.

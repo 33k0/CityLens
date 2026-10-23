@@ -135,7 +135,7 @@ export default function CommentsTable() {
 
         <main>
           {item === '311' ? (
-            <Requests311 />
+            <Requests311 voice={data.comments} />
           ) : (
           <>
           {sel && (

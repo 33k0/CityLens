@@ -26,16 +26,13 @@ export interface RawComment {
   ocr: boolean
   has_address_hint: boolean
   pdf_file: string
+  tract_id?: string | null // set by resolve_locations.py (Milestone 4)
   pdf_page_start: number
   pdf_page_end: number
   pages_total: number
   pages_exhibit: number
   after_deadline: boolean | null
 }
-
-/** Channel families. Voice and Problems are never summed, ranked, or charted together. */
-export type Family = 'voice' | 'problems'
-export const FAMILY_OF: Record<RawComment['channel'] | '311', Family> = { letter: 'voice', email: 'voice', site: 'voice', '311': 'problems' }
 
 export interface ItemMeta {
   item: string

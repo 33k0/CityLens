@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import { load311ByTract, load311Sample } from '../data/loaders'
 import type { Requests311ByTract, Request311Sample } from '../data/types311'
+import type { RawComment } from '../data/types'
+import ProblemsWithoutVoice from './ProblemsWithoutVoice'
 
 const LABEL: Record<string, string> = {
   sanitation_dumping: 'Sanitation & dumping', graffiti_blight: 'Graffiti & blight', abandoned_vehicles_parking: 'Abandoned vehicles & parking',
@@ -9,7 +11,7 @@ const LABEL: Record<string, string> = {
 }
 
 /** "Citywide 311 — last 12 months": the real problems layer, as tables until the map lands in Milestone 7. */
-export default function Requests311() {
+export default function Requests311({ voice }: { voice: RawComment[] }) {
   const [data, setData] = useState<Requests311ByTract | null>(null)
   const [sample, setSample] = useState<Request311Sample | null>(null)
   const [error, setError] = useState<string | null>(null)
@@ -152,8 +154,10 @@ export default function Requests311() {
             ))}
           </ol>
         </div>
-        <p className="mt-2 text-xs text-stone-500">Rate = requests ÷ ACS 2024 tract population × 1,000, scaled to 12 months. The "problems without voice" ranking (high 311, low comment volume) arrives with the fairness step.</p>
+        <p className="mt-2 text-xs text-stone-500">Rate = requests ÷ ACS 2024 tract population × 1,000, scaled to 12 months. Rates and ranks here are within 311 only.</p>
       </section>
+
+      <ProblemsWithoutVoice data311={data} voice={voice} />
 
       {sample && (
         <section className="rounded-lg border border-stone-200 bg-white p-3">

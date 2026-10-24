@@ -40,7 +40,7 @@ Staff can count comments, but they cannot see:
 
 ## The research behind CityLens
 
-Research from 2016 to 2026 points the same way: city feedback systems hear mostly from older, wealthier,
+Research from 2017 to 2026 points the same way: city feedback systems hear mostly from older, wealthier,
 English-speaking homeowners, and AI summaries can make the gap worse. Each finding below is tied to a feature.
 
 **1. Underserved areas report less, even when problems are worse.**
@@ -149,6 +149,21 @@ AI does the reading, sorting and explaining; code does all the counting.
   360 results when it explains who is underheard.
 - **Fairness and statistics are deterministic:** IBM AI Fairness 360, pandas and Spearman correlations. The AI never
   invents a number.
+
+## Responsible AI and privacy
+
+- **Privacy by design:** names, emails and phone numbers are removed as soon as each comment is loaded, and nothing
+  finer than a census tract is ever stored or shown. Raw PDFs and source files never leave the team's machines.
+- **Every AI label is traceable:** each one quotes the resident's own words, and code rejects any quote that isn't
+  word-for-word in the original.
+- **AI explains, code counts:** every count, rate, ranking and fairness metric is computed in code. The underheard
+  rule lives in a team settings file, not in a model's judgment.
+- **The assistant can't make things up unchecked:** the server validates every citation and every map action against
+  the app's data before staff see it, and each answer separates findings from background and caveats.
+- **Honest about uncertainty:** simulated data is labeled everywhere, every map shows how many comments could be
+  placed, and correlations are described as patterns between places, never as traits of a group. Police calls are
+  presented as calls, not crimes.
+- **Staff-only:** the assistant is built for council staff and is not public-facing.
 
 ## How we built it
 
@@ -282,6 +297,13 @@ We used several AI technologies, several from IBM:
 
 Every number in CityLens is computed by code, never by a model. The team reviewed and tested the work: 50 front-end
 and 138 Python tests.
+
+## Try it
+
+- **Live app:** https://city-lens-livid.vercel.app. Try the chat with "Tell me what the community with the most voice
+  and least voice is and then tell me reasons as to why this is."
+- **Code and setup:** https://github.com/33k0/CityLens. The README covers running it locally (`npm install`,
+  `npm run dev`), tests (`npm test`) and rebuilding the data. No keys are in the repository.
 
 ## Sources
 

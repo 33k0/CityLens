@@ -547,3 +547,22 @@ Dates are absolute. Newest at the bottom of each section.
   categories.json), so a section keeps its color everywhere. Validator: all hard checks pass on white (worst adjacent
   CVD ΔE 9.1, normal-vision ΔE 19.6); three hues are below 3:1 contrast, so every chart ships visible labels.
   Change arrows use ink, not status colors, because more or fewer reports is not good or bad by itself.
+
+### Generated constituent emails for geographic coverage (2026-10-23)
+
+- 385 more simulated emails, written by the build agent, live in `data/raw/emails/sanjose_city_emails_generated.csv`
+  (the user's CSV is untouched). `ingest_emails.py` reads both files. Generated rows have `generated=true`,
+  `generated_by="build agent"` and `source_file`/`source_row` in emails_raw.csv, inbox.json, the email fixture and
+  comments.json. All are `mock=true` and use fictional names and example.* addresses.
+- Their geography is shaped to follow the usual participation pattern in San José. Homeowner and high-income
+  tracts write in at about twice the per-resident rate of middle tracts. Usual under-heard areas get few emails, and
+  more of those are short and in Spanish or Vietnamese. A few less obvious spots get none: tracts picked from the data
+  for a high 311 rate plus many renters or limited-English households (Starbird, Blackford, Cadillac Winchester,
+  Windmill Springs, Hoffman-Via Monte), and the Tasman/Zanker apartment tracts. Census and 311 numbers are not
+  changed.
+- Every located generated email resolves to its intended tract with a residence basis, through a real intersection
+  or a neighborhood name. Generated rows are excluded from the item-cluster and named-place passes in
+  `resolve_locations.py`, so the locations of the original 435 comments do not change.
+- Labels and actionable flags come from the build agent (engine `build-agent`), with no Bob calls
+  (`BOB_BUDGET_USD=0`). Bob spend is unchanged at $8.99 over 19 runs. The labels are in
+  `data/bob_work/agent_labels.json` and `actionable_agent.json`, which are gitignored.

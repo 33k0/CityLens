@@ -117,7 +117,7 @@ We want our software to help politicians direct their objectives to areas that m
 
 ## The metrics we derived
 
-Every number is computed in code, never by an AI model. The unit is the census tract (San José has 215). Comments, 311 reports and police calls are kept separate and compared only through per-resident rates and rankings, never added together.
+Every number is computed in code, never by an AI model. The unit is the census tract (San José has 215). Comments, 311 reports and police calls are kept separate and compared only through per-resident rates and scores, never added together.
 
 ### Rates
 
@@ -131,20 +131,23 @@ Every number is computed in code, never by an AI model. The unit is the census t
 
 Repeat submissions are removed (RapidFuzz), and form-letter campaigns (MinHash) count once in the fairness checks. Billing and account requests are left out of 311. Police calls are calls, not crimes.
 
-### Rankings: putting voice and problems on the same scale
+### Scores: putting voice and problems on the same scale
 
-San José has about 217,000 311 reports but only a few hundred real comments, so the raw numbers can't be compared directly. Instead, CityLens ranks every census tract twice, like a percentile on a test score: once for how much it **writes in** and once for how many **problems it reports**, each per resident. Both ranks run from 0 to 100, so they can be compared side by side.
+San José has about 217,000 311 reports but only a few hundred real comments, so the raw counts can't be compared. Instead, each census tract gets two scores from 0 to 100:
+
+- **Voice score:** line up all 215 census tracts from fewest to most comments per resident. The score is how far along the line a census tract sits. **10 means 90% of census tracts write in more than it does.** 50 is the middle of the city; 90 is near the top.
+- **Problems score:** the same line-up, using 311 reports per resident (or police calls, if selected). **90 means it reports more problems than 90% of census tracts.**
+
+Because both scores use the same 0–100 scale, they can be compared directly.
 
 | Metric | What it means | How we get it |
 |---|---|---|
-| **Comment rank** (0–100) | How much a census tract writes in, compared with the rest of the city | The share of census tracts with a lower comment rate. 10 = writes in more than only 10% of census tracts. No comments = 0. |
-| **Problems rank** (0–100) | How many problems it reports, compared with the rest of the city | The same, using 311 reports per resident (or police calls, if selected). 90 = reports more than 90% of census tracts. |
-| **Underheard map score** | How far problems outpace voice; the darker the purple, the bigger the gap | Problems rank − comment rank. |
-| **Problems without voice** | The starkest gaps, highlighted on the map | Problems rank of 70 or more **and** comment rank of 30 or less. |
-| **Voice for its problems** (the red-to-yellow column) | How much a place speaks up for each problem it reports, compared with the city | (comments per resident ÷ 311 reports per resident) ÷ the same ratio for the whole city. 1.0 = city level; 0.25 = a quarter of the city's voice per problem; 0 = no voice at all. |
-| **Underheard census tract** (the final label) | The places worth outreach | Sends under half the comments its population predicts, **and** either reports 311 problems at or above the city rate or has limited-English households at 1.5× the city share. Few comments with few problems is labeled **quiet** instead. |
+| **Underheard map score** | How far problems outpace voice; the darker the purple, the bigger the gap | Problems score − voice score |
+| **Problems without voice** | The starkest gaps, highlighted on the map | Problems score of 70 or more **and** voice score of 30 or less |
+| **Voice for its problems** (the red-to-yellow column) | How much a place speaks up for each problem it reports, compared with the city | (comments per resident ÷ 311 reports per resident) ÷ the same ratio for the whole city. 1.0 = city level; 0.25 = a quarter of the city's voice per problem; 0 = no voice at all |
+| **Underheard census tract** (the final label) | The places worth outreach | Sends under half the comments its population predicts, **and** either reports 311 problems at or above the city rate or has limited-English households at 1.5× the city share. Few comments with few problems is labeled **quiet** instead |
 
-**Example:** a census tract with a problems rank of 90 and a comment rank of 10 gets an underheard map score of 80, so it shows as dark purple. It also counts as "problems without voice". If it sends under half its expected comments, it is labeled underheard and appears in the "Who we are not hearing from" table.
+**Example:** a census tract with a problems score of 90 and a voice score of 10 reports more problems than 90% of the city but writes in less than 90% of it. Its underheard map score is 80, so it shows as dark purple and counts as "problems without voice".
 
 ### Fairness (IBM AI Fairness 360)
 
@@ -245,7 +248,7 @@ Every number in CityLens is computed by code, never by a model. The team reviewe
 - **The data source we planned on was nearly empty:** We designed around Granicus eComments, then found San José's portal has barely been used since 2023. Real written comments now arrive as scanned PDF bundles on Legistar, so we built an OCR pipeline instead; 93% of the letters came from scans.
 - **Placing comments on the map:** Most letters don't include an address. Only 16% of real letters had enough location detail to place in a census tract, so every map shows its coverage to avoid mistaking missing locations for silence. We also correct OCR-garbled street names against the city's street list before matching.
 - **Messy city data:** About half of 311 requests have no coordinates, and police calls give only block ranges or intersections, so we matched them to the city's street address ranges.
-- **Comparing very different sources:** 311 reports outnumber real comments by about a thousand to one, so we compare them through per-resident rankings and never add them together (see The metrics we derived).
+- **Comparing very different sources:** 311 reports outnumber real comments by about a thousand to one, so we compare them through per-resident scores and never add them together (see The metrics we derived).
 - **Keeping AI honest:** Bob sometimes returned quotes that weren't exact or broke the JSON format. We added strict checks and retries instead of trusting the output. Form-letter copies reuse their original's label, with the quote re-matched to each copy's own OCR text (102 copies needed it).
 - **Form-letter campaigns:** One agenda item had 188 letters, 167 of them copies of one campaign. Without deduplication, it would have looked like 188 independent opinions.
 

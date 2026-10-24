@@ -405,16 +405,19 @@ async function mount(root,init){
   const isT=!!S.tractDetail;const reg=S.region;const t0=isT?D.byTract[S.tractDetail]:null;const city=!isT&&reg&&reg.poly==='city';
   const tr=isT?[t0]:regionTracts(reg.poly);const ids=new Set(tr.map(t=>t.id));const cs=D.comments.filter(c=>ids.has(c.tract));
   const f=areaFacts(tr);const exp=tr.reduce((s,t)=>s+t.exp,0);
-  const row=(v,l,sm)=>`<div class="prow"><b>${v}</b><div><div class="pl">${l}</div>${sm?`<div class="ps">${sm}</div>`:''}</div></div>`;
+  const row=(v,l,sm)=>`<div class="prow"><span class="pl">${l}</span><b>${v}</b>${sm?`<span class="ps">${sm}</span>`:''}</div>`;
   let rows='';
-  rows+=row(fmt(f.pop),'residents',city?`${fmt(tr.length)} census tracts`:isT?`${fmt(f.hh)} households · ${(f.pop/D.totPop*100).toFixed(2)}% of the city`:`${tr.length} census tracts · ${(f.pop/D.totPop*100).toFixed(1)}% of the city`);
+  rows+=row(fmt(f.pop),'Residents',city?`${fmt(f.hh)} households`:isT?`${fmt(f.hh)} households · ${(f.pop/D.totPop*100).toFixed(2)}% of the city`:`${(f.pop/D.totPop*100).toFixed(1)}% of the city`);
   rows+=row(P0(f.eng),'English-only households',city?'':`${P0(f.engC)} citywide`);
-  rows+=row(P0(f.ren),'renter households',city?'':`${P0(f.renC)} citywide`);
-  rows+=row(f.incWord,'median income',incLine(f));
+  rows+=row(P0(f.ren),'Renter households',city?'':`${P0(f.renC)} citywide`);
+  rows+=row(f.incWord,'Median income',incLine(f));
   const cnt={};cs.forEach(c=>cnt[c.cat]=(cnt[c.cat]||0)+1);const top=Object.entries(cnt).sort((a,b)=>b[1]-a[1])[0];
   const cc={};D.comments.forEach(c=>cc[c.cat]=(cc[c.cat]||0)+1);
   const gap=exp?Math.round((cs.length-exp)/exp*100):0;
-  const foot=`<div class="pfoot"><div><b>${fmt(cs.length)}</b> comment${cs.length===1?'':'s'} located here${city?'':` · ${exp<1?exp.toFixed(1):Math.round(exp)} expected from population${cs.length?` (${sgn(gap)}%)`:''}`}</div>${top?`<div>Top issue: <b>${esc(CATN[top[0]])}</b> · ${P0(top[1]/cs.length)} here${city?'':` vs ${P0((cc[top[0]]||0)/Math.max(1,D.comments.length))} citywide`}</div>`:cs.length?'':'<div class="muted">No comments located here — unknown, not absent.</div>'}${ITEM.n311?`<div>${fmt(tr.reduce((s,t)=>s+t.p311,0))} 311 problem reports</div>`:''}</div>`;
+  let fr=row(fmt(cs.length),'Comments located here',city?'':`${exp<1?exp.toFixed(1):Math.round(exp)} expected from population${cs.length?` (${sgn(gap)}%)`:''}`);
+  fr+=top?row(esc(CATN[top[0]]),'Top issue',`${P0(top[1]/cs.length)} of comments here${city?'':` vs ${P0((cc[top[0]]||0)/Math.max(1,D.comments.length))} citywide`}`):cs.length?'':'<div class="prow"><span class="ps" style="grid-column:1/-1;text-align:left">No comments located here: unknown, not absent.</span></div>';
+  if(ITEM.n311)fr+=row(fmt(tr.reduce((s,t)=>s+t.p311,0)),'311 problem reports','');
+  const foot=`<div class="prows pfoot">${fr}</div>`;
   const title=isT?t0.nbhd:reg.name;const sub=isT?`Census tract ${t0.id}`:`${tr.length} census tracts`;
   return `<div class="rmh"><div style="min-width:0">${isT&&reg?`<button class="link" data-act="untract" style="font-size:11.5px">← ${esc(reg.name)}</button>`:''}<div class="pt">${esc(title)}</div><div class="small muted">${sub}</div></div><button class="colbtn" data-act="closemodal" aria-label="Close">×</button></div><div class="prows">${rows}</div>${foot}<div class="rmf"><button class="btn pri" data-act="analytics" style="width:100%;justify-content:center;height:32px">Open analytics</button></div>`}
  /* ---------- analytics dashboard: KPI tiles, then charts, every mark has a hover tip ---------- */

@@ -83,7 +83,7 @@ Only these are allowed; anything else is dropped:
 | `{"type":"open_analytics","scope":"city"\|"region"\|"tract"}` | "open analytics", "show the charts for this region" |
 | `{"type":"open_comment","id":"<comment_id>"}` | "open that email", "show me the comment about King Road" |
 | `{"type":"filter_stance","ids":["support","oppose","neutral","unclear"]}` (subset) | "only opposing comments" |
-| `{"type":"set_view","id":"sbs"\|"map"}` | "compare voice and problems", "show them side by side", or whenever a side-by-side look helps the answer |
+| `{"type":"set_view","id":"sbs"\|"map"}` | only when the user asks to compare views or see them side by side ("compare voice and problems", "show them side by side"); never as an extra |
 | `{"type":"open_analytics","scope":"city"\|"region"\|"tract","section":"<category key>"}` (section optional) | "open the housing analytics", "show the charts for public safety" |
 | `{"type":"select_district","id":"3"}` | "show District 3", "pull up the census tracts in district 7" |
 | `{"type":"select_area","name":"Downtown"}` (a name or alias from `area_index.json`) | "what's going on downtown", "show Mayfair" |

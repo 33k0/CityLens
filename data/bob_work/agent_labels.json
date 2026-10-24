@@ -1,0 +1,3467 @@
+{
+ "E7469c2f9": {
+  "category": "environment_development_review",
+  "confidence": 0.88,
+  "evidence_quote": "Rezoning the Blossom Hill retail parcel for another strip mall will add traffic that is already jammed at school pickup.",
+  "stance": "oppose",
+  "stance_evidence": "Please deny the Blossom Hill rezoning application.",
+  "subcategory": "traffic_neighborhood_character",
+  "bob_task_id": ""
+ },
+ "E3c296092": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.91,
+  "evidence_quote": "My neighbor's catalytic converter was cut off in broad daylight last week.",
+  "stance": "support",
+  "stance_evidence": "Please fund faster police response for property crime.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "E47b18276": {
+  "category": "infrastructure_streets",
+  "confidence": 0.82,
+  "evidence_quote": "The road surface on our block is so broken that delivery trucks swerve into the bike lane.",
+  "stance": "oppose",
+  "stance_evidence": "I OPPOSE spending on cosmetic projects while basic streets crumble.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "Ea095f47d": {
+  "category": "infrastructure_streets",
+  "confidence": 0.9,
+  "evidence_quote": "A pothole near the crosswalk bent the rim on my car last week.",
+  "stance": "support",
+  "stance_evidence": "Please fix this pothole before someone gets hurt.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "E9ff5dc88": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.88,
+  "evidence_quote": "I signed a lease for my bakery last winter and still can't open because the permit is stuck.",
+  "stance": "support",
+  "stance_evidence": "Please fix the permit backlog and set a real turnaround time.",
+  "subcategory": "permit_backlog_delays",
+  "bob_task_id": ""
+ },
+ "E67acd857": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.93,
+  "evidence_quote": "Package theft and car break-ins on our block have doubled this year.",
+  "stance": "support",
+  "stance_evidence": "Please fund faster police response for property crime.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "E43383df8": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.86,
+  "evidence_quote": "Package theft and car break-ins on our block have doubled this year.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT more patrols and community service officers in our area.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "E2371faa9": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.91,
+  "evidence_quote": "Có người vứt nệm cũ và rác ở góc đường nhà tôi.",
+  "stance": "support",
+  "stance_evidence": "Tôi ủng hộ phạt nặng người vứt rác.",
+  "subcategory": "illegal_dumping_creek",
+  "bob_task_id": ""
+ },
+ "E82a66941": {
+  "category": "other",
+  "confidence": 0.84,
+  "evidence_quote": "El centro para personas mayores redujo sus horas y mi mamá ya no tiene a dónde ir.",
+  "stance": "support",
+  "stance_evidence": "Por favor regresen el horario completo.",
+  "subcategory": "senior_services_general",
+  "bob_task_id": ""
+ },
+ "E0e9b15b6": {
+  "category": "infrastructure_streets",
+  "confidence": 0.92,
+  "evidence_quote": "A pothole near the crosswalk bent the rim on my car last week.",
+  "stance": "support",
+  "stance_evidence": "Please repave the block instead of patching it again.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "Ef7f86225": {
+  "category": "infrastructure_streets",
+  "confidence": 0.85,
+  "evidence_quote": "The crossing by the elementary school has no signal and drivers do fifty through it.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT equal traffic-safety funding for every neighborhood, not just the loudest ones.",
+  "subcategory": "infrastructure_equity",
+  "bob_task_id": ""
+ },
+ "E1c4958fc": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.9,
+  "evidence_quote": "El centro comunitario cerró los programas para jóvenes en la noche.",
+  "stance": "support",
+  "stance_evidence": "Apoyo que la ciudad pague más programas para jóvenes.",
+  "subcategory": "crime_prevention_youth",
+  "bob_task_id": ""
+ },
+ "E87323822": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.9,
+  "evidence_quote": "We live close enough to the freeway that the windowsills are black with soot every week.",
+  "stance": "support",
+  "stance_evidence": "Please fund a sound wall and tree planting along this stretch.",
+  "subcategory": "freeway_air_quality",
+  "bob_task_id": ""
+ },
+ "Effd7295b": {
+  "category": "infrastructure_streets",
+  "confidence": 0.83,
+  "evidence_quote": "Our whole block lost its streetlights after the wire theft in the spring and only one came back.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT funding a faster repair crew and theft-proof wiring.",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ },
+ "E347b9657": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.89,
+  "evidence_quote": "The abandoned property next door has a pool full of green water and the weeds are taller than the fence.",
+  "stance": "support",
+  "stance_evidence": "Please send code enforcement back out and keep the case open until it's secured.",
+  "subcategory": "derelict_blight_enforcement",
+  "bob_task_id": ""
+ },
+ "E81239c9d": {
+  "category": "other",
+  "confidence": 0.83,
+  "evidence_quote": "The senior lunch program is the only place many older neighbors see anyone all week.",
+  "stance": "support",
+  "stance_evidence": "Please restore the full senior center schedule.",
+  "subcategory": "senior_services_general",
+  "bob_task_id": ""
+ },
+ "E0ea7807d": {
+  "category": "infrastructure_streets",
+  "confidence": 0.84,
+  "evidence_quote": "The crossing by the elementary school has no signal and drivers do fifty through it.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT equal traffic-safety funding for every neighborhood, not just the loudest ones.",
+  "subcategory": "infrastructure_equity",
+  "bob_task_id": ""
+ },
+ "E76ea6cf3": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.82,
+  "evidence_quote": "En mi cuadra ha habido varios robos a autos y casas.",
+  "stance": "support",
+  "stance_evidence": "Pedimos más vigilancia y que respondan a tiempo.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "E8b6646e9": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.91,
+  "evidence_quote": "Someone tried to break into our garage at 3 a.m. and police took over an hour to come.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT more patrols and community service officers in our area.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "E55a3b6db": {
+  "category": "infrastructure_streets",
+  "confidence": 0.85,
+  "evidence_quote": "Cada vez que llueve la calle se inunda porque el drenaje está tapado.",
+  "stance": "support",
+  "stance_evidence": "Por favor limpien el drenaje antes de las lluvias.",
+  "subcategory": "drainage_flooding",
+  "bob_task_id": ""
+ },
+ "E15df304f": {
+  "category": "infrastructure_streets",
+  "confidence": 0.95,
+  "evidence_quote": "The streetlight in front of our house has been flickering and then off entirely for six weeks.",
+  "stance": "support",
+  "stance_evidence": "Please prioritize the streetlight maintenance contract and fix our block.",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ },
+ "Ef93b9b31": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.85,
+  "evidence_quote": "The plan to add license-plate readers and surveillance cameras on every arterial goes too far for a city that values privacy.",
+  "stance": "oppose",
+  "stance_evidence": "I OPPOSE expanding surveillance cameras without a privacy ordinance first.",
+  "subcategory": "surveillance_privacy",
+  "bob_task_id": ""
+ },
+ "E31ac66c5": {
+  "category": "infrastructure_streets",
+  "confidence": 0.82,
+  "evidence_quote": "The streetlights on our street go dark every few nights and then stay out for weeks.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT funding a faster repair crew and theft-proof wiring.",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ },
+ "E637dbff0": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.89,
+  "evidence_quote": "I'm a renter and the annual increases are the reason my friends have left the city.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT lowering the annual rent-increase cap. Please vote yes.",
+  "subcategory": "rent_stabilization",
+  "bob_task_id": ""
+ },
+ "E7c9822c9": {
+  "category": "infrastructure_streets",
+  "confidence": 0.92,
+  "evidence_quote": "Varias luces de la calle están apagadas desde hace un mes.",
+  "stance": "support",
+  "stance_evidence": "Por favor manden a alguien a repararlas.",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ },
+ "Ec9204991": {
+  "category": "infrastructure_streets",
+  "confidence": 0.88,
+  "evidence_quote": "The streetlight in front of our house has been flickering and then off entirely for six weeks.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT funding a faster repair crew and theft-proof wiring.",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ },
+ "E28c30f0a": {
+  "category": "infrastructure_streets",
+  "confidence": 0.84,
+  "evidence_quote": "Water pools across the whole intersection after any storm because the drain is blocked.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT funding storm drain upgrades on residential streets.",
+  "subcategory": "drainage_flooding",
+  "bob_task_id": ""
+ },
+ "E4e5398f4": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.88,
+  "evidence_quote": "There have been five car break-ins on our street since August and two catalytic converter thefts.",
+  "stance": "support",
+  "stance_evidence": "Please fund faster police response for property crime.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "E7a6ecf8d": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.94,
+  "evidence_quote": "Package theft and car break-ins on our block have doubled this year.",
+  "stance": "support",
+  "stance_evidence": "Please fund faster police response for property crime.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "Ed1ba1f4e": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.84,
+  "evidence_quote": "Siguen tirando basura y muebles viejos en la esquina de nuestra cuadra.",
+  "stance": "support",
+  "stance_evidence": "Apoyo que la ciudad limpie y ponga cámaras.",
+  "subcategory": "illegal_dumping_creek",
+  "bob_task_id": ""
+ },
+ "E521480cc": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.91,
+  "evidence_quote": "Llevo meses esperando el permiso para una pequeña remodelación.",
+  "stance": "support",
+  "stance_evidence": "Por favor simplifiquen el proceso de permisos.",
+  "subcategory": "permit_backlog_delays",
+  "bob_task_id": ""
+ },
+ "E894737cd": {
+  "category": "governance_civic_rights",
+  "confidence": 0.91,
+  "evidence_quote": "Muchas familias tienen miedo de salir por las redadas de inmigración.",
+  "stance": "support",
+  "stance_evidence": "Apoyo la resolución para proteger a las familias inmigrantes.",
+  "subcategory": "immigrant_protection_sanctuary",
+  "bob_task_id": ""
+ },
+ "E64be606b": {
+  "category": "infrastructure_streets",
+  "confidence": 0.86,
+  "evidence_quote": "Varias luces de la calle están apagadas desde hace un mes.",
+  "stance": "support",
+  "stance_evidence": "Apoyo que la ciudad arregle las luces pronto.",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ },
+ "E6ecc2251": {
+  "category": "infrastructure_streets",
+  "confidence": 0.84,
+  "evidence_quote": "Cars speed down our street every morning and there is no marked crosswalk for the kids.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT equal traffic-safety funding for every neighborhood, not just the loudest ones.",
+  "subcategory": "infrastructure_equity",
+  "bob_task_id": ""
+ },
+ "E212fa6f9": {
+  "category": "infrastructure_streets",
+  "confidence": 0.84,
+  "evidence_quote": "The pothole patch from last year already crumbled and the hole is back, deeper.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT more road-repair funding for residential streets.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "Ef4714375": {
+  "category": "infrastructure_streets",
+  "confidence": 0.94,
+  "evidence_quote": "Có một ổ gà rất lớn trên đường nhà tôi từ mấy tháng nay.",
+  "stance": "support",
+  "stance_evidence": "Xin thành phố cho sửa đường sớm.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "E9384ca2e": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.9,
+  "evidence_quote": "我们家租房住，每年房租都涨，现在房租已经占了一半的收入。",
+  "stance": "support",
+  "stance_evidence": "请支持降低每年房租上涨的上限 (rent cap)。",
+  "subcategory": "rent_stabilization",
+  "bob_task_id": ""
+ },
+ "E42088770": {
+  "category": "infrastructure_streets",
+  "confidence": 0.87,
+  "evidence_quote": "Crews patched one pothole on our street and left four others right next to it.",
+  "stance": "support",
+  "stance_evidence": "Please repave the block instead of patching it again.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "Ef4ea553b": {
+  "category": "other",
+  "confidence": 0.93,
+  "evidence_quote": "El centro para personas mayores redujo sus horas y mi mamá ya no tiene a dónde ir.",
+  "stance": "support",
+  "stance_evidence": "Por favor regresen el horario completo.",
+  "subcategory": "senior_services_general",
+  "bob_task_id": ""
+ },
+ "E38196d4c": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.85,
+  "evidence_quote": "There have been five car break-ins on our street since August and two catalytic converter thefts.",
+  "stance": "support",
+  "stance_evidence": "Please fund faster police response for property crime.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "E9e72785e": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.92,
+  "evidence_quote": "Our ADU permit has been in plan review for eleven months and every round brings a new comment.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT the permitting modernization, but please add plan checkers, not just software.",
+  "subcategory": "permit_backlog_delays",
+  "bob_task_id": ""
+ },
+ "E9c7fd995": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.88,
+  "evidence_quote": "Someone keeps dumping mattresses and construction debris at the end of our street.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT more dumping enforcement and faster cleanup.",
+  "subcategory": "illegal_dumping_creek",
+  "bob_task_id": ""
+ },
+ "E3d72c58b": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.91,
+  "evidence_quote": "People dump old tires and paint cans by the creek path behind our homes.",
+  "stance": "support",
+  "stance_evidence": "Please schedule a cleanup crew and post no-dumping signs.",
+  "subcategory": "illegal_dumping_creek",
+  "bob_task_id": ""
+ },
+ "E815744b9": {
+  "category": "infrastructure_streets",
+  "confidence": 0.93,
+  "evidence_quote": "The pavement on our street is cracked end to end and water sits in the low spots.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT more road-repair funding for residential streets.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "E20c21177": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.85,
+  "evidence_quote": "There have been five car break-ins on our street since August and two catalytic converter thefts.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT more patrols and community service officers in our area.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "E89d6bd18": {
+  "category": "infrastructure_streets",
+  "confidence": 0.91,
+  "evidence_quote": "There is a pothole on our street the size of a manhole cover and it has been there since winter.",
+  "stance": "support",
+  "stance_evidence": "Please fix this pothole before someone gets hurt.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "E5794f822": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.93,
+  "evidence_quote": "The building's front door lock has been broken for months and strangers sleep in the stairwell.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT proactive rental inspections so tenants don't have to fight alone.",
+  "subcategory": "habitability_hot_water_mold",
+  "bob_task_id": ""
+ },
+ "E06350821": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.85,
+  "evidence_quote": "Someone keeps dumping mattresses and construction debris at the end of our street.",
+  "stance": "support",
+  "stance_evidence": "Please clean it up and put a camera at this spot.",
+  "subcategory": "illegal_dumping_creek",
+  "bob_task_id": ""
+ },
+ "Efc518073": {
+  "category": "other",
+  "confidence": 0.94,
+  "evidence_quote": "The senior center near us cut its hours to three days a week and my father now eats lunch alone most days.",
+  "stance": "support",
+  "stance_evidence": "Please restore the full senior center schedule.",
+  "subcategory": "senior_services_general",
+  "bob_task_id": ""
+ },
+ "E069a4131": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.9,
+  "evidence_quote": "许可证审批已经等了八个月，每次都要求补交新的文件。",
+  "stance": "support",
+  "stance_evidence": "希望市政府加快许可证审批，增加审图人员。",
+  "subcategory": "permit_backlog_delays",
+  "bob_task_id": ""
+ },
+ "E3717bbc1": {
+  "category": "infrastructure_streets",
+  "confidence": 0.89,
+  "evidence_quote": "Our whole block lost its streetlights after the wire theft in the spring and only one came back.",
+  "stance": "support",
+  "stance_evidence": "Please prioritize the streetlight maintenance contract and fix our block.",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ },
+ "E581b2c89": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.91,
+  "evidence_quote": "Package theft and car break-ins on our block have doubled this year.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT more patrols and community service officers in our area.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "E8454a954": {
+  "category": "infrastructure_streets",
+  "confidence": 0.89,
+  "evidence_quote": "The pothole patch from last year already crumbled and the hole is back, deeper.",
+  "stance": "support",
+  "stance_evidence": "Please fix this pothole before someone gets hurt.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "Ee530f422": {
+  "category": "infrastructure_streets",
+  "confidence": 0.93,
+  "evidence_quote": "Có một ổ gà rất lớn trên đường nhà tôi từ mấy tháng nay.",
+  "stance": "support",
+  "stance_evidence": "Xin thành phố cho sửa đường sớm.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "Ed2603149": {
+  "category": "other",
+  "confidence": 0.89,
+  "evidence_quote": "I make a decent salary and still can't save anything after rent and childcare.",
+  "stance": "unclear",
+  "stance_evidence": "",
+  "subcategory": "general_cost_of_living",
+  "bob_task_id": ""
+ },
+ "E384928e9": {
+  "category": "infrastructure_streets",
+  "confidence": 0.88,
+  "evidence_quote": "Our whole block lost its streetlights after the wire theft in the spring and only one came back.",
+  "stance": "support",
+  "stance_evidence": "Please send a crew to repair these lights.",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ },
+ "Efe4073dd": {
+  "category": "infrastructure_streets",
+  "confidence": 0.85,
+  "evidence_quote": "The pavement on our street is cracked end to end and water sits in the low spots.",
+  "stance": "oppose",
+  "stance_evidence": "I OPPOSE spending on cosmetic projects while basic streets crumble.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "E77028788": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.84,
+  "evidence_quote": "There have been five car break-ins on our street since August and two catalytic converter thefts.",
+  "stance": "support",
+  "stance_evidence": "Please fund faster police response for property crime.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "Eae9d12b2": {
+  "category": "infrastructure_streets",
+  "confidence": 0.9,
+  "evidence_quote": "Our whole block lost its streetlights after the wire theft in the spring and only one came back.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT funding a faster repair crew and theft-proof wiring.",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ },
+ "E0421f141": {
+  "category": "infrastructure_streets",
+  "confidence": 0.83,
+  "evidence_quote": "The pavement on our street is cracked end to end and water sits in the low spots.",
+  "stance": "support",
+  "stance_evidence": "Please repave the block instead of patching it again.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "E96758fe8": {
+  "category": "other",
+  "confidence": 0.86,
+  "evidence_quote": "The senior lunch program is the only place many older neighbors see anyone all week.",
+  "stance": "support",
+  "stance_evidence": "Please restore the full senior center schedule.",
+  "subcategory": "senior_services_general",
+  "bob_task_id": ""
+ },
+ "E58903180": {
+  "category": "infrastructure_streets",
+  "confidence": 0.9,
+  "evidence_quote": "Other neighborhoods got flashing beacons at their school crossings years ago and we are still waiting.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT equal traffic-safety funding for every neighborhood, not just the loudest ones.",
+  "subcategory": "infrastructure_equity",
+  "bob_task_id": ""
+ },
+ "E3cd5ba9a": {
+  "category": "infrastructure_streets",
+  "confidence": 0.88,
+  "evidence_quote": "Gần trường học không có vạch qua đường và xe chạy rất nhanh.",
+  "stance": "support",
+  "stance_evidence": "Xin thành phố làm vạch qua đường và đèn báo.",
+  "subcategory": "infrastructure_equity",
+  "bob_task_id": ""
+ },
+ "E3ccc8d98": {
+  "category": "infrastructure_streets",
+  "confidence": 0.94,
+  "evidence_quote": "Có một ổ gà rất lớn trên đường nhà tôi từ mấy tháng nay.",
+  "stance": "support",
+  "stance_evidence": "Xin thành phố cho sửa đường sớm.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "E9dd61cef": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.91,
+  "evidence_quote": "The community center near us cut its teen hours and since then there are more kids with nothing to do at night.",
+  "stance": "support",
+  "stance_evidence": "Please restore funding for youth programs in the public safety budget.",
+  "subcategory": "crime_prevention_youth",
+  "bob_task_id": ""
+ },
+ "Eef5e87db": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.84,
+  "evidence_quote": "A simple kitchen remodel permit has taken five months and three resubmittals.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT the permitting modernization, but please add plan checkers, not just software.",
+  "subcategory": "permit_backlog_delays",
+  "bob_task_id": ""
+ },
+ "E9f279830": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.85,
+  "evidence_quote": "There have been five car break-ins on our street since August and two catalytic converter thefts.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT more patrols and community service officers in our area.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "Ebca1db21": {
+  "category": "other",
+  "confidence": 0.9,
+  "evidence_quote": "Taon-taon pong tumataas ang upa namin at halos kalahati na ng sahod ko ang napupunta dito.",
+  "stance": "unclear",
+  "stance_evidence": "",
+  "subcategory": "personal_financial_hardship",
+  "bob_task_id": ""
+ },
+ "Ed8d61100": {
+  "category": "infrastructure_streets",
+  "confidence": 0.94,
+  "evidence_quote": "Mỗi lần mưa nước ngập vào sân vì cống bị nghẹt.",
+  "stance": "support",
+  "stance_evidence": "Xin cho người đến thông cống trước mùa mưa.",
+  "subcategory": "drainage_flooding",
+  "bob_task_id": ""
+ },
+ "E4a160ebb": {
+  "category": "infrastructure_streets",
+  "confidence": 0.83,
+  "evidence_quote": "Cars speed down our street every morning and there is no marked crosswalk for the kids.",
+  "stance": "support",
+  "stance_evidence": "Please install a flashing beacon and a marked crosswalk this year.",
+  "subcategory": "infrastructure_equity",
+  "bob_task_id": ""
+ },
+ "E6d7929b4": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.85,
+  "evidence_quote": "Chủ nhà bắt chúng tôi dọn đi để sửa nhà nhưng thật ra là để tăng giá.",
+  "stance": "support",
+  "stance_evidence": "Xin thành phố bảo vệ người thuê nhà và đóng lỗ hổng này.",
+  "subcategory": "tenant_protection_eviction",
+  "bob_task_id": ""
+ },
+ "Ebea0a942": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.9,
+  "evidence_quote": "People dump old tires and paint cans by the creek path behind our homes.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT more dumping enforcement and faster cleanup.",
+  "subcategory": "illegal_dumping_creek",
+  "bob_task_id": ""
+ },
+ "Ed3af36f7": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.85,
+  "evidence_quote": "Nhà hàng xóm bị trộm hai lần trong tháng.",
+  "stance": "support",
+  "stance_evidence": "Xin tăng cường tuần tra trong khu phố.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "E8292292c": {
+  "category": "infrastructure_streets",
+  "confidence": 0.88,
+  "evidence_quote": "Three streetlights on our block have been out for almost a month.",
+  "stance": "support",
+  "stance_evidence": "Please send a crew to repair these lights.",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ },
+ "E5ebe5f06": {
+  "category": "infrastructure_streets",
+  "confidence": 0.93,
+  "evidence_quote": "Crews patched one pothole on our street and left four others right next to it.",
+  "stance": "oppose",
+  "stance_evidence": "I OPPOSE spending on cosmetic projects while basic streets crumble.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "E5cd4be70": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.94,
+  "evidence_quote": "The vacant lot next to us has become a dump site for appliances and bags of trash.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT more dumping enforcement and faster cleanup.",
+  "subcategory": "illegal_dumping_creek",
+  "bob_task_id": ""
+ },
+ "Ebc6f02b1": {
+  "category": "infrastructure_streets",
+  "confidence": 0.93,
+  "evidence_quote": "Mỗi lần mưa nước ngập vào sân vì cống bị nghẹt.",
+  "stance": "support",
+  "stance_evidence": "Xin cho người đến thông cống trước mùa mưa.",
+  "subcategory": "drainage_flooding",
+  "bob_task_id": ""
+ },
+ "E2012bb0e": {
+  "category": "infrastructure_streets",
+  "confidence": 0.9,
+  "evidence_quote": "Every time it rains the storm drain at our curb backs up and water reaches the garages.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT funding storm drain upgrades on residential streets.",
+  "subcategory": "drainage_flooding",
+  "bob_task_id": ""
+ },
+ "E10cdf6f1": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.85,
+  "evidence_quote": "Our landlord sent notices to six units saying we have to leave for renovations that never seem to happen.",
+  "stance": "support",
+  "stance_evidence": "Please close the remodel loophole and require relocation payments.",
+  "subcategory": "tenant_protection_eviction",
+  "bob_task_id": ""
+ },
+ "E9c6f5f39": {
+  "category": "infrastructure_streets",
+  "confidence": 0.88,
+  "evidence_quote": "The road surface on our block is so broken that delivery trucks swerve into the bike lane.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT more road-repair funding for residential streets.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "E051c61ed": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.84,
+  "evidence_quote": "Llevo meses esperando el permiso para una pequeña remodelación.",
+  "stance": "support",
+  "stance_evidence": "Por favor simplifiquen el proceso de permisos.",
+  "subcategory": "permit_backlog_delays",
+  "bob_task_id": ""
+ },
+ "E62ab6e11": {
+  "category": "governance_civic_rights",
+  "confidence": 0.95,
+  "evidence_quote": "Muchas familias tienen miedo de salir por las redadas de inmigración.",
+  "stance": "support",
+  "stance_evidence": "Apoyo la resolución para proteger a las familias inmigrantes.",
+  "subcategory": "immigrant_protection_sanctuary",
+  "bob_task_id": ""
+ },
+ "Ec5f706a0": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.88,
+  "evidence_quote": "My rent went up again this year and it now takes more than half my paycheck.",
+  "stance": "support",
+  "stance_evidence": "Please vote YES on the rent cap amendment.",
+  "subcategory": "rent_stabilization",
+  "bob_task_id": ""
+ },
+ "E0a795504": {
+  "category": "other",
+  "confidence": 0.86,
+  "evidence_quote": "The senior lunch program is the only place many older neighbors see anyone all week.",
+  "stance": "support",
+  "stance_evidence": "Please restore the full senior center schedule.",
+  "subcategory": "senior_services_general",
+  "bob_task_id": ""
+ },
+ "Ef9f536fd": {
+  "category": "infrastructure_streets",
+  "confidence": 0.94,
+  "evidence_quote": "Có một ổ gà rất lớn trên đường nhà tôi từ mấy tháng nay.",
+  "stance": "support",
+  "stance_evidence": "Xin thành phố cho sửa đường sớm.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "E26e15ff1": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.9,
+  "evidence_quote": "Hay colchones y basura tirados junto al arroyo.",
+  "stance": "support",
+  "stance_evidence": "Por favor vengan a limpiar pronto.",
+  "subcategory": "illegal_dumping_creek",
+  "bob_task_id": ""
+ },
+ "E1c18031c": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.87,
+  "evidence_quote": "Nhà tôi sát xa lộ, bụi và tiếng ồn suốt ngày.",
+  "stance": "support",
+  "stance_evidence": "Xin xây tường cách âm và trồng cây.",
+  "subcategory": "freeway_air_quality",
+  "bob_task_id": ""
+ },
+ "E42f90e0e": {
+  "category": "infrastructure_streets",
+  "confidence": 0.92,
+  "evidence_quote": "Three streetlights on our block have been out for almost a month.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT funding a faster repair crew and theft-proof wiring.",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ },
+ "E0c07e6fe": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.85,
+  "evidence_quote": "La casa abandonada de la esquina está llena de basura y entra gente de noche.",
+  "stance": "support",
+  "stance_evidence": "Pedimos que la ciudad obligue al dueño a limpiar.",
+  "subcategory": "derelict_blight_enforcement",
+  "bob_task_id": ""
+ },
+ "E3bf8a0a0": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.92,
+  "evidence_quote": "Parking on our street is already full every night, and the fourplex reform has no plan for it.",
+  "stance": "oppose",
+  "stance_evidence": "Please vote no on citywide fourplexes.",
+  "subcategory": "housing_supply_infrastructure",
+  "bob_task_id": ""
+ },
+ "Ec93452c8": {
+  "category": "infrastructure_streets",
+  "confidence": 0.85,
+  "evidence_quote": "The streetlight in front of our house has been flickering and then off entirely for six weeks.",
+  "stance": "oppose",
+  "stance_evidence": "I OPPOSE renewing a contract that leaves lights out this long.",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ },
+ "Ee81bb6b1": {
+  "category": "infrastructure_streets",
+  "confidence": 0.92,
+  "evidence_quote": "Có một ổ gà rất lớn trên đường nhà tôi từ mấy tháng nay.",
+  "stance": "support",
+  "stance_evidence": "Xin thành phố cho sửa đường sớm.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "E84bdf250": {
+  "category": "other",
+  "confidence": 0.88,
+  "evidence_quote": "The senior lunch program is the only place many older neighbors see anyone all week.",
+  "stance": "support",
+  "stance_evidence": "Please restore the full senior center schedule.",
+  "subcategory": "senior_services_general",
+  "bob_task_id": ""
+ },
+ "E7d884d1f": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.82,
+  "evidence_quote": "A simple kitchen remodel permit has taken five months and three resubmittals.",
+  "stance": "support",
+  "stance_evidence": "Please fix the permit backlog and set a real turnaround time.",
+  "subcategory": "permit_backlog_delays",
+  "bob_task_id": ""
+ },
+ "E8c6b84ca": {
+  "category": "infrastructure_streets",
+  "confidence": 0.94,
+  "evidence_quote": "Cars speed down our street every morning and there is no marked crosswalk for the kids.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT equal traffic-safety funding for every neighborhood, not just the loudest ones.",
+  "subcategory": "infrastructure_equity",
+  "bob_task_id": ""
+ },
+ "E6d70f764": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.89,
+  "evidence_quote": "My neighbor's catalytic converter was cut off in broad daylight last week.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT more patrols and community service officers in our area.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "Ecf3d2500": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.91,
+  "evidence_quote": "There is a pile of dumped furniture and trash bags on the sidewalk that has been there two weeks.",
+  "stance": "support",
+  "stance_evidence": "Please schedule a cleanup crew and post no-dumping signs.",
+  "subcategory": "illegal_dumping_creek",
+  "bob_task_id": ""
+ },
+ "E315def3b": {
+  "category": "governance_civic_rights",
+  "confidence": 0.94,
+  "evidence_quote": "My neighbors are afraid to report crimes or take their kids to the clinic because of immigration raids.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT the resolution protecting immigrant residents.",
+  "subcategory": "immigrant_protection_sanctuary",
+  "bob_task_id": ""
+ },
+ "Efbad1002": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.85,
+  "evidence_quote": "Someone keeps dumping mattresses and construction debris at the end of our street.",
+  "stance": "support",
+  "stance_evidence": "Please schedule a cleanup crew and post no-dumping signs.",
+  "subcategory": "illegal_dumping_creek",
+  "bob_task_id": ""
+ },
+ "Ee516ffcb": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.88,
+  "evidence_quote": "The house two doors down has been vacant for three years, the roof is caving in, and people break in at night.",
+  "stance": "support",
+  "stance_evidence": "Please enforce the vacant building ordinance and fine the owner.",
+  "subcategory": "derelict_blight_enforcement",
+  "bob_task_id": ""
+ },
+ "E4c291f6c": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.89,
+  "evidence_quote": "My neighbor's catalytic converter was cut off in broad daylight last week.",
+  "stance": "support",
+  "stance_evidence": "Please fund faster police response for property crime.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "E8e3d37f8": {
+  "category": "infrastructure_streets",
+  "confidence": 0.83,
+  "evidence_quote": "Mấy cột đèn đường gần trạm xe buýt bị tắt từ tháng trước.",
+  "stance": "support",
+  "stance_evidence": "Xin quý vị cho người đến sửa sớm.",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ },
+ "E9c66a6f7": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.84,
+  "evidence_quote": "Hay colchones y basura tirados junto al arroyo.",
+  "stance": "support",
+  "stance_evidence": "Apoyo que la ciudad limpie y ponga cámaras.",
+  "subcategory": "illegal_dumping_creek",
+  "bob_task_id": ""
+ },
+ "Ece4dc6f1": {
+  "category": "governance_civic_rights",
+  "confidence": 0.85,
+  "evidence_quote": "The commission application process is hard to find and the interviews happen at 2 p.m. on weekdays.",
+  "stance": "support",
+  "stance_evidence": "Please hold evening interviews and publish the applicant pool for every commission.",
+  "subcategory": "boards_commissions_fairness",
+  "bob_task_id": ""
+ },
+ "E01d3f172": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.89,
+  "evidence_quote": "Nos robaron el convertidor catalítico del carro.",
+  "stance": "support",
+  "stance_evidence": "Pedimos más vigilancia y que respondan a tiempo.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "E383cce0a": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.94,
+  "evidence_quote": "The vacant lot next to us has become a dump site for appliances and bags of trash.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT more dumping enforcement and faster cleanup.",
+  "subcategory": "illegal_dumping_creek",
+  "bob_task_id": ""
+ },
+ "E1aecd220": {
+  "category": "infrastructure_streets",
+  "confidence": 0.95,
+  "evidence_quote": "The storm drain on our block has been clogged with leaves and silt since October.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT funding storm drain upgrades on residential streets.",
+  "subcategory": "drainage_flooding",
+  "bob_task_id": ""
+ },
+ "E9633c88a": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.91,
+  "evidence_quote": "El centro comunitario cerró los programas para jóvenes en la noche.",
+  "stance": "support",
+  "stance_evidence": "Apoyo que la ciudad pague más programas para jóvenes.",
+  "subcategory": "crime_prevention_youth",
+  "bob_task_id": ""
+ },
+ "Efe1f132f": {
+  "category": "infrastructure_streets",
+  "confidence": 0.89,
+  "evidence_quote": "Cada vez que llueve la calle se inunda porque el drenaje está tapado.",
+  "stance": "support",
+  "stance_evidence": "Por favor limpien el drenaje antes de las lluvias.",
+  "subcategory": "drainage_flooding",
+  "bob_task_id": ""
+ },
+ "Efe3af561": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.86,
+  "evidence_quote": "I signed a lease for my bakery last winter and still can't open because the permit is stuck.",
+  "stance": "support",
+  "stance_evidence": "Please fix the permit backlog and set a real turnaround time.",
+  "subcategory": "permit_backlog_delays",
+  "bob_task_id": ""
+ },
+ "Eade346ca": {
+  "category": "other",
+  "confidence": 0.89,
+  "evidence_quote": "Everything in this city costs more every year and nobody in charge seems to notice.",
+  "stance": "unclear",
+  "stance_evidence": "",
+  "subcategory": "general_cost_of_living",
+  "bob_task_id": ""
+ },
+ "E32c4c537": {
+  "category": "infrastructure_streets",
+  "confidence": 0.89,
+  "evidence_quote": "Cars speed down our street every morning and there is no marked crosswalk for the kids.",
+  "stance": "support",
+  "stance_evidence": "Please install a flashing beacon and a marked crosswalk this year.",
+  "subcategory": "infrastructure_equity",
+  "bob_task_id": ""
+ },
+ "E42b3209c": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.87,
+  "evidence_quote": "My solar permit has been pending for twelve weeks for a standard rooftop system.",
+  "stance": "support",
+  "stance_evidence": "Please fix the permit backlog and set a real turnaround time.",
+  "subcategory": "permit_backlog_delays",
+  "bob_task_id": ""
+ },
+ "Eb3d6b127": {
+  "category": "governance_civic_rights",
+  "confidence": 0.9,
+  "evidence_quote": "The commission application process is hard to find and the interviews happen at 2 p.m. on weekdays.",
+  "stance": "support",
+  "stance_evidence": "Please hold evening interviews and publish the applicant pool for every commission.",
+  "subcategory": "boards_commissions_fairness",
+  "bob_task_id": ""
+ },
+ "E0fd79f3c": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.92,
+  "evidence_quote": "Siguen tirando basura y muebles viejos en la esquina de nuestra cuadra.",
+  "stance": "support",
+  "stance_evidence": "Apoyo que la ciudad limpie y ponga cámaras.",
+  "subcategory": "illegal_dumping_creek",
+  "bob_task_id": ""
+ },
+ "Eec62b968": {
+  "category": "infrastructure_streets",
+  "confidence": 0.87,
+  "evidence_quote": "Water pools across the whole intersection after any storm because the drain is blocked.",
+  "stance": "support",
+  "stance_evidence": "Please have Public Works clear the drain before the rainy season.",
+  "subcategory": "drainage_flooding",
+  "bob_task_id": ""
+ },
+ "Edc8c5bed": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.82,
+  "evidence_quote": "My solar permit has been pending for twelve weeks for a standard rooftop system.",
+  "stance": "support",
+  "stance_evidence": "Please fix the permit backlog and set a real turnaround time.",
+  "subcategory": "permit_backlog_delays",
+  "bob_task_id": ""
+ },
+ "Ec9b05402": {
+  "category": "infrastructure_streets",
+  "confidence": 0.95,
+  "evidence_quote": "Có một ổ gà rất lớn trên đường nhà tôi từ mấy tháng nay.",
+  "stance": "support",
+  "stance_evidence": "Xin thành phố cho sửa đường sớm.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "E8f270daf": {
+  "category": "infrastructure_streets",
+  "confidence": 0.94,
+  "evidence_quote": "Cada vez que llueve la calle se inunda porque el drenaje está tapado.",
+  "stance": "support",
+  "stance_evidence": "Por favor limpien el drenaje antes de las lluvias.",
+  "subcategory": "drainage_flooding",
+  "bob_task_id": ""
+ },
+ "E85876629": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.83,
+  "evidence_quote": "Tenants in my building are being pushed out with 'substantial remodel' notices and the units get re-rented at double.",
+  "stance": "support",
+  "stance_evidence": "Please close the remodel loophole and require relocation payments.",
+  "subcategory": "tenant_protection_eviction",
+  "bob_task_id": ""
+ },
+ "E7cc5073d": {
+  "category": "infrastructure_streets",
+  "confidence": 0.93,
+  "evidence_quote": "Las luces de la calle llevan semanas apagadas en nuestra cuadra.",
+  "stance": "support",
+  "stance_evidence": "Por favor manden a alguien a repararlas.",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ },
+ "Eb8700275": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.9,
+  "evidence_quote": "Isang linggo na po kaming walang mainit na tubig sa aming apartment at hindi sumasagot ang may-ari.",
+  "stance": "support",
+  "stance_evidence": "Sana po ay magpadala kayo ng inspector sa lalong madaling panahon.",
+  "subcategory": "habitability_hot_water_mold",
+  "bob_task_id": ""
+ },
+ "Eb4273be7": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.9,
+  "evidence_quote": "Someone keeps dumping mattresses and construction debris at the end of our street.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT more dumping enforcement and faster cleanup.",
+  "subcategory": "illegal_dumping_creek",
+  "bob_task_id": ""
+ },
+ "E1266ad3b": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.86,
+  "evidence_quote": "A boarded-up commercial building on our corner has trash piling up and the fence is falling onto the sidewalk.",
+  "stance": "support",
+  "stance_evidence": "Please enforce the vacant building ordinance and fine the owner.",
+  "subcategory": "derelict_blight_enforcement",
+  "bob_task_id": ""
+ },
+ "E202041ec": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.85,
+  "evidence_quote": "The building's front door lock has been broken for months and strangers sleep in the stairwell.",
+  "stance": "support",
+  "stance_evidence": "Please send an inspector and hold the landlord accountable.",
+  "subcategory": "habitability_hot_water_mold",
+  "bob_task_id": ""
+ },
+ "E4adcf440": {
+  "category": "other",
+  "confidence": 0.91,
+  "evidence_quote": "The senior lunch program is the only place many older neighbors see anyone all week.",
+  "stance": "support",
+  "stance_evidence": "Please restore the full senior center schedule.",
+  "subcategory": "senior_services_general",
+  "bob_task_id": ""
+ },
+ "Eecd0f091": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.87,
+  "evidence_quote": "Someone tried to break into our garage at 3 a.m. and police took over an hour to come.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT more patrols and community service officers in our area.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "Eff5490f9": {
+  "category": "infrastructure_streets",
+  "confidence": 0.86,
+  "evidence_quote": "Water pools across the whole intersection after any storm because the drain is blocked.",
+  "stance": "support",
+  "stance_evidence": "Please have Public Works clear the drain before the rainy season.",
+  "subcategory": "drainage_flooding",
+  "bob_task_id": ""
+ },
+ "E379a87d3": {
+  "category": "infrastructure_streets",
+  "confidence": 0.93,
+  "evidence_quote": "Other neighborhoods got flashing beacons at their school crossings years ago and we are still waiting.",
+  "stance": "support",
+  "stance_evidence": "Please install a flashing beacon and a marked crosswalk this year.",
+  "subcategory": "infrastructure_equity",
+  "bob_task_id": ""
+ },
+ "Ea6ef1ce7": {
+  "category": "infrastructure_streets",
+  "confidence": 0.9,
+  "evidence_quote": "The pothole patch from last year already crumbled and the hole is back, deeper.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT more road-repair funding for residential streets.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "E9e50fc70": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.93,
+  "evidence_quote": "En mi cuadra ha habido varios robos a autos y casas.",
+  "stance": "support",
+  "stance_evidence": "Pedimos más vigilancia y que respondan a tiempo.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "E63d10829": {
+  "category": "infrastructure_streets",
+  "confidence": 0.89,
+  "evidence_quote": "Varias luces de la calle están apagadas desde hace un mes.",
+  "stance": "support",
+  "stance_evidence": "Apoyo que la ciudad arregle las luces pronto.",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ },
+ "E2209d493": {
+  "category": "infrastructure_streets",
+  "confidence": 0.91,
+  "evidence_quote": "The crossing by the elementary school has no signal and drivers do fifty through it.",
+  "stance": "support",
+  "stance_evidence": "Please install a flashing beacon and a marked crosswalk this year.",
+  "subcategory": "infrastructure_equity",
+  "bob_task_id": ""
+ },
+ "Ec5513606": {
+  "category": "infrastructure_streets",
+  "confidence": 0.86,
+  "evidence_quote": "Other neighborhoods got flashing beacons at their school crossings years ago and we are still waiting.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT equal traffic-safety funding for every neighborhood, not just the loudest ones.",
+  "subcategory": "infrastructure_equity",
+  "bob_task_id": ""
+ },
+ "E9e66de00": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.9,
+  "evidence_quote": "There have been five car break-ins on our street since August and two catalytic converter thefts.",
+  "stance": "support",
+  "stance_evidence": "Please fund faster police response for property crime.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "E498d5d73": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.84,
+  "evidence_quote": "Someone tried to break into our garage at 3 a.m. and police took over an hour to come.",
+  "stance": "support",
+  "stance_evidence": "Please fund faster police response for property crime.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "Eec3d8018": {
+  "category": "infrastructure_streets",
+  "confidence": 0.92,
+  "evidence_quote": "Every time it rains the storm drain at our curb backs up and water reaches the garages.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT funding storm drain upgrades on residential streets.",
+  "subcategory": "drainage_flooding",
+  "bob_task_id": ""
+ },
+ "Ea3999770": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.84,
+  "evidence_quote": "Package theft and car break-ins on our block have doubled this year.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT more patrols and community service officers in our area.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "E1ca3a1a6": {
+  "category": "infrastructure_streets",
+  "confidence": 0.92,
+  "evidence_quote": "Our whole block lost its streetlights after the wire theft in the spring and only one came back.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT funding a faster repair crew and theft-proof wiring.",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ },
+ "E746e97c1": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.91,
+  "evidence_quote": "My rent went up again this year and it now takes more than half my paycheck.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT lowering the annual rent-increase cap. Please vote yes.",
+  "subcategory": "rent_stabilization",
+  "bob_task_id": ""
+ },
+ "E83e7ee7f": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.82,
+  "evidence_quote": "Somos inquilinos y la renta ya es más de la mitad de nuestro sueldo.",
+  "stance": "support",
+  "stance_evidence": "Apoyo bajar el límite de aumento de renta. Por favor voten que sí.",
+  "subcategory": "rent_stabilization",
+  "bob_task_id": ""
+ },
+ "E4eeb5cb1": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.85,
+  "evidence_quote": "The abandoned property next door has a pool full of green water and the weeds are taller than the fence.",
+  "stance": "support",
+  "stance_evidence": "Please enforce the vacant building ordinance and fine the owner.",
+  "subcategory": "derelict_blight_enforcement",
+  "bob_task_id": ""
+ },
+ "Ec1040319": {
+  "category": "infrastructure_streets",
+  "confidence": 0.89,
+  "evidence_quote": "The streetlight in front of our house has been flickering and then off entirely for six weeks.",
+  "stance": "support",
+  "stance_evidence": "Please send a crew to repair these lights.",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ },
+ "E87e10b53": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.9,
+  "evidence_quote": "I signed a lease for my bakery last winter and still can't open because the permit is stuck.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT the permitting modernization, but please add plan checkers, not just software.",
+  "subcategory": "permit_backlog_delays",
+  "bob_task_id": ""
+ },
+ "E5fc27be1": {
+  "category": "infrastructure_streets",
+  "confidence": 0.91,
+  "evidence_quote": "The crossing by the elementary school has no signal and drivers do fifty through it.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT equal traffic-safety funding for every neighborhood, not just the loudest ones.",
+  "subcategory": "infrastructure_equity",
+  "bob_task_id": ""
+ },
+ "E8326d227": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.84,
+  "evidence_quote": "Our building changed owners and the first letter we got was a rent increase.",
+  "stance": "support",
+  "stance_evidence": "Please vote YES on the rent cap amendment.",
+  "subcategory": "rent_stabilization",
+  "bob_task_id": ""
+ },
+ "Eb41e5810": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.93,
+  "evidence_quote": "I'd like to build a small fourplex on my lot so my parents and my daughter can live nearby.",
+  "stance": "support",
+  "stance_evidence": "Please vote yes on the citywide fourplex zoning reform.",
+  "subcategory": "zoning_density_reform",
+  "bob_task_id": ""
+ },
+ "E197dccef": {
+  "category": "infrastructure_streets",
+  "confidence": 0.92,
+  "evidence_quote": "Crews patched one pothole on our street and left four others right next to it.",
+  "stance": "support",
+  "stance_evidence": "Please repave the block instead of patching it again.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "E46a45f00": {
+  "category": "infrastructure_streets",
+  "confidence": 0.82,
+  "evidence_quote": "Las luces de la calle llevan semanas apagadas en nuestra cuadra.",
+  "stance": "support",
+  "stance_evidence": "Por favor manden a alguien a repararlas.",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ },
+ "E065c1c40": {
+  "category": "infrastructure_streets",
+  "confidence": 0.88,
+  "evidence_quote": "Varias luces de la calle están apagadas desde hace un mes.",
+  "stance": "support",
+  "stance_evidence": "Por favor manden a alguien a repararlas.",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ },
+ "Eab03f964": {
+  "category": "infrastructure_streets",
+  "confidence": 0.9,
+  "evidence_quote": "Cada vez que llueve la calle se inunda porque el drenaje está tapado.",
+  "stance": "support",
+  "stance_evidence": "Por favor limpien el drenaje antes de las lluvias.",
+  "subcategory": "drainage_flooding",
+  "bob_task_id": ""
+ },
+ "Ea31f3552": {
+  "category": "infrastructure_streets",
+  "confidence": 0.83,
+  "evidence_quote": "Two streetlights near the bus stop have been out since the last storm.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT funding a faster repair crew and theft-proof wiring.",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ },
+ "E83e03208": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.89,
+  "evidence_quote": "There is a pile of dumped furniture and trash bags on the sidewalk that has been there two weeks.",
+  "stance": "support",
+  "stance_evidence": "Please clean it up and put a camera at this spot.",
+  "subcategory": "illegal_dumping_creek",
+  "bob_task_id": ""
+ },
+ "Efe6a2873": {
+  "category": "infrastructure_streets",
+  "confidence": 0.85,
+  "evidence_quote": "Có một ổ gà rất lớn trên đường nhà tôi từ mấy tháng nay.",
+  "stance": "support",
+  "stance_evidence": "Xin thành phố cho sửa đường sớm.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "E89863eea": {
+  "category": "other",
+  "confidence": 0.88,
+  "evidence_quote": "Between rent, groceries and gas, my family is falling further behind every month.",
+  "stance": "unclear",
+  "stance_evidence": "",
+  "subcategory": "general_cost_of_living",
+  "bob_task_id": ""
+ },
+ "E4694bf85": {
+  "category": "infrastructure_streets",
+  "confidence": 0.94,
+  "evidence_quote": "El bache de nuestra calle dañó la llanta de mi carro.",
+  "stance": "oppose",
+  "stance_evidence": "Me opongo a que lo dejen así tanto tiempo.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "E3de7908b": {
+  "category": "infrastructure_streets",
+  "confidence": 0.93,
+  "evidence_quote": "The storm drain on our block has been clogged with leaves and silt since October.",
+  "stance": "support",
+  "stance_evidence": "Please have Public Works clear the drain before the rainy season.",
+  "subcategory": "drainage_flooding",
+  "bob_task_id": ""
+ },
+ "E0deb326e": {
+  "category": "infrastructure_streets",
+  "confidence": 0.91,
+  "evidence_quote": "The streetlight in front of our house has been flickering and then off entirely for six weeks.",
+  "stance": "oppose",
+  "stance_evidence": "I OPPOSE renewing a contract that leaves lights out this long.",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ },
+ "Eb4945616": {
+  "category": "other",
+  "confidence": 0.83,
+  "evidence_quote": "El centro para personas mayores redujo sus horas y mi mamá ya no tiene a dónde ir.",
+  "stance": "support",
+  "stance_evidence": "Por favor regresen el horario completo.",
+  "subcategory": "senior_services_general",
+  "bob_task_id": ""
+ },
+ "Edec6c555": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.85,
+  "evidence_quote": "My neighbor's catalytic converter was cut off in broad daylight last week.",
+  "stance": "support",
+  "stance_evidence": "Please fund faster police response for property crime.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "E948c1b48": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.89,
+  "evidence_quote": "The vacant lot next to us has become a dump site for appliances and bags of trash.",
+  "stance": "support",
+  "stance_evidence": "Please clean it up and put a camera at this spot.",
+  "subcategory": "illegal_dumping_creek",
+  "bob_task_id": ""
+ },
+ "Ecfb0cc21": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.9,
+  "evidence_quote": "Raising permit fees again while review times keep growing is backwards.",
+  "stance": "oppose",
+  "stance_evidence": "I OPPOSE the fee increase unless it pays for more plan check staff.",
+  "subcategory": "permit_fees_staffing",
+  "bob_task_id": ""
+ },
+ "E0f689a2b": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.91,
+  "evidence_quote": "Our apartment has had black mold in the bathroom and bedroom since spring and the landlord just paints over it.",
+  "stance": "support",
+  "stance_evidence": "Please send an inspector and hold the landlord accountable.",
+  "subcategory": "habitability_hot_water_mold",
+  "bob_task_id": ""
+ },
+ "Ed3bffda6": {
+  "category": "infrastructure_streets",
+  "confidence": 0.88,
+  "evidence_quote": "Mỗi lần mưa nước ngập vào sân vì cống bị nghẹt.",
+  "stance": "support",
+  "stance_evidence": "Xin cho người đến thông cống trước mùa mưa.",
+  "subcategory": "drainage_flooding",
+  "bob_task_id": ""
+ },
+ "E802eb2fb": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.93,
+  "evidence_quote": "Hay colchones y basura tirados junto al arroyo.",
+  "stance": "support",
+  "stance_evidence": "Por favor vengan a limpiar pronto.",
+  "subcategory": "illegal_dumping_creek",
+  "bob_task_id": ""
+ },
+ "E207b5669": {
+  "category": "other",
+  "confidence": 0.86,
+  "evidence_quote": "Tiền nhà, tiền chợ, tiền xăng đều tăng, gia đình tôi rất khó khăn.",
+  "stance": "unclear",
+  "stance_evidence": "",
+  "subcategory": "general_cost_of_living",
+  "bob_task_id": ""
+ },
+ "Ed6acf4e0": {
+  "category": "infrastructure_streets",
+  "confidence": 0.89,
+  "evidence_quote": "Crews patched one pothole on our street and left four others right next to it.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT more road-repair funding for residential streets.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "Ea9738a26": {
+  "category": "infrastructure_streets",
+  "confidence": 0.91,
+  "evidence_quote": "Có một ổ gà rất lớn trên đường nhà tôi từ mấy tháng nay.",
+  "stance": "support",
+  "stance_evidence": "Xin thành phố cho sửa đường sớm.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "Ef6144a3e": {
+  "category": "infrastructure_streets",
+  "confidence": 0.84,
+  "evidence_quote": "Cars speed down our street every morning and there is no marked crosswalk for the kids.",
+  "stance": "support",
+  "stance_evidence": "Please install a flashing beacon and a marked crosswalk this year.",
+  "subcategory": "infrastructure_equity",
+  "bob_task_id": ""
+ },
+ "E6ab667eb": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.86,
+  "evidence_quote": "The heater in our unit has been broken since November and the landlord says it's not urgent.",
+  "stance": "support",
+  "stance_evidence": "Please send an inspector and hold the landlord accountable.",
+  "subcategory": "habitability_hot_water_mold",
+  "bob_task_id": ""
+ },
+ "Eeeb3da30": {
+  "category": "other",
+  "confidence": 0.83,
+  "evidence_quote": "Trung tâm người cao tuổi giảm giờ mở cửa, mẹ tôi không còn nơi gặp bạn bè.",
+  "stance": "support",
+  "stance_evidence": "Xin giữ nguyên giờ mở cửa như trước.",
+  "subcategory": "senior_services_general",
+  "bob_task_id": ""
+ },
+ "E69ab6d97": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.89,
+  "evidence_quote": "The heater in our unit has been broken since November and the landlord says it's not urgent.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT proactive rental inspections so tenants don't have to fight alone.",
+  "subcategory": "habitability_hot_water_mold",
+  "bob_task_id": ""
+ },
+ "E0e4c3c93": {
+  "category": "infrastructure_streets",
+  "confidence": 0.83,
+  "evidence_quote": "The road surface on our block is so broken that delivery trucks swerve into the bike lane.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT more road-repair funding for residential streets.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "E532cf9b1": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.85,
+  "evidence_quote": "Llevo meses esperando el permiso para una pequeña remodelación.",
+  "stance": "support",
+  "stance_evidence": "Por favor simplifiquen el proceso de permisos.",
+  "subcategory": "permit_backlog_delays",
+  "bob_task_id": ""
+ },
+ "Eee019bc3": {
+  "category": "infrastructure_streets",
+  "confidence": 0.84,
+  "evidence_quote": "The pothole patch from last year already crumbled and the hole is back, deeper.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT more road-repair funding for residential streets.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "E21028356": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.9,
+  "evidence_quote": "Our apartment has had black mold in the bathroom and bedroom since spring and the landlord just paints over it.",
+  "stance": "support",
+  "stance_evidence": "Please send an inspector and hold the landlord accountable.",
+  "subcategory": "habitability_hot_water_mold",
+  "bob_task_id": ""
+ },
+ "E55c542fd": {
+  "category": "infrastructure_streets",
+  "confidence": 0.95,
+  "evidence_quote": "The crossing by the elementary school has no signal and drivers do fifty through it.",
+  "stance": "support",
+  "stance_evidence": "Please install a flashing beacon and a marked crosswalk this year.",
+  "subcategory": "infrastructure_equity",
+  "bob_task_id": ""
+ },
+ "E080221ad": {
+  "category": "infrastructure_streets",
+  "confidence": 0.82,
+  "evidence_quote": "Varias luces de la calle están apagadas desde hace un mes.",
+  "stance": "support",
+  "stance_evidence": "Por favor manden a alguien a repararlas.",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ },
+ "E3a6612fe": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.86,
+  "evidence_quote": "Nhà tôi sát xa lộ, bụi và tiếng ồn suốt ngày.",
+  "stance": "support",
+  "stance_evidence": "Xin xây tường cách âm và trồng cây.",
+  "subcategory": "freeway_air_quality",
+  "bob_task_id": ""
+ },
+ "E94c59dfb": {
+  "category": "other",
+  "confidence": 0.9,
+  "evidence_quote": "老人活动中心把开放时间减少到每周三天，我母亲现在大部分时间一个人在家吃午饭，很孤单。",
+  "stance": "support",
+  "stance_evidence": "请恢复原来的开放时间。",
+  "subcategory": "senior_services_general",
+  "bob_task_id": ""
+ },
+ "Eadb5fbfc": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.91,
+  "evidence_quote": "Tôi chờ giấy phép sửa nhà hơn năm tháng rồi.",
+  "stance": "support",
+  "stance_evidence": "Xin thành phố giải quyết giấy phép nhanh hơn.",
+  "subcategory": "permit_backlog_delays",
+  "bob_task_id": ""
+ },
+ "Ea420f433": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.83,
+  "evidence_quote": "There is a pile of dumped furniture and trash bags on the sidewalk that has been there two weeks.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT more dumping enforcement and faster cleanup.",
+  "subcategory": "illegal_dumping_creek",
+  "bob_task_id": ""
+ },
+ "E224e864f": {
+  "category": "other",
+  "confidence": 0.9,
+  "evidence_quote": "Todo sube y los sueldos no.",
+  "stance": "unclear",
+  "stance_evidence": "",
+  "subcategory": "general_cost_of_living",
+  "bob_task_id": ""
+ },
+ "E9e8e26d4": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.92,
+  "evidence_quote": "Allowing fourplexes on single-family lots is a modest change that lets neighborhoods grow gently.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT the fourplex reform. Please approve it.",
+  "subcategory": "zoning_density_reform",
+  "bob_task_id": ""
+ },
+ "Ea19ffde7": {
+  "category": "infrastructure_streets",
+  "confidence": 0.9,
+  "evidence_quote": "我们街区的路灯已经坏了一个多月，晚上非常黑，老人不敢出门散步。",
+  "stance": "support",
+  "stance_evidence": "请尽快派人修好路灯。",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ },
+ "E691aefe0": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.89,
+  "evidence_quote": "I'd like to build a small fourplex on my lot so my parents and my daughter can live nearby.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT the fourplex reform. Please approve it.",
+  "subcategory": "zoning_density_reform",
+  "bob_task_id": ""
+ },
+ "E309f4339": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.92,
+  "evidence_quote": "Package theft and car break-ins on our block have doubled this year.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT more patrols and community service officers in our area.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "Ed83851d5": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.93,
+  "evidence_quote": "Our apartment has had black mold in the bathroom and bedroom since spring and the landlord just paints over it.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT proactive rental inspections so tenants don't have to fight alone.",
+  "subcategory": "habitability_hot_water_mold",
+  "bob_task_id": ""
+ },
+ "E15fbf8fe": {
+  "category": "other",
+  "confidence": 0.94,
+  "evidence_quote": "Everything in this city costs more every year and nobody in charge seems to notice.",
+  "stance": "unclear",
+  "stance_evidence": "",
+  "subcategory": "general_cost_of_living",
+  "bob_task_id": ""
+ },
+ "E70540ecf": {
+  "category": "infrastructure_streets",
+  "confidence": 0.86,
+  "evidence_quote": "The crossing by the elementary school has no signal and drivers do fifty through it.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT equal traffic-safety funding for every neighborhood, not just the loudest ones.",
+  "subcategory": "infrastructure_equity",
+  "bob_task_id": ""
+ },
+ "Eb9cad8a2": {
+  "category": "infrastructure_streets",
+  "confidence": 0.94,
+  "evidence_quote": "The crossing by the elementary school has no signal and drivers do fifty through it.",
+  "stance": "support",
+  "stance_evidence": "Please install a flashing beacon and a marked crosswalk this year.",
+  "subcategory": "infrastructure_equity",
+  "bob_task_id": ""
+ },
+ "Efac5b5fa": {
+  "category": "infrastructure_streets",
+  "confidence": 0.84,
+  "evidence_quote": "Three streetlights on our block have been out for almost a month.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT funding a faster repair crew and theft-proof wiring.",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ },
+ "Eeed561a5": {
+  "category": "infrastructure_streets",
+  "confidence": 0.92,
+  "evidence_quote": "Water pools across the whole intersection after any storm because the drain is blocked.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT funding storm drain upgrades on residential streets.",
+  "subcategory": "drainage_flooding",
+  "bob_task_id": ""
+ },
+ "Ef4ae0572": {
+  "category": "infrastructure_streets",
+  "confidence": 0.9,
+  "evidence_quote": "Two streetlights near the bus stop have been out since the last storm.",
+  "stance": "support",
+  "stance_evidence": "Please prioritize the streetlight maintenance contract and fix our block.",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ },
+ "Eca4f3fc6": {
+  "category": "infrastructure_streets",
+  "confidence": 0.93,
+  "evidence_quote": "Gần trường học không có vạch qua đường và xe chạy rất nhanh.",
+  "stance": "support",
+  "stance_evidence": "Xin thành phố làm vạch qua đường và đèn báo.",
+  "subcategory": "infrastructure_equity",
+  "bob_task_id": ""
+ },
+ "E06bdb115": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.91,
+  "evidence_quote": "My neighbor's catalytic converter was cut off in broad daylight last week.",
+  "stance": "support",
+  "stance_evidence": "Please fund faster police response for property crime.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "Ea3e86075": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.89,
+  "evidence_quote": "I don't want my daily movements logged by surveillance cameras with no clear rule on who can see the data.",
+  "stance": "oppose",
+  "stance_evidence": "I OPPOSE expanding surveillance cameras without a privacy ordinance first.",
+  "subcategory": "surveillance_privacy",
+  "bob_task_id": ""
+ },
+ "E8367ea73": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.87,
+  "evidence_quote": "People dump old tires and paint cans by the creek path behind our homes.",
+  "stance": "support",
+  "stance_evidence": "Please clean it up and put a camera at this spot.",
+  "subcategory": "illegal_dumping_creek",
+  "bob_task_id": ""
+ },
+ "E6e3c7a32": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.94,
+  "evidence_quote": "Our sewer lines and school classrooms are already at capacity, and fourplexes on every lot will make that worse.",
+  "stance": "oppose",
+  "stance_evidence": "Please vote no on citywide fourplexes.",
+  "subcategory": "housing_supply_infrastructure",
+  "bob_task_id": ""
+ },
+ "Ec23347d5": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.82,
+  "evidence_quote": "Late-night youth programs and summer jobs prevent more crime than another patrol car ever will.",
+  "stance": "support",
+  "stance_evidence": "Please restore funding for youth programs in the public safety budget.",
+  "subcategory": "crime_prevention_youth",
+  "bob_task_id": ""
+ },
+ "Ee540a7ed": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.91,
+  "evidence_quote": "Vivimos junto a la autopista y el aire siempre está sucio.",
+  "stance": "support",
+  "stance_evidence": "Pedimos un muro de sonido y más árboles.",
+  "subcategory": "freeway_air_quality",
+  "bob_task_id": ""
+ },
+ "E34544f95": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.95,
+  "evidence_quote": "The house two doors down has been vacant for three years, the roof is caving in, and people break in at night.",
+  "stance": "support",
+  "stance_evidence": "Please send code enforcement back out and keep the case open until it's secured.",
+  "subcategory": "derelict_blight_enforcement",
+  "bob_task_id": ""
+ },
+ "Ee7147321": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.87,
+  "evidence_quote": "El centro comunitario cerró los programas para jóvenes en la noche.",
+  "stance": "support",
+  "stance_evidence": "Apoyo que la ciudad pague más programas para jóvenes.",
+  "subcategory": "crime_prevention_youth",
+  "bob_task_id": ""
+ },
+ "Eb9a5d3b4": {
+  "category": "other",
+  "confidence": 0.85,
+  "evidence_quote": "Todo sube y los sueldos no.",
+  "stance": "unclear",
+  "stance_evidence": "",
+  "subcategory": "general_cost_of_living",
+  "bob_task_id": ""
+ },
+ "Ec5c647bd": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.83,
+  "evidence_quote": "There have been five car break-ins on our street since August and two catalytic converter thefts.",
+  "stance": "support",
+  "stance_evidence": "Please fund faster police response for property crime.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "E573a765d": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.85,
+  "evidence_quote": "There have been five car break-ins on our street since August and two catalytic converter thefts.",
+  "stance": "support",
+  "stance_evidence": "Please fund faster police response for property crime.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "E9489abab": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.89,
+  "evidence_quote": "There is a pile of dumped furniture and trash bags on the sidewalk that has been there two weeks.",
+  "stance": "support",
+  "stance_evidence": "Please clean it up and put a camera at this spot.",
+  "subcategory": "illegal_dumping_creek",
+  "bob_task_id": ""
+ },
+ "E1d24bf27": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.9,
+  "evidence_quote": "We live close enough to the freeway that the windowsills are black with soot every week.",
+  "stance": "support",
+  "stance_evidence": "Please fund a sound wall and tree planting along this stretch.",
+  "subcategory": "freeway_air_quality",
+  "bob_task_id": ""
+ },
+ "Eb841732a": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.93,
+  "evidence_quote": "Our apartment has had black mold in the bathroom and bedroom since spring and the landlord just paints over it.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT proactive rental inspections so tenants don't have to fight alone.",
+  "subcategory": "habitability_hot_water_mold",
+  "bob_task_id": ""
+ },
+ "Ed70d52b9": {
+  "category": "infrastructure_streets",
+  "confidence": 0.92,
+  "evidence_quote": "Mỗi lần mưa nước ngập vào sân vì cống bị nghẹt.",
+  "stance": "support",
+  "stance_evidence": "Xin cho người đến thông cống trước mùa mưa.",
+  "subcategory": "drainage_flooding",
+  "bob_task_id": ""
+ },
+ "E030d880f": {
+  "category": "infrastructure_streets",
+  "confidence": 0.86,
+  "evidence_quote": "A pothole near the crosswalk bent the rim on my car last week.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT more road-repair funding for residential streets.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "E4aa036c5": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.83,
+  "evidence_quote": "Blanket upzoning of single-family neighborhoods ignores the water and sewer infrastructure underneath them.",
+  "stance": "oppose",
+  "stance_evidence": "Please vote no on citywide fourplexes.",
+  "subcategory": "housing_supply_infrastructure",
+  "bob_task_id": ""
+ },
+ "E3bbb0af9": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.9,
+  "evidence_quote": "Căn hộ của chúng tôi không có nước nóng hơn một tuần.",
+  "stance": "support",
+  "stance_evidence": "Xin thành phố cử người kiểm tra và buộc chủ nhà sửa.",
+  "subcategory": "habitability_hot_water_mold",
+  "bob_task_id": ""
+ },
+ "E8f1bfd03": {
+  "category": "governance_civic_rights",
+  "confidence": 0.86,
+  "evidence_quote": "Muchas familias tienen miedo de salir por las redadas de inmigración.",
+  "stance": "support",
+  "stance_evidence": "Apoyo la resolución para proteger a las familias inmigrantes.",
+  "subcategory": "immigrant_protection_sanctuary",
+  "bob_task_id": ""
+ },
+ "E1ffdfc27": {
+  "category": "infrastructure_streets",
+  "confidence": 0.89,
+  "evidence_quote": "Two streetlights near the bus stop have been out since the last storm.",
+  "stance": "oppose",
+  "stance_evidence": "I OPPOSE renewing a contract that leaves lights out this long.",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ },
+ "Ed710e66e": {
+  "category": "infrastructure_streets",
+  "confidence": 0.84,
+  "evidence_quote": "The road surface on our block is so broken that delivery trucks swerve into the bike lane.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT more road-repair funding for residential streets.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "E357b9dea": {
+  "category": "infrastructure_streets",
+  "confidence": 0.85,
+  "evidence_quote": "The pothole patch from last year already crumbled and the hole is back, deeper.",
+  "stance": "support",
+  "stance_evidence": "Please fix this pothole before someone gets hurt.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "Ed0bc1a73": {
+  "category": "infrastructure_streets",
+  "confidence": 0.9,
+  "evidence_quote": "Ilang linggo na pong patay ang mga ilaw sa kalye namin.",
+  "stance": "support",
+  "stance_evidence": "Pakiayos po agad.",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ },
+ "E9890a9aa": {
+  "category": "infrastructure_streets",
+  "confidence": 0.89,
+  "evidence_quote": "Half the streetlights along our walk to school are out, and the copper wiring was stolen again.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT funding a faster repair crew and theft-proof wiring.",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ },
+ "Eb58c206e": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.94,
+  "evidence_quote": "Allowing fourplexes on single-family lots is a modest change that lets neighborhoods grow gently.",
+  "stance": "support",
+  "stance_evidence": "Please vote yes on the citywide fourplex zoning reform.",
+  "subcategory": "zoning_density_reform",
+  "bob_task_id": ""
+ },
+ "E49242ea8": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.92,
+  "evidence_quote": "My neighbor's catalytic converter was cut off in broad daylight last week.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT more patrols and community service officers in our area.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "E3eb83f33": {
+  "category": "infrastructure_streets",
+  "confidence": 0.9,
+  "evidence_quote": "Có một ổ gà rất lớn trên đường nhà tôi từ mấy tháng nay.",
+  "stance": "support",
+  "stance_evidence": "Xin thành phố cho sửa đường sớm.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "Eb691c645": {
+  "category": "infrastructure_streets",
+  "confidence": 0.85,
+  "evidence_quote": "No hay paso de peatones cerca de la escuela y los carros pasan muy rápido.",
+  "stance": "support",
+  "stance_evidence": "Pedimos que pongan un cruce con luces.",
+  "subcategory": "infrastructure_equity",
+  "bob_task_id": ""
+ },
+ "E436a11cf": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.84,
+  "evidence_quote": "Vivimos junto a la autopista y el aire siempre está sucio.",
+  "stance": "support",
+  "stance_evidence": "Pedimos un muro de sonido y más árboles.",
+  "subcategory": "freeway_air_quality",
+  "bob_task_id": ""
+ },
+ "Ea2a14aa1": {
+  "category": "other",
+  "confidence": 0.95,
+  "evidence_quote": "Tiền nhà, tiền chợ, tiền xăng đều tăng, gia đình tôi rất khó khăn.",
+  "stance": "unclear",
+  "stance_evidence": "",
+  "subcategory": "general_cost_of_living",
+  "bob_task_id": ""
+ },
+ "E1ddf091b": {
+  "category": "infrastructure_streets",
+  "confidence": 0.94,
+  "evidence_quote": "The road surface on our block is so broken that delivery trucks swerve into the bike lane.",
+  "stance": "support",
+  "stance_evidence": "Please repave the block instead of patching it again.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "E42aaabdb": {
+  "category": "infrastructure_streets",
+  "confidence": 0.86,
+  "evidence_quote": "The storm drain on our block has been clogged with leaves and silt since October.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT funding storm drain upgrades on residential streets.",
+  "subcategory": "drainage_flooding",
+  "bob_task_id": ""
+ },
+ "E14d96f39": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.84,
+  "evidence_quote": "Khu phố tôi bị trộm xe và đập kính xe nhiều lần.",
+  "stance": "support",
+  "stance_evidence": "Xin tăng cường tuần tra trong khu phố.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "Ee32c96b7": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.86,
+  "evidence_quote": "Mis hijos adultos no pueden pagar renta aquí y necesitamos más unidades de vivienda.",
+  "stance": "support",
+  "stance_evidence": "Por favor voten a favor de la reforma.",
+  "subcategory": "zoning_density_reform",
+  "bob_task_id": ""
+ },
+ "Ef9cc7713": {
+  "category": "environment_development_review",
+  "confidence": 0.89,
+  "evidence_quote": "The Blossom Hill parcel should be housing or a park, not more empty retail.",
+  "stance": "oppose",
+  "stance_evidence": "I OPPOSE the rezoning as proposed.",
+  "subcategory": "traffic_neighborhood_character",
+  "bob_task_id": ""
+ },
+ "E4c07192f": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.93,
+  "evidence_quote": "The plan to add license-plate readers and surveillance cameras on every arterial goes too far for a city that values privacy.",
+  "stance": "oppose",
+  "stance_evidence": "I OPPOSE expanding surveillance cameras without a privacy ordinance first.",
+  "subcategory": "surveillance_privacy",
+  "bob_task_id": ""
+ },
+ "E835f08b5": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.85,
+  "evidence_quote": "Vivimos junto a la autopista y el aire siempre está sucio.",
+  "stance": "support",
+  "stance_evidence": "Pedimos un muro de sonido y más árboles.",
+  "subcategory": "freeway_air_quality",
+  "bob_task_id": ""
+ },
+ "E2cbc4c53": {
+  "category": "infrastructure_streets",
+  "confidence": 0.92,
+  "evidence_quote": "The road surface on our block is so broken that delivery trucks swerve into the bike lane.",
+  "stance": "support",
+  "stance_evidence": "Please fix this pothole before someone gets hurt.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "E6ab20822": {
+  "category": "infrastructure_streets",
+  "confidence": 0.94,
+  "evidence_quote": "Las luces de la calle llevan semanas apagadas en nuestra cuadra.",
+  "stance": "support",
+  "stance_evidence": "Apoyo que la ciudad arregle las luces pronto.",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ },
+ "Eb03950b7": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.93,
+  "evidence_quote": "Allowing fourplexes on single-family lots is a modest change that lets neighborhoods grow gently.",
+  "stance": "support",
+  "stance_evidence": "Please vote yes on the citywide fourplex zoning reform.",
+  "subcategory": "zoning_density_reform",
+  "bob_task_id": ""
+ },
+ "E5c96c116": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.86,
+  "evidence_quote": "There have been five car break-ins on our street since August and two catalytic converter thefts.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT more patrols and community service officers in our area.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "Ef524a6e1": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.94,
+  "evidence_quote": "The plan to add license-plate readers and surveillance cameras on every arterial goes too far for a city that values privacy.",
+  "stance": "oppose",
+  "stance_evidence": "I OPPOSE expanding surveillance cameras without a privacy ordinance first.",
+  "subcategory": "surveillance_privacy",
+  "bob_task_id": ""
+ },
+ "E98d10892": {
+  "category": "governance_civic_rights",
+  "confidence": 0.85,
+  "evidence_quote": "Almost every member of the planning commission lives in the same few neighborhoods, and it shows in their votes.",
+  "stance": "support",
+  "stance_evidence": "Please hold evening interviews and publish the applicant pool for every commission.",
+  "subcategory": "boards_commissions_fairness",
+  "bob_task_id": ""
+ },
+ "Ece5ebc89": {
+  "category": "infrastructure_streets",
+  "confidence": 0.84,
+  "evidence_quote": "The pothole patch from last year already crumbled and the hole is back, deeper.",
+  "stance": "support",
+  "stance_evidence": "Please repave the block instead of patching it again.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "E5ffb28b0": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.93,
+  "evidence_quote": "Raising permit fees again while review times keep growing is backwards.",
+  "stance": "oppose",
+  "stance_evidence": "I OPPOSE the fee increase unless it pays for more plan check staff.",
+  "subcategory": "permit_fees_staffing",
+  "bob_task_id": ""
+ },
+ "Ea18618a5": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.85,
+  "evidence_quote": "I don't want my daily movements logged by surveillance cameras with no clear rule on who can see the data.",
+  "stance": "oppose",
+  "stance_evidence": "I OPPOSE expanding surveillance cameras without a privacy ordinance first.",
+  "subcategory": "surveillance_privacy",
+  "bob_task_id": ""
+ },
+ "Ec26a6026": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.84,
+  "evidence_quote": "I'm a renter and the annual increases are the reason my friends have left the city.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT lowering the annual rent-increase cap. Please vote yes.",
+  "subcategory": "rent_stabilization",
+  "bob_task_id": ""
+ },
+ "E3c68251e": {
+  "category": "infrastructure_streets",
+  "confidence": 0.91,
+  "evidence_quote": "The pothole patch from last year already crumbled and the hole is back, deeper.",
+  "stance": "support",
+  "stance_evidence": "Please repave the block instead of patching it again.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "Edad1c0fa": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.87,
+  "evidence_quote": "Parking on our street is already full every night, and the fourplex reform has no plan for it.",
+  "stance": "oppose",
+  "stance_evidence": "I OPPOSE the fourplex reform as written. Please phase it in with an infrastructure plan.",
+  "subcategory": "housing_supply_infrastructure",
+  "bob_task_id": ""
+ },
+ "E3af570ba": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.89,
+  "evidence_quote": "Blanket upzoning of single-family neighborhoods ignores the water and sewer infrastructure underneath them.",
+  "stance": "oppose",
+  "stance_evidence": "Please vote no on citywide fourplexes.",
+  "subcategory": "housing_supply_infrastructure",
+  "bob_task_id": ""
+ },
+ "E36c144a5": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.91,
+  "evidence_quote": "Parking on our street is already full every night, and the fourplex reform has no plan for it.",
+  "stance": "oppose",
+  "stance_evidence": "Please vote no on citywide fourplexes.",
+  "subcategory": "housing_supply_infrastructure",
+  "bob_task_id": ""
+ },
+ "E7e50bf51": {
+  "category": "governance_civic_rights",
+  "confidence": 0.9,
+  "evidence_quote": "Muchas familias tienen miedo de salir por las redadas de inmigración.",
+  "stance": "support",
+  "stance_evidence": "Apoyo la resolución para proteger a las familias inmigrantes.",
+  "subcategory": "immigrant_protection_sanctuary",
+  "bob_task_id": ""
+ },
+ "Eb6461b87": {
+  "category": "infrastructure_streets",
+  "confidence": 0.91,
+  "evidence_quote": "There is a pothole on our street the size of a manhole cover and it has been there since winter.",
+  "stance": "oppose",
+  "stance_evidence": "I OPPOSE spending on cosmetic projects while basic streets crumble.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "Ecd315c00": {
+  "category": "infrastructure_streets",
+  "confidence": 0.93,
+  "evidence_quote": "Three streetlights on our block have been out for almost a month.",
+  "stance": "oppose",
+  "stance_evidence": "I OPPOSE renewing a contract that leaves lights out this long.",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ },
+ "Eddd38b4a": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.86,
+  "evidence_quote": "There is a pile of dumped furniture and trash bags on the sidewalk that has been there two weeks.",
+  "stance": "support",
+  "stance_evidence": "Please clean it up and put a camera at this spot.",
+  "subcategory": "illegal_dumping_creek",
+  "bob_task_id": ""
+ },
+ "E4a8ff5f5": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.84,
+  "evidence_quote": "Our ADU permit has been in plan review for eleven months and every round brings a new comment.",
+  "stance": "support",
+  "stance_evidence": "Please fix the permit backlog and set a real turnaround time.",
+  "subcategory": "permit_backlog_delays",
+  "bob_task_id": ""
+ },
+ "E7ad2ff46": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.87,
+  "evidence_quote": "Package theft and car break-ins on our block have doubled this year.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT more patrols and community service officers in our area.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "Ecdc7b901": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.87,
+  "evidence_quote": "La casa abandonada de la esquina está llena de basura y entra gente de noche.",
+  "stance": "support",
+  "stance_evidence": "Pedimos que la ciudad obligue al dueño a limpiar.",
+  "subcategory": "derelict_blight_enforcement",
+  "bob_task_id": ""
+ },
+ "E1a7a776e": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.91,
+  "evidence_quote": "My grown kids can't afford to live in the city they grew up in, and fourplexes are a reasonable fix.",
+  "stance": "support",
+  "stance_evidence": "Please vote yes on the citywide fourplex zoning reform.",
+  "subcategory": "zoning_density_reform",
+  "bob_task_id": ""
+ },
+ "E7f13e58e": {
+  "category": "infrastructure_streets",
+  "confidence": 0.91,
+  "evidence_quote": "There is a pothole on our street the size of a manhole cover and it has been there since winter.",
+  "stance": "support",
+  "stance_evidence": "Please fix this pothole before someone gets hurt.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "E52784375": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.88,
+  "evidence_quote": "Our sewer lines and school classrooms are already at capacity, and fourplexes on every lot will make that worse.",
+  "stance": "oppose",
+  "stance_evidence": "Please vote no on citywide fourplexes.",
+  "subcategory": "housing_supply_infrastructure",
+  "bob_task_id": ""
+ },
+ "E07121c8c": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.89,
+  "evidence_quote": "Allowing fourplexes on single-family lots is a modest change that lets neighborhoods grow gently.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT the fourplex reform. Please approve it.",
+  "subcategory": "zoning_density_reform",
+  "bob_task_id": ""
+ },
+ "Efdf9abe5": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.88,
+  "evidence_quote": "Our landlord sent notices to six units saying we have to leave for renovations that never seem to happen.",
+  "stance": "support",
+  "stance_evidence": "Please close the remodel loophole and require relocation payments.",
+  "subcategory": "tenant_protection_eviction",
+  "bob_task_id": ""
+ },
+ "E50b654e2": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.91,
+  "evidence_quote": "My grown kids can't afford to live in the city they grew up in, and fourplexes are a reasonable fix.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT the fourplex reform. Please approve it.",
+  "subcategory": "zoning_density_reform",
+  "bob_task_id": ""
+ },
+ "E2677b46b": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.91,
+  "evidence_quote": "Our sewer lines and school classrooms are already at capacity, and fourplexes on every lot will make that worse.",
+  "stance": "oppose",
+  "stance_evidence": "I OPPOSE the fourplex reform as written. Please phase it in with an infrastructure plan.",
+  "subcategory": "housing_supply_infrastructure",
+  "bob_task_id": ""
+ },
+ "Ed59cedc6": {
+  "category": "infrastructure_streets",
+  "confidence": 0.84,
+  "evidence_quote": "Two streetlights near the bus stop have been out since the last storm.",
+  "stance": "oppose",
+  "stance_evidence": "I OPPOSE renewing a contract that leaves lights out this long.",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ },
+ "E538b42e3": {
+  "category": "infrastructure_streets",
+  "confidence": 0.89,
+  "evidence_quote": "Half the streetlights along our walk to school are out, and the copper wiring was stolen again.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT funding a faster repair crew and theft-proof wiring.",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ },
+ "E64e93b0e": {
+  "category": "environment_development_review",
+  "confidence": 0.83,
+  "evidence_quote": "The Blossom Hill parcel should be housing or a park, not more empty retail.",
+  "stance": "oppose",
+  "stance_evidence": "Please deny the Blossom Hill rezoning application.",
+  "subcategory": "traffic_neighborhood_character",
+  "bob_task_id": ""
+ },
+ "E822cb301": {
+  "category": "infrastructure_streets",
+  "confidence": 0.9,
+  "evidence_quote": "Crews patched one pothole on our street and left four others right next to it.",
+  "stance": "support",
+  "stance_evidence": "Please repave the block instead of patching it again.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "Ed86ca618": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.82,
+  "evidence_quote": "Chủ nhà bắt chúng tôi dọn đi để sửa nhà nhưng thật ra là để tăng giá.",
+  "stance": "support",
+  "stance_evidence": "Xin thành phố bảo vệ người thuê nhà và đóng lỗ hổng này.",
+  "subcategory": "tenant_protection_eviction",
+  "bob_task_id": ""
+ },
+ "E968e364b": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.84,
+  "evidence_quote": "My grown kids can't afford to live in the city they grew up in, and fourplexes are a reasonable fix.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT the fourplex reform. Please approve it.",
+  "subcategory": "zoning_density_reform",
+  "bob_task_id": ""
+ },
+ "E69ec686e": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.89,
+  "evidence_quote": "There have been five car break-ins on our street since August and two catalytic converter thefts.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT more patrols and community service officers in our area.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "E9c7e1f75": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.87,
+  "evidence_quote": "Blanket upzoning of single-family neighborhoods ignores the water and sewer infrastructure underneath them.",
+  "stance": "oppose",
+  "stance_evidence": "I OPPOSE the fourplex reform as written. Please phase it in with an infrastructure plan.",
+  "subcategory": "housing_supply_infrastructure",
+  "bob_task_id": ""
+ },
+ "Ec117e892": {
+  "category": "infrastructure_streets",
+  "confidence": 0.83,
+  "evidence_quote": "Other neighborhoods got flashing beacons at their school crossings years ago and we are still waiting.",
+  "stance": "support",
+  "stance_evidence": "Please install a flashing beacon and a marked crosswalk this year.",
+  "subcategory": "infrastructure_equity",
+  "bob_task_id": ""
+ },
+ "E377d5183": {
+  "category": "infrastructure_streets",
+  "confidence": 0.93,
+  "evidence_quote": "The pothole patch from last year already crumbled and the hole is back, deeper.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT more road-repair funding for residential streets.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "Ed3491769": {
+  "category": "infrastructure_streets",
+  "confidence": 0.95,
+  "evidence_quote": "A pothole near the crosswalk bent the rim on my car last week.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT more road-repair funding for residential streets.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "Eed504080": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.93,
+  "evidence_quote": "Our sewer lines and school classrooms are already at capacity, and fourplexes on every lot will make that worse.",
+  "stance": "oppose",
+  "stance_evidence": "Please vote no on citywide fourplexes.",
+  "subcategory": "housing_supply_infrastructure",
+  "bob_task_id": ""
+ },
+ "E832aee26": {
+  "category": "other",
+  "confidence": 0.84,
+  "evidence_quote": "La renta, la comida y la gasolina están carísimas y ya no alcanza.",
+  "stance": "unclear",
+  "stance_evidence": "",
+  "subcategory": "general_cost_of_living",
+  "bob_task_id": ""
+ },
+ "E5ebe6a08": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.95,
+  "evidence_quote": "We live close enough to the freeway that the windowsills are black with soot every week.",
+  "stance": "support",
+  "stance_evidence": "Please fund a sound wall and tree planting along this stretch.",
+  "subcategory": "freeway_air_quality",
+  "bob_task_id": ""
+ },
+ "E7aedd240": {
+  "category": "other",
+  "confidence": 0.92,
+  "evidence_quote": "I make a decent salary and still can't save anything after rent and childcare.",
+  "stance": "unclear",
+  "stance_evidence": "",
+  "subcategory": "general_cost_of_living",
+  "bob_task_id": ""
+ },
+ "Ef14f1933": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.82,
+  "evidence_quote": "A simple kitchen remodel permit has taken five months and three resubmittals.",
+  "stance": "support",
+  "stance_evidence": "Please fix the permit backlog and set a real turnaround time.",
+  "subcategory": "permit_backlog_delays",
+  "bob_task_id": ""
+ },
+ "E99d612a1": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.93,
+  "evidence_quote": "Có người vứt nệm cũ và rác ở góc đường nhà tôi.",
+  "stance": "support",
+  "stance_evidence": "Tôi ủng hộ phạt nặng người vứt rác.",
+  "subcategory": "illegal_dumping_creek",
+  "bob_task_id": ""
+ },
+ "Ebb4247bf": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.87,
+  "evidence_quote": "Raising permit fees again while review times keep growing is backwards.",
+  "stance": "oppose",
+  "stance_evidence": "I OPPOSE the fee increase unless it pays for more plan check staff.",
+  "subcategory": "permit_fees_staffing",
+  "bob_task_id": ""
+ },
+ "Ee3f24471": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.85,
+  "evidence_quote": "Allowing fourplexes on single-family lots is a modest change that lets neighborhoods grow gently.",
+  "stance": "support",
+  "stance_evidence": "Please vote yes on the citywide fourplex zoning reform.",
+  "subcategory": "zoning_density_reform",
+  "bob_task_id": ""
+ },
+ "E910c23d4": {
+  "category": "infrastructure_streets",
+  "confidence": 0.84,
+  "evidence_quote": "Other neighborhoods got flashing beacons at their school crossings years ago and we are still waiting.",
+  "stance": "support",
+  "stance_evidence": "Please install a flashing beacon and a marked crosswalk this year.",
+  "subcategory": "infrastructure_equity",
+  "bob_task_id": ""
+ },
+ "E6845dc58": {
+  "category": "infrastructure_streets",
+  "confidence": 0.85,
+  "evidence_quote": "A pothole near the crosswalk bent the rim on my car last week.",
+  "stance": "support",
+  "stance_evidence": "Please fix this pothole before someone gets hurt.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "Ec5d22b73": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.86,
+  "evidence_quote": "A boarded-up commercial building on our corner has trash piling up and the fence is falling onto the sidewalk.",
+  "stance": "support",
+  "stance_evidence": "Please send code enforcement back out and keep the case open until it's secured.",
+  "subcategory": "derelict_blight_enforcement",
+  "bob_task_id": ""
+ },
+ "E4d7607db": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.86,
+  "evidence_quote": "Somos inquilinos y la renta ya es más de la mitad de nuestro sueldo.",
+  "stance": "support",
+  "stance_evidence": "Apoyo bajar el límite de aumento de renta. Por favor voten que sí.",
+  "subcategory": "rent_stabilization",
+  "bob_task_id": ""
+ },
+ "Ef016c553": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.93,
+  "evidence_quote": "Raising permit fees again while review times keep growing is backwards.",
+  "stance": "oppose",
+  "stance_evidence": "I OPPOSE the fee increase unless it pays for more plan check staff.",
+  "subcategory": "permit_fees_staffing",
+  "bob_task_id": ""
+ },
+ "E74f70116": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.92,
+  "evidence_quote": "Nos robaron el convertidor catalítico del carro.",
+  "stance": "support",
+  "stance_evidence": "Pedimos más vigilancia y que respondan a tiempo.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "E20a2d54b": {
+  "category": "infrastructure_streets",
+  "confidence": 0.92,
+  "evidence_quote": "Crews patched one pothole on our street and left four others right next to it.",
+  "stance": "oppose",
+  "stance_evidence": "I OPPOSE spending on cosmetic projects while basic streets crumble.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "E821be159": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.87,
+  "evidence_quote": "Late-night youth programs and summer jobs prevent more crime than another patrol car ever will.",
+  "stance": "support",
+  "stance_evidence": "Please restore funding for youth programs in the public safety budget.",
+  "subcategory": "crime_prevention_youth",
+  "bob_task_id": ""
+ },
+ "E5f2a469d": {
+  "category": "environment_development_review",
+  "confidence": 0.89,
+  "evidence_quote": "The Blossom Hill parcel should be housing or a park, not more empty retail.",
+  "stance": "oppose",
+  "stance_evidence": "Please deny the Blossom Hill rezoning application.",
+  "subcategory": "traffic_neighborhood_character",
+  "bob_task_id": ""
+ },
+ "E8669ced5": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.92,
+  "evidence_quote": "My neighbor's catalytic converter was cut off in broad daylight last week.",
+  "stance": "support",
+  "stance_evidence": "Please fund faster police response for property crime.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "Ea2c8fd0b": {
+  "category": "other",
+  "confidence": 0.91,
+  "evidence_quote": "The senior lunch program is the only place many older neighbors see anyone all week.",
+  "stance": "support",
+  "stance_evidence": "Please restore the full senior center schedule.",
+  "subcategory": "senior_services_general",
+  "bob_task_id": ""
+ },
+ "E00f7ca9a": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.88,
+  "evidence_quote": "The freeway noise behind our homes is constant and my son's asthma has gotten worse.",
+  "stance": "support",
+  "stance_evidence": "Please fund a sound wall and tree planting along this stretch.",
+  "subcategory": "freeway_air_quality",
+  "bob_task_id": ""
+ },
+ "E7e68e8aa": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.89,
+  "evidence_quote": "Someone tried to break into our garage at 3 a.m. and police took over an hour to come.",
+  "stance": "support",
+  "stance_evidence": "Please fund faster police response for property crime.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "Eb40e51fb": {
+  "category": "infrastructure_streets",
+  "confidence": 0.9,
+  "evidence_quote": "A pothole near the crosswalk bent the rim on my car last week.",
+  "stance": "support",
+  "stance_evidence": "Please repave the block instead of patching it again.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "E603f1705": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.85,
+  "evidence_quote": "Cada año la renta sube más de lo que ganamos.",
+  "stance": "support",
+  "stance_evidence": "Apoyo bajar el límite de aumento de renta. Por favor voten que sí.",
+  "subcategory": "rent_stabilization",
+  "bob_task_id": ""
+ },
+ "Ef8ea9943": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.85,
+  "evidence_quote": "Every lease renewal is another increase, and wages in my house have not moved.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT lowering the annual rent-increase cap. Please vote yes.",
+  "subcategory": "rent_stabilization",
+  "bob_task_id": ""
+ },
+ "Eaf27b1b5": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.87,
+  "evidence_quote": "The house two doors down has been vacant for three years, the roof is caving in, and people break in at night.",
+  "stance": "support",
+  "stance_evidence": "Please enforce the vacant building ordinance and fine the owner.",
+  "subcategory": "derelict_blight_enforcement",
+  "bob_task_id": ""
+ },
+ "E0604cd3b": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.83,
+  "evidence_quote": "Vivimos junto a la autopista y el aire siempre está sucio.",
+  "stance": "support",
+  "stance_evidence": "Pedimos un muro de sonido y más árboles.",
+  "subcategory": "freeway_air_quality",
+  "bob_task_id": ""
+ },
+ "E2a1a9ffe": {
+  "category": "infrastructure_streets",
+  "confidence": 0.83,
+  "evidence_quote": "The streetlights on our street go dark every few nights and then stay out for weeks.",
+  "stance": "oppose",
+  "stance_evidence": "I OPPOSE renewing a contract that leaves lights out this long.",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ },
+ "Ea195f671": {
+  "category": "infrastructure_streets",
+  "confidence": 0.87,
+  "evidence_quote": "Half the streetlights along our walk to school are out, and the copper wiring was stolen again.",
+  "stance": "support",
+  "stance_evidence": "Please prioritize the streetlight maintenance contract and fix our block.",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ },
+ "E22f3fbfd": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.86,
+  "evidence_quote": "Llevamos más de una semana sin agua caliente y el dueño no responde.",
+  "stance": "support",
+  "stance_evidence": "Por favor manden un inspector pronto.",
+  "subcategory": "habitability_hot_water_mold",
+  "bob_task_id": ""
+ },
+ "E7cab35b1": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.84,
+  "evidence_quote": "Someone tried to break into our garage at 3 a.m. and police took over an hour to come.",
+  "stance": "support",
+  "stance_evidence": "Please fund faster police response for property crime.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "E841218bf": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.86,
+  "evidence_quote": "The heater in our unit has been broken since November and the landlord says it's not urgent.",
+  "stance": "support",
+  "stance_evidence": "Please send an inspector and hold the landlord accountable.",
+  "subcategory": "habitability_hot_water_mold",
+  "bob_task_id": ""
+ },
+ "Ec024ba52": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.93,
+  "evidence_quote": "Please restore the free bulky-item pickup appointments that were cut this year.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT funding free bulky-item pickup and neighborhood dump days.",
+  "subcategory": "dumping_prevention_access",
+  "bob_task_id": ""
+ },
+ "Eebb680bd": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.93,
+  "evidence_quote": "Please restore the free bulky-item pickup appointments that were cut this year.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT funding free bulky-item pickup and neighborhood dump days.",
+  "subcategory": "dumping_prevention_access",
+  "bob_task_id": ""
+ },
+ "Eba5bca1e": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.84,
+  "evidence_quote": "The freeway noise behind our homes is constant and my son's asthma has gotten worse.",
+  "stance": "support",
+  "stance_evidence": "Please fund a sound wall and tree planting along this stretch.",
+  "subcategory": "freeway_air_quality",
+  "bob_task_id": ""
+ },
+ "E2c37e215": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.93,
+  "evidence_quote": "Please restore the free bulky-item pickup appointments that were cut this year.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT funding free bulky-item pickup and neighborhood dump days.",
+  "subcategory": "dumping_prevention_access",
+  "bob_task_id": ""
+ },
+ "E85eb1c85": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.93,
+  "evidence_quote": "Please restore the free bulky-item pickup appointments that were cut this year.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT funding free bulky-item pickup and neighborhood dump days.",
+  "subcategory": "dumping_prevention_access",
+  "bob_task_id": ""
+ },
+ "E4bae59c9": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.83,
+  "evidence_quote": "Our building changed owners and the first letter we got was a rent increase.",
+  "stance": "support",
+  "stance_evidence": "Please vote YES on the rent cap amendment.",
+  "subcategory": "rent_stabilization",
+  "bob_task_id": ""
+ },
+ "E52cddb22": {
+  "category": "other",
+  "confidence": 0.89,
+  "evidence_quote": "La renta, la comida y la gasolina están carísimas y ya no alcanza.",
+  "stance": "unclear",
+  "stance_evidence": "",
+  "subcategory": "general_cost_of_living",
+  "bob_task_id": ""
+ },
+ "E4536caa3": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.84,
+  "evidence_quote": "The vacant lot next to us has become a dump site for appliances and bags of trash.",
+  "stance": "support",
+  "stance_evidence": "Please schedule a cleanup crew and post no-dumping signs.",
+  "subcategory": "illegal_dumping_creek",
+  "bob_task_id": ""
+ },
+ "E488ac6b2": {
+  "category": "infrastructure_streets",
+  "confidence": 0.9,
+  "evidence_quote": "Other neighborhoods got flashing beacons at their school crossings years ago and we are still waiting.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT equal traffic-safety funding for every neighborhood, not just the loudest ones.",
+  "subcategory": "infrastructure_equity",
+  "bob_task_id": ""
+ },
+ "Ee39da7ad": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.92,
+  "evidence_quote": "The house two doors down has been vacant for three years, the roof is caving in, and people break in at night.",
+  "stance": "support",
+  "stance_evidence": "Please enforce the vacant building ordinance and fine the owner.",
+  "subcategory": "derelict_blight_enforcement",
+  "bob_task_id": ""
+ },
+ "E90bfd184": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.91,
+  "evidence_quote": "Our building changed owners and the first letter we got was a rent increase.",
+  "stance": "support",
+  "stance_evidence": "Please vote YES on the rent cap amendment.",
+  "subcategory": "rent_stabilization",
+  "bob_task_id": ""
+ },
+ "Eec67cbf6": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.83,
+  "evidence_quote": "I own a fourplex and my insurance and property taxes went up far more than the proposed cap.",
+  "stance": "oppose",
+  "stance_evidence": "Please vote no on the rent ordinance amendment.",
+  "subcategory": "rent_stabilization",
+  "bob_task_id": ""
+ },
+ "Ed384bdde": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.86,
+  "evidence_quote": "Our ADU permit has been in plan review for eleven months and every round brings a new comment.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT the permitting modernization, but please add plan checkers, not just software.",
+  "subcategory": "permit_backlog_delays",
+  "bob_task_id": ""
+ },
+ "E579be70c": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.86,
+  "evidence_quote": "Somos inquilinos y la renta ya es más de la mitad de nuestro sueldo.",
+  "stance": "support",
+  "stance_evidence": "Apoyo bajar el límite de aumento de renta. Por favor voten que sí.",
+  "subcategory": "rent_stabilization",
+  "bob_task_id": ""
+ },
+ "E3dc23a4b": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.89,
+  "evidence_quote": "Tôi chờ giấy phép sửa nhà hơn năm tháng rồi.",
+  "stance": "support",
+  "stance_evidence": "Xin thành phố giải quyết giấy phép nhanh hơn.",
+  "subcategory": "permit_backlog_delays",
+  "bob_task_id": ""
+ },
+ "E62b244d8": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.87,
+  "evidence_quote": "Allowing fourplexes on single-family lots is a modest change that lets neighborhoods grow gently.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT the fourplex reform. Please approve it.",
+  "subcategory": "zoning_density_reform",
+  "bob_task_id": ""
+ },
+ "E4558c7fb": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.94,
+  "evidence_quote": "Our ADU permit has been in plan review for eleven months and every round brings a new comment.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT the permitting modernization, but please add plan checkers, not just software.",
+  "subcategory": "permit_backlog_delays",
+  "bob_task_id": ""
+ },
+ "E875ad68a": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.93,
+  "evidence_quote": "Raising permit fees again while review times keep growing is backwards.",
+  "stance": "oppose",
+  "stance_evidence": "I OPPOSE the fee increase unless it pays for more plan check staff.",
+  "subcategory": "permit_fees_staffing",
+  "bob_task_id": ""
+ },
+ "E4b5e6388": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.89,
+  "evidence_quote": "Parking on our street is already full every night, and the fourplex reform has no plan for it.",
+  "stance": "oppose",
+  "stance_evidence": "Please vote no on citywide fourplexes.",
+  "subcategory": "housing_supply_infrastructure",
+  "bob_task_id": ""
+ },
+ "E4331e2ce": {
+  "category": "infrastructure_streets",
+  "confidence": 0.92,
+  "evidence_quote": "Water pools across the whole intersection after any storm because the drain is blocked.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT funding storm drain upgrades on residential streets.",
+  "subcategory": "drainage_flooding",
+  "bob_task_id": ""
+ },
+ "E572c21c2": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.95,
+  "evidence_quote": "There have been five car break-ins on our street since August and two catalytic converter thefts.",
+  "stance": "support",
+  "stance_evidence": "Please fund faster police response for property crime.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "Ecedcab0d": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.87,
+  "evidence_quote": "The proposed permit fee schedule raises fees on small projects by almost forty percent with no promise of faster service.",
+  "stance": "oppose",
+  "stance_evidence": "I OPPOSE the fee increase unless it pays for more plan check staff.",
+  "subcategory": "permit_fees_staffing",
+  "bob_task_id": ""
+ },
+ "E3b9527a2": {
+  "category": "other",
+  "confidence": 0.88,
+  "evidence_quote": "The senior center near us cut its hours to three days a week and my father now eats lunch alone most days.",
+  "stance": "support",
+  "stance_evidence": "Please restore the full senior center schedule.",
+  "subcategory": "senior_services_general",
+  "bob_task_id": ""
+ },
+ "E9deb08f0": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.95,
+  "evidence_quote": "Gia đình tôi thuê nhà và tiền thuê tăng liên tục.",
+  "stance": "support",
+  "stance_evidence": "Xin quý vị bỏ phiếu thuận để giảm mức trần tăng tiền thuê.",
+  "subcategory": "rent_stabilization",
+  "bob_task_id": ""
+ },
+ "Edf5aec45": {
+  "category": "environment_development_review",
+  "confidence": 0.84,
+  "evidence_quote": "Un centro de datos que usa tanta agua no tiene sentido cuando nos piden ahorrar.",
+  "stance": "oppose",
+  "stance_evidence": "Por favor voten que no.",
+  "subcategory": "flood_water_risk",
+  "bob_task_id": ""
+ },
+ "E42664181": {
+  "category": "infrastructure_streets",
+  "confidence": 0.85,
+  "evidence_quote": "The pavement on our street is cracked end to end and water sits in the low spots.",
+  "stance": "support",
+  "stance_evidence": "Please repave the block instead of patching it again.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "E70c66387": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.93,
+  "evidence_quote": "Tôi chờ giấy phép sửa nhà hơn năm tháng rồi.",
+  "stance": "support",
+  "stance_evidence": "Xin thành phố giải quyết giấy phép nhanh hơn.",
+  "subcategory": "permit_backlog_delays",
+  "bob_task_id": ""
+ },
+ "E7bdd4ef5": {
+  "category": "infrastructure_streets",
+  "confidence": 0.85,
+  "evidence_quote": "Crews patched one pothole on our street and left four others right next to it.",
+  "stance": "support",
+  "stance_evidence": "Please fix this pothole before someone gets hurt.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "Ee980cc83": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.91,
+  "evidence_quote": "Mis hijos adultos no pueden pagar renta aquí y necesitamos más unidades de vivienda.",
+  "stance": "support",
+  "stance_evidence": "Por favor voten a favor de la reforma.",
+  "subcategory": "zoning_density_reform",
+  "bob_task_id": ""
+ },
+ "Eef9fcb84": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.85,
+  "evidence_quote": "Parking on our street is already full every night, and the fourplex reform has no plan for it.",
+  "stance": "oppose",
+  "stance_evidence": "Please vote no on citywide fourplexes.",
+  "subcategory": "housing_supply_infrastructure",
+  "bob_task_id": ""
+ },
+ "E167df8f9": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.86,
+  "evidence_quote": "Package theft and car break-ins on our block have doubled this year.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT more patrols and community service officers in our area.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "Ed4f75dbd": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.88,
+  "evidence_quote": "Our building changed owners and the first letter we got was a rent increase.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT lowering the annual rent-increase cap. Please vote yes.",
+  "subcategory": "rent_stabilization",
+  "bob_task_id": ""
+ },
+ "E54eed7ae": {
+  "category": "infrastructure_streets",
+  "confidence": 0.94,
+  "evidence_quote": "The crossing by the elementary school has no signal and drivers do fifty through it.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT equal traffic-safety funding for every neighborhood, not just the loudest ones.",
+  "subcategory": "infrastructure_equity",
+  "bob_task_id": ""
+ },
+ "E6cfc93df": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.92,
+  "evidence_quote": "Our apartment has had black mold in the bathroom and bedroom since spring and the landlord just paints over it.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT proactive rental inspections so tenants don't have to fight alone.",
+  "subcategory": "habitability_hot_water_mold",
+  "bob_task_id": ""
+ },
+ "E30ddc98f": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.87,
+  "evidence_quote": "We own one rental duplex and the cost of a new roof alone wiped out three years of increases.",
+  "stance": "oppose",
+  "stance_evidence": "Please vote no on the rent ordinance amendment.",
+  "subcategory": "rent_stabilization",
+  "bob_task_id": ""
+ },
+ "Ef0a95fea": {
+  "category": "infrastructure_streets",
+  "confidence": 0.82,
+  "evidence_quote": "Two streetlights near the bus stop have been out since the last storm.",
+  "stance": "support",
+  "stance_evidence": "Please send a crew to repair these lights.",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ },
+ "E608c0f56": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.85,
+  "evidence_quote": "Our building changed owners and the first letter we got was a rent increase.",
+  "stance": "support",
+  "stance_evidence": "Please vote YES on the rent cap amendment.",
+  "subcategory": "rent_stabilization",
+  "bob_task_id": ""
+ },
+ "E3f7d4edd": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.82,
+  "evidence_quote": "I own a fourplex and my insurance and property taxes went up far more than the proposed cap.",
+  "stance": "oppose",
+  "stance_evidence": "I OPPOSE lowering the rent cap without a capital-improvement pass-through.",
+  "subcategory": "rent_stabilization",
+  "bob_task_id": ""
+ },
+ "E52fc9b55": {
+  "category": "other",
+  "confidence": 0.84,
+  "evidence_quote": "Our branch library closed on Sundays and Mondays, and it was where seniors went to stay cool.",
+  "stance": "support",
+  "stance_evidence": "Please restore the full senior center schedule.",
+  "subcategory": "senior_services_general",
+  "bob_task_id": ""
+ },
+ "Eb804151f": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.94,
+  "evidence_quote": "My rent went up again this year and it now takes more than half my paycheck.",
+  "stance": "support",
+  "stance_evidence": "Please vote YES on the rent cap amendment.",
+  "subcategory": "rent_stabilization",
+  "bob_task_id": ""
+ },
+ "E2a5ff634": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.93,
+  "evidence_quote": "Mis hijos adultos no pueden pagar renta aquí y necesitamos más unidades de vivienda.",
+  "stance": "support",
+  "stance_evidence": "Por favor voten a favor de la reforma.",
+  "subcategory": "zoning_density_reform",
+  "bob_task_id": ""
+ },
+ "E81b34bcb": {
+  "category": "environment_development_review",
+  "confidence": 0.83,
+  "evidence_quote": "Rezoning the Blossom Hill retail parcel for another strip mall will add traffic that is already jammed at school pickup.",
+  "stance": "oppose",
+  "stance_evidence": "Please deny the Blossom Hill rezoning application.",
+  "subcategory": "traffic_neighborhood_character",
+  "bob_task_id": ""
+ },
+ "E6c38445d": {
+  "category": "environment_development_review",
+  "confidence": 0.83,
+  "evidence_quote": "Trung tâm dữ liệu dùng quá nhiều nước và điện.",
+  "stance": "oppose",
+  "stance_evidence": "Xin quý vị bỏ phiếu chống.",
+  "subcategory": "flood_water_risk",
+  "bob_task_id": ""
+ },
+ "E51a0e20a": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.83,
+  "evidence_quote": "People dump old tires and paint cans by the creek path behind our homes.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT more dumping enforcement and faster cleanup.",
+  "subcategory": "illegal_dumping_creek",
+  "bob_task_id": ""
+ },
+ "Ea8ae7ab6": {
+  "category": "environment_development_review",
+  "confidence": 0.93,
+  "evidence_quote": "Trung tâm dữ liệu dùng quá nhiều nước và điện.",
+  "stance": "oppose",
+  "stance_evidence": "Xin quý vị bỏ phiếu chống.",
+  "subcategory": "flood_water_risk",
+  "bob_task_id": ""
+ },
+ "Ebf944504": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.91,
+  "evidence_quote": "Cada año la renta sube más de lo que ganamos.",
+  "stance": "support",
+  "stance_evidence": "Apoyo bajar el límite de aumento de renta. Por favor voten que sí.",
+  "subcategory": "rent_stabilization",
+  "bob_task_id": ""
+ },
+ "E65bed228": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.82,
+  "evidence_quote": "Cada año la renta sube más de lo que ganamos.",
+  "stance": "support",
+  "stance_evidence": "Apoyo bajar el límite de aumento de renta. Por favor voten que sí.",
+  "subcategory": "rent_stabilization",
+  "bob_task_id": ""
+ },
+ "E721957b4": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.85,
+  "evidence_quote": "My neighbor's catalytic converter was cut off in broad daylight last week.",
+  "stance": "support",
+  "stance_evidence": "Please fund faster police response for property crime.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "Edf883439": {
+  "category": "infrastructure_streets",
+  "confidence": 0.83,
+  "evidence_quote": "The streetlights on our street go dark every few nights and then stay out for weeks.",
+  "stance": "support",
+  "stance_evidence": "Please send a crew to repair these lights.",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ },
+ "E3c4f5ae7": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.94,
+  "evidence_quote": "We have had no hot water for nine days and the property manager stopped answering.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT proactive rental inspections so tenants don't have to fight alone.",
+  "subcategory": "habitability_hot_water_mold",
+  "bob_task_id": ""
+ },
+ "E66cab59f": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.92,
+  "evidence_quote": "Our ADU permit has been in plan review for eleven months and every round brings a new comment.",
+  "stance": "support",
+  "stance_evidence": "Please fix the permit backlog and set a real turnaround time.",
+  "subcategory": "permit_backlog_delays",
+  "bob_task_id": ""
+ },
+ "Ec821eaed": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.94,
+  "evidence_quote": "We have had no hot water for nine days and the property manager stopped answering.",
+  "stance": "support",
+  "stance_evidence": "Please send an inspector and hold the landlord accountable.",
+  "subcategory": "habitability_hot_water_mold",
+  "bob_task_id": ""
+ },
+ "E8e5d225f": {
+  "category": "sanitation_environment_quality",
+  "confidence": 0.84,
+  "evidence_quote": "People dump old tires and paint cans by the creek path behind our homes.",
+  "stance": "support",
+  "stance_evidence": "Please schedule a cleanup crew and post no-dumping signs.",
+  "subcategory": "illegal_dumping_creek",
+  "bob_task_id": ""
+ },
+ "E3e621d40": {
+  "category": "environment_development_review",
+  "confidence": 0.91,
+  "evidence_quote": "Trung tâm dữ liệu dùng quá nhiều nước và điện.",
+  "stance": "oppose",
+  "stance_evidence": "Xin quý vị bỏ phiếu chống.",
+  "subcategory": "flood_water_risk",
+  "bob_task_id": ""
+ },
+ "E9ba1be14": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.9,
+  "evidence_quote": "The proposed permit fee schedule raises fees on small projects by almost forty percent with no promise of faster service.",
+  "stance": "oppose",
+  "stance_evidence": "I OPPOSE the fee increase unless it pays for more plan check staff.",
+  "subcategory": "permit_fees_staffing",
+  "bob_task_id": ""
+ },
+ "E5f2549ae": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.87,
+  "evidence_quote": "My grown kids can't afford to live in the city they grew up in, and fourplexes are a reasonable fix.",
+  "stance": "support",
+  "stance_evidence": "Please vote yes on the citywide fourplex zoning reform.",
+  "subcategory": "zoning_density_reform",
+  "bob_task_id": ""
+ },
+ "E66bb6049": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.91,
+  "evidence_quote": "As a small landlord, a lower cap means I can't keep up with repairs on an older building.",
+  "stance": "oppose",
+  "stance_evidence": "Please vote no on the rent ordinance amendment.",
+  "subcategory": "rent_stabilization",
+  "bob_task_id": ""
+ },
+ "E8ada2da4": {
+  "category": "environment_development_review",
+  "confidence": 0.9,
+  "evidence_quote": "The Blossom Hill parcel should be housing or a park, not more empty retail.",
+  "stance": "oppose",
+  "stance_evidence": "I OPPOSE the rezoning as proposed.",
+  "subcategory": "traffic_neighborhood_character",
+  "bob_task_id": ""
+ },
+ "Eb44ef650": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.84,
+  "evidence_quote": "Căn hộ của chúng tôi không có nước nóng hơn một tuần.",
+  "stance": "support",
+  "stance_evidence": "Xin thành phố cử người kiểm tra và buộc chủ nhà sửa.",
+  "subcategory": "habitability_hot_water_mold",
+  "bob_task_id": ""
+ },
+ "E3cbf38d9": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.89,
+  "evidence_quote": "Every lease renewal is another increase, and wages in my house have not moved.",
+  "stance": "support",
+  "stance_evidence": "Please vote YES on the rent cap amendment.",
+  "subcategory": "rent_stabilization",
+  "bob_task_id": ""
+ },
+ "Eced8c2a8": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.91,
+  "evidence_quote": "I'm a renter and the annual increases are the reason my friends have left the city.",
+  "stance": "support",
+  "stance_evidence": "Please vote YES on the rent cap amendment.",
+  "subcategory": "rent_stabilization",
+  "bob_task_id": ""
+ },
+ "Ee566b432": {
+  "category": "environment_development_review",
+  "confidence": 0.9,
+  "evidence_quote": "Rezoning the Blossom Hill retail parcel for another strip mall will add traffic that is already jammed at school pickup.",
+  "stance": "oppose",
+  "stance_evidence": "I OPPOSE the rezoning as proposed.",
+  "subcategory": "traffic_neighborhood_character",
+  "bob_task_id": ""
+ },
+ "Ee2ece9bc": {
+  "category": "environment_development_review",
+  "confidence": 0.9,
+  "evidence_quote": "Trung tâm dữ liệu dùng quá nhiều nước và điện.",
+  "stance": "oppose",
+  "stance_evidence": "Xin quý vị bỏ phiếu chống.",
+  "subcategory": "flood_water_risk",
+  "bob_task_id": ""
+ },
+ "E922bcf10": {
+  "category": "environment_development_review",
+  "confidence": 0.9,
+  "evidence_quote": "Rezoning the Blossom Hill retail parcel for another strip mall will add traffic that is already jammed at school pickup.",
+  "stance": "oppose",
+  "stance_evidence": "Please deny the Blossom Hill rezoning application.",
+  "subcategory": "traffic_neighborhood_character",
+  "bob_task_id": ""
+ },
+ "E9f9e840e": {
+  "category": "environment_development_review",
+  "confidence": 0.89,
+  "evidence_quote": "Un centro de datos que usa tanta agua no tiene sentido cuando nos piden ahorrar.",
+  "stance": "oppose",
+  "stance_evidence": "Por favor voten que no.",
+  "subcategory": "flood_water_risk",
+  "bob_task_id": ""
+ },
+ "E2d563e45": {
+  "category": "infrastructure_streets",
+  "confidence": 0.84,
+  "evidence_quote": "Our whole block lost its streetlights after the wire theft in the spring and only one came back.",
+  "stance": "support",
+  "stance_evidence": "Please send a crew to repair these lights.",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ },
+ "Eb2667ab8": {
+  "category": "environment_development_review",
+  "confidence": 0.9,
+  "evidence_quote": "Un centro de datos que usa tanta agua no tiene sentido cuando nos piden ahorrar.",
+  "stance": "oppose",
+  "stance_evidence": "Por favor voten que no.",
+  "subcategory": "flood_water_risk",
+  "bob_task_id": ""
+ },
+ "E64e98a52": {
+  "category": "public_safety_emergency_response",
+  "confidence": 0.93,
+  "evidence_quote": "Someone tried to break into our garage at 3 a.m. and police took over an hour to come.",
+  "stance": "support",
+  "stance_evidence": "Please fund faster police response for property crime.",
+  "subcategory": "patrol_staffing_levels",
+  "bob_task_id": ""
+ },
+ "Ed8193377": {
+  "category": "infrastructure_streets",
+  "confidence": 0.83,
+  "evidence_quote": "Có một ổ gà rất lớn trên đường nhà tôi từ mấy tháng nay.",
+  "stance": "support",
+  "stance_evidence": "Xin thành phố cho sửa đường sớm.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "E378356c7": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.87,
+  "evidence_quote": "The house two doors down has been vacant for three years, the roof is caving in, and people break in at night.",
+  "stance": "support",
+  "stance_evidence": "Please enforce the vacant building ordinance and fine the owner.",
+  "subcategory": "derelict_blight_enforcement",
+  "bob_task_id": ""
+ },
+ "E7e22eb14": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.93,
+  "evidence_quote": "Our building changed owners and the first letter we got was a rent increase.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT lowering the annual rent-increase cap. Please vote yes.",
+  "subcategory": "rent_stabilization",
+  "bob_task_id": ""
+ },
+ "E6044d40c": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.89,
+  "evidence_quote": "The heater in our unit has been broken since November and the landlord says it's not urgent.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT proactive rental inspections so tenants don't have to fight alone.",
+  "subcategory": "habitability_hot_water_mold",
+  "bob_task_id": ""
+ },
+ "Ee0f8556b": {
+  "category": "environment_development_review",
+  "confidence": 0.84,
+  "evidence_quote": "Trung tâm dữ liệu dùng quá nhiều nước và điện.",
+  "stance": "oppose",
+  "stance_evidence": "Xin quý vị bỏ phiếu chống.",
+  "subcategory": "flood_water_risk",
+  "bob_task_id": ""
+ },
+ "E9d94b2b5": {
+  "category": "environment_development_review",
+  "confidence": 0.89,
+  "evidence_quote": "The Blossom Hill parcel should be housing or a park, not more empty retail.",
+  "stance": "oppose",
+  "stance_evidence": "I OPPOSE the rezoning as proposed.",
+  "subcategory": "traffic_neighborhood_character",
+  "bob_task_id": ""
+ },
+ "Eb28dcee0": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.93,
+  "evidence_quote": "My solar permit has been pending for twelve weeks for a standard rooftop system.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT the permitting modernization, but please add plan checkers, not just software.",
+  "subcategory": "permit_backlog_delays",
+  "bob_task_id": ""
+ },
+ "E8f52b5e0": {
+  "category": "code_enforcement_habitability",
+  "confidence": 0.92,
+  "evidence_quote": "A simple kitchen remodel permit has taken five months and three resubmittals.",
+  "stance": "support",
+  "stance_evidence": "Please fix the permit backlog and set a real turnaround time.",
+  "subcategory": "permit_backlog_delays",
+  "bob_task_id": ""
+ },
+ "Ea352e482": {
+  "category": "other",
+  "confidence": 0.84,
+  "evidence_quote": "El centro para personas mayores redujo sus horas y mi mamá ya no tiene a dónde ir.",
+  "stance": "support",
+  "stance_evidence": "Por favor regresen el horario completo.",
+  "subcategory": "senior_services_general",
+  "bob_task_id": ""
+ },
+ "E9f3c1888": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.85,
+  "evidence_quote": "I'd like to build a small fourplex on my lot so my parents and my daughter can live nearby.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT the fourplex reform. Please approve it.",
+  "subcategory": "zoning_density_reform",
+  "bob_task_id": ""
+ },
+ "E3206b31c": {
+  "category": "infrastructure_streets",
+  "confidence": 0.83,
+  "evidence_quote": "A pothole near the crosswalk bent the rim on my car last week.",
+  "stance": "support",
+  "stance_evidence": "I SUPPORT more road-repair funding for residential streets.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "Ef0f972c6": {
+  "category": "environment_development_review",
+  "confidence": 0.86,
+  "evidence_quote": "Un centro de datos que usa tanta agua no tiene sentido cuando nos piden ahorrar.",
+  "stance": "oppose",
+  "stance_evidence": "Por favor voten que no.",
+  "subcategory": "flood_water_risk",
+  "bob_task_id": ""
+ },
+ "E00bfbc58": {
+  "category": "housing_affordability_policy",
+  "confidence": 0.92,
+  "evidence_quote": "I'm a renter and the annual increases are the reason my friends have left the city.",
+  "stance": "support",
+  "stance_evidence": "Please vote YES on the rent cap amendment.",
+  "subcategory": "rent_stabilization",
+  "bob_task_id": ""
+ },
+ "E4a11c30a": {
+  "category": "infrastructure_streets",
+  "confidence": 0.85,
+  "evidence_quote": "A pothole near the crosswalk bent the rim on my car last week.",
+  "stance": "oppose",
+  "stance_evidence": "I OPPOSE spending on cosmetic projects while basic streets crumble.",
+  "subcategory": "pothole_pavement_repair",
+  "bob_task_id": ""
+ },
+ "Eedd18a0a": {
+  "category": "infrastructure_streets",
+  "confidence": 0.9,
+  "evidence_quote": "Mấy cột đèn đường gần trạm xe buýt bị tắt từ tháng trước.",
+  "stance": "support",
+  "stance_evidence": "Xin quý vị cho người đến sửa sớm.",
+  "subcategory": "streetlight_outage",
+  "bob_task_id": ""
+ }
+}

@@ -24,7 +24,7 @@ LETTERS_JSON = ROOT / "public" / "data" / "comments_raw.json"
 
 KEEP = ["comment_id", "item", "item_title", "meeting_date", "channel", "mock", "received_at", "subject", "text", "language",
         "commenter_type", "duplicate_of", "after_deadline", "source_url", "submitted_via", "to_office", "ocr",
-        "pdf_page_start", "pdf_page_end", "pages_total", "pages_exhibit"]
+        "pdf_page_start", "pdf_page_end", "pages_total", "pages_exhibit", "generated", "generated_by"]
 
 
 def read(p: Path) -> pd.DataFrame | None:
@@ -92,6 +92,7 @@ def main() -> int:
     for r in voice.to_dict(orient="records"):
         r["mock"] = b(r["mock"])
         r["ocr"] = b(r["ocr"])
+        r["generated"] = b(r["generated"])   # simulated emails written by the build agent (ingest_emails.py)
         r["multi_tract"] = b(r["multi_tract"])
         r["duplicate_of"] = r["duplicate_of"] or None
         r["campaign_id"] = r["campaign_id"] or None

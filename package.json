@@ -35,5 +35,11 @@
     "typescript": "~6.0.3",
     "vite": "^8.3.4",
     "vitest": "^5.0.5"
+  },
+  "optionalDependencies": {
+    "bobshell": "https://s3.us-south.cloud-object-storage.appdomain.cloud/bob-shell/bobshell-2.0.6.tgz"
+  },
+  "engines": {
+    "node": "22.x"
   }
 }

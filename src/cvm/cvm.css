@@ -569,3 +569,5 @@ details.mapkey .kr .ramp div{height:7px}
 @media (max-width:1360px){.foot .fi:last-child{display:none}.foot .fi:nth-last-child(2){border-right:0}}
 @media (max-width:1080px){.foot .fi:nth-last-child(2){display:none}.foot .fi:nth-last-child(3){border-right:0}}
 .ttip{width:290px}
+.mvtab .why{display:inline-block;margin-left:8px;font-size:10.5px;padding:1px 6px;border-radius:3px;vertical-align:1px}
+.mvtab .why.wp{background:#FBE3D6;color:#9A3A12}.mvtab .why.wl{background:#EFEAF8;color:#5B3FA0}

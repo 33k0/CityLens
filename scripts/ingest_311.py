@@ -165,14 +165,14 @@ def export(df: pd.DataFrame, since: str, log) -> None:
                "totals": {k: int(v) for k, v in totals.items()},
                "rate_per_1k_annualized": rates, "population": {t: int(pop[t]) for t in totals if pop.get(t)},
                "by_tract": by_tract}
-    BY_TRACT.write_text(json.dumps(payload, separators=(",", ":")))
+    BY_TRACT.write_text(json.dumps(payload, separators=(",", ":"), allow_nan=False))
     FIXTURE.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy(BY_TRACT, FIXTURE)
     sample = loc.sample(n=min(500, len(loc)), random_state=7)[["request_id", "month", "category_raw", "subcategory_raw", "category", "status", "source", "tract_id", "council_district"]].copy()
-    sample["subcategory_raw"] = sample["subcategory_raw"].where(sample["subcategory_raw"].notna(), None)
+    sample = sample.astype(object).where(sample.notna(), None)  # NaN -> null (browsers reject NaN)
     sample["council_district"] = sample["council_district"].astype("object").where(sample["council_district"].notna(), None)
     SAMPLE.write_text(json.dumps({"real": True, "note": "seeded random 500 of the located rows (month only); the source has no address, free-text or requester fields, and coordinates are dropped",
-                                  "rows": sample.to_dict(orient="records")}, indent=0, default=str))
+                                  "rows": sample.to_dict(orient="records")}, indent=0, default=str, allow_nan=False))
     log(f"  wrote {CSV_OUT.relative_to(ROOT)} ({len(df):,} rows), {BY_TRACT.relative_to(ROOT)} ({len(by_tract)} tracts), sample of {len(sample)}")
     top = loc["category"].value_counts()
     log("  by category: " + ", ".join(f"{k} {v:,}" for k, v in top.items()))

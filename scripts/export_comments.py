@@ -46,7 +46,7 @@ def main() -> int:
     for c in KEEP:
         if c not in voice.columns:
             voice[c] = ""
-    voice = voice[KEEP].copy()
+    voice = voice[KEEP].copy().fillna("")  # channel-specific columns (e.g. to_office) are blank, never NaN
 
     loc = read(D / "locations.csv")
     if loc is not None:
@@ -127,7 +127,7 @@ def main() -> int:
     payload = {"categories": categories, "campaigns": campaigns, "generated_at": datetime.now().astimezone().isoformat(timespec="seconds"), "family": "voice",
                "note": "Voice family only. 311 lives in requests_311_by_tract.json and is never summed with these rows.",
                "channels": channels, "items": sorted(items.values(), key=lambda x: -x["count"]), "comments": recs}
-    OUT.write_text(json.dumps(payload, ensure_ascii=False, indent=1))
+    OUT.write_text(json.dumps(payload, ensure_ascii=False, indent=1, allow_nan=False))  # browsers reject NaN
     log(f"wrote {OUT.relative_to(ROOT)}: {len(recs)} voice comments, {len(items)} items, channels={ {k: v['count'] for k, v in channels.items()} }")
     return 0
 

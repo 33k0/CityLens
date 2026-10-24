@@ -1,0 +1,57 @@
+{
+ "048be4c5ea5a25c8c60d79f822286e46db135d670adaea812d12e438465d1bfb": {
+  "tract_id": "06085501101",
+  "matched": true,
+  "source": "census_onelineaddress"
+ },
+ "07b69ccc34b4c561e46c76f98eb5d51fda125cb3257fddf5434cf1ca135e228d": {
+  "tract_id": "06085500901",
+  "matched": true,
+  "source": "census_onelineaddress"
+ },
+ "0adb1280e4f6ebf120a38d4d027439f8c85a5c4065a7292ea191a48e0eb7a0a7": {
+  "tract_id": "06085500500",
+  "matched": true,
+  "source": "census_onelineaddress"
+ },
+ "1a52d2ae694b98de793d95c23e989b05d483fae05466cc85cfdf165832f4b1a9": {
+  "tract_id": "06085501902",
+  "matched": true,
+  "source": "census_onelineaddress"
+ },
+ "4e30c73334f8835d3769217ff5cd4a12ae7e5dbd48bce53657c3adf65cf9030a": {
+  "tract_id": "06085503602",
+  "matched": true,
+  "source": "sjgis_streets_intersection"
+ },
+ "5896ee8a6519a06fd91500124d873ebd7db70f9c2241b08f219e34eeff69e6d0": {
+  "tract_id": "06085500800",
+  "matched": true,
+  "source": "census_onelineaddress"
+ },
+ "606863e900f8be97c3a5b9a0735182c6138f9ad4cbe3925c701f369025f25c2e": {
+  "tract_id": "06085503602",
+  "matched": true,
+  "source": "sjgis_streets_intersection"
+ },
+ "8a82c01c8471e2d60c5328437bc974a60b07cf10f08efeba38e934d58f7773ac": {
+  "tract_id": "06085501700",
+  "matched": true,
+  "source": "census_onelineaddress"
+ },
+ "a99d3eb73cde978642f963d9d384ea06f93b0140bb68e147d0963e98b5568cd3": {
+  "tract_id": "06085500200",
+  "matched": true,
+  "source": "census_onelineaddress"
+ },
+ "b6e6aa2c638d249d0fb90bcf39c4a65963ae16f990e5c3112f0dd7fe7c9968fe": {
+  "tract_id": "",
+  "matched": false,
+  "source": "sjgis_streets_intersection"
+ },
+ "b91db96c78071b1122b5d171f6cca71d39570ec287d4ba2a090a9d297367dc92": {
+  "tract_id": "06085500902",
+  "matched": true,
+  "source": "sjgis_streets_intersection"
+ }
+}

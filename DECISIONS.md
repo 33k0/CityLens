@@ -249,3 +249,55 @@ Dates are absolute. Newest at the bottom of each section.
 - `public/data/inbox.json` feeds the Inbox panel: emails as received, newest first, sender shown as
   "[name and address removed at ingest]".
 - Pipeline: step b in `scripts/data.sh`; `--offline` (or a missing raw CSV) rebuilds from the fixture.
+
+## Milestone 4 — location resolution (`scripts/resolve_locations.py`, 2026-10-23)
+
+- **Ladder:** address → neighborhood → zip → district → none; each comment stops at the first tier that resolves.
+  `district` is an added tier for writers who state only their council district ("I am a resident of District 5"):
+  `council_district` is set, `tract_id` stays empty. Otherwise `council_district` comes from the district containing
+  the tract centroid; a stated district overrides it. Letters and emails run together into one `data/locations.csv`.
+- **Coverage (honest, shown in the UI rather than hidden):**
+
+  | tier | letters (271, real) | emails (164, simulated) | combined (435) |
+  |---|---|---|---|
+  | address | 9 (3.3%) | 8 (4.9%) | 17 (3.9%) |
+  | neighborhood | 16 (5.9%) | 50 (30.5%) | 66 (15.2%) |
+  | zip | 8 (3.0%) | 0 | 8 (1.8%) |
+  | district only | 14 (5.2%) | 0 | 14 (3.2%) |
+  | none | 224 (82.7%) | 106 (64.6%) | 330 (75.9%) |
+  | **with a tract** | **33 (12.2%)** | **58 (35.4%)** | **91 (20.9%) in 28 of 215 tracts** |
+
+  188 of the 271 letters are near-identical 25-081 campaign letters that say only "As a resident of San José".
+  67 of the 91 located rows are `multi_tract=true`.
+- **Address tier.** Signature addresses in the real letters are all organization offices (SVCN, SIREN, YWCA, a
+  developer, the Chamber, the County), not homes; they stay at `address` precision as "where the commenter is
+  based". Body addresses count only as an address block or after "I live at/on", because an address inside a
+  sentence is usually the project site; the City Hall recipient block is skipped. Single addresses go to the US
+  Census Geocoder (onelineaddress, Public_AR_Current / Current_Current → tract GEOID). Intersections are resolved by
+  intersecting the two streets in San José GIS `OPN/OPN_OpenDataService/MapServer/60` (Streets, `FULLNAME`), major
+  street types winning over Ct/Ln; crossings more than ~1 km apart are treated as ambiguous. A ~40-entry landmark
+  gazetteer (coordinates from the Census geocoder on each landmark's address) resolves only after a proximity or
+  residence cue, so "graduate of SJSU" never locates anyone. Results: 7 signature addresses, 1 letterhead, 4
+  intersections (Story & King ×3, 5th & William), 5 landmarks (Kelley Park ×4, Diridon Station).
+- **Neighborhood tier** needs context: a residence cue ("live in", "X resident", "my X block") or a sign-off line
+  that is only a place counts strongly; a locative preposition counts weakly. Organization collisions ("X Union",
+  "School District", "Washington D.C.", "SOMOS Mayfair") and negations ("I don't live there") are rejected.
+  Token-aware fuzzy match at 85, every token ≥ 75; Spanish and Vietnamese cues supported. Generic city-GIS names
+  without aliases are skipped when under 5 characters or a dictionary word. Primary tract = the listed tract with the
+  largest population. The ingest's guessed neighborhood field is ignored for letters (it had false positives) and
+  trusted for user-entered channels.
+- **Item-title rule.** Places named in the agenda item title are ignored unless the comment has a first-person
+  residence or proximity cue, so "streetlights along the Story Road corridor" does not locate a writer but "I cross
+  King and Story every night" does.
+- **Zip tier.** Census 2020 ZCTA–tract relationship file filtered to 95xxx / county 085 →
+  `data/zcta_tract_crosswalk.csv`. People per overlap ≈ (overlap land area ÷ tract land area) × tract population,
+  over our 215 tracts; zips with fewer than 500 estimated people in San José tracts, or following another city's
+  name (95037 Morgan Hill), are treated as outside the city.
+- **Privacy.** Raw addresses and intersections exist only in memory and in gitignored `data/raw/`.
+  `data/geocode_cache.json` maps sha256(normalized query) → {tract_id, matched, source} and `locations.csv` carries no
+  street text (asserted in code and tests). **Known limit:** an unsalted hash of a short address can be confirmed by
+  hashing a guess. Every cached address today is an organization's office or a public intersection, so the risk is
+  low; a secret salt kept in `data/raw/` is the fix before real resident addresses are ever cached.
+- Thresholds (85 fuzzy, 92 landmarks, 45-character proximity window, 1 km crossing ambiguity, 500 people per zip)
+  were tuned by hand on these 435 rows. Not resolved by design: single streets without a cross street ("traffic on
+  Zanker", "the Alma Ave pothole") and the 30-mile Coyote Creek Trail.

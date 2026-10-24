@@ -1,0 +1,810 @@
+{
+ "generated_at": "2026-10-23T17:05:42-0700",
+ "tract_count": 215,
+ "n": 435,
+ "tiers": {
+  "address": {
+   "count": 17,
+   "share": 0.0391
+  },
+  "neighborhood": {
+   "count": 66,
+   "share": 0.1517
+  },
+  "zip": {
+   "count": 8,
+   "share": 0.0184
+  },
+  "district": {
+   "count": 14,
+   "share": 0.0322
+  },
+  "none": {
+   "count": 330,
+   "share": 0.7586
+  }
+ },
+ "with_tract": 91,
+ "with_tract_share": 0.2092,
+ "distinct_tracts": 28,
+ "multi_tract": 67,
+ "by_source": {
+  "address/body": 1,
+  "address/intersection": 4,
+  "address/landmark": 5,
+  "address/signature": 7,
+  "district/body": 14,
+  "neighborhood/body": 43,
+  "neighborhood/signature": 23,
+  "none/-": 330,
+  "zip/signature": 8
+ },
+ "by_channel": {
+  "email": {
+   "n": 164,
+   "tiers": {
+    "address": {
+     "count": 8,
+     "share": 0.0488
+    },
+    "neighborhood": {
+     "count": 50,
+     "share": 0.3049
+    },
+    "zip": {
+     "count": 0,
+     "share": 0.0
+    },
+    "district": {
+     "count": 0,
+     "share": 0.0
+    },
+    "none": {
+     "count": 106,
+     "share": 0.6463
+    }
+   },
+   "with_tract": 58,
+   "with_tract_share": 0.3537
+  },
+  "letter": {
+   "n": 271,
+   "tiers": {
+    "address": {
+     "count": 9,
+     "share": 0.0332
+    },
+    "neighborhood": {
+     "count": 16,
+     "share": 0.059
+    },
+    "zip": {
+     "count": 8,
+     "share": 0.0295
+    },
+    "district": {
+     "count": 14,
+     "share": 0.0517
+    },
+    "none": {
+     "count": 224,
+     "share": 0.8266
+    }
+   },
+   "with_tract": 33,
+   "with_tract_share": 0.1218
+  }
+ },
+ "by_item": {
+  "25-008": {
+   "n": 1,
+   "tiers": {
+    "address": {
+     "count": 0,
+     "share": 0.0
+    },
+    "neighborhood": {
+     "count": 0,
+     "share": 0.0
+    },
+    "zip": {
+     "count": 0,
+     "share": 0.0
+    },
+    "district": {
+     "count": 0,
+     "share": 0.0
+    },
+    "none": {
+     "count": 1,
+     "share": 1.0
+    }
+   },
+   "with_tract": 0,
+   "with_tract_share": 0.0
+  },
+  "25-011": {
+   "n": 10,
+   "tiers": {
+    "address": {
+     "count": 1,
+     "share": 0.1
+    },
+    "neighborhood": {
+     "count": 1,
+     "share": 0.1
+    },
+    "zip": {
+     "count": 0,
+     "share": 0.0
+    },
+    "district": {
+     "count": 0,
+     "share": 0.0
+    },
+    "none": {
+     "count": 8,
+     "share": 0.8
+    }
+   },
+   "with_tract": 2,
+   "with_tract_share": 0.2
+  },
+  "25-012": {
+   "n": 1,
+   "tiers": {
+    "address": {
+     "count": 1,
+     "share": 1.0
+    },
+    "neighborhood": {
+     "count": 0,
+     "share": 0.0
+    },
+    "zip": {
+     "count": 0,
+     "share": 0.0
+    },
+    "district": {
+     "count": 0,
+     "share": 0.0
+    },
+    "none": {
+     "count": 0,
+     "share": 0.0
+    }
+   },
+   "with_tract": 1,
+   "with_tract_share": 1.0
+  },
+  "25-018": {
+   "n": 4,
+   "tiers": {
+    "address": {
+     "count": 1,
+     "share": 0.25
+    },
+    "neighborhood": {
+     "count": 0,
+     "share": 0.0
+    },
+    "zip": {
+     "count": 0,
+     "share": 0.0
+    },
+    "district": {
+     "count": 0,
+     "share": 0.0
+    },
+    "none": {
+     "count": 3,
+     "share": 0.75
+    }
+   },
+   "with_tract": 1,
+   "with_tract_share": 0.25
+  },
+  "25-025": {
+   "n": 1,
+   "tiers": {
+    "address": {
+     "count": 0,
+     "share": 0.0
+    },
+    "neighborhood": {
+     "count": 0,
+     "share": 0.0
+    },
+    "zip": {
+     "count": 0,
+     "share": 0.0
+    },
+    "district": {
+     "count": 0,
+     "share": 0.0
+    },
+    "none": {
+     "count": 1,
+     "share": 1.0
+    }
+   },
+   "with_tract": 0,
+   "with_tract_share": 0.0
+  },
+  "25-054": {
+   "n": 2,
+   "tiers": {
+    "address": {
+     "count": 1,
+     "share": 0.5
+    },
+    "neighborhood": {
+     "count": 0,
+     "share": 0.0
+    },
+    "zip": {
+     "count": 0,
+     "share": 0.0
+    },
+    "district": {
+     "count": 0,
+     "share": 0.0
+    },
+    "none": {
+     "count": 1,
+     "share": 0.5
+    }
+   },
+   "with_tract": 1,
+   "with_tract_share": 0.5
+  },
+  "25-059": {
+   "n": 57,
+   "tiers": {
+    "address": {
+     "count": 2,
+     "share": 0.0351
+    },
+    "neighborhood": {
+     "count": 11,
+     "share": 0.193
+    },
+    "zip": {
+     "count": 0,
+     "share": 0.0
+    },
+    "district": {
+     "count": 10,
+     "share": 0.1754
+    },
+    "none": {
+     "count": 34,
+     "share": 0.5965
+    }
+   },
+   "with_tract": 13,
+   "with_tract_share": 0.2281
+  },
+  "25-065": {
+   "n": 3,
+   "tiers": {
+    "address": {
+     "count": 1,
+     "share": 0.3333
+    },
+    "neighborhood": {
+     "count": 1,
+     "share": 0.3333
+    },
+    "zip": {
+     "count": 0,
+     "share": 0.0
+    },
+    "district": {
+     "count": 1,
+     "share": 0.3333
+    },
+    "none": {
+     "count": 0,
+     "share": 0.0
+    }
+   },
+   "with_tract": 2,
+   "with_tract_share": 0.6667
+  },
+  "25-081": {
+   "n": 188,
+   "tiers": {
+    "address": {
+     "count": 1,
+     "share": 0.0053
+    },
+    "neighborhood": {
+     "count": 3,
+     "share": 0.016
+    },
+    "zip": {
+     "count": 8,
+     "share": 0.0426
+    },
+    "district": {
+     "count": 3,
+     "share": 0.016
+    },
+    "none": {
+     "count": 173,
+     "share": 0.9202
+    }
+   },
+   "with_tract": 12,
+   "with_tract_share": 0.0638
+  },
+  "25-085": {
+   "n": 4,
+   "tiers": {
+    "address": {
+     "count": 1,
+     "share": 0.25
+    },
+    "neighborhood": {
+     "count": 0,
+     "share": 0.0
+    },
+    "zip": {
+     "count": 0,
+     "share": 0.0
+    },
+    "district": {
+     "count": 0,
+     "share": 0.0
+    },
+    "none": {
+     "count": 3,
+     "share": 0.75
+    }
+   },
+   "with_tract": 1,
+   "with_tract_share": 0.25
+  },
+  "MOCK-26-901": {
+   "n": 11,
+   "tiers": {
+    "address": {
+     "count": 0,
+     "share": 0.0
+    },
+    "neighborhood": {
+     "count": 7,
+     "share": 0.6364
+    },
+    "zip": {
+     "count": 0,
+     "share": 0.0
+    },
+    "district": {
+     "count": 0,
+     "share": 0.0
+    },
+    "none": {
+     "count": 4,
+     "share": 0.3636
+    }
+   },
+   "with_tract": 7,
+   "with_tract_share": 0.6364
+  },
+  "MOCK-26-902": {
+   "n": 40,
+   "tiers": {
+    "address": {
+     "count": 3,
+     "share": 0.075
+    },
+    "neighborhood": {
+     "count": 6,
+     "share": 0.15
+    },
+    "zip": {
+     "count": 0,
+     "share": 0.0
+    },
+    "district": {
+     "count": 0,
+     "share": 0.0
+    },
+    "none": {
+     "count": 31,
+     "share": 0.775
+    }
+   },
+   "with_tract": 9,
+   "with_tract_share": 0.225
+  },
+  "MOCK-26-903": {
+   "n": 20,
+   "tiers": {
+    "address": {
+     "count": 0,
+     "share": 0.0
+    },
+    "neighborhood": {
+     "count": 8,
+     "share": 0.4
+    },
+    "zip": {
+     "count": 0,
+     "share": 0.0
+    },
+    "district": {
+     "count": 0,
+     "share": 0.0
+    },
+    "none": {
+     "count": 12,
+     "share": 0.6
+    }
+   },
+   "with_tract": 8,
+   "with_tract_share": 0.4
+  },
+  "MOCK-26-904": {
+   "n": 13,
+   "tiers": {
+    "address": {
+     "count": 0,
+     "share": 0.0
+    },
+    "neighborhood": {
+     "count": 3,
+     "share": 0.2308
+    },
+    "zip": {
+     "count": 0,
+     "share": 0.0
+    },
+    "district": {
+     "count": 0,
+     "share": 0.0
+    },
+    "none": {
+     "count": 10,
+     "share": 0.7692
+    }
+   },
+   "with_tract": 3,
+   "with_tract_share": 0.2308
+  },
+  "MOCK-26-905": {
+   "n": 10,
+   "tiers": {
+    "address": {
+     "count": 0,
+     "share": 0.0
+    },
+    "neighborhood": {
+     "count": 2,
+     "share": 0.2
+    },
+    "zip": {
+     "count": 0,
+     "share": 0.0
+    },
+    "district": {
+     "count": 0,
+     "share": 0.0
+    },
+    "none": {
+     "count": 8,
+     "share": 0.8
+    }
+   },
+   "with_tract": 2,
+   "with_tract_share": 0.2
+  },
+  "MOCK-26-906": {
+   "n": 39,
+   "tiers": {
+    "address": {
+     "count": 1,
+     "share": 0.0256
+    },
+    "neighborhood": {
+     "count": 18,
+     "share": 0.4615
+    },
+    "zip": {
+     "count": 0,
+     "share": 0.0
+    },
+    "district": {
+     "count": 0,
+     "share": 0.0
+    },
+    "none": {
+     "count": 20,
+     "share": 0.5128
+    }
+   },
+   "with_tract": 19,
+   "with_tract_share": 0.4872
+  },
+  "MOCK-26-907": {
+   "n": 8,
+   "tiers": {
+    "address": {
+     "count": 3,
+     "share": 0.375
+    },
+    "neighborhood": {
+     "count": 0,
+     "share": 0.0
+    },
+    "zip": {
+     "count": 0,
+     "share": 0.0
+    },
+    "district": {
+     "count": 0,
+     "share": 0.0
+    },
+    "none": {
+     "count": 5,
+     "share": 0.625
+    }
+   },
+   "with_tract": 3,
+   "with_tract_share": 0.375
+  },
+  "MOCK-26-908": {
+   "n": 8,
+   "tiers": {
+    "address": {
+     "count": 0,
+     "share": 0.0
+    },
+    "neighborhood": {
+     "count": 1,
+     "share": 0.125
+    },
+    "zip": {
+     "count": 0,
+     "share": 0.0
+    },
+    "district": {
+     "count": 0,
+     "share": 0.0
+    },
+    "none": {
+     "count": 7,
+     "share": 0.875
+    }
+   },
+   "with_tract": 1,
+   "with_tract_share": 0.125
+  },
+  "MOCK-26-909": {
+   "n": 7,
+   "tiers": {
+    "address": {
+     "count": 0,
+     "share": 0.0
+    },
+    "neighborhood": {
+     "count": 3,
+     "share": 0.4286
+    },
+    "zip": {
+     "count": 0,
+     "share": 0.0
+    },
+    "district": {
+     "count": 0,
+     "share": 0.0
+    },
+    "none": {
+     "count": 4,
+     "share": 0.5714
+    }
+   },
+   "with_tract": 3,
+   "with_tract_share": 0.4286
+  },
+  "MOCK-26-910": {
+   "n": 2,
+   "tiers": {
+    "address": {
+     "count": 0,
+     "share": 0.0
+    },
+    "neighborhood": {
+     "count": 0,
+     "share": 0.0
+    },
+    "zip": {
+     "count": 0,
+     "share": 0.0
+    },
+    "district": {
+     "count": 0,
+     "share": 0.0
+    },
+    "none": {
+     "count": 2,
+     "share": 1.0
+    }
+   },
+   "with_tract": 0,
+   "with_tract_share": 0.0
+  },
+  "MOCK-GEN": {
+   "n": 6,
+   "tiers": {
+    "address": {
+     "count": 1,
+     "share": 0.1667
+    },
+    "neighborhood": {
+     "count": 2,
+     "share": 0.3333
+    },
+    "zip": {
+     "count": 0,
+     "share": 0.0
+    },
+    "district": {
+     "count": 0,
+     "share": 0.0
+    },
+    "none": {
+     "count": 3,
+     "share": 0.5
+    }
+   },
+   "with_tract": 3,
+   "with_tract_share": 0.5
+  }
+ },
+ "by_council_district": {
+  "10": 1,
+  "2": 3,
+  "3": 45,
+  "4": 8,
+  "5": 24,
+  "6": 11,
+  "7": 10,
+  "8": 1,
+  "9": 2
+ },
+ "by_matched_name": [
+  {
+   "name": "Washington-Guadalupe",
+   "count": 8,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Japantown",
+   "count": 6,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Downtown",
+   "count": 6,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Alviso",
+   "count": 6,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "East San José",
+   "count": 5,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Tully Road",
+   "count": 5,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Story Road",
+   "count": 4,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Kelley Park",
+   "count": 4,
+   "precision": "address"
+  },
+  {
+   "name": "King Road",
+   "count": 3,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Alum Rock",
+   "count": 3,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Willow Glen",
+   "count": 3,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Vendome",
+   "count": 2,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Naglee Park",
+   "count": 2,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Mayfair",
+   "count": 2,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Little Portugal",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Diridon Station",
+   "count": 1,
+   "precision": "address"
+  },
+  {
+   "name": "South University",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Olinder",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "North San José",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Gardner",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Rose Garden",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Almaden Valley",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Berryessa",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Evergreen",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Cambrian",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Monterey Road corridor",
+   "count": 1,
+   "precision": "neighborhood"
+  }
+ ]
+}

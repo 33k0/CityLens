@@ -206,6 +206,10 @@ function brief(question, regionTracts, sectionKey) {
     }).sort((a, b) => b.n - a.n)
     lines.push('SECTIONS, most comments first (section|comments|real letters|simulated emails|located|311 per 1k/yr or none): ' + rows.map((r) => `${r.label}|${r.n}|${r.letters}|${r.sim}|${r.loc}|${r.p311 ? r.p311.toFixed(1) : 'none'}`).join('; '))
   }
+  const rows = T.filter((r) => num(r.pop) >= 500)
+  const fmtT = (r) => `${r.nbhd}|${r.tract_id}|D${parseInt(r.district, 10)}|voice ${r.voice_per_1k}/1k (${r.comments} comments)|311 ${r.p311_per_1k_yr}/1k/yr`
+  lines.push('CENSUS TRACTS WITH THE MOST VOICE (neighborhood|tract id|district|voice|311): ' + [...rows].sort((a, b) => num(b.voice_per_1k) - num(a.voice_per_1k)).slice(0, 5).map(fmtT).join('; '))
+  lines.push('MOST UNDERHEARD CENSUS TRACTS (underheard rule; highest 311 rate first): ' + rows.filter((r) => r.underheard === 'True').sort((a, b) => num(b.p311_per_1k_yr) - num(a.p311_per_1k_yr)).slice(0, 5).map(fmtT).join('; '))
   const sec = sectionIn(question, sectionKey)
   if (sec) {
     const k = sec.key
@@ -338,6 +342,23 @@ export function validateActions(list) {
       case 'set_view': if (['sbs', 'map'].includes(id)) v = { type: a.type, id }; break
       case 'select_district': { const t = areaIndex().districts[String(parseInt(id, 10))]; if (t?.length) v = { type: a.type, id: String(parseInt(id, 10)), tracts: t } } break
       case 'select_area': { const ar = findArea(a.name ?? a.id); if (ar) v = { type: a.type, name: ar.name, tracts: ar.tracts } } break
+      case 'split_view': {
+        /* side by side with a place and/or map type per side: {district}|{area}|{tract}, scheme voice|prob|gap */
+        const SCH = ['voice', 'prob', 'gap']
+        const side = (x) => {
+          if (!x || typeof x !== 'object') return null
+          const o = {}
+          if (SCH.includes(String(x.scheme))) o.scheme = String(x.scheme)
+          let pl = null
+          if (x.district != null) { const t = areaIndex().districts[String(parseInt(x.district, 10))]; if (t?.length) pl = { name: `Council District ${parseInt(x.district, 10)}`, tracts: t } }
+          else if (x.tract != null && tractIds().has(String(x.tract))) { const t = (cachedJson('public/data/ui.json')?.tracts || []).find((r) => r.id === String(x.tract)); pl = { name: t?.nbhd || 'Census tract', tracts: [String(x.tract)] } }
+          else if (x.area != null || x.name != null) { const ar = findArea(x.area ?? x.name); if (ar) pl = { name: ar.name, tracts: ar.tracts } }
+          if (pl) Object.assign(o, pl)
+          return Object.keys(o).length ? o : null
+        }
+        const L = side(a.left), Rt = side(a.right)
+        if (L || Rt) v = { type: a.type, left: L, right: Rt }
+      } break
       case 'compare_places': {
         const ps = (Array.isArray(a.places) ? a.places : []).slice(0, 2).map((p) => {
           if (p?.district != null) { const t = areaIndex().districts[String(parseInt(p.district, 10))]; return t?.length ? { name: `Council District ${parseInt(p.district, 10)}`, tracts: t } : null }

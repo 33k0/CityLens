@@ -5,12 +5,13 @@ import pandas as pd
 import bob_label as B
 SCR = sys.argv[1]
 side = json.load(open(f"{SCR}/side.json"))
+side2 = json.load(open(f"{SCR}/side2.json")) if Path(f"{SCR}/side2.json").exists() else []
 cats = json.loads(B.CATS.read_text())
 e = pd.read_csv(str(Path(__file__).resolve().parents[2]) + "/data/emails_raw.csv", dtype=str, keep_default_na=False)
 e = e[e.generated == "True"]
 agent, act, errs = {}, {}, 0
 for r in e.itertuples():
-    s = side[int(r.source_row)]
+    s = (side2 if r.source_file.endswith("_batch2.csv") else side)[int(r.source_row)]
     lab, er = B.validate(dict(s["label"]), cats, r.text[:B.TEXT_CAP])
     if er:
         errs += 1; print(r.comment_id, s["key"], er); continue

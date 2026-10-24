@@ -14,3 +14,4 @@ data/bob_work/
 data/bob_last_output*.jsonl
 data/bob_chat_runs.json
 scripts/mock_emails/side.json
+scripts/mock_emails/side2.json

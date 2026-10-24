@@ -6,6 +6,7 @@ cd "$(dirname "$0")/../.."
 S=scripts/mock_emails
 PY=.venv/bin/python
 PYTHONHASHSEED=0 $PY $S/gen.py $S $S/overrides.json | cut -c1-160
+PYTHONHASHSEED=0 $PY $S/batch2.py $S | tail -1
 $PY scripts/ingest_emails.py 2>&1 | head -1
 $PY scripts/resolve_locations.py 2>&1 | grep -E "\[email\]"
 $PY $S/verify.py $S | tail -6

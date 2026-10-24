@@ -511,3 +511,33 @@ details.mapkey .kr .ramp div{height:7px}
 .mvn b{font-weight:600;font-size:13px}.mvn em{display:block;font-style:normal;font-size:11px;color:var(--ink2)}
 .mvc{display:grid;grid-template-columns:minmax(0,1fr) 54px;gap:8px;align-items:center}.mvc>div{height:8px;background:#F2F2EF;border-radius:0 4px 4px 0}
 .mvc>div i{display:block;height:100%;border-radius:0 4px 4px 0}.mvc b{font-size:12.5px;font-weight:500;text-align:right;font-variant-numeric:tabular-nums}
+
+/* section picker + menu */
+.picker{gap:12px;padding:6px 12px 6px 10px;min-width:280px}
+.picker.open{border-color:var(--ink2)}
+.picker .ey{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink2);line-height:1.2}
+.picker .t{font-size:15px;line-height:1.25}
+.picker .m{display:flex;gap:12px;font-size:12px;color:var(--ink2)}
+.picker .m b{color:var(--ink);font-weight:600}
+.picker .chev{display:flex;color:var(--ink2);margin-left:auto;flex:none}
+.picker .chev svg{width:16px;height:16px}
+.sw{width:10px;height:28px;border-radius:3px;flex:none}
+.sw.all{display:grid;grid-template-columns:1fr 1fr;gap:2px;width:14px;height:14px;background:none;align-self:center}
+.sw.all i{border-radius:1px}
+.secmenu{width:460px;padding:6px 6px 8px}
+.secmenu .mh{display:flex;justify-content:space-between;padding-right:40px}
+.secmenu .mi.sec{align-items:center;gap:12px;padding:8px 10px}
+.secmenu .mi.sec .sw{height:22px;width:6px}
+.secmenu .mi.sec .sw.all{width:14px;height:14px}
+.secmenu .sx{flex:1;min-width:0}
+.secmenu .st{font-weight:500;line-height:1.3}
+.secmenu .sm{font-size:12px;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.secmenu .sn{display:flex;flex-direction:column;align-items:flex-end;gap:4px;width:64px;flex:none;font-variant-numeric:tabular-nums}
+.secmenu .sn i{display:block;width:64px;height:4px;background:var(--bg);border-radius:2px;overflow:hidden}
+.secmenu .sn u{display:block;height:100%;border-radius:2px}
+.secmenu .ck{width:14px;flex:none;color:var(--ink);font-size:13px}
+.secmenu .mi.cur{background:var(--bg)}
+.secmenu .msep{height:1px;background:var(--line);margin:4px 10px}
+.secmenu .mi.sec{border:0;margin:1px 0}
+.picker .m span{white-space:nowrap;flex:none}
+.secmenu .sn b{font-family:inherit;font-weight:600}

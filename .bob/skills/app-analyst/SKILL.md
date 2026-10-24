@@ -31,6 +31,8 @@ Never print secrets** (`.env.local`, `BOB_API_KEY`, anything starting with `bob_
 | `data/campaigns.json` | Form-letter campaigns: `campaign_id`, `size`, `items`, `channels`, `representative_comment_id`, `template_snippet`; `counting_rule`. | "Is this a campaign? How big?" |
 | `DECISIONS.md`, `docs/METRICS.md` | Design decisions and the formula sheet. | "How is X computed / why?" |
 | `public/data/tract_profiles.csv` | **Start here for any place question.** One row per census tract: `tract_id`, `nbhd`, `district`, `pop`, `households`, `renter`, `lep`, `income`, `nonwhite`, `epc` (Equity Priority), `spanish`, `asian_pacific` (household language shares), `comments` and `comments_<section>` (voice, unique, located), `voice_per_1k`, `p311_per_1k_yr` and `p311_<section>_per_1k_yr` (311, separate family), `expected_comments`, `underheard`, `quiet` (the app's rule). | District or neighborhood profiles, comparisons, rankings. Read with `grep`/`awk`, e.g. `awk -F, '$3==3'` for District 3. |
+| `public/data/police_by_tract.json` | **San José Police calls for service** (real, SJPD open data, same months as 311): `by_tract[tract][group][YYYY-MM]`, `groups[]` (violence and weapons, theft and property, traffic and vehicles, disturbances and noise, welfare and mental health, suspicious activity and trespassing, alarms, other), `city_monthly`, `coverage` (share placed in a census tract). Also in `tract_profiles.csv` as `police_per_1k_yr` and `police_<group>_per_1k_yr`. | Police calls by place, type and month; trends over time. |
+| `public/data/requests_311_types.json` | 311 reports per census tract by service type (Graffiti, Illegal Dumping, Streetlight Outage, Encampment Concerns, …). | Which kinds of 311 problems drive a place's rate. |
 | `public/data/area_index.json` | `districts` ("1"…"10" → census tract ids) and `areas[]` (`name`, `aliases`, `tracts`) for named neighborhoods like Downtown, Japantown, Mayfair. | Which census tracts make up a district or named area. |
 | `public/data/associations.json` | Spearman correlations across census tracts between ACS attributes (income, renter, lep, nonwhite, spanish, asian_pacific, epc) and outcomes (`voice_per_1k`, `p311_per_1k_yr`, per-section 311 rates), with `rho`, `p`, `n`, `strength`. | "What goes with what": e.g. renter share vs. comment rate, income vs. dumping reports. |
 | `docs/CONTEXT_SAN_JOSE.md` | Short, widely documented San José background (participation research, how 311 is used, East Side history, district elections, redlining, Little Saigon, language). Sections: `participation`, `reporting`, `east-side`, `districts`, `redlining`, `vietnamese`, `language`, `crime-and-place`. | *Possible* reasons behind a pattern. Background only; cite as `[[file:docs/CONTEXT_SAN_JOSE.md#east-side]]` and say it is background. |
@@ -45,6 +47,9 @@ Citywide metrics in `metrics.json` are citywide: say so if you use one for a reg
 
 - **Agenda item / sections.** Staff pick an agenda item (or all) and a section (voice category, e.g. Streets &
   Infrastructure) with subsections; filters also include stance (support / oppose / neutral / unclear).
+- **Problems view** has a switch at the top of the filters: **311 reports** or **Police calls**; each lists its types
+  and ticking types filters the map. Analytics (All sections or Public Safety) has a **Police calls over time** chart,
+  and the map info card shows police calls per 1,000 a year.
 - **Map schemes** (top bar): **Voice** = public comments per 1,000 residents per tract (where people write in);
   **Problems** = 311 problem reports per 1,000 residents per year (only for sections with 311 data);
   **Underheard** map = 311 percentile minus comment percentile (0–100 each, per 1,000 residents); darkest = many
@@ -107,8 +112,10 @@ opened. Don't add actions to purely definitional questions.
 6. Nothing finer than a census tract; never names, addresses or cross-streets of writers.
 7. No model or vendor names.
 8. Associations describe census tracts, not people. Never say or imply that an ethnic, language or income group causes
-   problems or crime. The app has **no crime data**: 311 public-safety reports are service requests (vehicle concerns,
-   fireworks, non-emergency police), not crime rates. Name the measure exactly.
+   problems or crime. The app has **no crime rates**. It has two problem families besides comments, each named exactly:
+   **311 reports** (service requests) and **police calls** (SJPD calls for service: calls, not crimes; they include
+   officer-initiated stops and follow where officers patrol, so more patrol means more calls). Voice, 311 and police
+   calls are three separate families: compare them side by side, never add them.
 9. Correlation is not cause. Give the size (`rho`, strength) and at least one other plausible explanation.
 10. Background from `docs/CONTEXT_SAN_JOSE.md` is labeled "background" and never presented as a finding of the app.
 

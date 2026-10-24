@@ -88,7 +88,7 @@ const FILES = ['public/data/comments.json', 'public/data/requests_311_by_tract.j
   'public/data/fairness/voice_city.json', 'public/data/fairness/311_city.json', 'public/data/fairness/meta.json',
   'public/data/fairness/problems_without_voice.json', 'public/data/coverage.json', 'public/data/ui.json',
   'public/data/inbox.json', 'data/campaigns.json', 'DECISIONS.md', 'docs/METRICS.md',
-  'public/data/tract_profiles.csv', 'public/data/area_index.json', 'public/data/associations.json', 'docs/CONTEXT_SAN_JOSE.md']
+  'public/data/tract_profiles.csv', 'public/data/police_by_tract.json', 'public/data/requests_311_types.json', 'public/data/area_index.json', 'public/data/associations.json', 'docs/CONTEXT_SAN_JOSE.md']
 function validRef(ref) {
   const m = /^(metric|file):(.+)$/i.exec(String(ref || '').trim())
   if (!m) return null
@@ -177,7 +177,7 @@ function summarize(rows) {
   const c = rows.reduce((s, r) => s + (num(r.comments) || 0), 0)
   const e = rows.reduce((s, r) => s + (num(r.expected_comments) || 0), 0)
   return { census_tracts: rows.length, residents: pop, comments: c, expected_comments: +e.toFixed(1), voice_per_1k: +(c / pop * 1000).toFixed(3),
-    p311_per_1k_yr: +w('p311_per_1k_yr').toFixed(1), renter: +w('renter').toFixed(3), lep: +w('lep').toFixed(3),
+    p311_per_1k_yr: +w('p311_per_1k_yr').toFixed(1), police_per_1k_yr: +w('police_per_1k_yr').toFixed(0), renter: +w('renter').toFixed(3), lep: +w('lep').toFixed(3),
     spanish: +w('spanish').toFixed(3), asian_pacific: +w('asian_pacific').toFixed(3), median_income_popweighted: Math.round(w('income')),
     equity_priority_tracts: rows.filter((r) => r.epc === 'True').length, underheard: rows.filter((r) => r.underheard === 'True').length,
     quiet: rows.filter((r) => r.quiet === 'True').length }
@@ -191,10 +191,10 @@ function brief(question, regionTracts, sectionKey) {
   const D = areaIndex().districts
   const city = summarize(T)
   const dist = Object.entries(D).map(([d, ids]) => ({ d, ...summarize(ids.map((t) => by.get(t)).filter(Boolean)) }))
-  lines.push('DISTRICTS, sorted by voice rate, lowest first (district|census tracts|residents|comments|expected|voice per 1k|voice vs city|311 per 1k/yr|311 vs city|renter|limited English|underheard census tracts):')
-  for (const x of [...dist].sort((a, b) => a.voice_per_1k - b.voice_per_1k)) lines.push(`  D${x.d}|${x.census_tracts}|${x.residents}|${x.comments}|${x.expected_comments}|${x.voice_per_1k}|${(x.voice_per_1k / city.voice_per_1k).toFixed(2)}x|${x.p311_per_1k_yr}|${(x.p311_per_1k_yr / city.p311_per_1k_yr).toFixed(2)}x|${x.renter}|${x.lep}|${x.underheard}`)
+  lines.push('DISTRICTS, sorted by voice rate, lowest first (district|census tracts|residents|comments|expected|voice per 1k|voice vs city|311 per 1k/yr|311 vs city|police calls per 1k/yr|renter|limited English|underheard census tracts):')
+  for (const x of [...dist].sort((a, b) => a.voice_per_1k - b.voice_per_1k)) lines.push(`  D${x.d}|${x.census_tracts}|${x.residents}|${x.comments}|${x.expected_comments}|${x.voice_per_1k}|${(x.voice_per_1k / city.voice_per_1k).toFixed(2)}x|${x.p311_per_1k_yr}|${(x.p311_per_1k_yr / city.p311_per_1k_yr).toFixed(2)}x|${x.police_per_1k_yr}|${x.renter}|${x.lep}|${x.underheard}`)
   const pick = (f, dir) => [...dist].sort((a, b) => dir * (f(a) - f(b)))[0].d
-  lines.push(`DISTRICT FACTS, all sections (pre-checked): lowest voice rate D${pick((x) => x.voice_per_1k, 1)}; highest voice rate D${pick((x) => x.voice_per_1k, -1)}; highest 311 rate D${pick((x) => x.p311_per_1k_yr, -1)}; lowest 311 rate D${pick((x) => x.p311_per_1k_yr, 1)}; most underheard census tracts D${pick((x) => x.underheard, -1)}; highest renter share D${pick((x) => x.renter, -1)}; highest limited-English share D${pick((x) => x.lep, -1)}. "Most underheard" = most underheard census tracts (few comments AND many 311 problems or many limited-English households), not simply the lowest voice rate.`)
+  lines.push(`DISTRICT FACTS, all sections (pre-checked): lowest voice rate D${pick((x) => x.voice_per_1k, 1)}; highest voice rate D${pick((x) => x.voice_per_1k, -1)}; highest 311 rate D${pick((x) => x.p311_per_1k_yr, -1)}; highest police-call rate D${pick((x) => x.police_per_1k_yr, -1)}; lowest police-call rate D${pick((x) => x.police_per_1k_yr, 1)}; lowest 311 rate D${pick((x) => x.p311_per_1k_yr, 1)}; most underheard census tracts D${pick((x) => x.underheard, -1)}; highest renter share D${pick((x) => x.renter, -1)}; highest limited-English share D${pick((x) => x.lep, -1)}. "Most underheard" = most underheard census tracts (few comments AND many 311 problems or many limited-English households), not simply the lowest voice rate.`)
   const C = cachedJson('public/data/comments.json')
   if (C?.comments) {
     const uniq = C.comments.filter((c) => !c.duplicate_of)
@@ -233,15 +233,25 @@ function brief(question, regionTracts, sectionKey) {
     const rows = p.tracts.map((t) => by.get(t)).filter(Boolean)
     if (!rows.length) continue
     lines.push(`PLACE "${p.label}" (${rows.length} census tracts): ${JSON.stringify(summarize(rows))}`)
-    const cols = ['tract_id', 'nbhd', 'pop', 'renter', 'lep', 'income', 'epc', 'comments', 'expected_comments', 'p311_per_1k_yr', 'underheard', 'quiet']
+    const cols = ['tract_id', 'nbhd', 'pop', 'renter', 'lep', 'income', 'epc', 'comments', 'expected_comments', 'p311_per_1k_yr', 'police_per_1k_yr', 'police_violence_per_1k_yr', 'underheard', 'quiet']
     lines.push(`  rows (${cols.join('|')}|comments by section):`)
     for (const r of rows.slice(0, 45)) {
       const sec = Object.entries(SEC_SHORT).map(([k, v]) => `${v}${r['comments_' + k]}`).join(' ')
       lines.push(`  ${cols.map((c) => r[c]).join('|')}|${sec}`)
     }
   }
+  const PO = cachedJson('public/data/police_by_tract.json')
+  if (PO?.groups) lines.push(`POLICE CALLS (SJPD calls for service, ${PO.months[0]} to ${PO.months.at(-1)}, same months as 311; ${PO.coverage.located} of ${PO.coverage.calls} placed in census tracts): citywide by type ${PO.groups.map((g) => `${g.label} ${g.count}`).join('; ')}. Monthly citywide totals: ${PO.months.map((m) => `${m} ${Object.values(PO.city_monthly).reduce((a, o) => a + (o[m] || 0), 0)}`).join(', ')} (last month partial). Calls, not crimes.`)
+  if (PO?.by_tract) {
+    const agg = (ids) => { const g = {}, m = {}; ids.forEach((t) => Object.entries(PO.by_tract[t] || {}).forEach(([k, mo]) => Object.entries(mo).forEach(([mm, n]) => { g[k] = (g[k] || 0) + n; m[mm] = (m[mm] || 0) + n }))); return { g, m } }
+    const lab = (k) => (PO.groups.find((x) => x.key === k) || {}).label || k
+    const fmtG = (g) => { const tot = Object.values(g).reduce((a, b) => a + b, 0) || 1; return Object.entries(g).sort((a, b) => b[1] - a[1]).slice(0, 4).map(([k, n]) => `${lab(k)} ${Math.round(n / tot * 100)}%`).join(', ') }
+    lines.push('POLICE CALLS BY DISTRICT (district: top call types by share | monthly calls ' + PO.months[0] + '…' + PO.months.at(-1) + '):')
+    for (const [d, ids] of Object.entries(D)) { const x = agg(ids); lines.push(`  D${d}: ${fmtG(x.g)} | ${PO.months.map((mm) => x.m[mm] || 0).join(',')}`) }
+    for (const p of places.slice(0, 2)) { const x = agg(p.tracts); lines.push(`  ${p.label}: ${fmtG(x.g)} | ${PO.months.map((mm) => x.m[mm] || 0).join(',')}`) }
+  }
   const A = cachedJson('public/data/associations.json')
-  if (A?.results) lines.push(`STRONGEST ASSOCIATIONS across census tracts (Spearman; places not people; not cause): ${A.results.slice(0, 14).map((r) => `${r.attribute_label} vs ${r.outcome_label}: rho ${r.rho}`).join('; ')}`)
+  if (A?.results) lines.push(`STRONGEST ASSOCIATIONS across census tracts (Spearman; places not people; not cause): ${A.results.slice(0, 20).map((r) => `${r.attribute_label} vs ${r.outcome_label}: rho ${r.rho}`).join('; ')}`)
   try { lines.push(`BACKGROUND (docs/CONTEXT_SAN_JOSE.md; label as background, cite as [[file:docs/CONTEXT_SAN_JOSE.md#<section>]]):\n${readFileSync(join(REPO, 'docs/CONTEXT_SAN_JOSE.md'), 'utf8').split('\n## ').slice(1).map((x) => '#' + x.replace(/\n/g, ' ').trim()).join('\n')}`) } catch { /* optional */ }
   return { text: lines.join('\n'), places }
 }
@@ -359,7 +369,7 @@ export function tidyProse(t) {
     return seg
       .replace(/\s*(?:,|\band\b)?\s*\b0608\d{7}\b/g, '')
       .replace(/`([^`]*)`/g, '$1').replace(/\s*\(\s*mock:\s*true\s*\)|\bmock:\s*true\b/gi, '').replace(/\(\s*\)/g, '')
-      .replace(/\b(?<![Cc]ensus )([Tt])racts?\b/g, (m, T) => (T === 'T' ? 'Census t' : 'census t') + m.slice(1))
+      .replace(/\b(?<![Cc]ensus[ -])([Tt])racts?\b/g, (m, T) => (T === 'T' ? 'Census t' : 'census t') + m.slice(1))
       .replace(/\s*(?:,|\band\b)\s*\)/g, ')').replace(/\(\s*\)/g, '')
       .replace(/[ \t]+([.,;:)])/g, '$1').replace(/[ \t]{2,}/g, ' ')
   }).join('')

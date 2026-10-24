@@ -11,6 +11,7 @@ run ingest_emails.py "$@"              # b  (simulated email channel from the us
 run build_tracts.py "$@"              # c
 run ingest_311.py "$@"                 # a3 (311 service requests -> per-tract counts; needs tracts from c)
 run p311_types.py                     # a4 (311 per census tract by service type, for filtering the Problems map)
+run ingest_police.py                  # a6 (SJPD calls for service -> census tracts, same months as 311)
 run resolve_locations.py "$@"         # d
 run bob_label.py "$@"                  # e  (IBM Bob labels every voice comment; --offline replays the cache; run_bob.mjs rebuilds the taxonomy on request)
 run export_comments.py                # h  (voice export: letters + email + site, joined with locations and classifications)

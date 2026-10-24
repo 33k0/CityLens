@@ -3,7 +3,7 @@
 
 
 
-- **Team:** Civics · [FILL: every team member's full name]
+- **Team:** Civics · [FILL: Aaminah Mohammad, Iniyan Kannappan, Jannah Hussaini, Sri Vatsa Vuddanti]
 - **Live app:** [city-lens-livid.vercel.app](https://city-lens-livid.vercel.app)
 - **Code:** [github.com/33k0/CityLens](https://github.com/33k0/CityLens)
 - **Demo video:** [FILL]

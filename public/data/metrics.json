@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-23T21:34:59-07:00",
+ "generated_at": "2026-10-24T00:49:36-07:00",
  "scope": "citywide, all items, no filters",
  "metrics": {
   "H1": {
@@ -36,14 +36,14 @@
    "id": "H4",
    "name": "Category share, voice (%)",
    "value": {
-    "Housing & Affordability Policy": 15.1,
-    "Public Safety & Emergency Response": 12.0,
-    "Streets & Infrastructure": 20.6,
+    "Housing & Affordability Policy": 15.3,
+    "Public Safety & Emergency Response": 11.3,
+    "Streets & Infrastructure": 20.8,
     "Environment & Development Review": 7.2,
-    "Code Enforcement & Permitting": 13.3,
-    "Governance & Civic Rights": 12.5,
+    "Code Enforcement & Permitting": 13.5,
+    "Governance & Civic Rights": 12.4,
     "Sanitation & Environmental Quality": 11.5,
-    "Other / General": 7.8
+    "Other / General": 8.0
    },
    "formula": "100·U(cat=c)/U(V)",
    "label": "illustrative"
@@ -66,52 +66,52 @@
    "name": "Subcategory share within category (%)",
    "value": {
     "Housing & Affordability Policy": {
-     "Zoning & Density Reform": 24.1,
-     "Rent Stabilization & Caps": 41.0,
-     "Tenant Protections & Eviction": 13.9,
-     "Affordable Housing Financing": 7.2,
-     "Housing Supply & Infrastructure Readiness": 13.9
+     "Zoning & Density Reform": 24.4,
+     "Rent Stabilization & Caps": 44.0,
+     "Tenant Protections & Eviction": 14.3,
+     "Affordable Housing Financing": 7.1,
+     "Housing Supply & Infrastructure Readiness": 10.1
     },
     "Public Safety & Emergency Response": {
-     "Patrol & Sworn Officer Staffing": 51.5,
-     "Alternative & Co-Response Programs": 15.9,
-     "Cameras, Surveillance & Privacy": 13.6,
-     "Crime Prevention & Youth Programs": 18.9
+     "Patrol & Sworn Officer Staffing": 54.8,
+     "Alternative & Co-Response Programs": 16.9,
+     "Cameras, Surveillance & Privacy": 13.7,
+     "Crime Prevention & Youth Programs": 14.5
     },
     "Streets & Infrastructure": {
-     "Pothole & Pavement Repair": 33.9,
-     "Streetlight Outages & Reliability": 38.3,
-     "Storm Drain & Flooding": 13.2,
-     "Infrastructure Equity & Accountability": 14.5
+     "Pothole & Pavement Repair": 34.1,
+     "Streetlight Outages & Reliability": 39.3,
+     "Storm Drain & Flooding": 13.1,
+     "Infrastructure Equity & Accountability": 13.5
     },
     "Environment & Development Review": {
-     "EIR & Environmental Review": 22.8,
-     "Flood & Water Risk": 29.1,
+     "EIR & Environmental Review": 19.0,
+     "Flood & Water Risk": 32.9,
      "Traffic & Neighborhood Character": 31.6,
      "Conditional Approval & Community Benefits": 16.5
     },
     "Code Enforcement & Permitting": {
-     "Habitability Failures": 39.0,
-     "Derelict Buildings & Blight": 25.3,
-     "Permit Backlog & Delays": 25.3,
-     "Permit Fees & Staffing": 10.3
+     "Habitability Failures": 36.9,
+     "Derelict Buildings & Blight": 24.2,
+     "Permit Backlog & Delays": 28.9,
+     "Permit Fees & Staffing": 10.1
     },
     "Governance & Civic Rights": {
-     "Voter Threshold & Prop 13": 13.0,
-     "Immigrant Protection & Sanctuary Policy": 27.5,
-     "Council Appointments & Special Elections": 44.2,
-     "Boards, Commissions & Appointments Fairness": 15.2
+     "Voter Threshold & Prop 13": 11.8,
+     "Immigrant Protection & Sanctuary Policy": 27.9,
+     "Council Appointments & Special Elections": 44.9,
+     "Boards, Commissions & Appointments Fairness": 15.4
     },
     "Sanitation & Environmental Quality": {
-     "Illegal Dumping & Creek Pollution": 52.4,
-     "Dumping Prevention & Free Disposal Access": 26.2,
-     "Freeway Air Quality & Noise": 21.4
+     "Illegal Dumping & Creek Pollution": 46.5,
+     "Dumping Prevention & Free Disposal Access": 32.3,
+     "Freeway Air Quality & Noise": 21.3
     },
     "Other / General": {
-     "Personal Financial Hardship": 17.4,
-     "Cover Note / Forwarded Attachment": 17.4,
-     "General Cost-of-Living Frustration": 32.6,
-     "Senior Services (General)": 32.6
+     "Personal Financial Hardship": 14.8,
+     "Cover Note / Forwarded Attachment": 17.0,
+     "General Cost-of-Living Frustration": 36.4,
+     "Senior Services (General)": 31.8
     }
    },
    "formula": "100·U(cat=c∩sub=s)/U(cat=c)",
@@ -121,18 +121,18 @@
    "id": "H7",
    "name": "Stance distribution (% of unique voices)",
    "value": {
-    "support": 47.8,
-    "oppose": 18.5,
-    "neutral": 30.6,
-    "unclear": 3.0
+    "support": 64.0,
+    "oppose": 21.5,
+    "neutral": 9.5,
+    "unclear": 5.0
    },
    "formula": "100·U(stance=k)/U(V)",
    "label": "illustrative",
    "raw_rows": {
-    "support": 720,
-    "oppose": 209,
-    "neutral": 337,
-    "unclear": 33
+    "support": 898,
+    "oppose": 242,
+    "neutral": 104,
+    "unclear": 55
    }
   },
   "H8": {
@@ -484,14 +484,14 @@
    "name": "Net support index (−100..+100)",
    "value": {
     "by_category": {
-     "Housing & Affordability Policy": 40,
-     "Public Safety & Emergency Response": 41,
-     "Streets & Infrastructure": 65,
-     "Environment & Development Review": -65,
-     "Code Enforcement & Permitting": 51,
-     "Governance & Civic Rights": 62,
-     "Sanitation & Environmental Quality": 91,
-     "Other / General": 88
+     "Housing & Affordability Policy": 39,
+     "Public Safety & Emergency Response": 53,
+     "Streets & Infrastructure": 72,
+     "Environment & Development Review": -64,
+     "Code Enforcement & Permitting": 33,
+     "Governance & Civic Rights": 58,
+     "Sanitation & Environmental Quality": 96,
+     "Other / General": 58
     },
     "by_item": {
      "25-008": {
@@ -550,52 +550,52 @@
       "title": "Terra Verde data center: EIR certification and site development permit"
      },
      "MOCK-26-902": {
-      "net": 57,
+      "net": 64,
       "n_unique": 91.0,
       "title": "Streetlight reliability program and maintenance contract (Story/King c"
      },
      "MOCK-26-903": {
-      "net": 37,
+      "net": 47,
       "n_unique": 66.0,
       "title": "Pavement maintenance: emergency repair on Alma Avenue and road funding"
      },
      "MOCK-26-904": {
-      "net": 42,
+      "net": 31,
       "n_unique": 31.0,
       "title": "Proactive rental inspection and habitability enforcement"
      },
      "MOCK-26-905": {
-      "net": 4,
+      "net": 2,
       "n_unique": 51.0,
       "title": "Citywide fourplex zoning reform"
      },
      "MOCK-26-906": {
-      "net": 53,
+      "net": 48,
       "n_unique": 92.0,
       "title": "Apartment Rent Ordinance amendment: annual rent-increase cap"
      },
      "MOCK-26-908": {
-      "net": 30,
+      "net": 0,
       "n_unique": 53.0,
       "title": "Permitting modernization and fee schedule"
      },
      "MOCK-26-907": {
-      "net": 79,
+      "net": 92,
       "n_unique": 79.0,
       "title": "Illegal dumping response and Coyote Creek cleanup"
      },
      "MOCK-26-909": {
-      "net": 51,
+      "net": 58,
       "n_unique": 90.0,
       "title": "Public safety budget: patrols, community service officers, cameras"
      },
      "MOCK-GEN": {
-      "net": 54,
+      "net": 61,
       "n_unique": 407.0,
       "title": "General correspondence (no agenda item)"
      },
      "MOCK-26-910": {
-      "net": -82,
+      "net": -67,
       "n_unique": 12.0,
       "title": "Rezoning application: Blossom Hill Road retail parcel"
      }
@@ -619,14 +619,14 @@
    "id": "A11",
    "name": "Attention gap by category (pp, 311 share − voice share)",
    "value": {
-    "Housing & Affordability Policy": -15.1,
-    "Public Safety & Emergency Response": -6.9,
-    "Streets & Infrastructure": 9.7,
+    "Housing & Affordability Policy": -15.3,
+    "Public Safety & Emergency Response": -6.2,
+    "Streets & Infrastructure": 9.5,
     "Environment & Development Review": -7.2,
-    "Code Enforcement & Permitting": -13.1,
-    "Governance & Civic Rights": -12.5,
+    "Code Enforcement & Permitting": -13.3,
+    "Governance & Civic Rights": -12.4,
     "Sanitation & Environmental Quality": 46.5,
-    "Other / General": -1.4
+    "Other / General": -1.6
    },
    "formula": "H5_c − H4_c",
    "label": "mixed: 311 real, voice illustrative"
@@ -804,13 +804,13 @@
      },
      {
       "rank": 2,
-      "category": "Code Enforcement & Permitting",
-      "rank_change": 1
+      "category": "Housing & Affordability Policy",
+      "rank_change": 0
      },
      {
       "rank": 3,
-      "category": "Housing & Affordability Policy",
-      "rank_change": -1
+      "category": "Code Enforcement & Permitting",
+      "rank_change": 0
      },
      {
       "rank": 4,
@@ -824,13 +824,13 @@
      },
      {
       "rank": 6,
-      "category": "Other / General",
-      "rank_change": 0
+      "category": "Governance & Civic Rights",
+      "rank_change": 1
      },
      {
       "rank": 7,
-      "category": "Governance & Civic Rights",
-      "rank_change": 0
+      "category": "Other / General",
+      "rank_change": -1
      },
      {
       "rank": 8,
@@ -1100,8 +1100,7 @@
    "id": "Q1",
    "name": "Labeling engine share (%)",
    "value": {
-    "bob": 33.5,
-    "build-agent": 66.5
+    "bob": 100.0
    },
    "formula": "100·|engine=k|/|V|",
    "label": "real"
@@ -1110,9 +1109,9 @@
    "id": "Q2",
    "name": "Low-confidence share (%)",
    "value": {
-    "below_0.6": 0.0,
-    "below_0.8": 0.5,
-    "mean_confidence": 0.9
+    "below_0.6": 0.1,
+    "below_0.8": 2.3,
+    "mean_confidence": 0.929
    },
    "formula": "100·|conf<0.6|/|V|",
    "label": "real"
@@ -1183,9 +1182,9 @@
    "id": "Q8",
    "name": "Bob cost",
    "value": {
-    "total_usd": 8.99,
-    "per_comment_usd": 0.0069,
-    "runs": 19
+    "total_usd": 24.36,
+    "per_comment_usd": 0.0188,
+    "runs": 85
    },
    "formula": "Σ session_costs / |V|",
    "label": "real"

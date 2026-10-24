@@ -1946,32 +1946,32 @@
   "raw": [
    {
     "category": "infrastructure_streets",
-    "score": 128.1,
+    "score": 130.1,
     "rank": 1
    },
    {
     "category": "housing_affordability_policy",
-    "score": 86.5,
+    "score": 88.5,
     "rank": 2
    },
    {
     "category": "code_enforcement_habitability",
-    "score": 84.0,
+    "score": 85.0,
     "rank": 3
    },
    {
     "category": "public_safety_emergency_response",
-    "score": 76.0,
+    "score": 71.0,
     "rank": 4
    },
    {
     "category": "sanitation_environment_quality",
-    "score": 69.0,
+    "score": 70.0,
     "rank": 5
    },
    {
     "category": "other",
-    "score": 51.0,
+    "score": 50.0,
     "rank": 6
    },
    {
@@ -1988,31 +1988,31 @@
   "aif360_reweighted": [
    {
     "category": "infrastructure_streets",
-    "score": 125.982889169,
+    "score": 127.587332071,
     "rank": 1,
     "rank_change": 0
    },
    {
     "category": "housing_affordability_policy",
-    "score": 88.453012924,
+    "score": 89.528398207,
     "rank": 2,
     "rank_change": 0
    },
    {
     "category": "code_enforcement_habitability",
-    "score": 81.590357811,
+    "score": 82.921636881,
     "rank": 3,
     "rank_change": 0
    },
    {
     "category": "public_safety_emergency_response",
-    "score": 76.246861396,
+    "score": 71.706696523,
     "rank": 4,
     "rank_change": 0
    },
    {
     "category": "sanitation_environment_quality",
-    "score": 68.0021831,
+    "score": 68.804404551,
     "rank": 5,
     "rank_change": 0
    },
@@ -2024,13 +2024,13 @@
    },
    {
     "category": "other",
-    "score": 50.91690889,
+    "score": 50.114687439,
     "rank": 7,
     "rank_change": -1
    },
    {
     "category": "environment_development_review",
-    "score": 42.672230594,
+    "score": 43.201288213,
     "rank": 8,
     "rank_change": 0
    }
@@ -2038,49 +2038,49 @@
   "population_reweighted": [
    {
     "category": "infrastructure_streets",
-    "score": 116.634964757,
+    "score": 118.708556193,
     "rank": 1,
     "rank_change": 0
    },
    {
-    "category": "code_enforcement_habitability",
-    "score": 81.013223031,
+    "category": "housing_affordability_policy",
+    "score": 82.341589743,
     "rank": 2,
-    "rank_change": 1
+    "rank_change": 0
    },
    {
-    "category": "housing_affordability_policy",
-    "score": 79.493265208,
+    "category": "code_enforcement_habitability",
+    "score": 81.713531544,
     "rank": 3,
-    "rank_change": -1
+    "rank_change": 0
    },
    {
     "category": "sanitation_environment_quality",
-    "score": 57.619385022,
+    "score": 58.269702821,
     "rank": 4,
     "rank_change": 1
    },
    {
     "category": "public_safety_emergency_response",
-    "score": 56.040953762,
+    "score": 52.479269672,
     "rank": 5,
     "rank_change": -1
    },
    {
-    "category": "other",
-    "score": 45.014647371,
-    "rank": 6,
-    "rank_change": 0
-   },
-   {
     "category": "governance_civic_rights",
     "score": 42.583141181,
+    "rank": 6,
+    "rank_change": 1
+   },
+   {
+    "category": "other",
+    "score": 42.578494488,
     "rank": 7,
-    "rank_change": 0
+    "rank_change": -1
    },
    {
     "category": "environment_development_review",
-    "score": 40.654881694,
+    "score": 40.380176385,
     "rank": 8,
     "rank_change": 0
    }
@@ -2088,37 +2088,37 @@
   "raw_all_comments": [
    {
     "category": "infrastructure_streets",
-    "score": 227.0,
+    "score": 229.0,
     "rank": 1
    },
    {
     "category": "housing_affordability_policy",
-    "score": 166.0,
+    "score": 168.0,
     "rank": 2
    },
    {
     "category": "code_enforcement_habitability",
-    "score": 146.0,
+    "score": 149.0,
     "rank": 3
    },
    {
     "category": "governance_civic_rights",
-    "score": 138.0,
+    "score": 136.0,
     "rank": 4
    },
    {
-    "category": "public_safety_emergency_response",
-    "score": 132.0,
+    "category": "sanitation_environment_quality",
+    "score": 127.0,
     "rank": 5
    },
    {
-    "category": "sanitation_environment_quality",
-    "score": 126.0,
+    "category": "public_safety_emergency_response",
+    "score": 124.0,
     "rank": 6
    },
    {
     "category": "other",
-    "score": 86.0,
+    "score": 88.0,
     "rank": 7
    },
    {

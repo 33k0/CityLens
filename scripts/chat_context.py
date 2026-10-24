@@ -53,6 +53,17 @@ def main() -> int:
         n = pd.Series({i: sum(sum(m.values()) for ck, m in bt.get(i, {}).items() if k == "all" or ck == k) for i in t.index})
         t["p311_per_1k_yr" if k == "all" else f"p311_{k}_per_1k_yr"] = (n / t["pop"].where(t["pop"] > 0) * 1000 * 12 / months).round(1)
 
+    # SJPD calls for service (third family: police), same months as 311
+    polf = PUB / "police_by_tract.json"
+    if polf.exists():
+        pol = json.loads(polf.read_text())
+        pm = pol["months_covered"]
+        tot = pd.Series({i: sum(sum(m.values()) for m in pol["by_tract"].get(i, {}).values()) for i in t.index})
+        t["police_per_1k_yr"] = (tot / t["pop"].where(t["pop"] > 0) * 1000 * 12 / pm).round(1)
+        for g in pol["groups"]:
+            n = pd.Series({i: sum(pol["by_tract"].get(i, {}).get(g["key"], {}).values()) for i in t.index})
+            t[f"police_{g['key']}_per_1k_yr"] = (n / t["pop"].where(t["pop"] > 0) * 1000 * 12 / pm).round(1)
+
     # the app's underheard rule (config.json), citywide, all sections
     U = cfg.get("underheard_rule", {})
     pop = t["pop"].sum()
@@ -82,6 +93,10 @@ def main() -> int:
              "epc": "Equity Priority Community"}
     outs = {"voice_per_1k": "comments per 1,000 (voice)", "p311_per_1k_yr": "311 problem reports per 1,000 a year (all)"}
     lab = {c["key"]: c["label"] for c in com["categories"]}
+    if "police_per_1k_yr" in t:
+        outs |= {"police_per_1k_yr": "police calls per 1,000 a year (all)", "police_violence_per_1k_yr": "police calls per 1,000 a year: violence and weapons",
+                 "police_theft_property_per_1k_yr": "police calls per 1,000 a year: theft and property",
+                 "police_welfare_per_1k_yr": "police calls per 1,000 a year: welfare and mental health"}
     outs |= {f"p311_{k}_per_1k_yr": f"311 reports per 1,000 a year: {lab[k]}" for k in cats if t[f"p311_{k}_per_1k_yr"].fillna(0).sum() > 0}
     res = []
     d = t[t["pop"] > 0]
@@ -99,6 +114,7 @@ def main() -> int:
         "read_as": "Census tract-level association between a place's ACS profile and what was measured there. It does not "
                    "describe individuals, does not show cause, and 311 volume also reflects who uses 311.",
         "caveat_voice": "Most comments are simulated emails (see metrics Q6), so voice associations are illustrative.",
+        "caveat_police": "Police calls for service are calls, not crimes; they include officer-initiated stops and follow where officers patrol.",
         "results": sorted(res, key=lambda r: -abs(r["rho"]))}, indent=1))
     print(f"tract_profiles.csv {len(t)} rows; area_index {len(districts)} districts, {len(areas)} areas; associations {len(res)}")
     return 0

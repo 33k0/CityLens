@@ -2,7 +2,78 @@
  "method": "Spearman rank correlation across San Jos\u00e9 census tracts with residents (n\u2248213).",
  "read_as": "Census tract-level association between a place's ACS profile and what was measured there. It does not describe individuals, does not show cause, and 311 volume also reflects who uses 311.",
  "caveat_voice": "Most comments are simulated emails (see metrics Q6), so voice associations are illustrative.",
+ "caveat_police": "Police calls for service are calls, not crimes; they include officer-initiated stops and follow where officers patrol.",
  "results": [
+  {
+   "attribute": "income",
+   "attribute_label": "median household income",
+   "outcome": "police_violence_per_1k_yr",
+   "outcome_label": "police calls per 1,000 a year: violence and weapons",
+   "rho": -0.612,
+   "p": 1.8e-23,
+   "n": 215,
+   "strength": "strong"
+  },
+  {
+   "attribute": "income",
+   "attribute_label": "median household income",
+   "outcome": "police_per_1k_yr",
+   "outcome_label": "police calls per 1,000 a year (all)",
+   "rho": -0.596,
+   "p": 4.2e-22,
+   "n": 215,
+   "strength": "strong"
+  },
+  {
+   "attribute": "income",
+   "attribute_label": "median household income",
+   "outcome": "police_theft_property_per_1k_yr",
+   "outcome_label": "police calls per 1,000 a year: theft and property",
+   "rho": -0.566,
+   "p": 1.3e-19,
+   "n": 215,
+   "strength": "strong"
+  },
+  {
+   "attribute": "spanish",
+   "attribute_label": "Spanish-speaking households",
+   "outcome": "police_per_1k_yr",
+   "outcome_label": "police calls per 1,000 a year (all)",
+   "rho": 0.533,
+   "p": 3.8e-17,
+   "n": 215,
+   "strength": "strong"
+  },
+  {
+   "attribute": "renter",
+   "attribute_label": "renter share",
+   "outcome": "police_theft_property_per_1k_yr",
+   "outcome_label": "police calls per 1,000 a year: theft and property",
+   "rho": 0.532,
+   "p": 4e-17,
+   "n": 215,
+   "strength": "strong"
+  },
+  {
+   "attribute": "income",
+   "attribute_label": "median household income",
+   "outcome": "police_welfare_per_1k_yr",
+   "outcome_label": "police calls per 1,000 a year: welfare and mental health",
+   "rho": -0.526,
+   "p": 1.1e-16,
+   "n": 215,
+   "strength": "strong"
+  },
+  {
+   "attribute": "renter",
+   "attribute_label": "renter share",
+   "outcome": "police_per_1k_yr",
+   "outcome_label": "police calls per 1,000 a year (all)",
+   "rho": 0.526,
+   "p": 1.1e-16,
+   "n": 215,
+   "strength": "strong"
+  },
   {
    "attribute": "income",
    "attribute_label": "median household income",
@@ -10,6 +81,26 @@
    "outcome_label": "311 reports per 1,000 a year: Sanitation & Environmental Quality",
    "rho": -0.522,
    "p": 1.9e-16,
+   "n": 215,
+   "strength": "strong"
+  },
+  {
+   "attribute": "spanish",
+   "attribute_label": "Spanish-speaking households",
+   "outcome": "police_violence_per_1k_yr",
+   "outcome_label": "police calls per 1,000 a year: violence and weapons",
+   "rho": 0.52,
+   "p": 2.6e-16,
+   "n": 215,
+   "strength": "strong"
+  },
+  {
+   "attribute": "renter",
+   "attribute_label": "renter share",
+   "outcome": "police_violence_per_1k_yr",
+   "outcome_label": "police calls per 1,000 a year: violence and weapons",
+   "rho": 0.518,
+   "p": 3.9e-16,
    "n": 215,
    "strength": "strong"
   },
@@ -46,6 +137,26 @@
   {
    "attribute": "spanish",
    "attribute_label": "Spanish-speaking households",
+   "outcome": "police_theft_property_per_1k_yr",
+   "outcome_label": "police calls per 1,000 a year: theft and property",
+   "rho": 0.479,
+   "p": 1e-13,
+   "n": 215,
+   "strength": "moderate"
+  },
+  {
+   "attribute": "renter",
+   "attribute_label": "renter share",
+   "outcome": "police_welfare_per_1k_yr",
+   "outcome_label": "police calls per 1,000 a year: welfare and mental health",
+   "rho": 0.465,
+   "p": 6.2e-13,
+   "n": 215,
+   "strength": "moderate"
+  },
+  {
+   "attribute": "spanish",
+   "attribute_label": "Spanish-speaking households",
    "outcome": "p311_per_1k_yr",
    "outcome_label": "311 problem reports per 1,000 a year (all)",
    "rho": 0.464,
@@ -76,10 +187,30 @@
   {
    "attribute": "spanish",
    "attribute_label": "Spanish-speaking households",
+   "outcome": "police_welfare_per_1k_yr",
+   "outcome_label": "police calls per 1,000 a year: welfare and mental health",
+   "rho": 0.419,
+   "p": 1.4e-10,
+   "n": 215,
+   "strength": "moderate"
+  },
+  {
+   "attribute": "spanish",
+   "attribute_label": "Spanish-speaking households",
    "outcome": "p311_public_safety_emergency_response_per_1k_yr",
    "outcome_label": "311 reports per 1,000 a year: Public Safety & Emergency Response",
    "rho": 0.418,
    "p": 1.8e-10,
+   "n": 215,
+   "strength": "moderate"
+  },
+  {
+   "attribute": "epc",
+   "attribute_label": "Equity Priority Community",
+   "outcome": "police_violence_per_1k_yr",
+   "outcome_label": "police calls per 1,000 a year: violence and weapons",
+   "rho": 0.415,
+   "p": 2.2e-10,
    "n": 215,
    "strength": "moderate"
   },
@@ -116,10 +247,40 @@
   {
    "attribute": "epc",
    "attribute_label": "Equity Priority Community",
+   "outcome": "police_per_1k_yr",
+   "outcome_label": "police calls per 1,000 a year (all)",
+   "rho": 0.388,
+   "p": 3.8e-09,
+   "n": 215,
+   "strength": "moderate"
+  },
+  {
+   "attribute": "epc",
+   "attribute_label": "Equity Priority Community",
+   "outcome": "police_theft_property_per_1k_yr",
+   "outcome_label": "police calls per 1,000 a year: theft and property",
+   "rho": 0.376,
+   "p": 1.3e-08,
+   "n": 215,
+   "strength": "moderate"
+  },
+  {
+   "attribute": "epc",
+   "attribute_label": "Equity Priority Community",
    "outcome": "p311_public_safety_emergency_response_per_1k_yr",
    "outcome_label": "311 reports per 1,000 a year: Public Safety & Emergency Response",
    "rho": 0.36,
    "p": 5.4e-08,
+   "n": 215,
+   "strength": "moderate"
+  },
+  {
+   "attribute": "lep",
+   "attribute_label": "limited-English share",
+   "outcome": "police_theft_property_per_1k_yr",
+   "outcome_label": "police calls per 1,000 a year: theft and property",
+   "rho": 0.351,
+   "p": 1.3e-07,
    "n": 215,
    "strength": "moderate"
   },
@@ -144,6 +305,16 @@
    "strength": "moderate"
   },
   {
+   "attribute": "lep",
+   "attribute_label": "limited-English share",
+   "outcome": "police_violence_per_1k_yr",
+   "outcome_label": "police calls per 1,000 a year: violence and weapons",
+   "rho": 0.337,
+   "p": 4.1e-07,
+   "n": 215,
+   "strength": "moderate"
+  },
+  {
    "attribute": "income",
    "attribute_label": "median household income",
    "outcome": "voice_per_1k",
@@ -156,12 +327,32 @@
   {
    "attribute": "lep",
    "attribute_label": "limited-English share",
+   "outcome": "police_per_1k_yr",
+   "outcome_label": "police calls per 1,000 a year (all)",
+   "rho": 0.332,
+   "p": 6.5e-07,
+   "n": 215,
+   "strength": "moderate"
+  },
+  {
+   "attribute": "lep",
+   "attribute_label": "limited-English share",
    "outcome": "p311_sanitation_environment_quality_per_1k_yr",
    "outcome_label": "311 reports per 1,000 a year: Sanitation & Environmental Quality",
    "rho": 0.329,
    "p": 7.8e-07,
    "n": 215,
    "strength": "moderate"
+  },
+  {
+   "attribute": "asian_pacific",
+   "attribute_label": "Asian/Pacific-language households",
+   "outcome": "police_welfare_per_1k_yr",
+   "outcome_label": "police calls per 1,000 a year: welfare and mental health",
+   "rho": -0.297,
+   "p": 9.7e-06,
+   "n": 215,
+   "strength": "weak"
   },
   {
    "attribute": "renter",
@@ -180,6 +371,26 @@
    "outcome_label": "311 reports per 1,000 a year: Streets & Infrastructure",
    "rho": -0.293,
    "p": 1.2e-05,
+   "n": 215,
+   "strength": "weak"
+  },
+  {
+   "attribute": "nonwhite",
+   "attribute_label": "non-white share",
+   "outcome": "police_violence_per_1k_yr",
+   "outcome_label": "police calls per 1,000 a year: violence and weapons",
+   "rho": 0.277,
+   "p": 3.8e-05,
+   "n": 215,
+   "strength": "weak"
+  },
+  {
+   "attribute": "nonwhite",
+   "attribute_label": "non-white share",
+   "outcome": "police_theft_property_per_1k_yr",
+   "outcome_label": "police calls per 1,000 a year: theft and property",
+   "rho": 0.277,
+   "p": 3.9e-05,
    "n": 215,
    "strength": "weak"
   },
@@ -214,6 +425,16 @@
    "strength": "weak"
   },
   {
+   "attribute": "epc",
+   "attribute_label": "Equity Priority Community",
+   "outcome": "police_welfare_per_1k_yr",
+   "outcome_label": "police calls per 1,000 a year: welfare and mental health",
+   "rho": 0.265,
+   "p": 8.6e-05,
+   "n": 215,
+   "strength": "weak"
+  },
+  {
    "attribute": "lep",
    "attribute_label": "limited-English share",
    "outcome": "p311_infrastructure_streets_per_1k_yr",
@@ -230,6 +451,16 @@
    "outcome_label": "311 reports per 1,000 a year: Sanitation & Environmental Quality",
    "rho": -0.244,
    "p": 0.0003,
+   "n": 215,
+   "strength": "weak"
+  },
+  {
+   "attribute": "nonwhite",
+   "attribute_label": "non-white share",
+   "outcome": "police_per_1k_yr",
+   "outcome_label": "police calls per 1,000 a year (all)",
+   "rho": 0.241,
+   "p": 0.00036,
    "n": 215,
    "strength": "weak"
   },
@@ -284,6 +515,16 @@
    "strength": "weak"
   },
   {
+   "attribute": "asian_pacific",
+   "attribute_label": "Asian/Pacific-language households",
+   "outcome": "police_per_1k_yr",
+   "outcome_label": "police calls per 1,000 a year (all)",
+   "rho": -0.185,
+   "p": 0.0065,
+   "n": 215,
+   "strength": "weak"
+  },
+  {
    "attribute": "epc",
    "attribute_label": "Equity Priority Community",
    "outcome": "p311_infrastructure_streets_per_1k_yr",
@@ -300,6 +541,26 @@
    "outcome_label": "311 problem reports per 1,000 a year (all)",
    "rho": -0.174,
    "p": 0.011,
+   "n": 215,
+   "strength": "weak"
+  },
+  {
+   "attribute": "lep",
+   "attribute_label": "limited-English share",
+   "outcome": "police_welfare_per_1k_yr",
+   "outcome_label": "police calls per 1,000 a year: welfare and mental health",
+   "rho": 0.173,
+   "p": 0.011,
+   "n": 215,
+   "strength": "weak"
+  },
+  {
+   "attribute": "asian_pacific",
+   "attribute_label": "Asian/Pacific-language households",
+   "outcome": "police_violence_per_1k_yr",
+   "outcome_label": "police calls per 1,000 a year: violence and weapons",
+   "rho": -0.164,
+   "p": 0.016,
    "n": 215,
    "strength": "weak"
   },
@@ -364,6 +625,16 @@
    "strength": "weak"
   },
   {
+   "attribute": "asian_pacific",
+   "attribute_label": "Asian/Pacific-language households",
+   "outcome": "police_theft_property_per_1k_yr",
+   "outcome_label": "police calls per 1,000 a year: theft and property",
+   "rho": -0.092,
+   "p": 0.18,
+   "n": 215,
+   "strength": "none"
+  },
+  {
    "attribute": "renter",
    "attribute_label": "renter share",
    "outcome": "p311_code_enforcement_habitability_per_1k_yr",
@@ -390,6 +661,16 @@
    "outcome_label": "311 reports per 1,000 a year: Code Enforcement & Permitting",
    "rho": -0.066,
    "p": 0.33,
+   "n": 215,
+   "strength": "none"
+  },
+  {
+   "attribute": "nonwhite",
+   "attribute_label": "non-white share",
+   "outcome": "police_welfare_per_1k_yr",
+   "outcome_label": "police calls per 1,000 a year: welfare and mental health",
+   "rho": 0.053,
+   "p": 0.44,
    "n": 215,
    "strength": "none"
   },

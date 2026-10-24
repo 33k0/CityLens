@@ -76,7 +76,9 @@ const getJ=p=>fetch(`${BASE}/data/${p}`).then(r=>{if(!r.ok)throw new Error(`${p}
 function jitter(c,t){const R=rng(seedOf(c.id));const bb=t.cb||bbox(t.geometry);let p,k=0;do{p=[bb[0]+R()*(bb[2]-bb[0]),bb[1]+R()*(bb[3]-bb[1])];k++}while(!(inGeom(p,t.geometry)&&inGeom(p,D.city.geometry))&&k<400);return k>=400?t.c:p}
 async function load(){
  if(D.ready)return D;
- const [ui,voice,p311,inbox,cfg,met]=await Promise.all([getJ('ui.json'),getJ('comments.json'),getJ('requests_311_by_tract.json'),getJ('inbox.json').catch(()=>({emails:[]})),getJ('config.json').catch(()=>({})),getJ('metrics.json').catch(()=>({metrics:{}}))]);
+ const [ui,voice,p311,inbox,cfg,met,svc]=await Promise.all([getJ('ui.json'),getJ('comments.json'),getJ('requests_311_by_tract.json'),getJ('inbox.json').catch(()=>({emails:[]})),getJ('config.json').catch(()=>({})),getJ('metrics.json').catch(()=>({metrics:{}})),getJ('requests_311_types.json').catch(()=>({types:[],by_tract:{}}))]);
+ /* 311 by service type per census tract: lets the Problems map filter below the section level */
+ D.svcTypes=svc.types||[];D.svcBy={};Object.entries(svc.by_tract||{}).forEach(([t,o])=>Object.entries(o).forEach(([k,n])=>{(D.svcBy[k]=D.svcBy[k]||{})[t]=n}));
  D.metrics=(met&&met.metrics)||{};
  D.cfg=Object.assign({underrepresented_ratio:0.5,underheard_rule:{problems_vs_city:1,limited_english_vs_city:1.5},policy_sections:[],low_confidence:0.8,small_n:10},cfg);
  D.city={type:'Feature',geometry:ui.city,properties:{}};
@@ -326,18 +328,20 @@ async function mount(root,init){
  function sel311(){if(ITEM.id!=='all')return null;const ks=new Set();Object.keys(S.cats).forEach(k=>{if(k.startsWith('cat:'))ks.add(k.slice(4));else if(k.startsWith('sub:')){const d=(D.catDefs||[]).find(x=>x.subcategories.some(s=>'sub:'+s.key===k));if(d)ks.add(d.key)}});return ks.size?[...ks]:null}
  const tot311=k=>Object.values(D.p311[k]||{}).reduce((a,b)=>a+b,0);
  /* Problems view: the filter list counts 311 reports, not comments */
- function filters311(){const any=Object.keys(S.cats).length;const head=`<div class="sech"><h4>Filters</h4><button class="link" data-act="togglefilters">${S.filtersOpen?'Hide':'Show'}</button></div>`;
+ function filters311(){const any=Object.keys(S.cats).length;const svc=S.svc||{};const anySvc=Object.keys(svc).length;const head=`<div class="sech"><h4>Filters</h4><button class="link" data-act="togglefilters">${S.filtersOpen?'Hide':'Show'}</button></div>`;
   const shown=D.tracts.reduce((a,t)=>a+t.p311,0);const total=ITEM.id==='all'?tot311('all'):tot311(ITEM.id);
-  const foot=`<div class="small muted" style="margin-top:10px"><b class="num" style="color:var(--ink)">${fmt(shown)}</b> of ${fmt(total)} 311 reports on the map</div>`;
+  const foot=`<div class="small muted" style="margin-top:10px"><b class="num" style="color:var(--ink)">${fmt(shown)}</b> of ${fmt(total)} 311 reports on the map${anySvc?` · <button class="link" data-act="svcclear">clear report types</button>`:''}</div>`;
   if(!S.filtersOpen)return `<div class="sec">${head}${foot}</div>`;
+  const types=k=>D.svcTypes.filter(x=>x.category===k);
+  const trow=(x,mx,cls='')=>{const on=!!svc[x.key];return `<button class="subrow ${cls} ${on?'on':''} ${anySvc&&!on?'dim':''}" data-act="svc" data-v="${esc(x.key)}" aria-pressed="${on}"><span class="sbx">${on?'✓':''}</span><span class="snm">${esc(x.label)}</span><span class="sct num">${fmt(x.count)}</span><span class="sbar"><i style="width:${x.count/mx*100}%"></i></span></button>`};
   if(ITEM.id==='all'){const ks=(D.catDefs||[]).map(c=>c.key);const mx=Math.max(1,...ks.map(tot311));const sel=new Set(sel311()||[]);
    const rows=ks.map(k=>{const n=tot311(k);const on=sel.has(k);const lab=(ITEMS[k]||{}).title||D.p311Labels[k]||k;
-    return n?`<button class="subrow ${on?'on':''} ${any&&!on?'dim':''}" data-act="cat" data-v="cat:${k}" aria-pressed="${on}"><span class="sbx">${on?'✓':''}</span><span class="snm">${esc(lab)}</span><span class="sct num">${fmt(n)}</span><span class="sbar"><i style="width:${n/mx*100}%"></i></span></button>`
-     :`<div class="subrow nodata none" title="No 311 reports map to this section"><span class="sbx"></span><span class="snm">${esc(lab)}</span><span class="sct num">—</span></div>`}).join('');
+    if(!n)return `<div class="subrow nodata none" title="No 311 reports map to this section"><span class="sbx"></span><span class="snm">${esc(lab)}</span><span class="sct num">—</span></div>`;
+    const ts=types(k);const open=!!(S.catExp||{})[k];const tmx=Math.max(1,...ts.map(x=>x.count));
+    return `<div class="subgrp${open?' open':''}"><button class="subrow ${on?'on':''} ${(any||anySvc)&&!on?'dim':''}" data-act="cat" data-v="cat:${k}" aria-pressed="${on}"><span class="sbx">${on?'✓':''}</span><span class="snm">${esc(lab)}</span><span class="sct num">${fmt(n)}</span><span class="sbar"><i style="width:${n/mx*100}%"></i></span></button>${ts.length>1?`<button class="sexp" data-act="catexp" data-v="${k}" aria-expanded="${open}" aria-label="${open?'Hide':'Show'} report types in ${esc(lab)}">${open?'▴':'▾'}</button>`:''}</div>${open?`<div class="subnest">${ts.map(x=>trow(x,tmx,'nested')).join('')}</div>`:''}`}).join('');
    return `<div class="sec">${head}<div class="lbl" style="margin-top:0">Section · 311 reports</div><div class="sublist">${rows}</div>${foot}</div>`}
-  const types=D.p311Tax.filter(x=>x.category===ITEM.id).sort((a,b)=>b.count-a.count);const mx=Math.max(1,...types.map(x=>x.count));
-  return `<div class="sec">${head}<div class="lbl" style="margin-top:0">311 report types in this section</div><div class="sublist">${types.slice(0,12).map(x=>`<div class="subrow nodata"><span class="sbx" style="visibility:hidden"></span><span class="snm">${esc(x.service_type)}</span><span class="sct num">${fmt(x.count)}</span><span class="sbar"><i style="width:${x.count/mx*100}%"></i></span></div>`).join('')}</div>
-   <div class="small muted" style="margin-top:8px">311 reports are counted by section, not subsection, so the map shows the whole section. Counts are citywide since July 2025.</div>${foot}</div>`}
+  const ts=types(ITEM.id);const mx=Math.max(1,...ts.map(x=>x.count));
+  return `<div class="sec">${head}<div class="lbl" style="margin-top:0">311 report type</div><div class="sublist">${ts.map(x=>trow(x,mx)).join('')}</div>${foot}</div>`}
  function filters(){if(S.scheme==='prob'&&!S.sbs&&ITEM.n311)return filters311();const fc=filtered();/* counts are every voice comment (letters and emails), placed on the map or not */const cc={};D.itemAll.forEach(c=>cc[c.cat]=(cc[c.cat]||0)+1);const sc={};D.itemAll.forEach(c=>sc[c.stance]=(sc[c.stance]||0)+1);const fa=D.itemAll.filter(dotFilter);
  return `<div class="sec"><div class="sech"><h4>Filters</h4><button class="link" data-act="togglefilters">${S.filtersOpen?'Hide':'Show'}</button></div>${S.filtersOpen?`
  <div class="lbl" style="margin-top:0">${ITEM.id==='all'?'Section':'Subcategory'}</div><div class="sublist">${(()=>{const mx=Math.max(1,CATS.reduce((t,c)=>t+(cc[c.k]||0),0));const any=Object.keys(S.cats).length;
@@ -598,7 +602,7 @@ async function mount(root,init){
    const c=D.voice.find(x=>x.id===id);return c?H.cite(c):''})}
  const ACT_LABEL={select_section:a=>'opened '+((ITEMS[a.id]||{}).title||a.id),set_scheme:a=>'switched the map to '+({voice:'Voice',prob:'Problems',gap:'Underheard'}[a.id]||a.id),zoom_tract:a=>'zoomed to '+((D.byTract[a.id]||{}).nbhd||a.id),open_analytics:a=>'opened '+a.scope+' analytics',open_comment:a=>'opened comment '+a.id,filter_stance:a=>'filtered stance to '+(a.ids||[]).join(', '),set_view:a=>a.id==='sbs'?'opened side-by-side maps':'went back to the single map',select_district:a=>`opened Council District ${a.id} (${a.tracts.length} census tracts)`,select_area:a=>`opened ${a.name} (${a.tracts.length} census tracts)`,select_tracts:a=>`opened ${a.name} (${a.ids.length} census tracts)`,compare_places:a=>`compared ${(a.places||[]).map(p=>p.name).join(' and ')}`};
  function runActions(acts){let zoom=null;(acts||[]).forEach(a=>{
-  if(a.type==='select_section'&&ITEMS[a.id]){setItem(a.id);S.cats={}}
+  if(a.type==='select_section'&&ITEMS[a.id]){setItem(a.id);S.cats={};S.svc={}}
   else if(a.type==='set_scheme'){S.scheme=a.id;S.sbs=false;S.view='main'}
   else if(a.type==='zoom_tract'&&D.byTract[a.id]){S.view='main';S.selTract=a.id;S.tractDetail=a.id;S.modal=true;zoom=a.id}
   else if(a.type==='open_analytics'){if(a.section&&ITEMS[a.section]){setItem(a.section);S.cats={}}if(a.scope==='city'){S.tractDetail=null;S.region={name:'All of San José',poly:'city'};S.regions=[S.region]}S.view='analytics';S.modal=false}
@@ -641,7 +645,7 @@ async function mount(root,init){
  function onHover(t,p,mv){maps.forEach(m=>m.hover(t));if(!t){if(!S.pin)tip.style.display='none';return}showTip(t,p,mv)}
  function showTip(t,p,mv){mv.el.appendChild(tip);tip.innerHTML=H.tip(t);tip.style.display='block';let x=p[0]+16,y=p[1]+12;if(x+272>mv.w)x=p[0]-284;if(y+tip.offsetHeight>mv.h-8)y=mv.h-tip.offsetHeight-8;tip.style.left=x+'px';tip.style.top=y+'px'}
  function heatTh(){const fc=filtered();const sc=Math.max(.05,fc.length/Math.max(1,D.located));D.thSc=sc;const o={};D.tracts.forEach(t=>o[t.id]=0);fc.forEach(c=>o[c.tract]++);const nz=Object.values(o).filter(v=>v>0).sort((a,b)=>a-b);const q=p=>nz.length?nz[Math.floor(p*(nz.length-1))]:1;const a1=Math.max(2,q(.35)+1),a2=Math.max(a1+1,q(.65)+1),a3=Math.max(a2+1,q(.88)+1);D.th=[1,a1,a2,a3];
-  const T=D.tracts;const sel=sel311();T.forEach(t=>{t.p311=sel?sel.reduce((a,k)=>a+((D.p311[k]||{})[t.id]||0),0):ITEM.n311?((D.p311[ITEM.id]||{})[t.id]||0):0});
+  const T=D.tracts;const sel=sel311();const svcSel=Object.keys(S.svc||{});T.forEach(t=>{t.p311=svcSel.length?svcSel.reduce((a,k)=>a+((D.svcBy[k]||{})[t.id]||0),0):sel?sel.reduce((a,k)=>a+((D.p311[k]||{})[t.id]||0),0):ITEM.n311?((D.p311[ITEM.id]||{})[t.id]||0):0});
   const vt=T.reduce((a,t)=>a+o[t.id],0)||1,pt=T.reduce((a,t)=>a+t.p311,0)||1;
   T.forEach(t=>{t.vrate=o[t.id]/t.pop*1000;t.prate=t.p311/t.pop*1000*12/D.m311});const vp=pctRanks(T.map(t=>t.vrate)),pp=pctRanks(T.map(t=>t.prate));T.forEach((t,i)=>{t.vpct=vp[i];t.ppct=pp[i];t.pgap=ITEM.n311?pp[i]-vp[i]:0;t.pwv=!!ITEM.n311&&pp[i]>=70&&vp[i]<=30});
   const qq=a=>{a=a.filter(x=>x>0).sort((x,y)=>x-y);return a.length?[.25,.5,.75].map(p=>a[Math.floor(a.length*p)]):[1,2,3]};
@@ -759,7 +763,7 @@ async function mount(root,init){
   case 'scheme':S.scheme=v;S.sbs=false;break;
   case 'sbs':S.sbs=!S.sbs;S.drawer=false;break;
   case 'menu':S.menu=S.menu===a.dataset.m?null:a.dataset.m;break;
-  case 'pickitem':S.menu=null;S.state=null;setItem(a.dataset.id);if(S.view==='analytics'){S.view='main';S.modal=false}S.selTract=null;S.tractDetail=null;S.cats={};S.mvOpen=-1;S.chatExtra=[];S.openCite=null;break;
+  case 'pickitem':S.menu=null;S.state=null;S.svc={};setItem(a.dataset.id);if(S.view==='analytics'){S.view='main';S.modal=false}S.selTract=null;S.tractDetail=null;S.cats={};S.mvOpen=-1;S.chatExtra=[];S.openCite=null;break;
   case 'loadregion':S.menu=null;S.tractDetail=null;S.selTract=null;{const r=S.saved[+a.dataset.i];S.region=r;S.regions=[r];S.compare=false;S.modal=true;S.right=true}break;
   case 'compare':S.menu=null;S.regions=S.saved.slice(0,2);S.region=S.regions[0];S.compare=true;S.modal=true;S.sbs=false;break;
   case 'draw':S.armed=!S.armed;S.sbs=false;S.modal=S.armed?false:!!(S.region&&Array.isArray(S.region.poly));S.hint=S.armed?'Click to place the first point':null;S.preDraw=false;break;
@@ -767,6 +771,8 @@ async function mount(root,init){
   case 'tab':if(v==='region'&&!S.region&&S.tab!=='region'){S.modal=true}else S.tab=v;S.right=true;break;
   case 'stance':S.stance[v]=S.stance[v]?0:1;break;
   case 'catexp':S.catExp=S.catExp||{};S.catExp[v]=!S.catExp[v];break;
+  case 'svc':S.svc=S.svc||{};if(S.svc[v])delete S.svc[v];else S.svc[v]=1;break;
+  case 'svcclear':S.svc={};break;
   case 'cat':if(S.cats[v])delete S.cats[v];else S.cats[v]=1;break;
   case 'togglefilters':S.filtersOpen=!S.filtersOpen;break;
   case 'fairopen':S.fairOpen=!S.fairOpen;break;

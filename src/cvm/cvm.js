@@ -103,7 +103,7 @@ async function load(){
    ocr:!!c.ocr,pages:c.pages_total,actionable:c.actionable??null,actReason:c.actionable_reason||'',participant:c.participant||'',exhibit:c.pages_exhibit,srcUrl:c.source_url||'',office:c.to_office||'',via:c.submitted_via||'',commenter:c.commenter_type||'',inherited:c.inherited_from||''}});
  D.voice.forEach(c=>{if(c.t)c.ll=jitter(c,c.t)});
  /* 311: problem reports per census tract per category, summed over the window (separate family) */
- D.p311={all:{}};D.m311=p311.months_covered;D.p311Labels=p311.category_labels||{};
+ D.p311={all:{}};D.m311=p311.months_covered;D.p311Labels=p311.category_labels||{};D.p311Tax=p311.taxonomy||[];
  D.p311m={};D.p311months=p311.months;Object.entries(p311.by_tract).forEach(([t,cats])=>Object.values(cats).forEach(m=>Object.entries(m).forEach(([mo,n])=>{(D.p311m[t]=D.p311m[t]||{})[mo]=((D.p311m[t]||{})[mo]||0)+n})));
  Object.entries(p311.by_tract).forEach(([t,cats])=>Object.entries(cats).forEach(([k,m])=>{const n=Object.values(m).reduce((a,b)=>a+b,0);(D.p311[k]=D.p311[k]||{})[t]=((D.p311[k]||{})[t]||0)+n;D.p311.all[t]=(D.p311.all[t]||0)+n}));
  /* sections (Bob's categories) become the picker items; 'all' aggregates voice only */
@@ -322,7 +322,23 @@ async function mount(root,init){
  ${S.menu==='saved'?`<div class="menu" style="right:16px;width:300px">${S.saved.map((r,i)=>`<div class="mi" data-act="loadregion" data-i="${i}"><span style="width:10px;height:10px;border:1.5px dashed ${GAP[4]};border-radius:50%;margin-top:4px;flex:none"></span><div style="flex:1"><div style="font-weight:500">${esc(r.name)}</div><div class="small muted">${regionTracts(r.poly).length} census tracts</div></div></div>`).join('')}${S.saved.length>1?'<div style="border-top:1px solid var(--line);margin:6px -6px 0;padding:8px 10px 2px"><button class="btn" data-act="compare">Compare first two</button></div>':''}</div>`:''}
  </div>`}
 
- function filters(){const fc=filtered();/* counts are every voice comment (letters and emails), placed on the map or not */const cc={};D.itemAll.forEach(c=>cc[c.cat]=(cc[c.cat]||0)+1);const sc={};D.itemAll.forEach(c=>sc[c.stance]=(sc[c.stance]||0)+1);const fa=D.itemAll.filter(dotFilter);
+ /* sections picked in the All sections filter (a subsection counts as its section: 311 has no subsections) */
+ function sel311(){if(ITEM.id!=='all')return null;const ks=new Set();Object.keys(S.cats).forEach(k=>{if(k.startsWith('cat:'))ks.add(k.slice(4));else if(k.startsWith('sub:')){const d=(D.catDefs||[]).find(x=>x.subcategories.some(s=>'sub:'+s.key===k));if(d)ks.add(d.key)}});return ks.size?[...ks]:null}
+ const tot311=k=>Object.values(D.p311[k]||{}).reduce((a,b)=>a+b,0);
+ /* Problems view: the filter list counts 311 reports, not comments */
+ function filters311(){const any=Object.keys(S.cats).length;const head=`<div class="sech"><h4>Filters</h4><button class="link" data-act="togglefilters">${S.filtersOpen?'Hide':'Show'}</button></div>`;
+  const shown=D.tracts.reduce((a,t)=>a+t.p311,0);const total=ITEM.id==='all'?tot311('all'):tot311(ITEM.id);
+  const foot=`<div class="small muted" style="margin-top:10px"><b class="num" style="color:var(--ink)">${fmt(shown)}</b> of ${fmt(total)} 311 reports on the map</div>`;
+  if(!S.filtersOpen)return `<div class="sec">${head}${foot}</div>`;
+  if(ITEM.id==='all'){const ks=(D.catDefs||[]).map(c=>c.key);const mx=Math.max(1,...ks.map(tot311));const sel=new Set(sel311()||[]);
+   const rows=ks.map(k=>{const n=tot311(k);const on=sel.has(k);const lab=(ITEMS[k]||{}).title||D.p311Labels[k]||k;
+    return n?`<button class="subrow ${on?'on':''} ${any&&!on?'dim':''}" data-act="cat" data-v="cat:${k}" aria-pressed="${on}"><span class="sbx">${on?'✓':''}</span><span class="snm">${esc(lab)}</span><span class="sct num">${fmt(n)}</span><span class="sbar"><i style="width:${n/mx*100}%"></i></span></button>`
+     :`<div class="subrow nodata none" title="No 311 reports map to this section"><span class="sbx"></span><span class="snm">${esc(lab)}</span><span class="sct num">—</span></div>`}).join('');
+   return `<div class="sec">${head}<div class="lbl" style="margin-top:0">Section · 311 reports</div><div class="sublist">${rows}</div>${foot}</div>`}
+  const types=D.p311Tax.filter(x=>x.category===ITEM.id).sort((a,b)=>b.count-a.count);const mx=Math.max(1,...types.map(x=>x.count));
+  return `<div class="sec">${head}<div class="lbl" style="margin-top:0">311 report types in this section</div><div class="sublist">${types.slice(0,12).map(x=>`<div class="subrow nodata"><span class="sbx" style="visibility:hidden"></span><span class="snm">${esc(x.service_type)}</span><span class="sct num">${fmt(x.count)}</span><span class="sbar"><i style="width:${x.count/mx*100}%"></i></span></div>`).join('')}</div>
+   <div class="small muted" style="margin-top:8px">311 reports are counted by section, not subsection, so the map shows the whole section. Counts are citywide since July 2025.</div>${foot}</div>`}
+ function filters(){if(S.scheme==='prob'&&!S.sbs&&ITEM.n311)return filters311();const fc=filtered();/* counts are every voice comment (letters and emails), placed on the map or not */const cc={};D.itemAll.forEach(c=>cc[c.cat]=(cc[c.cat]||0)+1);const sc={};D.itemAll.forEach(c=>sc[c.stance]=(sc[c.stance]||0)+1);const fa=D.itemAll.filter(dotFilter);
  return `<div class="sec"><div class="sech"><h4>Filters</h4><button class="link" data-act="togglefilters">${S.filtersOpen?'Hide':'Show'}</button></div>${S.filtersOpen?`
  <div class="lbl" style="margin-top:0">${ITEM.id==='all'?'Section':'Subcategory'}</div><div class="sublist">${(()=>{const mx=Math.max(1,CATS.reduce((t,c)=>t+(cc[c.k]||0),0));const any=Object.keys(S.cats).length;
   const row=(k,label,n,mxv,cls='')=>{const on=!!S.cats[k];return `<button class="subrow ${cls} ${on?'on':''} ${any&&!on?'dim':''}" data-act="cat" data-v="${k}" aria-pressed="${on}"><span class="sbx">${on?'✓':''}</span><span class="snm">${label}</span><span class="sct num">${n}</span><span class="sbar"><i style="width:${n/mxv*100}%"></i></span></button>`};
@@ -625,7 +641,8 @@ async function mount(root,init){
  function onHover(t,p,mv){maps.forEach(m=>m.hover(t));if(!t){if(!S.pin)tip.style.display='none';return}showTip(t,p,mv)}
  function showTip(t,p,mv){mv.el.appendChild(tip);tip.innerHTML=H.tip(t);tip.style.display='block';let x=p[0]+16,y=p[1]+12;if(x+272>mv.w)x=p[0]-284;if(y+tip.offsetHeight>mv.h-8)y=mv.h-tip.offsetHeight-8;tip.style.left=x+'px';tip.style.top=y+'px'}
  function heatTh(){const fc=filtered();const sc=Math.max(.05,fc.length/Math.max(1,D.located));D.thSc=sc;const o={};D.tracts.forEach(t=>o[t.id]=0);fc.forEach(c=>o[c.tract]++);const nz=Object.values(o).filter(v=>v>0).sort((a,b)=>a-b);const q=p=>nz.length?nz[Math.floor(p*(nz.length-1))]:1;const a1=Math.max(2,q(.35)+1),a2=Math.max(a1+1,q(.65)+1),a3=Math.max(a2+1,q(.88)+1);D.th=[1,a1,a2,a3];
-  const T=D.tracts,vt=T.reduce((a,t)=>a+o[t.id],0)||1,pt=T.reduce((a,t)=>a+t.p311,0)||1;
+  const T=D.tracts;const sel=sel311();T.forEach(t=>{t.p311=sel?sel.reduce((a,k)=>a+((D.p311[k]||{})[t.id]||0),0):ITEM.n311?((D.p311[ITEM.id]||{})[t.id]||0):0});
+  const vt=T.reduce((a,t)=>a+o[t.id],0)||1,pt=T.reduce((a,t)=>a+t.p311,0)||1;
   T.forEach(t=>{t.vrate=o[t.id]/t.pop*1000;t.prate=t.p311/t.pop*1000*12/D.m311});const vp=pctRanks(T.map(t=>t.vrate)),pp=pctRanks(T.map(t=>t.prate));T.forEach((t,i)=>{t.vpct=vp[i];t.ppct=pp[i];t.pgap=ITEM.n311?pp[i]-vp[i]:0;t.pwv=!!ITEM.n311&&pp[i]>=70&&vp[i]<=30});
   const qq=a=>{a=a.filter(x=>x>0).sort((x,y)=>x-y);return a.length?[.25,.5,.75].map(p=>a[Math.floor(a.length*p)]):[1,2,3]};
   D.qb={voice:qq(T.map(t=>t.vrate)),prob:qq(T.map(t=>t.prate)),gap:qq(T.map(t=>t.pgap))};return o}

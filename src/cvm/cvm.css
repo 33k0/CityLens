@@ -604,3 +604,5 @@ details.mapkey .kr .ramp div{height:7px}
 .srcdl{display:grid;grid-template-columns:120px 1fr;gap:8px 14px}.srcdl dt{color:var(--ink2)}.srcdl dd{margin:0}
 .srcpre{white-space:pre-wrap;font-size:11.5px;background:var(--bg);padding:10px;border-radius:4px;max-height:50vh;overflow:auto}
 button.cite{font:inherit;cursor:pointer}
+.subrow.nodata{cursor:default}.subrow.nodata:hover{background:#fff}.subrow.nodata .snm{color:var(--ink)}
+.subrow.nodata.none .snm,.subrow.nodata.none .sct{color:#9A9A94;font-weight:400}.subrow.nodata.none .sbx{opacity:.4}

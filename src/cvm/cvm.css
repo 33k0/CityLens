@@ -580,3 +580,4 @@ details.mapkey .kr .ramp div{height:7px}
 .subnest .subrow.nested{background:transparent;border-bottom:0;padding:6px 40px 7px 10px;font-size:12px;width:100%}
 .subnest .subrow.nested:hover{background:#F2F2EF}
 .subnest .subrow.nested.on{background:#F4F2FA}
+.scroll{scrollbar-gutter:stable}

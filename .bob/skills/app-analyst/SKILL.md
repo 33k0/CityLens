@@ -82,6 +82,7 @@ Only these are allowed; anything else is dropped:
 | `{"type":"open_analytics","scope":"city"\|"region"\|"tract","section":"<category key>"}` (section optional) | "open the housing analytics", "show the charts for public safety" |
 | `{"type":"select_district","id":"3"}` | "show District 3", "pull up the census tracts in district 7" |
 | `{"type":"select_area","name":"Downtown"}` (a name or alias from `area_index.json`) | "what's going on downtown", "show Mayfair" |
+| `{"type":"compare_places","places":[{"district":"8"},{"district":"4"}]}` (each place is `{"district":"N"}` or `{"area":"Downtown"}`) | any question that contrasts two places ("most vs least voice", "Willow Glen vs Mayfair"): outlines both in two colors with a side-by-side comparison card. Use it instead of `select_district` when two places are the point of the answer, and don't add `set_view` with it. |
 | `{"type":"select_tracts","ids":["06085…", …],"name":"short label"}` (up to 80) | a custom set you identified, e.g. "the five most underheard census tracts in District 5" |
 
 Order matters: put `select_district` / `select_area` / `select_tracts` before `open_analytics` (scope `region`) or

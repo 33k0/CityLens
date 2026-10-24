@@ -328,6 +328,13 @@ export function validateActions(list) {
       case 'set_view': if (['sbs', 'map'].includes(id)) v = { type: a.type, id }; break
       case 'select_district': { const t = areaIndex().districts[String(parseInt(id, 10))]; if (t?.length) v = { type: a.type, id: String(parseInt(id, 10)), tracts: t } } break
       case 'select_area': { const ar = findArea(a.name ?? a.id); if (ar) v = { type: a.type, name: ar.name, tracts: ar.tracts } } break
+      case 'compare_places': {
+        const ps = (Array.isArray(a.places) ? a.places : []).slice(0, 2).map((p) => {
+          if (p?.district != null) { const t = areaIndex().districts[String(parseInt(p.district, 10))]; return t?.length ? { name: `Council District ${parseInt(p.district, 10)}`, tracts: t } : null }
+          const ar = findArea(p?.area ?? p?.name); return ar ? { name: ar.name, tracts: ar.tracts } : null
+        }).filter(Boolean)
+        if (ps.length === 2 && ps[0].name !== ps[1].name) v = { type: a.type, places: ps }
+      } break
       case 'select_tracts': {
         const ids = [...new Set((Array.isArray(a.ids) ? a.ids : []).map(String))].filter((x) => tractIds().has(x)).slice(0, 80)
         if (ids.length) v = { type: a.type, ids, name: oneLine(a.name || 'Selected census tracts', 60) }

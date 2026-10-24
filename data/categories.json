@@ -1,0 +1,590 @@
+{
+  "version": "v1.0",
+  "subcategories_added_on": "2026-10-24",
+  "family": "voice",
+  "authored_by": "ibm-bob",
+  "source": "Sample of 271 letters (10 items) and 164 emails (11 items) spanning Jan 2025 council meetings and simulated 2026 agenda items; taxonomy derived from the text of those comments.",
+  "stance_definition": "support = commenter favors the proposal, action, or appointment being discussed; oppose = commenter is against it or asks the council to vote no; neutral = commenter is mixed, undecided, or raises a question without taking a side; unclear = content-free cover note, forwarded attachment notice, or message too vague to place on the item.",
+  "categories": [
+    {
+      "key": "housing_affordability_policy",
+      "label": "Housing & Affordability Policy",
+      "description": "Comments about housing supply, zoning, rent regulation, affordable housing financing, and displacement. The main ask is a policy change that affects how much housing exists or what it costs.",
+      "include": [
+        "Zoning changes (upzoning, fourplex reform, ADU permits) aimed at increasing or restricting housing",
+        "Rent ordinance caps, eviction protections, and landlord-tenant policy",
+        "Affordable housing bond issuers, tax-exempt financing, and housing development approvals",
+        "Comments about being priced out, rent increases, or housing supply shortage"
+      ],
+      "exclude": [
+        "Habitability complaints (no hot water, mold) → code_enforcement_habitability",
+        "Permitting process delays not tied to housing supply policy → code_enforcement_habitability",
+        "Rezoning for non-residential uses (retail strip mall) → environment_development_review"
+      ],
+      "examples": [
+        "I strongly SUPPORT legalizing fourplexes citywide. We have a housing shortage and single-family-only zoning is a big reason.",
+        "I am writing to support the staff recommendation as well as the memo from Mayor Mahan, and Councilmembers Kamei, Foley and Cohen. The memo recommends allowing any affordable housing developer to use any bond issuer approved by the State of California.",
+        "I strongly SUPPORT lowering the annual rent cap under the Apartment Rent Ordinance. Working people are being priced out of the city we grew up in."
+      ],
+      "keywords": [
+        "housing",
+        "rent",
+        "zoning",
+        "fourplex",
+        "ADU",
+        "affordability",
+        "affordable",
+        "eviction",
+        "bond",
+        "upzoning",
+        "density",
+        "landlord",
+        "tenant",
+        "renter",
+        "displacement",
+        "vivienda",
+        "renta",
+        "alquiler",
+        "arrendamiento",
+        "propietario",
+        "inquilino",
+        "nhà ở",
+        "tiền thuê",
+        "chủ nhà",
+        "người thuê"
+      ],
+      "subcategories": [
+        {
+          "key": "zoning_density_reform",
+          "label": "Zoning & Density Reform",
+          "description": "Comments supporting or opposing citywide upzoning, fourplex legalization, ADU policy, and other land-use rule changes meant to increase or restrict overall housing supply."
+        },
+        {
+          "key": "rent_stabilization",
+          "label": "Rent Stabilization & Caps",
+          "description": "Comments about the Apartment Rent Ordinance, annual rent-increase caps, and rent-control policy, including both tenant support and landlord opposition."
+        },
+        {
+          "key": "tenant_protection_eviction",
+          "label": "Tenant Protections & Eviction",
+          "description": "Comments focused on eviction defenses, anti-retaliation protections, loophole-closing in the rent ordinance, and safeguards for renters facing displacement."
+        },
+        {
+          "key": "affordable_housing_financing",
+          "label": "Affordable Housing Financing",
+          "description": "Comments about tax-exempt bond issuers, multifamily revenue bond policy, and the mechanics of financing deed-restricted affordable housing development."
+        },
+        {
+          "key": "housing_supply_infrastructure",
+          "label": "Housing Supply & Infrastructure Readiness",
+          "description": "Comments linking new housing supply to concerns about whether supporting infrastructure—sewers, water, schools—can handle increased density."
+        }
+      ],
+      "maps_311": [
+        "housing"
+      ]
+    },
+    {
+      "key": "public_safety_emergency_response",
+      "label": "Public Safety & Emergency Response",
+      "description": "Comments about policing, non-sworn response programs, 911 alternatives, crime prevention, surveillance, and public-safety budget priorities. The main ask is about who responds to emergencies and how.",
+      "include": [
+        "Support or opposition to alternative or co-response programs for 911 calls",
+        "Patrol levels, sworn vs. non-sworn staffing, community service officers",
+        "Surveillance cameras, license-plate readers, and privacy trade-offs",
+        "Crime prevention: youth programs, lighting as safety investment",
+        "Concerns about specific crimes (car break-ins, catalytic converter theft) tied to a policy ask"
+      ],
+      "exclude": [
+        "Streetlight outages as infrastructure maintenance → infrastructure_streets",
+        "Immigrant protection from federal enforcement → governance_civic_rights"
+      ],
+      "examples": [
+        "I SUPPORT expanding non-sworn community service officers and better lighting/cameras rather than only adding armed police.",
+        "We ask members of PSFSS to defer accepting the report and direct staff to return within 60 days with updated recommendations for a disability-inclusive alternative response.",
+        "Crime is up and you want to cut sworn officers? I OPPOSE any police budget cut. Fund more patrols now."
+      ],
+      "keywords": [
+        "police",
+        "patrol",
+        "officer",
+        "crime",
+        "safety",
+        "911",
+        "response",
+        "community service officer",
+        "surveillance",
+        "camera",
+        "break-in",
+        "catalytic",
+        "enforcement",
+        "co-response",
+        "alternative response",
+        "seguridad",
+        "policía",
+        "crimen",
+        "robo",
+        "vigilancia",
+        "an toàn",
+        "cảnh sát",
+        "tội phạm"
+      ],
+      "subcategories": [
+        {
+          "key": "patrol_staffing_levels",
+          "label": "Patrol & Sworn Officer Staffing",
+          "description": "Comments about funding or cutting sworn police officer positions, patrol frequency, and response times to crime incidents."
+        },
+        {
+          "key": "alternative_co_response",
+          "label": "Alternative & Co-Response Programs",
+          "description": "Comments on non-sworn or civilian responders for 911 calls, including disability-inclusive alternatives and YWCA/SURJ-type co-response proposals."
+        },
+        {
+          "key": "surveillance_privacy",
+          "label": "Cameras, Surveillance & Privacy",
+          "description": "Comments weighing the use of city surveillance cameras and license-plate readers against resident privacy rights."
+        },
+        {
+          "key": "crime_prevention_youth",
+          "label": "Crime Prevention & Youth Programs",
+          "description": "Comments supporting late-night youth programs, job training, and lighting as upstream crime-prevention investments rather than enforcement."
+        }
+      ],
+      "maps_311": [
+        "public_safety"
+      ]
+    },
+    {
+      "key": "infrastructure_streets",
+      "label": "Streets & Infrastructure",
+      "description": "Comments about road surfaces, streetlights, sidewalks, storm drains, and other public right-of-way infrastructure. The main ask is repair, maintenance, or funding for physical infrastructure.",
+      "include": [
+        "Pothole and pavement repair requests tied to a funding or policy decision",
+        "Streetlight outages and maintenance contracts",
+        "Sidewalk drainage, storm drain backups, and flood risk from inadequate infrastructure",
+        "Derelict buildings affecting public sidewalks or transit rights-of-way"
+      ],
+      "exclude": [
+        "Flood risk from a new development project → environment_development_review",
+        "Code enforcement on private property → code_enforcement_habitability",
+        "Permitting for street work → code_enforcement_habitability"
+      ],
+      "examples": [
+        "For almost a month now the streetlights along King Road between Story and Tully have been out. The whole stretch is pitch black.",
+        "There is a huge pothole on Alma Avenue just west of the Washington area. It is at least two feet across and deep.",
+        "Every rain over an inch the storm drain backs up and water reaches the driveways."
+      ],
+      "keywords": [
+        "pothole",
+        "streetlight",
+        "sidewalk",
+        "road",
+        "pavement",
+        "light",
+        "outage",
+        "repair",
+        "drain",
+        "flooding",
+        "infrastructure",
+        "street",
+        "curb",
+        "gutter",
+        "wiring",
+        "bache",
+        "baches",
+        "alumbrado",
+        "calle",
+        "pavimento",
+        "inundación",
+        "ổ gà",
+        "đèn đường",
+        "đường",
+        "sửa chữa"
+      ],
+      "subcategories": [
+        {
+          "key": "pothole_pavement_repair",
+          "label": "Pothole & Pavement Repair",
+          "description": "Comments reporting specific potholes or crumbling road surfaces and requesting emergency or scheduled repair, including debates about patch quality vs. full repaving."
+        },
+        {
+          "key": "streetlight_outage",
+          "label": "Streetlight Outages & Reliability",
+          "description": "Comments about extended streetlight outages, copper-wire theft, contractor reliability, and funding for permanent wiring upgrades on corridors like Story/King."
+        },
+        {
+          "key": "drainage_flooding",
+          "label": "Storm Drain & Flooding",
+          "description": "Comments about storm-drain backups, water reaching driveways and garages, and requests for Public Works or Water District intervention."
+        },
+        {
+          "key": "infrastructure_equity",
+          "label": "Infrastructure Equity & Accountability",
+          "description": "Comments arguing that lower-income or East Side neighborhoods wait longer for repairs than wealthier areas, and requesting equal service standards."
+        }
+      ],
+      "maps_311": [
+        "streets_infrastructure"
+      ]
+    },
+    {
+      "key": "environment_development_review",
+      "label": "Environment & Development Review",
+      "description": "Comments about environmental review, land-use approvals, rezoning, and the environmental or community impacts of proposed development projects. The main ask concerns whether a specific project should be approved, denied, or revised.",
+      "include": [
+        "EIR certification and environmental impact review for new development",
+        "Rezoning applications for specific parcels",
+        "Flood risk, water demand, air quality, or habitat concerns raised in the context of a project",
+        "Community benefit agreements, traffic impacts, and neighborhood character in response to a development proposal"
+      ],
+      "exclude": [
+        "Citywide zoning policy (fourplex reform, upzoning) → housing_affordability_policy",
+        "Air quality concerns not tied to a specific project → other",
+        "Infrastructure failures unrelated to new development → infrastructure_streets"
+      ],
+      "examples": [
+        "the Terra Verde EIR appears to understate groundwater and cooling-water demand and does not adequately model cumulative flood impacts. I OPPOSE certification of the EIR as written.",
+        "I OPPOSE rezoning the parcel near Blossom Hill Road for another strip mall. We have empty retail already and it'll add traffic to a bad intersection.",
+        "cooling-water demand, backup generator emissions, cumulative flood impacts, and inadequate community engagement"
+      ],
+      "keywords": [
+        "EIR",
+        "rezoning",
+        "development",
+        "environmental",
+        "flood",
+        "water",
+        "data center",
+        "traffic",
+        "parcel",
+        "permit",
+        "review",
+        "impact",
+        "project",
+        "approval",
+        "deny",
+        "industrial",
+        "zoning",
+        "community benefit",
+        "rezonificación",
+        "proyecto",
+        "impacto ambiental",
+        "inundación",
+        "phê duyệt",
+        "môi trường",
+        "dự án"
+      ],
+      "subcategories": [
+        {
+          "key": "eir_environmental_review",
+          "label": "EIR & Environmental Review",
+          "description": "Comments on the adequacy of Environmental Impact Reports, including concerns about understated water demand, flood modeling, and cumulative environmental impacts."
+        },
+        {
+          "key": "flood_water_risk",
+          "label": "Flood & Water Risk",
+          "description": "Comments specifically about flood risk, groundwater depletion, and water-use concerns raised in relation to a proposed development project."
+        },
+        {
+          "key": "traffic_neighborhood_character",
+          "label": "Traffic & Neighborhood Character",
+          "description": "Comments opposing a development due to traffic congestion, excess vacant retail, or incompatibility with existing neighborhood character."
+        },
+        {
+          "key": "conditional_approval",
+          "label": "Conditional Approval & Community Benefits",
+          "description": "Comments supporting a project only if specific conditions—water recycling, community benefit agreements, or noise mitigation—are attached to approval."
+        }
+      ],
+      "maps_311": []
+    },
+    {
+      "key": "code_enforcement_habitability",
+      "label": "Code Enforcement & Permitting",
+      "description": "Comments about building code enforcement, property habitability, permit backlogs, and inspection processes. The main ask is that the city enforce standards on existing properties or speed up permitting.",
+      "include": [
+        "Rental unit habitability problems (no hot water, mold, pest) and requests for inspector dispatch",
+        "Derelict or blighted buildings and code enforcement response",
+        "Permitting delays for ADUs, small businesses, solar, or remodels",
+        "Permit fee levels and the code enforcement staffing or operations study session"
+      ],
+      "exclude": [
+        "Citywide policy on rental inspections is the item → still code_enforcement_habitability if the main ask is about habitability enforcement",
+        "Rezoning or EIR for new construction → environment_development_review",
+        "Sidewalk or street infrastructure failing near a property → infrastructure_streets"
+      ],
+      "examples": [
+        "Tenants at Cedar Court Apartments near Tully Road have had NO hot water for nine days. The landlord ignores us. I OPPOSE the slow code enforcement response.",
+        "My ADU permit has been 'in review' for EIGHT months. Every cycle they ask for one new thing.",
+        "I would like to know what PBCE and DOT staff are empowered to do when a derelict building on private property is endangering safety along public transportation rights-of-way."
+      ],
+      "keywords": [
+        "code enforcement",
+        "habitability",
+        "inspector",
+        "inspection",
+        "permit",
+        "ADU",
+        "blight",
+        "derelict",
+        "hot water",
+        "mold",
+        "landlord",
+        "tenant",
+        "fee",
+        "permitting",
+        "plan check",
+        "building",
+        "solar",
+        "backlog",
+        "permiso",
+        "inspector",
+        "inquilino",
+        "arrendador",
+        "agua caliente",
+        "giấy phép",
+        "thanh tra",
+        "chủ nhà",
+        "nước nóng"
+      ],
+      "subcategories": [
+        {
+          "key": "habitability_hot_water_mold",
+          "label": "Habitability Failures",
+          "description": "Comments reporting urgent habitability deficiencies—no hot water, mold, broken security—and demanding inspector dispatch and landlord accountability."
+        },
+        {
+          "key": "derelict_blight_enforcement",
+          "label": "Derelict Buildings & Blight",
+          "description": "Comments about abandoned or blighted buildings that endanger adjacent sidewalks, transit rights-of-way, or neighborhood quality."
+        },
+        {
+          "key": "permit_backlog_delays",
+          "label": "Permit Backlog & Delays",
+          "description": "Comments about prolonged ADU, small-business, solar, or remodel permit reviews and requests to reduce turnaround times or waive fees for delayed projects."
+        },
+        {
+          "key": "permit_fees_staffing",
+          "label": "Permit Fees & Staffing",
+          "description": "Comments opposing fee increases without service improvement and calling for more plan-check staff rather than software-only process reforms."
+        }
+      ],
+      "maps_311": [
+        "permits_code"
+      ]
+    },
+    {
+      "key": "governance_civic_rights",
+      "label": "Governance & Civic Rights",
+      "description": "Comments about local governance decisions, voter rights, tax policy, legislative advocacy, immigrant protections, and council appointments. The main ask concerns how power is exercised or who holds office.",
+      "include": [
+        "Opposition to or support for lowering voter thresholds for taxes (Prop 13, IGR)",
+        "Immigrant protection resolutions and sanctuary city policies",
+        "Council district appointments and special elections",
+        "Legislative program priorities and IGR advocacy positions",
+        "Boards and commissions appointments and fairness concerns"
+      ],
+      "exclude": [
+        "Specific service-delivery concerns about policing → public_safety_emergency_response",
+        "Specific project approvals → environment_development_review"
+      ],
+      "examples": [
+        "I am opposed to lower the voter threshold for approving property taxes and undermining Prop 13. This will be devastating for most of the seniors.",
+        "I am writing to express my strong support for the memo proposed by Councilmembers Ortiz, Campos, Cohen, and Candelas, which outlines critical actions to protect our city's residents from the harmful policies of the incoming presidential administration.",
+        "I am writing to urge you to appoint Jahmal Williams to be the Interim Councilmember for District 3."
+      ],
+      "keywords": [
+        "Prop 13",
+        "Proposition 13",
+        "voter threshold",
+        "tax",
+        "IGR",
+        "legislative",
+        "immigrant",
+        "sanctuary",
+        "deportation",
+        "resolution",
+        "appointment",
+        "interim",
+        "council",
+        "election",
+        "governance",
+        "boards",
+        "commission",
+        "impuesto",
+        "umbral",
+        "inmigrante",
+        "nombramiento",
+        "consejo",
+        "thuế",
+        "di dân",
+        "bổ nhiệm",
+        "hội đồng"
+      ],
+      "subcategories": [
+        {
+          "key": "voter_threshold_prop13",
+          "label": "Voter Threshold & Prop 13",
+          "description": "Comments opposing or supporting IGR advocacy to lower the supermajority threshold for property taxes, referencing Proposition 13 and the defeat of Proposition 5."
+        },
+        {
+          "key": "immigrant_protection_sanctuary",
+          "label": "Immigrant Protection & Sanctuary Policy",
+          "description": "Comments supporting or opposing the city resolution affirming protections for immigrant residents, limiting police collaboration with federal immigration enforcement."
+        },
+        {
+          "key": "council_appointments",
+          "label": "Council Appointments & Special Elections",
+          "description": "Comments nominating or endorsing candidates for interim council appointments, including letters of support for District 3 candidates."
+        },
+        {
+          "key": "boards_commissions_fairness",
+          "label": "Boards, Commissions & Appointments Fairness",
+          "description": "Comments questioning who is appointed to city boards and commissions and whether the selection process is equitable or transparent."
+        }
+      ],
+      "maps_311": []
+    },
+    {
+      "key": "sanitation_environment_quality",
+      "label": "Sanitation & Environmental Quality",
+      "description": "Comments about illegal dumping, waste cleanup, creek maintenance, air quality, and environmental health in public spaces. The main ask is cleanup, enforcement, or prevention related to waste and environmental conditions in public areas.",
+      "include": [
+        "Illegal dumping on public land or near waterways",
+        "Coyote Creek and park cleanup",
+        "Free bulky-item pickup and dump-day programs",
+        "Air quality, noise, and environmental health near freeways or industrial areas",
+        "RV program conditions related to waste or environmental compliance"
+      ],
+      "exclude": [
+        "Habitability inside rental units → code_enforcement_habitability",
+        "Flood infrastructure (storm drains) → infrastructure_streets",
+        "Flood risk from development projects → environment_development_review"
+      ],
+      "examples": [
+        "There is a huge pile of mattresses and construction debris dumped along the Coyote Creek trail near Kelley Park. Been there weeks. I worry about it getting into the creek.",
+        "People dump because legal disposal is expensive and far. I SUPPORT more free bulky-item pickup and dump days.",
+        "The air near my place by 101 is visibly hazy and my kid's asthma is worse. I SUPPORT a sound/air wall and more trees along the corridor."
+      ],
+      "keywords": [
+        "dumping",
+        "dump",
+        "trash",
+        "debris",
+        "creek",
+        "mattress",
+        "cleanup",
+        "sanitation",
+        "air quality",
+        "asthma",
+        "freeway",
+        "noise",
+        "pollution",
+        "litter",
+        "basura",
+        "escombros",
+        "arroyo",
+        "limpieza",
+        "calidad del aire",
+        "rác",
+        "đổ rác",
+        "suối",
+        "không khí"
+      ],
+      "subcategories": [
+        {
+          "key": "illegal_dumping_creek",
+          "label": "Illegal Dumping & Creek Pollution",
+          "description": "Comments reporting mattresses, construction debris, or other waste dumped along Coyote Creek or public trails, and requesting cleanup."
+        },
+        {
+          "key": "dumping_prevention_access",
+          "label": "Dumping Prevention & Free Disposal Access",
+          "description": "Comments supporting free bulky-item pickup, dump days, and surveillance cameras at known hotspots as prevention-first alternatives to repeat cleanup."
+        },
+        {
+          "key": "freeway_air_quality",
+          "label": "Freeway Air Quality & Noise",
+          "description": "Comments about hazy air, asthma, and noise near freeways, requesting sound or air walls and tree planting along high-traffic corridors."
+        }
+      ],
+      "maps_311": [
+        "sanitation_dumping",
+        "graffiti_blight"
+      ]
+    },
+    {
+      "key": "other",
+      "label": "Other / General",
+      "description": "Catch-all for hardship stories with no specific agenda item ask, one-off topics, cover notes forwarding attachments, and messages too vague to place in another category.",
+      "include": [
+        "Personal financial hardship (job loss, medical debt) seeking city help with no agenda item",
+        "Cover notes forwarding an attached letter with no independent content",
+        "Senior center service levels not tied to a specific agenda item",
+        "Comments expressing general frustration with cost of living without a specific policy ask"
+      ],
+      "exclude": [
+        "Any comment with a clear policy ask → assign to the relevant category above"
+      ],
+      "examples": [
+        "i dont know who to write to. i got laid off from a warehouse near monterey rd in april and cant find anything steady. im behind on rent and scared. is there any emergency help the city has??",
+        "Hello, Thank you for reviewing and responding to our attached comments. We look forward to continued discussion.",
+        "everything is too expensive here and nobody in charge seems to care. rent food gas all of it. i dont even know what im asking for anymore."
+      ],
+      "keywords": [
+        "help",
+        "struggling",
+        "lost",
+        "don't know",
+        "any assistance",
+        "attached",
+        "ayuda",
+        "no sé",
+        "adjunto",
+        "dificultades",
+        "giúp đỡ",
+        "không biết",
+        "đính kèm"
+      ],
+      "subcategories": [
+        {
+          "key": "personal_financial_hardship",
+          "label": "Personal Financial Hardship",
+          "description": "Messages from residents describing job loss, medical debt, or inability to afford rent, with no specific agenda item or policy ask."
+        },
+        {
+          "key": "cover_note_attachment",
+          "label": "Cover Note / Forwarded Attachment",
+          "description": "Emails whose entire content is a brief note forwarding an attached letter, with no independent substantive comment."
+        },
+        {
+          "key": "general_cost_of_living",
+          "label": "General Cost-of-Living Frustration",
+          "description": "Comments expressing broad frustration about the cost of rent, food, and gas without articulating a specific policy ask."
+        },
+        {
+          "key": "senior_services_general",
+          "label": "Senior Services (General)",
+          "description": "Comments about senior center hours, meal programs, or isolation that are not tied to a specific agenda item before the council."
+        }
+      ],
+      "maps_311": [
+        "other"
+      ]
+    }
+  ],
+  "bob_task_ids": [
+    "cfd109171c6263ed58abb96510696fb8",
+    "ca875b5c452ffbdd257bd7df5055dad3"
+  ],
+  "authored_on": "2026-10-23",
+  "corpus_fingerprint": {
+    "n_comments": 435,
+    "by_channel": {
+      "letter": 271,
+      "email": 164
+    },
+    "sha256": "7fca47cff5cdf6f1"
+  }
+}

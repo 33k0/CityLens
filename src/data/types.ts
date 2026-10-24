@@ -101,6 +101,9 @@ export interface VoiceComment {
   council_district: number | null
   matched_name?: string
   category: string
+  subcategory: string
+  bob_task_id: string
+  inherited_from: string
   confidence: number | null
   evidence_quote: string
   stance: Stance
@@ -126,7 +129,7 @@ export interface VoicePayload {
   generated_at: string
   family: 'voice'
   note: string
-  categories: { key: string; label: string; description: string }[]
+  categories: { key: string; label: string; description: string; subcategories: { key: string; label: string; description: string }[] }[]
   campaigns: unknown
   channels: Record<string, { count: number; mock: boolean; precision: Record<string, number> }>
   items: VoiceItem[]

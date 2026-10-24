@@ -1,0 +1,98 @@
+service_type,city_category,count,department
+Junk pickup,(blank),119873,ESD
+Vehicle Concerns,(blank),51403,DOT
+Illegal Dumping,(blank),42054,ESD
+Other Issues,Other,31004,ESD
+Container Issues,(blank),27192,DOT
+Graffiti,Other,20488,Parks and Recreation
+RGR?CCC,Junk Item Pick-Up - Recycle,20065,ESD
+(blank),(blank),10795,DOT
+Graffiti,Light Pole,9574,Parks and Recreation
+Other Issues,(blank),9349,DOT
+Streetlight Outage,(blank),9082,DOT
+Graffiti,Painted Wall,8884,Parks and Recreation
+RGR?CCC,Container Inquiry - Garbage,8161,ESD
+Encampment Concerns,(blank),7943,BSJ
+Missed Collection,(blank),7094,
+Other Issues,Vehicle complaint,6200,DOT
+Graffiti,Utility Box,5962,Parks and Recreation
+Other Issues,Validation,5941,Information Technology
+Other Issues,Streets Dispatch,4688,DOT
+Other Issues,External,4085,External
+Graffiti,Sidewalk,2840,Parks and Recreation
+Other Issues,Non-emergency police,2799,Police
+Other Issues,City Hall info,2543,ESD
+Graffiti,Wood Fence,2396,Parks and Recreation
+Pothole,(blank),2364,DOT
+RGR?CCC,Container Inquiry - Recycle,2317,ESD
+RGR?CCC,Missed Collection - Garbage,2079,ESD
+Water,Billing,1968,ESD
+Other Issues,Business Tax,1902,Finance
+Other Issues,Homeless concerns,1690,Housing
+Illegal Fireworks,(blank),1644,Code Enforcement
+Other Issues,Building permit,1579,Planning Building
+Water,Inquiry,1503,ESD
+RGR?CCC,Missed Collection - Recycle,1443,ESD
+Other Issues,Code Inquiry,1392,Code Enforcement
+Graffiti,Unpainted Wall,1283,Parks and Recreation
+Water,Services,1282,ESD
+Other Issues,SewerSanitation/WasteWater,1252,DOT
+RGR?CCC,Billing - Garbage and Recycle,904,ESD
+Other Issues,County info,886,External
+Water,Payment,794,ESD
+Water,Service Change,773,ESD
+RGR?CCC,Other - Garbage,676,ESD
+RGR?CCC,Garbage,671,ESD
+RGR?CCC,Container Inquiry - Yard Trimming,660,ESD
+Start New Services,(blank),482,
+Graffiti,Park Picnic Table,412,Parks and Recreation
+RGR?CCC,Other - Recycle,400,ESD
+RGR?CCC,Property Tax Billing - SFD,368,ESD
+Graffiti,Chain Link Fence,342,Parks and Recreation
+Water,Payment Plan,340,Finance
+Street Sweeping Service,(blank),339,External
+Graffiti,Tree,314,Parks and Recreation
+RGR?CCC,Other - SFD,252,ESD
+RGR?CCC,Other - Yard Trimming,236,ESD
+RGR?CCC,Missed Collection - Yard Trimming,232,ESD
+RGR?CCC,Other - MFD,232,ESD
+Water,Residential-Other,227,ESD
+Graffiti,Park Restroom Building,226,Parks and Recreation
+RGR?CCC,Recycle,191,ESD
+Water,Residential,156,ESD
+Community WiFi,(blank),145,
+Water,Meter Services,122,ESD
+Water,E-Bill Express-Other,121,ESD
+Water,Auto Pay,112,ESD
+RGR?CCC,SFD,99,ESD
+Eviction Prevention,(blank),83,
+Water,Commercial-Other,57,ESD
+Storm/Sewer Water,(blank),51,ESD
+Water,Login Assistant,50,ESD
+RGR?CCC,MFD,50,ESD
+RGR?CCC,Payment - SFD,49,ESD
+RGR?CCC,Yard Trimming,43,ESD
+RGR?CCC,Other - Street Sweeping,42,ESD
+RGR?CCC,Other E-Bill Express - MFD,37,ESD
+Other Issues,Parking permit,33,DOT
+RGR?CCC,Payment - MFD,31,ESD
+RGR?CCC,Liens - SFD,30,ESD
+Water,E-Bill Express,26,ESD
+RGR?CCC,NIS - SFD,26,ESD
+RGR?CCC,Auto Pay - MFD,18,ESD
+RGR?CCC,Missed Street - Street Sweeping,18,ESD
+Water,Commercial,18,ESD
+RGR?CCC,Login Assistance - MFD,11,ESD
+Graffiti,(blank),10,Parks and Recreation
+Water,(blank),8,ESD
+RGR?CCC,E-Bill Express Technical Issues - MFD,7,ESD
+Other Issues,Junk Item Pick-Up - Recycle,5,
+Garbage and Recycling,(blank),4,External
+RGR?CCC,Street Sweeping,3,ESD
+Abandoned Vehicle,(blank),3,DOT
+Other Issues,Billing - Garbage and Recycle,2,
+RGR?CCC,(blank),1,
+Illegal Dumping,Streets Dispatch,1,ESD
+RGR?CCC,Liens - MFD,1,Finance
+Other Issues,Garbage,1,
+Other Issues,Billing,1,Public Works

@@ -6,7 +6,10 @@ export interface Requests311ByTract {
   rows_total: number
   rows_located: number
   categories: string[]
-  taxonomy: { service_type: string; category_raw: string; category: string }[]
+  taxonomy_source: string
+  taxonomy: { service_type: string; city_category: string; category: string; reason: string; count: number }[]
+  category_labels: Record<string, string>
+  rows_not_problems: number
   months: string[]
   months_covered: number
   totals: Record<string, number>

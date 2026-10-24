@@ -1,0 +1,584 @@
+[
+  {
+    "service_type": "Junk pickup",
+    "city_category": "(blank)",
+    "category": "sanitation_environment_quality",
+    "reason": "Bulky-item and junk removal is solid-waste sanitation service"
+  },
+  {
+    "service_type": "Vehicle Concerns",
+    "city_category": "(blank)",
+    "category": "infrastructure_streets",
+    "reason": "Vehicle concerns on public roads are street-related operational issues"
+  },
+  {
+    "service_type": "Illegal Dumping",
+    "city_category": "(blank)",
+    "category": "sanitation_environment_quality",
+    "reason": "Illegal dumping on public land is a core sanitation concern"
+  },
+  {
+    "service_type": "Other Issues",
+    "city_category": "Other",
+    "category": "other",
+    "reason": "Generic catch-all with no specific category signal"
+  },
+  {
+    "service_type": "Container Issues",
+    "city_category": "(blank)",
+    "category": "sanitation_environment_quality",
+    "reason": "Refuse container problems are solid-waste sanitation service"
+  },
+  {
+    "service_type": "Graffiti",
+    "city_category": "Other",
+    "category": "sanitation_environment_quality",
+    "reason": "Graffiti removal is blight and environmental quality cleanup"
+  },
+  {
+    "service_type": "RGR?CCC",
+    "city_category": "Junk Item Pick-Up - Recycle",
+    "category": "sanitation_environment_quality",
+    "reason": "Recycling junk pickup is solid-waste and sanitation service"
+  },
+  {
+    "service_type": "(blank)",
+    "city_category": "(blank)",
+    "category": "none",
+    "reason": "No service type or category data to classify"
+  },
+  {
+    "service_type": "Graffiti",
+    "city_category": "Light Pole",
+    "category": "sanitation_environment_quality",
+    "reason": "Graffiti on light poles is blight and environmental quality cleanup"
+  },
+  {
+    "service_type": "Other Issues",
+    "city_category": "(blank)",
+    "category": "other",
+    "reason": "Generic unspecified issues with no category signal"
+  },
+  {
+    "service_type": "Streetlight Outage",
+    "city_category": "(blank)",
+    "category": "infrastructure_streets",
+    "reason": "Streetlight outages are public right-of-way infrastructure maintenance"
+  },
+  {
+    "service_type": "Graffiti",
+    "city_category": "Painted Wall",
+    "category": "sanitation_environment_quality",
+    "reason": "Graffiti on painted walls is blight and environmental quality cleanup"
+  },
+  {
+    "service_type": "RGR?CCC",
+    "city_category": "Container Inquiry - Garbage",
+    "category": "sanitation_environment_quality",
+    "reason": "Garbage container inquiries are solid-waste sanitation service"
+  },
+  {
+    "service_type": "Encampment Concerns",
+    "city_category": "(blank)",
+    "category": "public_safety_emergency_response",
+    "reason": "Encampment concerns involve safety response and community conditions"
+  },
+  {
+    "service_type": "Missed Collection",
+    "city_category": "(blank)",
+    "category": "sanitation_environment_quality",
+    "reason": "Missed refuse collection is a solid-waste sanitation service issue"
+  },
+  {
+    "service_type": "Other Issues",
+    "city_category": "Vehicle complaint",
+    "category": "infrastructure_streets",
+    "reason": "Vehicle complaints on streets are road and right-of-way issues"
+  },
+  {
+    "service_type": "Graffiti",
+    "city_category": "Utility Box",
+    "category": "sanitation_environment_quality",
+    "reason": "Graffiti on utility boxes is blight and environmental quality cleanup"
+  },
+  {
+    "service_type": "Other Issues",
+    "city_category": "Validation",
+    "category": "none",
+    "reason": "Internal IT validation records; no resident service category fits"
+  },
+  {
+    "service_type": "Other Issues",
+    "city_category": "Streets Dispatch",
+    "category": "infrastructure_streets",
+    "reason": "Streets dispatch routes field crews for road and street maintenance"
+  },
+  {
+    "service_type": "Other Issues",
+    "city_category": "External",
+    "category": "none",
+    "reason": "Routed to external agencies; no city service category applies"
+  },
+  {
+    "service_type": "Graffiti",
+    "city_category": "Sidewalk",
+    "category": "sanitation_environment_quality",
+    "reason": "Graffiti on sidewalks is blight and environmental quality cleanup"
+  },
+  {
+    "service_type": "Other Issues",
+    "city_category": "Non-emergency police",
+    "category": "public_safety_emergency_response",
+    "reason": "Non-emergency police issues are public safety service requests"
+  },
+  {
+    "service_type": "Other Issues",
+    "city_category": "City Hall info",
+    "category": "none",
+    "reason": "General city information requests; no service delivery category fits"
+  },
+  {
+    "service_type": "Graffiti",
+    "city_category": "Wood Fence",
+    "category": "sanitation_environment_quality",
+    "reason": "Graffiti on wood fences is blight and environmental quality cleanup"
+  },
+  {
+    "service_type": "Pothole",
+    "city_category": "(blank)",
+    "category": "infrastructure_streets",
+    "reason": "Pothole repair is core road and pavement infrastructure maintenance"
+  },
+  {
+    "service_type": "RGR?CCC",
+    "city_category": "Container Inquiry - Recycle",
+    "category": "sanitation_environment_quality",
+    "reason": "Recycling container inquiries are solid-waste sanitation service"
+  },
+  {
+    "service_type": "RGR?CCC",
+    "city_category": "Missed Collection - Garbage",
+    "category": "sanitation_environment_quality",
+    "reason": "Missed garbage collection is a solid-waste sanitation service issue"
+  },
+  {
+    "service_type": "Water",
+    "city_category": "Billing",
+    "category": "none",
+    "reason": "Water billing is an account/financial transaction, not a service category"
+  },
+  {
+    "service_type": "Other Issues",
+    "city_category": "Business Tax",
+    "category": "none",
+    "reason": "Business tax is a financial/account matter, not a service category"
+  },
+  {
+    "service_type": "Other Issues",
+    "city_category": "Homeless concerns",
+    "category": "public_safety_emergency_response",
+    "reason": "Homeless concerns involve community safety and emergency response services"
+  },
+  {
+    "service_type": "Illegal Fireworks",
+    "city_category": "(blank)",
+    "category": "public_safety_emergency_response",
+    "reason": "Illegal fireworks enforcement is a public safety and code issue"
+  },
+  {
+    "service_type": "Other Issues",
+    "city_category": "Building permit",
+    "category": "code_enforcement_habitability",
+    "reason": "Building permit inquiries relate to permitting and code enforcement"
+  },
+  {
+    "service_type": "Water",
+    "city_category": "Inquiry",
+    "category": "none",
+    "reason": "General water service inquiry; no infrastructure or policy category fits"
+  },
+  {
+    "service_type": "RGR?CCC",
+    "city_category": "Missed Collection - Recycle",
+    "category": "sanitation_environment_quality",
+    "reason": "Missed recycling collection is a solid-waste sanitation service issue"
+  },
+  {
+    "service_type": "Other Issues",
+    "city_category": "Code Inquiry",
+    "category": "code_enforcement_habitability",
+    "reason": "Code inquiries concern building code enforcement and permitting"
+  },
+  {
+    "service_type": "Graffiti",
+    "city_category": "Unpainted Wall",
+    "category": "sanitation_environment_quality",
+    "reason": "Graffiti on unpainted walls is blight and environmental quality cleanup"
+  },
+  {
+    "service_type": "Water",
+    "city_category": "Services",
+    "category": "none",
+    "reason": "Generic water services setup; account/service request, not a policy category"
+  },
+  {
+    "service_type": "Other Issues",
+    "city_category": "SewerSanitation/WasteWater",
+    "category": "infrastructure_streets",
+    "reason": "Sewer and wastewater issues are public utility infrastructure maintenance"
+  },
+  {
+    "service_type": "RGR?CCC",
+    "city_category": "Billing - Garbage and Recycle",
+    "category": "none",
+    "reason": "Garbage and recycle billing is a financial account matter"
+  },
+  {
+    "service_type": "Other Issues",
+    "city_category": "County info",
+    "category": "none",
+    "reason": "Routed to county agencies; no city service category applies"
+  },
+  {
+    "service_type": "Water",
+    "city_category": "Payment",
+    "category": "none",
+    "reason": "Water payment is a financial transaction, not a service category"
+  },
+  {
+    "service_type": "Water",
+    "city_category": "Service Change",
+    "category": "none",
+    "reason": "Water service change is an account setup request, not a service category"
+  },
+  {
+    "service_type": "RGR?CCC",
+    "city_category": "Other - Garbage",
+    "category": "sanitation_environment_quality",
+    "reason": "Miscellaneous garbage service requests are solid-waste sanitation"
+  },
+  {
+    "service_type": "RGR?CCC",
+    "city_category": "Garbage",
+    "category": "sanitation_environment_quality",
+    "reason": "Garbage service requests are solid-waste sanitation service"
+  },
+  {
+    "service_type": "RGR?CCC",
+    "city_category": "Container Inquiry - Yard Trimming",
+    "category": "sanitation_environment_quality",
+    "reason": "Yard trimming container inquiries are solid-waste sanitation service"
+  },
+  {
+    "service_type": "Start New Services",
+    "city_category": "(blank)",
+    "category": "none",
+    "reason": "Account setup to start utility services; no service delivery category fits"
+  },
+  {
+    "service_type": "Graffiti",
+    "city_category": "Park Picnic Table",
+    "category": "sanitation_environment_quality",
+    "reason": "Graffiti on park furniture is blight and environmental quality cleanup"
+  },
+  {
+    "service_type": "RGR?CCC",
+    "city_category": "Other - Recycle",
+    "category": "sanitation_environment_quality",
+    "reason": "Miscellaneous recycling service requests are solid-waste sanitation"
+  },
+  {
+    "service_type": "RGR?CCC",
+    "city_category": "Property Tax Billing - SFD",
+    "category": "none",
+    "reason": "Property tax billing is a financial account matter, not a service category"
+  },
+  {
+    "service_type": "Graffiti",
+    "city_category": "Chain Link Fence",
+    "category": "sanitation_environment_quality",
+    "reason": "Graffiti on chain link fences is blight and environmental quality cleanup"
+  },
+  {
+    "service_type": "Water",
+    "city_category": "Payment Plan",
+    "category": "none",
+    "reason": "Water payment plan is a financial account matter, not a service category"
+  },
+  {
+    "service_type": "Street Sweeping Service",
+    "city_category": "(blank)",
+    "category": "sanitation_environment_quality",
+    "reason": "Street sweeping is sanitation service keeping public spaces clean"
+  },
+  {
+    "service_type": "Graffiti",
+    "city_category": "Tree",
+    "category": "sanitation_environment_quality",
+    "reason": "Graffiti on trees is blight and environmental quality cleanup"
+  },
+  {
+    "service_type": "RGR?CCC",
+    "city_category": "Other - SFD",
+    "category": "sanitation_environment_quality",
+    "reason": "Single-family dwelling refuse service requests are solid-waste sanitation"
+  },
+  {
+    "service_type": "RGR?CCC",
+    "city_category": "Other - Yard Trimming",
+    "category": "sanitation_environment_quality",
+    "reason": "Yard trimming service requests are solid-waste sanitation service"
+  },
+  {
+    "service_type": "RGR?CCC",
+    "city_category": "Missed Collection - Yard Trimming",
+    "category": "sanitation_environment_quality",
+    "reason": "Missed yard trimming collection is a solid-waste sanitation issue"
+  },
+  {
+    "service_type": "RGR?CCC",
+    "city_category": "Other - MFD",
+    "category": "sanitation_environment_quality",
+    "reason": "Multi-family dwelling refuse service requests are solid-waste sanitation"
+  },
+  {
+    "service_type": "Water",
+    "city_category": "Residential-Other",
+    "category": "none",
+    "reason": "Residential water service requests are account matters, not policy category"
+  },
+  {
+    "service_type": "Graffiti",
+    "city_category": "Park Restroom Building",
+    "category": "sanitation_environment_quality",
+    "reason": "Graffiti on park restrooms is blight and environmental quality cleanup"
+  },
+  {
+    "service_type": "RGR?CCC",
+    "city_category": "Recycle",
+    "category": "sanitation_environment_quality",
+    "reason": "Recycling service requests are solid-waste sanitation service"
+  },
+  {
+    "service_type": "Water",
+    "city_category": "Residential",
+    "category": "none",
+    "reason": "Residential water service requests are account matters, not policy category"
+  },
+  {
+    "service_type": "Community WiFi",
+    "city_category": "(blank)",
+    "category": "none",
+    "reason": "Community WiFi is a connectivity service, not in any voice taxonomy category"
+  },
+  {
+    "service_type": "Water",
+    "city_category": "Meter Services",
+    "category": "none",
+    "reason": "Water meter services are account setup requests, not a service category"
+  },
+  {
+    "service_type": "Water",
+    "city_category": "E-Bill Express-Other",
+    "category": "none",
+    "reason": "E-billing is a financial account matter, not a service category"
+  },
+  {
+    "service_type": "Water",
+    "city_category": "Auto Pay",
+    "category": "none",
+    "reason": "Auto-pay setup is a financial account matter, not a service category"
+  },
+  {
+    "service_type": "RGR?CCC",
+    "city_category": "SFD",
+    "category": "sanitation_environment_quality",
+    "reason": "Single-family dwelling refuse service is solid-waste sanitation"
+  },
+  {
+    "service_type": "Eviction Prevention",
+    "city_category": "(blank)",
+    "category": "housing_affordability_policy",
+    "reason": "Eviction prevention relates to tenant protections and housing policy"
+  },
+  {
+    "service_type": "Water",
+    "city_category": "Commercial-Other",
+    "category": "none",
+    "reason": "Commercial water service requests are account matters, not policy category"
+  },
+  {
+    "service_type": "Storm/Sewer Water",
+    "city_category": "(blank)",
+    "category": "infrastructure_streets",
+    "reason": "Storm and sewer water infrastructure is public utility maintenance"
+  },
+  {
+    "service_type": "Water",
+    "city_category": "Login Assistant",
+    "category": "none",
+    "reason": "Online login assistance is an account/IT matter, not a service category"
+  },
+  {
+    "service_type": "RGR?CCC",
+    "city_category": "MFD",
+    "category": "sanitation_environment_quality",
+    "reason": "Multi-family dwelling refuse service is solid-waste sanitation"
+  },
+  {
+    "service_type": "RGR?CCC",
+    "city_category": "Payment - SFD",
+    "category": "none",
+    "reason": "Refuse service payment is a financial account matter"
+  },
+  {
+    "service_type": "RGR?CCC",
+    "city_category": "Yard Trimming",
+    "category": "sanitation_environment_quality",
+    "reason": "Yard trimming service is solid-waste and sanitation collection"
+  },
+  {
+    "service_type": "RGR?CCC",
+    "city_category": "Other - Street Sweeping",
+    "category": "sanitation_environment_quality",
+    "reason": "Street sweeping service requests are sanitation and public cleanliness"
+  },
+  {
+    "service_type": "RGR?CCC",
+    "city_category": "Other E-Bill Express - MFD",
+    "category": "none",
+    "reason": "E-billing for MFD is a financial account matter, not a service category"
+  },
+  {
+    "service_type": "Other Issues",
+    "city_category": "Parking permit",
+    "category": "none",
+    "reason": "Parking permit administration is an account matter, not a service category"
+  },
+  {
+    "service_type": "RGR?CCC",
+    "city_category": "Payment - MFD",
+    "category": "none",
+    "reason": "MFD refuse payment is a financial account matter"
+  },
+  {
+    "service_type": "RGR?CCC",
+    "city_category": "Liens - SFD",
+    "category": "none",
+    "reason": "Property liens are a financial/legal matter, not a service category"
+  },
+  {
+    "service_type": "Water",
+    "city_category": "E-Bill Express",
+    "category": "none",
+    "reason": "E-billing setup is a financial account matter, not a service category"
+  },
+  {
+    "service_type": "RGR?CCC",
+    "city_category": "NIS - SFD",
+    "category": "none",
+    "reason": "New/inactive service setup is an account request, not a service category"
+  },
+  {
+    "service_type": "RGR?CCC",
+    "city_category": "Auto Pay - MFD",
+    "category": "none",
+    "reason": "Auto-pay setup is a financial account matter, not a service category"
+  },
+  {
+    "service_type": "RGR?CCC",
+    "city_category": "Missed Street - Street Sweeping",
+    "category": "sanitation_environment_quality",
+    "reason": "Missed street sweeping is a sanitation and public cleanliness issue"
+  },
+  {
+    "service_type": "Water",
+    "city_category": "Commercial",
+    "category": "none",
+    "reason": "Commercial water service is an account request, not a service category"
+  },
+  {
+    "service_type": "RGR?CCC",
+    "city_category": "Login Assistance - MFD",
+    "category": "none",
+    "reason": "Online login assistance is an IT/account matter, not a service category"
+  },
+  {
+    "service_type": "Graffiti",
+    "city_category": "(blank)",
+    "category": "sanitation_environment_quality",
+    "reason": "Graffiti removal is blight and environmental quality cleanup"
+  },
+  {
+    "service_type": "Water",
+    "city_category": "(blank)",
+    "category": "none",
+    "reason": "Unspecified water request; no service delivery category reliably fits"
+  },
+  {
+    "service_type": "RGR?CCC",
+    "city_category": "E-Bill Express Technical Issues - MFD",
+    "category": "none",
+    "reason": "E-billing technical issues are an IT/account matter"
+  },
+  {
+    "service_type": "Other Issues",
+    "city_category": "Junk Item Pick-Up - Recycle",
+    "category": "sanitation_environment_quality",
+    "reason": "Recycling junk pickup requests are solid-waste sanitation service"
+  },
+  {
+    "service_type": "Garbage and Recycling",
+    "city_category": "(blank)",
+    "category": "sanitation_environment_quality",
+    "reason": "Garbage and recycling service is solid-waste sanitation"
+  },
+  {
+    "service_type": "RGR?CCC",
+    "city_category": "Street Sweeping",
+    "category": "sanitation_environment_quality",
+    "reason": "Street sweeping is sanitation service keeping public streets clean"
+  },
+  {
+    "service_type": "Abandoned Vehicle",
+    "city_category": "(blank)",
+    "category": "infrastructure_streets",
+    "reason": "Abandoned vehicle removal is a public right-of-way maintenance issue"
+  },
+  {
+    "service_type": "Other Issues",
+    "city_category": "Billing - Garbage and Recycle",
+    "category": "none",
+    "reason": "Billing disputes are a financial account matter, not a service category"
+  },
+  {
+    "service_type": "RGR?CCC",
+    "city_category": "(blank)",
+    "category": "sanitation_environment_quality",
+    "reason": "Refuse, garbage, recycling service requests are solid-waste sanitation"
+  },
+  {
+    "service_type": "Illegal Dumping",
+    "city_category": "Streets Dispatch",
+    "category": "sanitation_environment_quality",
+    "reason": "Illegal dumping dispatched via streets is a sanitation cleanup issue"
+  },
+  {
+    "service_type": "RGR?CCC",
+    "city_category": "Liens - MFD",
+    "category": "none",
+    "reason": "Property liens on MFD are a financial/legal matter"
+  },
+  {
+    "service_type": "Other Issues",
+    "city_category": "Garbage",
+    "category": "sanitation_environment_quality",
+    "reason": "Garbage service issues are solid-waste sanitation service"
+  },
+  {
+    "service_type": "Other Issues",
+    "city_category": "Billing",
+    "category": "none",
+    "reason": "Billing issues are a financial account matter, not a service category"
+  }
+]

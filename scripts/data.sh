@@ -11,6 +11,6 @@ run ingest_emails.py "$@"              # b  (simulated email channel from the us
 run build_tracts.py "$@"              # c
 run ingest_311.py "$@"                 # a3 (311 service requests -> per-tract counts; needs tracts from c)
 run resolve_locations.py "$@"         # d
-if [ -f scripts/run_bob.mjs ]; then echo "== run_bob.mjs"; node scripts/run_bob.mjs "$@"; else echo "-- run_bob.mjs (not built yet, skipped)"; fi   # e
+run bob_label.py "$@"                  # e  (IBM Bob labels every voice comment; --offline replays the cache; run_bob.mjs rebuilds the taxonomy on request)
 run export_comments.py                # h  (voice export: letters + email + site, joined with locations and classifications)
 run fairness.py                       # f/g (reads the export, so it runs last)

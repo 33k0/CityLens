@@ -59,7 +59,8 @@ export default function CommentsTable() {
     load311ByTract().then((d) => setN311(d.rows_located)).catch(() => setN311(null))
   }, [])
 
-  const catLabel = useMemo(() => Object.fromEntries((data?.categories ?? []).map((c) => [c.key, c.label])), [data])
+  const catLabel = useMemo(() => Object.fromEntries((data?.categories ?? []).flatMap((c) => [[c.key, c.label] as const, ...(c.subcategories ?? []).map((x) => [x.key, x.label] as const)])), [data])
+  const [sub, setSub] = useState('all')
   const items = useMemo(() => (data?.items ?? []).filter((it) => sourceF === 'all' || (sourceF === 'real' ? !it.mock : it.mock)), [data, sourceF])
 
   const filtered = useMemo(() => {
@@ -72,6 +73,7 @@ export default function CommentsTable() {
       if (channelF !== 'all' && c.channel !== channelF) return false
       if (!stances.has(c.stance)) return false
       if (cat !== 'all' && c.category !== cat) return false
+      if (sub !== 'all' && c.subcategory !== sub) return false
       if (collapse) {
         if (c.duplicate_of) return false
         if (c.campaign_id) {
@@ -81,16 +83,18 @@ export default function CommentsTable() {
       }
       return !needle || c.text.toLowerCase().includes(needle) || c.subject.toLowerCase().includes(needle) || c.comment_id.toLowerCase().includes(needle)
     })
-  }, [data, view, q, channelF, stances, cat, collapse, items])
+  }, [data, view, q, channelF, stances, cat, sub, collapse, items])
 
   const counts = useMemo(() => {
     const s: Record<string, number> = {}
     const c: Record<string, number> = {}
+    const sc: Record<string, number> = {}
     for (const x of filtered) {
+      sc[x.subcategory || ''] = (sc[x.subcategory || ''] ?? 0) + 1
       s[x.stance] = (s[x.stance] ?? 0) + 1
       c[x.category || 'unlabeled'] = (c[x.category || 'unlabeled'] ?? 0) + 1
     }
-    return { s, c }
+    return { s, c, sc }
   }, [filtered])
 
   if (error)
@@ -179,10 +183,20 @@ export default function CommentsTable() {
                 {data.categories.length > 0 && (
                   <div className="flex flex-wrap items-center gap-2">
                     <span className="w-16 font-semibold uppercase tracking-wide text-stone-500">Category</span>
-                    <button type="button" aria-pressed={cat === 'all'} onClick={() => setCat('all')} className={`rounded-full border px-2.5 py-1 ${cat === 'all' ? 'border-indigo-600 bg-indigo-600 text-white' : 'border-stone-300 bg-white'}`}>all</button>
+                    <button type="button" aria-pressed={cat === 'all'} onClick={() => { setCat('all'); setSub('all') }} className={`rounded-full border px-2.5 py-1 ${cat === 'all' ? 'border-indigo-600 bg-indigo-600 text-white' : 'border-stone-300 bg-white'}`}>all</button>
                     {data.categories.map((c) => (
-                      <button key={c.key} type="button" title={c.description} aria-pressed={cat === c.key} onClick={() => setCat(c.key)} className={`rounded-full border px-2.5 py-1 ${cat === c.key ? 'border-indigo-600 bg-indigo-600 text-white' : 'border-stone-300 bg-white'}`}>
+                      <button key={c.key} type="button" title={c.description} aria-pressed={cat === c.key} onClick={() => { setCat(c.key); setSub('all') }} className={`rounded-full border px-2.5 py-1 ${cat === c.key ? 'border-indigo-600 bg-indigo-600 text-white' : 'border-stone-300 bg-white'}`}>
                         {c.label} ({counts.c[c.key] ?? 0})
+                      </button>
+                    ))}
+                  </div>
+                )}
+                {cat !== 'all' && (data.categories.find((c) => c.key === cat)?.subcategories?.length ?? 0) > 0 && (
+                  <div className="flex flex-wrap items-center gap-2 pl-[4.5rem]">
+                    <button type="button" aria-pressed={sub === 'all'} onClick={() => setSub('all')} className={`rounded-full border px-2 py-0.5 ${sub === 'all' ? 'border-indigo-400 bg-indigo-100' : 'border-stone-300 bg-white'}`}>all subcategories</button>
+                    {data.categories.find((c) => c.key === cat)!.subcategories.map((x) => (
+                      <button key={x.key} type="button" title={x.description} aria-pressed={sub === x.key} onClick={() => setSub(x.key)} className={`rounded-full border px-2 py-0.5 ${sub === x.key ? 'border-indigo-400 bg-indigo-100' : 'border-stone-300 bg-white'}`}>
+                        {x.label} ({counts.sc[x.key] ?? 0})
                       </button>
                     ))}
                   </div>
@@ -233,7 +247,7 @@ function Row({ c, showItem, catLabel, open, onToggle, campaignSize }: { c: Voice
       <div className="mb-1 flex flex-wrap items-center gap-1.5 text-xs text-stone-500">
         <code className="rounded bg-stone-100 px-1.5 py-0.5 font-mono text-stone-700">{c.comment_id}</code>
         <span className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 font-medium ${s.cls}`} title={c.stance_evidence ? `stance evidence: “${c.stance_evidence}” (${c.stance_source})` : c.stance_source}><span aria-hidden>{s.glyph}</span>{s.label}</span>
-        {c.category && <span className="rounded bg-indigo-100 px-1.5 py-0.5 text-indigo-900">{catLabel[c.category] ?? c.category}{c.confidence !== null ? ` · ${Math.round(c.confidence * 100)}%` : ''}</span>}
+        {c.category && <span className="rounded bg-indigo-100 px-1.5 py-0.5 text-indigo-900" title={c.inherited_from ? `label inherited from ${c.inherited_from} (same campaign text)` : undefined}>{catLabel[c.category] ?? c.category}{c.subcategory ? ` › ${catLabel[c.subcategory] ?? c.subcategory}` : ''}{c.confidence !== null ? ` · ${Math.round(c.confidence * 100)}%` : ''}</span>}
         <span className={`rounded px-1.5 py-0.5 ${c.mock ? 'bg-amber-100 text-amber-900' : 'bg-emerald-100 text-emerald-900'}`}>{c.channel} · {c.mock ? 'simulated' : 'real'}</span>
         <span className={`rounded px-1.5 py-0.5 ${TYPE_CLS[c.commenter_type] ?? 'bg-stone-100'}`}>{TYPE_LABEL[c.commenter_type] ?? c.commenter_type}</span>
         <span>{fmtDate(c.received_at)}</span>

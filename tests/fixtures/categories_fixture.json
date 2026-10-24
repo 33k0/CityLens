@@ -1,0 +1,19 @@
+{
+  "version": "fixture-1",
+  "family": "voice",
+  "authored_by": "test-fixture",
+  "source": "Synthetic taxonomy for unit tests only; not used by the pipeline.",
+  "stance_definition": "support = asks the City to do it; oppose = asks the City not to; neutral = undecided or informational; unclear = cannot tell.",
+  "categories": [
+    {"key": "roads", "label": "Roads", "description": "Road surface and lighting.", "include": ["potholes", "lights"], "exclude": ["rent"],
+     "examples": ["huge pothole", "lights are out"], "keywords": ["pothole", "streetlight", "lights", "bache", "luces", "đèn đường", "ổ gà"], "maps_311": ["streets_infrastructure"]},
+    {"key": "rent", "label": "Rent", "description": "Rent and tenants.", "include": ["rent cap"], "exclude": ["roads"],
+     "examples": ["rent cap", "hot water"], "keywords": ["rent", "tenant", "landlord", "hot water", "renta", "tiền thuê", "nước nóng", "căn hộ"], "maps_311": ["housing"]},
+    {"key": "development", "label": "Development", "description": "Data centers and permits.", "include": ["data center"], "exclude": ["rent"],
+     "examples": ["data center", "permit"], "keywords": ["data center", "permit", "centro de datos", "trung tâm dữ liệu"], "maps_311": ["permits_code"]},
+    {"key": "safety", "label": "Safety", "description": "Crime and police.", "include": ["crime"], "exclude": ["roads"],
+     "examples": ["break-ins", "police"], "keywords": ["police", "crime", "break-ins", "robos"], "maps_311": ["public_safety"]},
+    {"key": "misc", "label": "Other", "description": "Everything else.", "include": ["other"], "exclude": ["anything above"],
+     "examples": ["laid off", "medical debt"], "keywords": ["job", "debt"], "maps_311": ["other"]}
+  ]
+}

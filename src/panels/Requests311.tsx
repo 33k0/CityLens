@@ -4,11 +4,7 @@ import type { Requests311ByTract, Request311Sample } from '../data/types311'
 import type { VoiceComment } from '../data/types'
 import ProblemsWithoutVoice from './ProblemsWithoutVoice'
 
-const LABEL: Record<string, string> = {
-  sanitation_dumping: 'Sanitation & dumping', graffiti_blight: 'Graffiti & blight', abandoned_vehicles_parking: 'Abandoned vehicles & parking',
-  streets_infrastructure: 'Streets & infrastructure', homelessness_encampments: 'Homelessness & encampments', noise_nuisance: 'Noise & nuisance',
-  utilities_billing: 'Utilities & billing', housing: 'Housing', parks_trees: 'Parks & trees', public_safety: 'Public safety', permits_code: 'Permits & code', other: 'Other',
-}
+const label = (d: Requests311ByTract, k: string) => d.category_labels?.[k] ?? k
 
 /** "Citywide 311 — last 12 months": the real problems layer, as tables until the map lands in Milestone 7. */
 export default function Requests311({ voice }: { voice: VoiceComment[] }) {
@@ -71,7 +67,7 @@ export default function Requests311({ voice }: { voice: VoiceComment[] }) {
         <span className="font-semibold uppercase tracking-wide text-stone-500">Category</span>
         <button type="button" aria-pressed={cat === 'all'} onClick={() => setCat('all')} className={`rounded-full border px-2.5 py-1 ${cat === 'all' ? 'border-indigo-600 bg-indigo-600 text-white' : 'border-stone-300 bg-white'}`}>all</button>
         {data.categories.map((c) => (
-          <button key={c} type="button" aria-pressed={cat === c} onClick={() => setCat(c)} className={`rounded-full border px-2.5 py-1 ${cat === c ? 'border-indigo-600 bg-indigo-600 text-white' : 'border-stone-300 bg-white'}`}>{LABEL[c] ?? c}</button>
+          <button key={c} type="button" aria-pressed={cat === c} onClick={() => setCat(c)} className={`rounded-full border px-2.5 py-1 ${cat === c ? 'border-indigo-600 bg-indigo-600 text-white' : 'border-stone-300 bg-white'}`}>{label(data, c)}</button>
         ))}
       </div>
 
@@ -101,17 +97,26 @@ export default function Requests311({ voice }: { voice: VoiceComment[] }) {
             <tbody>
               {stats.byCat.map(([c, n]) => (
                 <tr key={c} className="border-t border-stone-100">
-                  <td className="py-1 pr-2">{LABEL[c] ?? c}</td>
+                  <td className="py-1 pr-2">{label(data, c)}</td>
                   <td className="py-1 text-right font-mono">{n.toLocaleString()}</td>
                 </tr>
               ))}
             </tbody>
           </table>
           <details className="mt-2 text-xs text-stone-500">
-            <summary>How the city's "Service Type" (+ "Category") maps into these categories (hand-filled, data/taxonomy_311.csv)</summary>
-            <ul className="mt-1 list-disc pl-4">
-              {data.taxonomy.map((r, i) => (<li key={i}>{r.service_type}{r.category_raw !== '*' ? ` / ${r.category_raw}` : ''} → {LABEL[r.category] ?? r.category}</li>))}
-            </ul>
+            <summary>How the city's request types map into these categories ({data.taxonomy.length} combinations; {data.rows_not_problems.toLocaleString()} billing/account requests are not problems and are left out)</summary>
+            <table className="mt-1 w-full">
+              <tbody>
+                {data.taxonomy.map((r, i) => (
+                  <tr key={i} className="border-t border-stone-100 align-top">
+                    <td className="py-0.5 pr-2">{r.service_type}{r.city_category !== '(blank)' ? ` / ${r.city_category}` : ''}</td>
+                    <td className="py-0.5 pr-2">{r.category === 'none' ? <span className="text-stone-400">not a problem report</span> : label(data, r.category)}</td>
+                    <td className="py-0.5 pr-2 text-right font-mono">{r.count.toLocaleString()}</td>
+                    <td className="py-0.5 text-stone-400">{r.reason}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </details>
         </section>
 
@@ -169,7 +174,7 @@ export default function Requests311({ voice }: { voice: VoiceComment[] }) {
               <tbody>
                 {sample.rows.map((r) => (
                   <tr key={r.request_id} className="border-t border-stone-100">
-                    <td className="p-1 font-mono">{r.request_id}</td><td className="p-1">{r.month}</td><td className="p-1">{r.category_raw}</td><td className="p-1">{r.subcategory_raw ?? '—'}</td><td className="p-1">{LABEL[r.category] ?? r.category}</td><td className="p-1">{r.status}</td><td className="p-1">{r.source}</td><td className="p-1 font-mono">{r.tract_id}</td><td className="p-1">{r.council_district ?? '—'}</td>
+                    <td className="p-1 font-mono">{r.request_id}</td><td className="p-1">{r.month}</td><td className="p-1">{r.category_raw}</td><td className="p-1">{r.subcategory_raw ?? '—'}</td><td className="p-1">{label(data!, r.category)}</td><td className="p-1">{r.status}</td><td className="p-1">{r.source}</td><td className="p-1 font-mono">{r.tract_id}</td><td className="p-1">{r.council_district ?? '—'}</td>
                   </tr>
                 ))}
               </tbody>

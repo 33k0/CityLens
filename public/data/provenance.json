@@ -1,0 +1,121 @@
+{
+  "schema": 1,
+  "note": "One record per pipeline step, latest run. Bob run history: data/bob_runs.json.",
+  "updated_at": "2026-10-24T01:03:38+00:00",
+  "records": [
+    {
+      "step": "bob_categorize",
+      "engine": "bob",
+      "model": "IBM Bob Shell (agent mode), skill categorize-comments",
+      "reason": "",
+      "started_at": "2026-10-24T00:41:17Z",
+      "finished_at": "2026-10-24T00:45:59Z",
+      "task_id": "cfd109171c6263ed58abb96510696fb8",
+      "duration_ms": 280839,
+      "session_costs": 2.437042,
+      "stats": {
+        "task_id": "cfd109171c6263ed58abb96510696fb8",
+        "duration_ms": 280839,
+        "session_costs": 2.437042,
+        "max_cost": 3,
+        "tool_calls": 27
+      },
+      "prompt_form": "slash",
+      "summary": "Contents of file /var/folders/26/qy6f0tf12kdcrzkdqzg347000000gn/T/bob-task-outputs/cfd109171c6263ed58abb96510696fb8/processes/bob_execute_command_c24a4a04-b59d-49b8-a613-d0d0d0c497c1.log.stdout:\n\n1 | \n2 | !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n3 | !! WARNING: L41a0f758: Granite label rejected, using rules (validation failed after retry: evidence_quote is not an exact substring of the comment text)\n4 | !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n5 | \n6 | \n7 | !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n8 | !! WARNING: L4fdf1f98: Granite label rejected, using rules (validation failed after retry: stance_evidence is not an exact substring of the comment text)\n9 | !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n10 | \n11 |   25/435 classified ({'fallback': 2, 'retried_ok': 1, 'ollama': 23}) 145s\n12 | ",
+      "counts": {
+        "bob_runs_used": 2,
+        "bob_max_runs": 6,
+        "target": "all",
+        "categories": [
+          "housing_affordability_policy",
+          "public_safety_emergency_response",
+          "infrastructure_streets",
+          "environment_development_review",
+          "code_enforcement_habitability",
+          "governance_civic_rights",
+          "sanitation_environment_quality",
+          "other"
+        ],
+        "classify_rerun_by_run_bob": true,
+        "rows_by_engine": {
+          "ollama": 0,
+          "fallback": 435
+        }
+      },
+      "categories_source": "Sample of 271 letters (10 items) and 164 emails (11 items) spanning Jan 2025 council meetings and simulated 2026 agenda items; taxonomy derived from the text of those comments."
+    },
+    {
+      "step": "taxonomy",
+      "engine": "bob",
+      "model": "IBM Bob Shell",
+      "reason": "",
+      "bob_task_ids": [],
+      "authored_on": null,
+      "taxonomy_version": "v1.0",
+      "prompt_version": "v1.0",
+      "started_at": "2026-10-24T00:42:51+00:00",
+      "finished_at": "2026-10-24T00:42:51+00:00",
+      "counts": {
+        "categories": 8
+      },
+      "categories_source": "Sample of 271 letters (10 items) and 164 emails (11 items) spanning Jan 2025 council meetings and simulated 2026 agenda items; taxonomy derived from the text of those comments."
+    },
+    {
+      "step": "dedup_campaigns",
+      "engine": "fallback",
+      "model": "rapidfuzz+datasketch",
+      "reason": "deterministic, no model involved",
+      "started_at": "2026-10-24T00:42:51+00:00",
+      "finished_at": "2026-10-24T00:42:54+00:00",
+      "counts": {
+        "kept_existing": 79,
+        "added": 3,
+        "same_sender_other_item_not_marked": 4,
+        "duplicates_total": 82,
+        "campaigns": 4,
+        "campaign_rows": 194,
+        "campaign_sizes": {
+          "C01": 167,
+          "C02": 12,
+          "C03": 10,
+          "C04": 5
+        }
+      },
+      "categories_source": "Sample of 271 letters (10 items) and 164 emails (11 items) spanning Jan 2025 council meetings and simulated 2026 agenda items; taxonomy derived from the text of those comments."
+    },
+    {
+      "step": "classify",
+      "engine": "cache",
+      "model": "IBM Bob Shell",
+      "reason": "per-comment labels by IBM Bob in batches; Granite/rules only for rows Bob could not label validly",
+      "started_at": "2026-10-24T01:03:37+00:00",
+      "finished_at": "2026-10-24T01:03:38+00:00",
+      "wall_seconds": 1.4,
+      "counts": {
+        "rows": 435,
+        "units_labeled": 235,
+        "inherited": 200,
+        "by_engine": {
+          "bob": 427,
+          "fallback": 8
+        },
+        "bob_spent_total_usd": 8.3558
+      },
+      "bob_task_ids": [
+        "ca875b5c452ffbdd257bd7df5055dad3",
+        "dc0feaf265d95fc6686b73520b38e986",
+        "d8da17b570e48c15b9be88d2b19209d5",
+        "ef74cba6e728209cbf1ff858fb26c44c",
+        "cc7b71240160acebfb4a12c263feb622",
+        "c147f8196b92098e7b35f97c2a523caa",
+        "fe423910fabbf79084b8852eaf725718",
+        "5d6c820f4844f3393e16aa1c515ab681",
+        "9177fcfb2910d8c0bdbd532f53bdcbbe",
+        "eaede3cc304539634133dbf442aae7e8",
+        "cc55f66e985834a866ba123a9ec45a50"
+      ],
+      "prompt_version": "bob-label-v1",
+      "categories_source": "Sample of 271 letters (10 items) and 164 emails (11 items) spanning Jan 2025 council meetings and simulated 2026 agenda items; taxonomy derived from the text of those comments."
+    }
+  ]
+}

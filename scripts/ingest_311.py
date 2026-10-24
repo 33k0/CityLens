@@ -42,25 +42,30 @@ TAXONOMY = ROOT / "data" / "taxonomy_311.csv"
 TRACTS_CSV = ROOT / "data" / "tracts.csv"
 
 
-def load_taxonomy() -> tuple[dict, dict]:
-    """Hand-filled mapping. Rows with category_raw='*' match any Category for that Service Type; specific rows win."""
-    t = pd.read_csv(TAXONOMY, dtype=str).fillna("")
-    specific = {(r.service_type, r.category_raw): r.category for r in t.itertuples() if r.category_raw != "*"}
-    generic = {r.service_type: r.category for r in t.itertuples() if r.category_raw == "*"}
-    return specific, generic
+BOB_MAP = ROOT / "data" / "taxonomy_311_bob.json"
+CATEGORIES = ROOT / "data" / "categories.json"
 
 
 def apply_taxonomy(df: pd.DataFrame, log) -> pd.DataFrame:
-    specific, generic = load_taxonomy()
-    st = df["category_raw"].fillna("")
-    sub = df["subcategory_raw"].fillna("")
-    keys = list(zip(st, sub))
-    cat = [specific.get(k) or generic.get(k[0]) for k in keys]
-    df["category"] = pd.Series(cat, index=df.index)
-    unmapped = df[df["category"].isna()]["category_raw"].fillna("(blank)").value_counts()
-    if len(unmapped):
-        log("  unmapped Service Type values -> other: " + ", ".join(f"{k} {v:,}" for k, v in unmapped.items()))
+    """311 request types -> the voice taxonomy's category keys, using IBM Bob's mapping of the 97 distinct
+    (Service Type, Category) combinations (data/taxonomy_311_bob.json). 'none' = not a problem report (billing,
+    accounts, service setup): kept in totals, excluded from the problems layer. The earlier hand mapping is kept as
+    category_hand for comparison."""
+    bob = pd.DataFrame(json.loads(BOB_MAP.read_text()))
+    key = dict(zip(zip(bob["service_type"], bob["city_category"]), bob["category"]))
+    st = df["category_raw"].fillna("(blank)")
+    sub = df["subcategory_raw"].fillna("(blank)")
+    df["category"] = [key.get(k) for k in zip(st, sub)]
+    missing = df[df["category"].isna()]
+    if len(missing):
+        combos = missing.groupby(["category_raw", "subcategory_raw"], dropna=False).size()
+        log(f"  {len(missing):,} rows in combos Bob has not mapped -> other: " + ", ".join(f"{a}/{b} {n}" for (a, b), n in combos.items()))
     df["category"] = df["category"].fillna("other")
+    # hand mapping kept for comparison only
+    hand = pd.read_csv(TAXONOMY, dtype=str).fillna("")
+    spec = {(r.service_type, r.category_raw): r.category for r in hand.itertuples() if r.category_raw != "*"}
+    gen = {r.service_type: r.category for r in hand.itertuples() if r.category_raw == "*"}
+    df["category_hand"] = [spec.get((a, b)) or gen.get(a) or "other" for a, b in zip(df["category_raw"].fillna(""), df["subcategory_raw"].fillna(""))]
     return df
 
 
@@ -130,10 +135,12 @@ def locate(df: pd.DataFrame, log) -> pd.DataFrame:
 
 def export(df: pd.DataFrame, since: str, log) -> None:
     CSV_OUT.parent.mkdir(parents=True, exist_ok=True)
-    cols = ["request_id", "created_at", "category_raw", "subcategory_raw", "category", "status", "source", "department",
+    cols = ["request_id", "created_at", "category_raw", "subcategory_raw", "category", "category_hand", "status", "source", "department",
             "tract_id", "council_district", "location_precision"]
     df[cols].to_csv(CSV_OUT, index=False, date_format="%Y-%m-%dT%H:%M:%S")
-    loc = df[df["tract_id"].notna()].copy()
+    not_problem = df["category"] == "none"
+    log(f"  {not_problem.sum():,} rows are billing/account/service requests (Bob: none) -> kept in totals, not in the problems layer")
+    loc = df[df["tract_id"].notna() & ~not_problem].copy()
     loc["month"] = loc["created_at"].dt.strftime("%Y-%m")
     g = loc.groupby(["tract_id", "category", "month"]).size()
     by_tract: dict = {}
@@ -143,11 +150,17 @@ def export(df: pd.DataFrame, since: str, log) -> None:
     pop = pd.read_csv(TRACTS_CSV, dtype={"tract_id": str}).set_index("tract_id")["population"].to_dict()
     months_n = max(1, loc["month"].nunique())
     rates = {t: round(n / pop[t] * 1000 * (12 / months_n), 2) for t, n in totals.items() if pop.get(t)}
-    tax = pd.read_csv(TAXONOMY, dtype=str).fillna("")
+    bob_map = json.loads(BOB_MAP.read_text())
+    combos = pd.read_csv(ROOT / "data" / "taxonomy_311_combos.csv", dtype=str).fillna("")
+    for m, n in zip(bob_map, combos["count"]):
+        m["count"] = int(n)
+    cats = json.loads(CATEGORIES.read_text())["categories"]
     payload = {"source": "San José Open Data: 311 Service Request Data (CC0), 2025 + 2026 yearly CSVs", "real": True,
                "since": since, "generated_at": date.today().isoformat(), "rows_total": int(len(df)), "rows_located": int(len(loc)),
                "categories": sorted(loc["category"].unique().tolist()),
-               "taxonomy": [{"service_type": r.service_type, "category_raw": r.category_raw, "category": r.category} for r in tax.itertuples()],
+               "taxonomy_source": "IBM Bob mapped the 97 distinct (Service Type, Category) combinations into the voice taxonomy",
+               "taxonomy": bob_map, "category_labels": {c["key"]: c.get("label", c["key"]) for c in cats},
+               "rows_not_problems": int(not_problem.sum()),
                "months": sorted(loc["month"].unique().tolist()), "months_covered": int(months_n),
                "totals": {k: int(v) for k, v in totals.items()},
                "rate_per_1k_annualized": rates, "population": {t: int(pop[t]) for t in totals if pop.get(t)},

@@ -69,7 +69,7 @@ def main() -> int:
         log("  -- classifications.csv missing: category empty, stance 'unclear'")
 
     for c, default in [("tract_id", ""), ("location_precision", "none"), ("location_basis", ""), ("multi_tract", "False"), ("council_district", ""),
-                       ("category", ""), ("confidence", ""), ("evidence_quote", ""), ("stance", "unclear"),
+                       ("category", ""), ("subcategory", ""), ("bob_task_id", ""), ("inherited_from", ""), ("confidence", ""), ("evidence_quote", ""), ("stance", "unclear"),
                        ("stance_source", "pending_llm"), ("stance_evidence", ""), ("campaign_id", ""), ("engine", "")]:
         if c not in voice.columns:
             voice[c] = default
@@ -119,7 +119,9 @@ def main() -> int:
     if cats_path.exists():
         raw = json.loads(cats_path.read_text())
         raw = raw.get("categories", raw) if isinstance(raw, dict) else raw
-        categories = [{"key": c["key"], "label": c.get("label", c["key"]), "description": c.get("description", "")} for c in raw]
+        categories = [{"key": c["key"], "label": c.get("label", c["key"]), "description": c.get("description", ""),
+                       "subcategories": [{"key": x["key"], "label": x.get("label", x["key"]), "description": x.get("description", "")}
+                                         for x in c.get("subcategories", [])]} for c in raw]
     campaigns_path = D / "campaigns.json"
     campaigns = json.loads(campaigns_path.read_text()) if campaigns_path.exists() else None
     payload = {"categories": categories, "campaigns": campaigns, "generated_at": datetime.now().astimezone().isoformat(timespec="seconds"), "family": "voice",

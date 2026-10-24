@@ -405,7 +405,7 @@ async function mount(root,init){
     <p><b>${NAME[k]} neighborhoods</b> are heard <b class="hw">${said(f.di,OTHER[k])}</b>.</p>
     <div class="hbars"><div>${bar(f.pu,'u')}<em>${Math.round(f.pu*100)}%</em></div><div>${bar(f.pp,'p')}<em>${Math.round(f.pp*100)}%</em></div></div></div>`).join('')}
    ${(()=>{const k=rows[0].k,A=ATTRS[k];const rate=L=>{const p=L.reduce((a,t)=>a+t.pop,0);return p?L.reduce((a,t)=>a+t.n,0)/p:0};const ru=rate(T.filter(A.f)),rq=rate(T.filter(t=>!A.f(t)));const x=ru?rq/ru:null;
-     return ITEM.n311&&m.length?`<p class="hmirror">These neighborhoods report problems to 311 <b>${Math.min(...m).toFixed(1)}–${Math.max(...m).toFixed(1)}× as often</b>.${x&&x>1.1?` Despite this, less-impacted ${OTHER[k]} neighborhoods send <b>${x.toFixed(1)}× as many comments</b> per resident.`:''}</p>`:''})()}
+     return ITEM.n311&&m.length?`<p class="hmirror">These neighborhoods are <b>${Math.min(...m).toFixed(1)}–${Math.max(...m).toFixed(1)}× as likely</b> to be among the city's heavier 311 reporters.${x&&x>1.1?` Despite this, less-impacted ${OTHER[k]} neighborhoods send <b>${x.toFixed(1)}× as many comments</b> per resident.`:''}</p>`:''})()}
    <div class="hlinks"><button class="hbtn pri" data-act="scheme" data-v="gap">Show underheard map</button><button class="hbtn" data-act="drawer">How it's computed</button></div></div></section>`}
 
  function commentsTab(){const fc=(S.region?filtered().filter(c=>R().some(t=>t.id===c.tract)):filtered());return `<div class="ph" style="border-bottom:1px solid var(--line)"><div><h3>${fmt(fc.length)} comments</h3><div class="small muted">${S.region?'In '+S.region.name:'Located comments, current filters'} · newest first</div></div></div><div class="scroll">${fc.slice(0,40).map(c=>`<div class="ccard" data-act="inspect" data-id="${c.id}"><div class="crow"><span class="st ${c.stance}">${stIco(stV(c),10)}${stLabel[stV(c)]}</span><span class="cat">${CATN[c.cat]}</span>${c.camp?'<span class="cat" style="background:var(--bg)">Campaign</span>':''}${c.mock?'<span class="cat" style="background:var(--amberbg)">Simulated</span>':''}<span style="margin-left:auto">${fdate(c)}</span></div><div class="ctext">${esc(clip(c.text,420))}${c.langCode&&c.langCode!=='en'?`<span class="tr">${c.lang} · shown as written, not translated</span>`:''}</div><div class="crow"><span>${c.t.nbhd}</span>${c.photo?'<span>· 1 photo</span>':''}</div></div>`).join('')}</div>`}
@@ -413,8 +413,8 @@ async function mount(root,init){
  /* underheard = few comments for its population AND a reason to expect more: many reported problems (311 at or above the
     city rate) or many limited-English households. Few comments with few problems and normal factors = quiet, not underheard. */
  function underRule(){const C=D.cfg,U=C.underheard_rule||{};const T=D.tracts,pop=Math.max(1,D.totPop);
-  const c311=T.reduce((a,t)=>a+(t.prate||0)*t.pop,0)/pop;const hh=T.reduce((s,t)=>s+(t.households||0),0);const cLep=hh?T.reduce((s,t)=>s+t.lep*(t.households||0),0)/hh:0;
-  const low=t=>(t.exp>0?t.n/t.exp:1)<C.underrepresented_ratio;const prob=t=>!!ITEM.n311&&(t.prate||0)>=c311*(U.problems_vs_city??1);const lep=t=>t.lep>=cLep*(U.limited_english_vs_city??1.5);
+  const c311=T.reduce((a,t)=>a+(t.r311||0)*t.pop,0)/pop;const hh=T.reduce((s,t)=>s+(t.households||0),0);const cLep=hh?T.reduce((s,t)=>s+t.lep*(t.households||0),0)/hh:0;
+  const low=t=>(t.exp>0?t.n/t.exp:1)<C.underrepresented_ratio;const prob=t=>!!ITEM.n311&&(t.r311||0)>=c311*(U.problems_vs_city??1);const lep=t=>t.lep>=cLep*(U.limited_english_vs_city??1.5);
   return {c311,cLep,low,prob,lep,is:t=>low(t)&&(prob(t)||lep(t)),quiet:t=>low(t)&&!prob(t)&&!lep(t)}}
  function missingTop(){const u=underRule();return D.tracts.filter(u.is).sort((a,b)=>(b.exp-b.n)-(a.exp-a.n)).slice(0,5)}
  function missingTab(){const list=missingTop();return `<div class="ph"><h3>Most underheard census tracts</h3></div><div class="scroll">${list.map((t,i)=>{const open=S.mvOpen===i;const b=gapBin(t);return `<div class="mvrow"><div class="mvhead" data-act="mv" data-i="${i}" style="${open?'background:#FFF8D6;box-shadow:inset 3px 0 0 #1B1B1B':''}"><div class="rankn">${i+1}</div><div><div class="mvname"><div><b>${t.nbhd}</b><div class="tid">Census tract ${t.id}</div></div><span style="color:var(--ink2)">${ICON.chevR}</span></div>
@@ -584,9 +584,9 @@ async function mount(root,init){
   /* ---- missing voices ---- */
   if(kind!=='tract'){const mode=t=>{const o={};D.comments.forEach(c=>{if(c.tract===t.id)o[c.cat]=(o[c.cat]||0)+1});const e=Object.entries(o).sort((a,b)=>b[1]-a[1])[0];return e?CATN[e[0]]:'—'};
    const UR=underRule();const under=tr.filter(UR.is);const quiet=tr.filter(UR.quiet);const sortK=S.mvSort||(ITEM.n311?'ratio':'pop');
-   const vr=t=>t.pop?t.n/t.pop*1000:0;const cV=D.tracts.reduce((a,t)=>a+t.n,0)/Math.max(1,D.totPop)*1000;const c311r=D.tracts.reduce((a,t)=>a+(t.prate||0)*t.pop,0)/Math.max(1,D.totPop);
-   const idx=t=>(t.prate>0&&cV>0)?(vr(t)/t.prate)/(cV/c311r):null;/* voice per problem report, relative to the city (1 = city level) */
-   const keyF={pop:t=>t.pop,p311:t=>t.prate||0,lep:t=>t.lep,voice:t=>-vr(t),ratio:t=>-(idx(t)??9)*1e6+(t.prate||0)}[sortK]||(t=>t.pop);const list=[...under].sort((a,b)=>keyF(b)-keyF(a)).slice(0,10);
+   const vr=t=>t.pop?t.n/t.pop*1000:0;const cV=D.tracts.reduce((a,t)=>a+t.n,0)/Math.max(1,D.totPop)*1000;const c311r=D.tracts.reduce((a,t)=>a+(t.r311||0)*t.pop,0)/Math.max(1,D.totPop);
+   const idx=t=>(t.r311>0&&cV>0)?(vr(t)/t.r311)/(cV/c311r):null;/* voice per problem report, relative to the city (1 = city level) */
+   const keyF={pop:t=>t.pop,p311:t=>t.r311||0,lep:t=>t.lep,voice:t=>-vr(t),ratio:t=>-(idx(t)??9)*1e6+(t.r311||0)}[sortK]||(t=>t.pop);const list=[...under].sort((a,b)=>keyF(b)-keyF(a)).slice(0,10);
    const uPop=under.reduce((s,t)=>s+t.pop,0);const has311=!!ITEM.n311;
    const hh=D.tracts.reduce((s,t)=>s+(t.households||0),0);const cLep=hh?D.tracts.reduce((s,t)=>s+t.lep*(t.households||0),0)/hh:0;
    const heat=r=>r==null?'':r<0.1?'h0':r<0.35?'h1':r<0.6?'h2':r<0.9?'h3':'h4';
@@ -597,7 +597,7 @@ async function mount(root,init){
     ${list.map(t=>{const r=idx(t);return `<tr data-act="seltract" data-t="${t.id}"><td class="l"><b>${esc(t.nbhd)}</b>${UR.prob(t)?'<span class="why wp">many problems</span>':''}${UR.lep(t)?'<span class="why wl">limited English</span>':''}${['High','Higher','Highest'].includes(t.epc)?'<span class="epc">Equity Priority</span>':''}</td>
      <td ${tipA(`${t.nbhd}: ${fmt(t.pop)} residents`)}>${fmt(t.pop)}</td>
      <td ${tipA(`${t.nbhd}: ${t.n} email${t.n===1?'':'s'} and messages located here (${vr(t).toFixed(2)} per 1,000 residents); about ${t.exp.toFixed(1)} expected from its share of residents`)}>${t.n?`<b>${vr(t).toFixed(2)}</b><span class="muted"> · ${t.n}</span>`:'<span class="muted">none</span>'}</td>
-     ${has311?`<td ${tipA(`${t.nbhd}: ${Math.round(t.prate||0)} 311 problem reports per 1,000 residents a year; city ${Math.round(c311r)}`)}><b>${Math.round(t.prate||0)}</b></td>
+     ${has311?`<td ${tipA(`${t.nbhd}: ${Math.round(t.r311||0)} 311 problem reports per 1,000 residents a year; city ${Math.round(c311r)}`)}><b>${Math.round(t.r311||0)}</b></td>
      <td class="rt" ${tipA(`${t.nbhd}: ${r==null?'no 311 data':r.toFixed(2)+'× the city’s voice per 311 report. Below 1 means fewer messages for its problems than the city overall.'}`)}><span class="hc ${heat(r)}">${r==null?'—':r<0.01?'none':r.toFixed(2)+'×'}</span></td>`:''}
      <td ${tipA(`${t.nbhd}: ${P(t.lep)} of households are limited-English; city ${P(cLep)}`)}><span class="lp${t.lep>=cLep*1.5?' hi':''}">${P(t.lep)}</span></td></tr>`}).join('')}</tbody></table>
     <div class="note">Click a row to open that census tract on the map. Low comment counts can also mean writers did not say where they live (${P(ITEM.pct/100)} of comments could be located).</div></div>
@@ -691,7 +691,7 @@ async function mount(root,init){
   const T=D.tracts;const sel=sel311();const svcSel=Object.keys(S.svc||{});T.forEach(t=>{t.p311=svcSel.length?svcSel.reduce((a,k)=>a+((D.svcBy[k]||{})[t.id]||0),0):sel?sel.reduce((a,k)=>a+((D.p311[k]||{})[t.id]||0),0):ITEM.n311?((D.p311[ITEM.id]||{})[t.id]||0):0});
   const polSel=Object.keys(S.pol||{});T.forEach(t=>{const g=D.pol&&D.pol.by_tract[t.id]||{};t.pol=Object.entries(g).reduce((a,[k,m])=>a+((!polSel.length||polSel.includes(k))?Object.values(m).reduce((x,y)=>x+y,0):0),0);t.polRate=D.pol?t.pol/t.pop*1000*12/D.pol.months_covered:0});
   const vt=T.reduce((a,t)=>a+o[t.id],0)||1,pt=T.reduce((a,t)=>a+t.p311,0)||1;
-  const polMode=polOn();POL_MODE=polMode;T.forEach(t=>{t.vrate=o[t.id]/t.pop*1000;t.prate=polMode?t.polRate:t.p311/t.pop*1000*12/D.m311});const vp=pctRanks(T.map(t=>t.vrate)),pp=pctRanks(T.map(t=>t.prate));T.forEach((t,i)=>{t.vpct=vp[i];t.ppct=pp[i];t.pgap=ITEM.n311?pp[i]-vp[i]:0;t.pwv=!!ITEM.n311&&pp[i]>=70&&vp[i]<=30});
+  const polMode=polOn();POL_MODE=polMode;T.forEach(t=>{t.vrate=o[t.id]/t.pop*1000;t.r311=t.p311/t.pop*1000*12/D.m311;t.prate=polMode?t.polRate:t.r311});const vp=pctRanks(T.map(t=>t.vrate)),pp=pctRanks(T.map(t=>t.prate));T.forEach((t,i)=>{t.vpct=vp[i];t.ppct=pp[i];t.pgap=ITEM.n311?pp[i]-vp[i]:0;t.pwv=!!ITEM.n311&&pp[i]>=70&&vp[i]<=30});
   const qq=a=>{a=a.filter(x=>x>0).sort((x,y)=>x-y);return a.length?[.25,.5,.75].map(p=>a[Math.floor(a.length*p)]):[1,2,3]};
   D.qb={voice:qq(T.map(t=>t.vrate)),prob:qq(T.map(t=>t.prate)),gap:qq(T.map(t=>t.pgap))};return o}
  const sbsSch=()=>{const d=['voice','gap'];const v=S.sbsSch||d;return v.map((x,i)=>x==='prob'&&!ITEM.n311?d[i]:x)};

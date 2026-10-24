@@ -626,4 +626,8 @@ button.cite{font:inherit;cursor:pointer}
 .hb{display:block;height:10px;background:#F0F0EC;border-radius:0 5px 5px 0;overflow:hidden}.hb i{display:block;height:100%;border-radius:0 5px 5px 0}
 .hb.u i{background:#7357B4}.hb.p i{background:#BDBDB6}
 .hmirror{margin:14px 0 0;font-size:13.5px;line-height:1.4;padding:10px 12px;background:#F4F2FA;border-radius:6px}
-.hlinks{display:flex;gap:14px;margin-top:12px;font-size:12.5px}
+.hlinks{display:grid;grid-template-columns:1fr;gap:8px;margin-top:14px}
+.hbtn{display:flex;align-items:center;justify-content:center;gap:6px;min-height:36px;padding:6px 10px;border-radius:6px;border:1px solid #CFC4EA;background:#fff;color:#33205F;font:inherit;font-size:12.5px;font-weight:500;line-height:1.2;text-align:center;cursor:pointer;transition:background .15s,border-color .15s}
+.hbtn:hover{background:#F4F2FA;border-color:#9F8AD3}
+.hbtn.pri{background:#4A2C8C;border-color:#4A2C8C;color:#fff}.hbtn.pri:hover{background:#3B2271}
+.hbtn svg{width:14px;height:14px;flex:none}

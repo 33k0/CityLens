@@ -452,3 +452,52 @@ details.mapkey .kr .ramp div{height:7px}
 .card .fact{grid-template-columns:1fr auto}
 .an{grid-template-columns:240px minmax(0,1fr)}
 .anside .mini{height:180px}
+
+/* analytics dashboard v3 */
+.anmain.dash{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;background:#F2F2EF}
+.dash .card{padding:16px 18px;border-color:#E6E6E1}
+.dash .card h4{font-size:11px;letter-spacing:.07em;margin-bottom:6px}
+.dash .card .lead{font-size:14px;margin:0 0 12px;color:var(--ink)}
+.hfacts{padding:12px 18px!important}
+.hfs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+.hf{display:flex;flex-direction:column;gap:1px;border-left:1px solid #EEEEEA;padding-left:12px}.hf:first-child{border-left:0;padding-left:0}
+.hf span{font-size:11px;color:var(--ink2);text-transform:uppercase;letter-spacing:.05em}.hf b{font-size:20px;font-weight:600;font-variant-numeric:tabular-nums}.hf em{font-style:normal;font-size:11px;color:var(--ink2)}
+.kpis{display:grid;grid-template-columns:1.3fr 1.3fr 1fr 1fr;gap:14px}
+.kpi{background:#fff;border:1px solid #E6E6E1;border-radius:4px;padding:14px 16px;display:flex;flex-direction:column;position:relative;min-height:118px}
+.kpi .kl{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--ink2)}
+.kpi .kb{font-size:34px;font-weight:500;letter-spacing:-.02em;line-height:1.1;margin:6px 0 4px;font-variant-numeric:tabular-nums}
+.kpi.hero .kb{font-size:44px}
+.kpi .ks{font-size:12px;color:var(--ink2)}
+.kpi .spark{position:absolute;right:14px;bottom:12px}
+.dchip{font-size:12px;color:var(--ink);font-weight:500}.dchip em{font-style:normal;color:var(--ink2);font-weight:400}
+.bullet{position:relative;height:22px;margin-top:8px}.bullet i{position:absolute;left:0;top:0;height:8px;background:#7357B4;border-radius:0 4px 4px 0}
+.bullet b{position:absolute;top:-3px;height:14px;border-left:2px solid var(--ink)}.bullet::before{content:'';position:absolute;left:0;right:0;top:0;height:8px;background:#EFEFEB;z-index:-1}
+.bullet span{position:absolute;top:11px;font-size:10px;color:var(--ink2)}.bullet span:nth-of-type(2){transform:translateX(-50%)}
+.dwrap{display:grid;grid-template-columns:auto minmax(0,1fr);gap:24px;align-items:center}
+.donut path{stroke:#fff;stroke-width:1.5;cursor:default}.donut path:hover{opacity:.85}
+.donut .dc{font-size:30px;font-weight:600;fill:var(--ink)}.donut .ds{font-size:11px;fill:var(--ink2)}
+.dleg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 20px}
+.dl{display:grid;grid-template-columns:10px minmax(0,1fr) 34px 38px;gap:8px;align-items:baseline;padding:5px 0;border-bottom:1px solid #F0F0EC;font-size:12.5px}
+.dl i{width:10px;height:10px;border-radius:2px;display:block;align-self:center}.dl em{display:block;font-style:normal;font-size:11px;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dl b{text-align:right;font-variant-numeric:tabular-nums}.dl u{text-decoration:none;text-align:right;color:var(--ink2);font-size:11.5px}
+.pbars{display:flex;flex-direction:column;gap:7px}.pblg{display:flex;gap:14px;font-size:11.5px;color:var(--ink2);margin:2px 0 4px}.pblg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.pbr{display:grid;grid-template-columns:150px minmax(0,1fr) 64px;gap:10px;align-items:center;font-size:12px}
+.pbl{text-align:right;color:var(--ink);line-height:1.2}.pbt{display:flex;flex-direction:column;gap:2px}.pbt i{display:block;height:9px;border-radius:0 4px 4px 0}
+.pbv{display:flex;flex-direction:column;font-variant-numeric:tabular-nums;font-size:11.5px}.pbv b{font-weight:600}.pbv em{font-style:normal;color:var(--ink2)}
+.lc{display:block;height:170px}.lc .gl{stroke:#EDEDE9;stroke-width:1}.lc .ax{font-size:10px;fill:var(--ink2)}
+.mix{display:flex;flex-direction:column;gap:6px}.mxr{display:grid;grid-template-columns:150px minmax(0,1fr) 92px 40px;gap:10px;align-items:center;font-size:12px}
+.mxr>div{background:#F2F2EF;height:10px;border-radius:0 4px 4px 0}.mxr>div i{display:block;height:100%;border-radius:0 4px 4px 0}.mxr b{text-align:right;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mxr em{font-style:normal;color:var(--ink2);text-align:right}
+.div .dvh{display:grid;grid-template-columns:180px 1fr 1fr 44px;font-size:11px;color:var(--ink2)}.div .dvh span:first-child{grid-column:2;text-align:right;padding-right:6px}.div .dvh span:last-child{grid-column:3;padding-left:6px}
+.dvr{display:grid;grid-template-columns:180px minmax(0,2fr) 44px;gap:8px;align-items:center;padding:6px 0;border-bottom:1px solid #F0F0EC;font-size:12.5px}
+.dvl em{display:block;font-style:normal;font-size:11px;color:var(--ink2)}.dvb{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.dvo{display:flex;justify-content:flex-end}.dvo i{display:block;height:12px;background:#B3412B;border-radius:4px 0 0 4px}.dvs i{display:block;height:12px;background:#1F7A6E;border-radius:0 4px 4px 0}
+.dvn{text-align:right;font-variant-numeric:tabular-nums}
+.mks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.mk{display:flex;flex-direction:column}.mk b{font-size:24px;font-weight:500;font-variant-numeric:tabular-nums}.mk span{font-size:12px}.mk em{font-style:normal;font-size:11px;color:var(--ink2)}
+.mts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}.mtl{display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px}.mtl b{font-variant-numeric:tabular-nums}
+.mtb{height:8px;background:#EFEFEB;border-radius:4px;overflow:hidden}.mtb i{display:block;height:100%;background:#5C5C58;border-radius:4px}.mt em{display:block;font-style:normal;font-size:11px;color:var(--ink2);margin-top:4px}
+.tbars{display:flex;align-items:flex-end;gap:4px;height:130px}.tbars>div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;height:100%}.tbars i{display:block;border-radius:2px 2px 0 0}.tbars span{font-size:10px;color:var(--ink2);text-align:center;margin-top:3px}
+
+.kpis{grid-column:1/-1}
+.kpi .spark{position:static;display:block;margin-top:8px;width:100%;height:34px}
+.div .dvh{grid-template-columns:180px minmax(0,1fr) minmax(0,1fr) 44px;gap:0 2px;margin-left:8px}
+.div .dvh span:first-child{grid-column:2;text-align:right;padding-right:6px}.div .dvh span:last-child{grid-column:3;text-align:left;padding-left:6px}

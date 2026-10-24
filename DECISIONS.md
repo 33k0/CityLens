@@ -532,3 +532,18 @@ Dates are absolute. Newest at the bottom of each section.
 - The map pop card leads with residents, English-only households, renters and median income (each with the citywide
   value), followed by one small line each for comments vs expected, the top issue and 311 reports.
 - The top-bar section picker was briefly replaced by a summary line and then restored at the user's request.
+
+### Analytics dashboard, round 4 (2026-10-23)
+
+- Rebuilt as a dashboard with visual hierarchy, following the dataviz method: a facts strip (residents, English-only,
+  limited-English, renters, median income level, Equity Priority), four KPI tiles (comments, representation ratio
+  with a bullet marked at 1.0 — or, citywide, the share of residents where nothing was heard — 311 reports per 1,000 a
+  year with a monthly sparkline and change vs city, actionable share with change vs city), then charts: a donut of
+  sections with a labeled legend (count, share, top subsection), here-vs-citywide paired bars, diverging
+  support/oppose bars for policy sections, a monthly 311 line (area vs city, per 1,000 residents, one axis), 311 mix
+  bars, language bars (comments vs households), writer stats, citywide timeline and locality, trust meters, and
+  missing voices. Every mark has a hover tip.
+- Section colors use the dataviz reference categorical palette in a fixed order (slot = position in
+  categories.json), so a section keeps its color everywhere. Validator: all hard checks pass on white (worst adjacent
+  CVD ΔE 9.1, normal-vision ΔE 19.6); three hues are below 3:1 contrast, so every chart ships visible labels.
+  Change arrows use ink, not status colors, because more or fewer reports is not good or bad by itself.

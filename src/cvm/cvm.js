@@ -494,7 +494,7 @@ async function mount(root,init){
   const meter=(l,v,s)=>`<div class="mt" ${tipA(`${l}: ${P(v)}`)}><div class="mtl"><span>${l}</span><b>${P(v)}</b></div><div class="mtb"><i style="width:${(v||0)*100}%"></i></div>${s?`<em>${s}</em>`:''}</div>`;
   M+=card('How much to trust these numbers','',`<div class="mts">${meter('Placed on the map',scope.length?loc.length/scope.length:null,'the rest gave no usable location')}${meter('Real (not simulated)',W.length?1-W.filter(c=>c.mock).length/W.length:null,'simulated emails make numbers illustrative')}${meter('Average AI label confidence',mean,'every label cites an exact quote')}${meter('Labeled by the AI assistant',W.length?W.filter(c=>c.engine==='bob').length/W.length:null,'not yet checked against human review')}</div>`,'span2');
   /* ---- missing voices ---- */
-  if(kind!=='census tract'){const mode=t=>{const o={};D.comments.forEach(c=>{if(c.tract===t.id)o[c.cat]=(o[c.cat]||0)+1});const e=Object.entries(o).sort((a,b)=>b[1]-a[1])[0];return e?CATN[e[0]]:'—'};
+  if(kind!=='tract'){const mode=t=>{const o={};D.comments.forEach(c=>{if(c.tract===t.id)o[c.cat]=(o[c.cat]||0)+1});const e=Object.entries(o).sort((a,b)=>b[1]-a[1])[0];return e?CATN[e[0]]:'—'};
    const under=tr.filter(t=>{const r=t.exp>0?t.n/t.exp:1;return r<C.underrepresented_ratio});const sortK=S.mvSort||'pop';
    const keyF={pop:t=>t.pop,p311:t=>t.prate||0,lep:t=>t.lep}[sortK];const list=[...under].sort((a,b)=>keyF(b)-keyF(a)).slice(0,8);
    const mxPop=Math.max(1,...under.map(t=>t.pop)),mx311=Math.max(1e-9,...under.map(t=>t.prate||0)),mxLep=Math.max(1e-9,...under.map(t=>t.lep));

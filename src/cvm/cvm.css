@@ -606,3 +606,5 @@ details.mapkey .kr .ramp div{height:7px}
 button.cite{font:inherit;cursor:pointer}
 .subrow.nodata{cursor:default}.subrow.nodata:hover{background:#fff}.subrow.nodata .snm{color:var(--ink)}
 .subrow.nodata.none .snm,.subrow.nodata.none .sct{color:#9A9A94;font-weight:400}.subrow.nodata.none .sbx{opacity:.4}
+.polmix .mxr{grid-template-columns:220px minmax(0,1fr) 48px}
+.seg.probsrc{display:flex;margin:0 0 12px}.seg.probsrc button{flex:1}

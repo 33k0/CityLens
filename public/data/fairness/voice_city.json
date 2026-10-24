@@ -1946,7 +1946,7 @@
   "raw": [
    {
     "category": "governance_civic_rights",
-    "score": 20.087912088,
+    "score": 19.087912088,
     "rank": 1
    },
    {
@@ -1966,7 +1966,7 @@
    },
    {
     "category": "other",
-    "score": 5.0,
+    "score": 6.0,
     "rank": 5
    },
    {
@@ -1988,7 +1988,7 @@
   "aif360_reweighted": [
    {
     "category": "governance_civic_rights",
-    "score": 17.800347021,
+    "score": 16.988351917,
     "rank": 1,
     "rank_change": 0
    },
@@ -2005,16 +2005,16 @@
     "rank_change": 0
    },
    {
-    "category": "environment_development_review",
-    "score": 5.357649939,
+    "category": "other",
+    "score": 5.843329253,
     "rank": 4,
-    "rank_change": 0
+    "rank_change": 1
    },
    {
-    "category": "other",
-    "score": 5.031334149,
+    "category": "environment_development_review",
+    "score": 5.357649939,
     "rank": 5,
-    "rank_change": 0
+    "rank_change": -1
    },
    {
     "category": "code_enforcement_habitability",
@@ -2038,7 +2038,7 @@
   "population_reweighted": [
    {
     "category": "governance_civic_rights",
-    "score": 3.709000114,
+    "score": 3.601338556,
     "rank": 1,
     "rank_change": 0
    },
@@ -2056,7 +2056,7 @@
    },
    {
     "category": "other",
-    "score": 0.878671916,
+    "score": 0.986333474,
     "rank": 4,
     "rank_change": 1
    },
@@ -2088,7 +2088,7 @@
   "raw_all_comments": [
    {
     "category": "governance_civic_rights",
-    "score": 86.0,
+    "score": 80.0,
     "rank": 1
    },
    {
@@ -2108,7 +2108,7 @@
    },
    {
     "category": "other",
-    "score": 13.0,
+    "score": 19.0,
     "rank": 5
    },
    {

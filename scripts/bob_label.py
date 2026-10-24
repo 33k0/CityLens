@@ -350,8 +350,8 @@ def main() -> int:
     cats = json.loads(CATS.read_text())
     chash = C.categories_hash(cats)
 
-    if WORK.exists():
-        seeded = seed_from_work(units, cats, cache, chash)
+    if WORK.exists():  # every row, not only units: campaign copies Bob labeled on their own are reused too
+        seeded = seed_from_work(raw.to_dict("records"), cats, cache, chash)
         if seeded:
             C.save_cache(cache)
             log(f"reused {seeded} valid Bob labels already written in {WORK.relative_to(ROOT)}")

@@ -546,3 +546,8 @@ details.mapkey .kr .ramp div{height:7px}
 .prows .prow b{font-size:15px;font-weight:600;text-align:right;max-width:170px;white-space:normal;overflow:visible;line-height:1.25}
 .prows .prow .ps{grid-column:1/-1;text-align:right;font-size:11.5px;color:var(--ink2);line-height:1.35}
 .prows.pfoot{border-top:1px solid #E4E4DF;padding:2px 14px 6px;font-size:inherit;background:#FAFAF8}
+.composer-chip{max-width:100%;min-width:0}
+.composer-chip .cct{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.composer-chip .ccn{flex:none;white-space:nowrap;font-weight:400;opacity:.8}
+.composer-chip button{flex:none}
+.ctxbar>div:first-child{flex:1 1 auto}

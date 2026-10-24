@@ -434,3 +434,388 @@ Ef2de22a8,06085503121,address,street_anchor,issue,false,7,
 E9f0edc51,06085503121,address,street_anchor,issue,false,7,
 Ee96d600b,06085512022,address,street_anchor,both,true,2,Blossom Valley
 E81b23973,06085512022,address,street_anchor,issue,true,2,Blossom Valley
+E7469c2f9,06085512030,address,intersection,residence,false,10,
+E3c296092,,none,,,false,,
+E47b18276,,none,,,false,,
+Ea095f47d,06085507903,neighborhood,signature,residence,false,1,Rancho Rinconada
+E9ff5dc88,06085500500,address,intersection,residence,false,6,
+E67acd857,,none,,,false,,
+E43383df8,,none,,,false,,
+E2371faa9,06085512034,address,intersection,residence,false,10,
+E82a66941,,none,,,false,,
+E0e9b15b6,06085501102,address,intersection,residence,false,3,
+Ef7f86225,,none,,,false,,
+E1c4958fc,06085502500,address,intersection,residence,false,6,
+E87323822,06085502202,address,intersection,residence,false,6,
+Effd7295b,06085512059,neighborhood,signature,residence,true,10,Village Oaks
+E347b9657,06085512001,address,intersection,residence,false,2,
+E81239c9d,06085502701,neighborhood,body,residence,true,9,Farnham
+E0ea7807d,06085512059,neighborhood,signature,residence,true,10,Village Oaks
+E76ea6cf3,,none,,,false,,
+E8b6646e9,06085506202,address,intersection,residence,false,1,
+E55a3b6db,06085506802,address,intersection,residence,false,9,
+E15df304f,,none,,,false,,
+Ef93b9b31,06085506804,address,intersection,residence,false,9,
+E31ac66c5,06085503708,address,intersection,residence,false,5,
+E637dbff0,06085507903,neighborhood,body,residence,true,1,Lynbrook
+E7c9822c9,06085503804,neighborhood,signature,residence,true,5,Warm Springs
+Ec9204991,06085512043,address,intersection,residence,false,2,
+E28c30f0a,06085512031,address,intersection,residence,false,10,
+E4e5398f4,06085503313,neighborhood,signature,residence,true,8,Norwood
+E7a6ecf8d,06085512039,address,intersection,residence,false,2,
+Ed1ba1f4e,06085503508,address,intersection,residence,false,5,
+E521480cc,,none,,,false,,
+E894737cd,,none,,,false,,
+E64be606b,,none,,,false,,
+E6ecc2251,06085503330,neighborhood,body,residence,false,8,Chaboya
+E212fa6f9,,none,,,false,,
+Ef4714375,06085502902,neighborhood,signature,residence,true,9,Briarwood
+E9384ca2e,,none,,,false,,
+E42088770,06085511914,neighborhood,signature,residence,false,10,Holy Spirit
+Ef4ea553b,06085502701,address,intersection,residence,false,9,
+E38196d4c,06085511907,address,intersection,residence,false,10,
+E9e72785e,06085502400,neighborhood,signature,residence,true,6,Tamien
+E9c7fd995,,none,,,false,,
+E3d72c58b,06085501300,address,intersection,residence,false,3,
+E815744b9,,none,,,false,,
+E20c21177,06085512031,address,intersection,residence,false,10,
+E89d6bd18,06085512045,address,intersection,residence,false,10,
+E5794f822,,none,,,false,,
+E06350821,,none,,,false,,
+Efc518073,06085504315,neighborhood,body,residence,true,4,Sierramont
+E069a4131,,none,,,false,,
+E3717bbc1,06085503322,neighborhood,body,residence,true,8,Calico Creek
+E581b2c89,06085503333,neighborhood,body,residence,true,8,Cadwallader
+E8454a954,06085512057,address,intersection,residence,false,2,
+Ee530f422,06085506505,address,intersection,residence,false,1,
+Ed2603149,06085506605,neighborhood,signature,residence,true,1,San Tomas West
+E384928e9,06085501901,address,intersection,residence,false,6,
+Efe4073dd,06085500400,address,intersection,residence,false,6,
+E77028788,,none,,,false,,
+Eae9d12b2,06085505203,address,intersection,residence,false,6,
+E0421f141,,none,,,false,,
+E96758fe8,06085512047,neighborhood,signature,residence,true,10,Sakamota
+E58903180,06085504316,address,intersection,residence,false,4,
+E3cd5ba9a,,none,,,false,,
+E3ccc8d98,06085503330,neighborhood,signature,residence,false,8,Chaboya
+E9dd61cef,06085511916,address,intersection,both,false,10,
+Eef5e87db,06085504411,address,intersection,residence,false,4,
+E9f279830,06085503337,neighborhood,signature,residence,true,8,Dove Hill
+Ebca1db21,,none,,,false,,
+Ed8d61100,,none,,,false,,
+E4a160ebb,,none,,,false,,
+E6d7929b4,06085502101,address,intersection,residence,false,6,
+Ebea0a942,06085504311,neighborhood,body,residence,true,3,North Valley
+Ed3af36f7,,none,,,false,,
+E8292292c,06085512039,zip,field,residence,true,2,
+E5ebe5f06,,none,,,false,,
+E5cd4be70,06085503332,address,intersection,residence,false,8,
+Ebc6f02b1,06085502908,address,intersection,residence,false,9,
+E2012bb0e,06085503124,address,intersection,residence,false,9,
+E10cdf6f1,06085502902,neighborhood,signature,residence,true,9,Steindorf-Doerr
+E9c6f5f39,06085502906,neighborhood,body,residence,true,9,Kooser
+E051c61ed,06085503211,address,intersection,residence,false,7,
+E62ab6e11,06085503506,neighborhood,signature,residence,true,5,Hillview
+Ec5f706a0,06085502703,address,intersection,residence,false,9,
+E0a795504,06085506203,address,intersection,residence,false,1,
+Ef9f536fd,06085504410,address,intersection,residence,false,4,
+E26e15ff1,06085502001,address,intersection,residence,false,6,
+E1c18031c,,none,,,false,,
+E42f90e0e,06085502400,zip,field,residence,true,6,
+E0c07e6fe,,none,,,false,,
+E3bf8a0a0,06085503324,address,intersection,residence,false,8,
+Ec93452c8,,none,,,false,,
+Ee81bb6b1,06085503339,neighborhood,signature,residence,false,8,Silver Creek
+E84bdf250,,none,,,false,,
+E7d884d1f,06085506603,neighborhood,body,residence,false,1,San Tomas Aquino Park
+E8c6b84ca,06085500500,address,intersection,residence,false,6,
+E6d70f764,,none,,,false,,
+Ecf3d2500,06085506301,neighborhood,body,residence,false,1,Winchester
+E315def3b,,none,,,false,,
+Efbad1002,06085504318,address,intersection,residence,false,4,
+Ee516ffcb,06085511914,address,intersection,residence,false,10,
+E4c291f6c,06085506204,address,intersection,residence,false,1,
+E8e3d37f8,06085511913,address,intersection,residence,false,10,
+E9c66a6f7,06085506203,address,intersection,residence,false,1,
+Ece4dc6f1,06085506803,neighborhood,body,residence,true,9,Alta Vista
+E01d3f172,,none,,,false,,
+E383cce0a,06085503213,address,intersection,residence,false,7,
+E1aecd220,06085506603,neighborhood,signature,residence,false,1,San Tomas Aquino Park
+E9633c88a,06085512057,address,intersection,residence,false,2,
+Efe1f132f,06085512045,address,intersection,residence,false,10,
+Efe3af561,,none,,,false,,
+Eade346ca,,none,,,false,,
+E32c4c537,06085504315,address,intersection,residence,false,4,
+E42b3209c,06085503003,zip,field,residence,true,9,
+Eb3d6b127,06085506804,address,intersection,residence,false,9,
+E0fd79f3c,06085503210,address,intersection,residence,false,7,
+Eec62b968,,none,,,false,,
+Edc8c5bed,,none,,,false,,
+Ec9b05402,06085503306,address,intersection,residence,false,5,
+E8f270daf,,none,,,false,,
+E85876629,,none,,,false,,
+E7cc5073d,,none,,,false,,
+Eb8700275,,none,,,false,,
+Eb4273be7,06085512035,neighborhood,signature,residence,true,10,Los Paseos
+E1266ad3b,06085503326,neighborhood,body,residence,false,8,Mount Pleasant Foothills
+E202041ec,06085504321,neighborhood,body,residence,true,4,Flickinger
+E4adcf440,,none,,,false,,
+Eecd0f091,06085502909,address,intersection,residence,false,9,
+Eff5490f9,06085512053,neighborhood,body,residence,true,10,Playa del Rey
+E379a87d3,,none,,,false,,
+Ea6ef1ce7,06085506302,address,intersection,residence,false,1,
+E9e50fc70,,none,,,false,,
+E63d10829,06085503111,neighborhood,body,residence,true,7,Owsley
+E2209d493,06085501000,address,intersection,residence,false,3,
+Ec5513606,06085503207,address,intersection,residence,false,7,
+E9e66de00,,none,,,false,,
+E498d5d73,,none,,,false,,
+Eec3d8018,06085502701,neighborhood,body,residence,true,9,Cambrian Park
+Ea3999770,,none,,,false,,
+E1ca3a1a6,,none,,,false,,
+E746e97c1,,district,body,residence,false,8,
+E83e7ee7f,06085503113,address,intersection,residence,false,3,
+E4eeb5cb1,06085502400,neighborhood,signature,residence,true,6,Willow Glen
+Ec1040319,,none,,,false,,
+E87e10b53,06085512021,neighborhood,body,residence,true,2,Valley Christian
+E5fc27be1,06085503325,address,intersection,residence,false,8,
+E8326d227,06085503709,neighborhood,body,residence,true,3,Las Plumas
+Eb41e5810,06085503003,neighborhood,signature,residence,true,9,Valley View Reed
+E197dccef,06085503338,address,intersection,residence,false,8,
+E46a45f00,06085503803,address,intersection,residence,false,4,
+E065c1c40,06085503126,address,intersection,residence,false,7,
+Eab03f964,06085506402,address,intersection,residence,false,1,
+Ea31f3552,06085503220,address,intersection,residence,false,7,
+E83e03208,06085504320,address,intersection,residence,false,4,
+Efe6a2873,06085511912,address,intersection,residence,false,10,
+E89863eea,06085512027,address,intersection,residence,false,10,
+E4694bf85,,none,,,false,,
+E3de7908b,06085512005,neighborhood,signature,residence,true,9,Pinehurst
+E0deb326e,06085503509,address,intersection,residence,false,5,
+Eb4945616,06085501200,address,intersection,residence,false,3,
+Edec6c555,,none,,,false,,
+E948c1b48,06085512026,address,intersection,residence,false,2,
+Ecfb0cc21,06085504319,address,intersection,residence,false,4,
+E0f689a2b,06085503125,address,intersection,residence,false,9,
+Ed3bffda6,06085506202,neighborhood,signature,residence,true,1,English Estates
+E802eb2fb,,none,,,false,,
+E207b5669,,none,,,false,,
+Ed6acf4e0,06085506604,neighborhood,signature,residence,true,1,Baker West
+Ea9738a26,06085511917,address,intersection,residence,false,10,
+Ef6144a3e,06085506604,address,intersection,residence,false,1,
+E6ab667eb,06085502400,neighborhood,body,residence,true,6,Palmhaven
+Eeeb3da30,06085504317,address,intersection,residence,false,4,
+E69ab6d97,,none,,,false,,
+E0e4c3c93,,none,,,false,,
+E532cf9b1,06085503703,address,intersection,residence,false,5,
+Eee019bc3,06085503338,address,intersection,residence,false,8,
+E21028356,,none,,,false,,
+E55c542fd,06085511912,neighborhood,signature,residence,false,10,McKean
+E080221ad,,none,,,false,,
+E3a6612fe,,none,,,false,,
+E94c59dfb,,none,,,false,,
+Eadb5fbfc,06085512058,address,intersection,residence,false,2,
+Ea420f433,06085502902,address,intersection,residence,false,9,
+E224e864f,,none,,,false,,
+E9e8e26d4,06085502800,address,intersection,residence,false,9,
+Ea19ffde7,,none,,,false,,
+E691aefe0,06085512032,neighborhood,body,residence,true,10,Santa Teresa
+E309f4339,06085503002,address,intersection,residence,false,9,
+Ed83851d5,,none,,,false,,
+E15fbf8fe,,none,,,false,,
+E70540ecf,,district,body,residence,false,10,
+Eb9cad8a2,06085502002,neighborhood,signature,residence,true,6,Buena Vista
+Efac5b5fa,,none,,,false,,
+Eeed561a5,06085503336,address,intersection,residence,false,8,
+Ef4ae0572,06085500600,neighborhood,body,residence,true,6,Shasta Hanchett Park
+Eca4f3fc6,06085503326,neighborhood,signature,residence,false,8,Mount Pleasant Foothills
+E06bdb115,,none,,,false,,
+Ea3e86075,06085503330,address,intersection,residence,false,8,
+E8367ea73,06085512019,address,intersection,residence,false,2,
+E6e3c7a32,06085503003,neighborhood,body,residence,true,9,Lincoln Glen
+Ec23347d5,06085511907,neighborhood,signature,residence,true,10,Almaden Valley
+Ee540a7ed,,none,,,false,,
+E34544f95,06085504308,address,intersection,residence,false,4,
+Ee7147321,06085503333,neighborhood,body,residence,true,8,Cadwallader
+Eb9a5d3b4,,none,,,false,,
+Ec5c647bd,06085503321,address,intersection,residence,false,8,
+E573a765d,06085511913,address,intersection,residence,false,10,
+E9489abab,,none,,,false,,
+E1d24bf27,,none,,,false,,
+Eb841732a,06085503802,neighborhood,body,residence,true,5,Sheppard
+Ed70d52b9,06085507904,address,intersection,residence,false,1,
+E030d880f,,none,,,false,,
+E4aa036c5,06085511914,neighborhood,body,residence,true,10,Guadalupe Oak Grove
+E3bbb0af9,06085502907,address,intersection,residence,false,9,
+E8f1bfd03,,none,,,false,,
+E1ffdfc27,06085511910,address,intersection,residence,false,10,
+Ed710e66e,06085503001,neighborhood,body,residence,true,6,Willow Glen South
+E357b9dea,,none,,,false,,
+Ed0bc1a73,,none,,,false,,
+E9890a9aa,,none,,,false,,
+Eb58c206e,,none,,,false,,
+E49242ea8,06085506302,address,intersection,residence,false,1,
+E3eb83f33,06085506802,neighborhood,signature,residence,true,9,Good Samaritan
+Eb691c645,06085512023,address,intersection,residence,false,2,
+E436a11cf,,none,,,false,,
+Ea2a14aa1,06085503116,neighborhood,signature,residence,true,2,Rosenbaum
+E1ddf091b,06085505800,address,intersection,residence,false,6,
+E42aaabdb,06085512026,address,intersection,residence,false,2,
+E14d96f39,06085503323,address,intersection,residence,false,8,
+Ee32c96b7,,none,,,false,,
+Ef9cc7713,06085511914,address,intersection,residence,false,10,
+E4c07192f,06085502800,address,intersection,residence,false,9,
+E835f08b5,,none,,,false,,
+E2cbc4c53,,none,,,false,,
+E6ab20822,,none,,,false,,
+Eb03950b7,06085512037,address,intersection,residence,false,10,
+E5c96c116,06085503208,address,intersection,residence,false,2,
+Ef524a6e1,06085502601,neighborhood,signature,residence,true,6,Willow Glen West
+E98d10892,06085504321,neighborhood,body,residence,true,4,Flickinger
+Ece5ebc89,06085503326,neighborhood,body,residence,false,8,Mount Pleasant Foothills
+E5ffb28b0,06085512035,neighborhood,body,residence,true,10,Los Paseos
+Ea18618a5,06085502903,address,intersection,residence,false,9,
+Ec26a6026,06085503002,address,intersection,residence,false,9,
+E3c68251e,06085503511,address,intersection,residence,false,8,
+Edad1c0fa,06085505100,address,intersection,residence,false,6,
+E3af570ba,06085511911,neighborhood,body,residence,false,2,Los Alamitos Creek
+E36c144a5,,none,,,false,,
+E7e50bf51,06085512036,neighborhood,signature,residence,true,2,La Colina
+Eb6461b87,06085502910,address,intersection,residence,false,9,
+Ecd315c00,06085503336,address,intersection,residence,false,8,
+Eddd38b4a,06085512024,address,intersection,residence,false,9,
+E4a8ff5f5,06085512001,address,intersection,residence,false,2,
+E7ad2ff46,,none,,,false,,
+Ecdc7b901,06085503510,address,intersection,residence,false,5,
+E1a7a776e,06085503332,neighborhood,body,residence,false,8,Meadowlands
+E7f13e58e,06085506802,neighborhood,signature,residence,true,9,Los Gatos Memorial
+E52784375,06085502903,address,intersection,residence,false,9,
+E07121c8c,,none,,,false,,
+Efdf9abe5,06085502908,address,intersection,residence,false,9,
+E50b654e2,06085511917,address,intersection,residence,false,10,
+E2677b46b,06085503327,address,intersection,residence,false,8,
+Ed59cedc6,,none,,,false,,
+E538b42e3,06085502400,neighborhood,body,residence,true,6,River Glen
+E64e93b0e,06085502902,neighborhood,signature,residence,true,9,Bagby
+E822cb301,,none,,,false,,
+Ed86ca618,06085503315,address,intersection,residence,false,8,
+E968e364b,,none,,,false,,
+E69ec686e,,none,,,false,,
+E9c7e1f75,06085507906,address,intersection,residence,false,1,
+Ec117e892,06085503313,address,intersection,residence,false,8,
+E377d5183,06085506202,neighborhood,body,residence,true,1,Moreland West
+Ed3491769,06085506202,address,intersection,residence,false,1,
+Eed504080,06085506202,zip,field,residence,true,1,
+E832aee26,,none,,,false,,
+E5ebe6a08,06085505800,address,intersection,residence,false,6,
+E7aedd240,06085503127,neighborhood,body,residence,true,7,Communications Hill
+Ef14f1933,06085503304,neighborhood,body,residence,true,7,Meadowfair
+E99d612a1,,none,,,false,,
+Ebb4247bf,06085502104,address,intersection,residence,false,6,
+Ee3f24471,06085504308,neighborhood,body,residence,false,4,Sierra Vista Hills
+E910c23d4,06085502704,address,intersection,residence,false,9,
+E6845dc58,06085512100,neighborhood,body,residence,false,2,Coyote Valley
+Ec5d22b73,06085503305,neighborhood,body,residence,true,8,Eastridge
+E4d7607db,,none,,,false,,
+Ef016c553,,none,,,false,,
+E74f70116,06085503504,address,intersection,residence,false,5,
+E20a2d54b,,none,,,false,,
+E821be159,06085511905,address,intersection,residence,false,10,
+E5f2a469d,06085512047,neighborhood,signature,residence,true,10,Chesbro
+E8669ced5,06085503325,neighborhood,signature,residence,true,8,Quimby Oak
+Ea2c8fd0b,06085512052,neighborhood,signature,residence,true,10,Westfield Oakridge
+E00f7ca9a,06085512029,neighborhood,signature,residence,true,2,Palmia Park
+E7e68e8aa,,none,,,false,,
+Eb40e51fb,06085502500,address,intersection,residence,false,6,
+E603f1705,,none,,,false,,
+Ef8ea9943,06085503803,address,intersection,residence,false,4,
+Eaf27b1b5,06085506204,address,intersection,residence,false,1,
+E0604cd3b,06085504319,neighborhood,signature,residence,true,4,Vinci Park
+E2a1a9ffe,06085503003,neighborhood,body,residence,true,9,Lincoln Glen
+Ea195f671,06085503330,zip,field,residence,true,8,
+E22f3fbfd,,none,,,false,,
+E7cab35b1,06085512029,neighborhood,body,residence,true,2,Oak Grove
+E841218bf,,none,,,false,,
+Ec024ba52,,none,,,false,,
+Eebb680bd,,none,,,false,,
+Eba5bca1e,06085512029,neighborhood,body,residence,true,2,Blossom Valley
+E2c37e215,,none,,,false,,
+E85eb1c85,,none,,,false,,
+E4bae59c9,,none,,,false,,
+E52cddb22,,none,,,false,,
+E4536caa3,,none,,,false,,
+E488ac6b2,06085507906,address,intersection,residence,false,1,
+Ee39da7ad,,district,body,residence,false,8,
+E90bfd184,06085504323,address,intersection,residence,false,4,
+Eec67cbf6,06085502203,neighborhood,signature,residence,true,6,South Stokes
+Ed384bdde,06085512032,neighborhood,body,residence,true,10,Santa Teresa
+E579be70c,,none,,,false,,
+E3dc23a4b,,none,,,false,,
+E62b244d8,,none,,,false,,
+E4558c7fb,06085512005,neighborhood,signature,residence,true,9,Narvaez
+E875ad68a,,none,,,false,,
+E4b5e6388,06085512038,address,intersection,residence,false,2,
+E4331e2ce,06085502302,address,intersection,residence,false,6,
+E572c21c2,06085503339,neighborhood,body,residence,false,8,Silver Creek
+Ecedcab0d,06085512039,neighborhood,body,residence,true,2,Silver Leaf
+E3b9527a2,,none,,,false,,
+E9deb08f0,06085503315,address,intersection,residence,false,8,
+Edf5aec45,06085503327,neighborhood,signature,residence,true,8,Evergreen
+E42664181,06085504322,address,intersection,residence,false,4,
+E70c66387,06085505006,neighborhood,signature,residence,true,4,North San José
+E7bdd4ef5,06085502902,neighborhood,body,residence,true,9,Briarwood
+Ee980cc83,06085502908,address,intersection,residence,false,9,
+Eef9fcb84,06085512021,address,intersection,residence,false,2,
+E167df8f9,06085505203,address,intersection,residence,false,6,
+Ed4f75dbd,06085503116,address,intersection,residence,false,2,
+E54eed7ae,06085512034,address,intersection,residence,false,10,
+E6cfc93df,,none,,,false,,
+E30ddc98f,06085503127,neighborhood,body,residence,true,7,Communications Hill
+Ef0a95fea,06085506803,neighborhood,body,residence,false,9,Belwood-Belgatos
+E608c0f56,06085503123,address,intersection,residence,false,6,
+E3f7d4edd,06085503332,neighborhood,body,residence,false,8,Meadowlands
+E52fc9b55,06085502601,address,intersection,residence,false,6,
+Eb804151f,06085506601,address,intersection,residence,false,1,
+E2a5ff634,06085503323,address,intersection,residence,false,8,
+E81b34bcb,06085503125,address,intersection,residence,false,9,
+E6c38445d,06085512029,address,intersection,residence,false,2,
+E51a0e20a,06085505006,neighborhood,body,residence,true,4,North San José
+Ea8ae7ab6,06085503712,address,intersection,residence,false,5,
+Ebf944504,06085503508,address,intersection,residence,false,5,
+E65bed228,,none,,,false,,
+E721957b4,06085504308,neighborhood,body,residence,false,4,Sierra Vista Hills
+Edf883439,,none,,,false,,
+E3c4f5ae7,06085511911,neighborhood,body,residence,false,2,Santa Teresa Hills
+E66cab59f,06085502301,address,intersection,residence,false,6,
+Ec821eaed,06085506401,address,intersection,residence,false,1,
+E8e5d225f,06085512001,address,intersection,residence,false,2,
+E3e621d40,,none,,,false,,
+E9ba1be14,06085503507,address,intersection,residence,false,5,
+E5f2549ae,,none,,,false,,
+E66bb6049,,none,,,false,,
+E8ada2da4,06085512055,address,intersection,residence,false,2,
+Eb44ef650,06085506604,address,intersection,residence,false,1,
+E3cbf38d9,,none,,,false,,
+Eced8c2a8,06085503222,neighborhood,body,residence,true,7,Umbarger
+Ee566b432,06085502907,address,intersection,residence,false,9,
+Ee2ece9bc,06085503339,address,intersection,residence,false,8,
+E922bcf10,06085512059,address,intersection,residence,false,10,
+E9f9e840e,,none,,,false,,
+E2d563e45,06085503333,address,intersection,residence,false,8,
+Eb2667ab8,06085503402,address,intersection,residence,false,7,
+E64e98a52,06085502500,address,intersection,residence,false,6,
+Ed8193377,06085504311,neighborhood,signature,residence,true,3,North Valley
+E378356c7,06085503601,address,intersection,residence,false,3,
+E7e22eb14,,none,,,false,,
+E6044d40c,,none,,,false,,
+Ee0f8556b,06085507905,address,intersection,residence,false,1,
+E9d94b2b5,06085512025,address,intersection,residence,false,2,
+Eb28dcee0,06085511914,zip,field,residence,true,10,
+E8f52b5e0,,none,,,false,,
+Ea352e482,,none,,,false,,
+E9f3c1888,06085504314,address,intersection,residence,false,4,
+E3206b31c,06085503001,neighborhood,body,residence,true,6,Willow Glen South
+Ef0f972c6,,none,,,false,,
+E00bfbc58,06085512005,address,intersection,residence,false,9,
+E4a11c30a,,none,,,false,,
+Eedd18a0a,06085503329,address,intersection,residence,false,8,

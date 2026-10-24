@@ -279,6 +279,31 @@
       "stance": {
         "support": 5
       }
+    },
+    {
+      "campaign_id": "C05",
+      "size": 4,
+      "size_excluding_duplicates": 4,
+      "distinct_senders": 4,
+      "item": "MOCK-26-907",
+      "items": {
+        "MOCK-26-907": 4
+      },
+      "channels": {
+        "email": 4
+      },
+      "representative_comment_id": "Eebb680bd",
+      "template_snippet": "Please restore the free bulky-item pickup appointments that were cut this year. Since the change, mattresses, couches and appliances end up on sidewalks and in creeks instead of at the curb on a",
+      "min_pairwise_jaccard_to_rep": 0.842,
+      "comment_ids": [
+        "E2c37e215",
+        "E85eb1c85",
+        "Ec024ba52",
+        "Eebb680bd"
+      ],
+      "stance": {
+        "support": 4
+      }
     }
   ]
 }

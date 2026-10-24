@@ -1,93 +1,94 @@
 {
- "generated_at": "2026-10-23T17:41:14-0700",
+ "generated_at": "2026-10-23T21:20:39-0700",
  "tract_count": 215,
- "n": 435,
+ "n": 820,
  "tiers": {
   "address": {
-   "count": 96,
-   "share": 0.2207
+   "count": 255,
+   "share": 0.311
   },
   "neighborhood": {
-   "count": 49,
-   "share": 0.1126
+   "count": 144,
+   "share": 0.1756
   },
   "zip": {
-   "count": 8,
-   "share": 0.0184
+   "count": 14,
+   "share": 0.0171
   },
   "district": {
-   "count": 12,
-   "share": 0.0276
+   "count": 15,
+   "share": 0.0183
   },
   "none": {
-   "count": 270,
-   "share": 0.6207
+   "count": 392,
+   "share": 0.478
   }
  },
  "basis": {
-  "residence": 78,
+  "residence": 340,
   "issue": 76,
-  "both": 11
+  "both": 12
  },
- "with_tract": 153,
- "with_tract_share": 0.3517,
- "distinct_tracts": 36,
- "multi_tract": 76,
+ "with_tract": 413,
+ "with_tract_share": 0.5037,
+ "distinct_tracts": 184,
+ "multi_tract": 156,
  "by_source": {
   "address/body": 1,
-  "address/intersection": 22,
+  "address/intersection": 181,
   "address/landmark": 10,
   "address/signature": 7,
   "address/street_anchor": 56,
-  "district/body": 12,
-  "neighborhood/body": 29,
-  "neighborhood/signature": 19,
+  "district/body": 15,
+  "neighborhood/body": 82,
+  "neighborhood/signature": 61,
   "neighborhood/subject": 1,
-  "none/-": 270,
+  "none/-": 392,
+  "zip/field": 6,
   "zip/signature": 8
  },
  "by_basis": {
-  "address/both": 11,
+  "address/both": 12,
   "address/issue": 57,
-  "address/residence": 28,
-  "district/residence": 12,
+  "address/residence": 186,
+  "district/residence": 15,
   "neighborhood/issue": 19,
-  "neighborhood/residence": 30,
-  "none/-": 270,
-  "zip/residence": 8
+  "neighborhood/residence": 125,
+  "none/-": 392,
+  "zip/residence": 14
  },
  "by_channel": {
   "email": {
-   "n": 164,
+   "n": 549,
    "tiers": {
     "address": {
-     "count": 77,
-     "share": 0.4695
+     "count": 236,
+     "share": 0.4299
     },
     "neighborhood": {
-     "count": 33,
-     "share": 0.2012
+     "count": 128,
+     "share": 0.2332
     },
     "zip": {
-     "count": 0,
-     "share": 0.0
+     "count": 6,
+     "share": 0.0109
     },
     "district": {
-     "count": 0,
-     "share": 0.0
+     "count": 3,
+     "share": 0.0055
     },
     "none": {
-     "count": 54,
-     "share": 0.3293
+     "count": 176,
+     "share": 0.3206
     }
    },
    "basis": {
-    "residence": 31,
+    "residence": 293,
     "issue": 68,
-    "both": 11
+    "both": 12
    },
-   "with_tract": 110,
-   "with_tract_share": 0.6707
+   "with_tract": 370,
+   "with_tract_share": 0.674
   },
   "letter": {
    "n": 271,
@@ -444,47 +445,15 @@
    "with_tract_share": 0.25
   },
   "MOCK-26-901": {
-   "n": 11,
+   "n": 20,
    "tiers": {
     "address": {
-     "count": 3,
-     "share": 0.2727
-    },
-    "neighborhood": {
      "count": 8,
-     "share": 0.7273
-    },
-    "zip": {
-     "count": 0,
-     "share": 0.0
-    },
-    "district": {
-     "count": 0,
-     "share": 0.0
-    },
-    "none": {
-     "count": 0,
-     "share": 0.0
-    }
-   },
-   "basis": {
-    "residence": 4,
-    "issue": 5,
-    "both": 2
-   },
-   "with_tract": 11,
-   "with_tract_share": 1.0
-  },
-  "MOCK-26-902": {
-   "n": 40,
-   "tiers": {
-    "address": {
-     "count": 33,
-     "share": 0.825
+     "share": 0.4
     },
     "neighborhood": {
-     "count": 1,
-     "share": 0.025
+     "count": 9,
+     "share": 0.45
     },
     "zip": {
      "count": 0,
@@ -495,28 +464,60 @@
      "share": 0.0
     },
     "none": {
-     "count": 6,
+     "count": 3,
      "share": 0.15
     }
    },
    "basis": {
-    "residence": 0,
+    "residence": 10,
+    "issue": 5,
+    "both": 2
+   },
+   "with_tract": 17,
+   "with_tract_share": 0.85
+  },
+  "MOCK-26-902": {
+   "n": 77,
+   "tiers": {
+    "address": {
+     "count": 47,
+     "share": 0.6104
+    },
+    "neighborhood": {
+     "count": 9,
+     "share": 0.1169
+    },
+    "zip": {
+     "count": 3,
+     "share": 0.039
+    },
+    "district": {
+     "count": 0,
+     "share": 0.0
+    },
+    "none": {
+     "count": 18,
+     "share": 0.2338
+    }
+   },
+   "basis": {
+    "residence": 25,
     "issue": 28,
     "both": 6
    },
-   "with_tract": 34,
-   "with_tract_share": 0.85
+   "with_tract": 59,
+   "with_tract_share": 0.7662
   },
   "MOCK-26-903": {
-   "n": 20,
+   "n": 57,
    "tiers": {
     "address": {
-     "count": 20,
-     "share": 1.0
+     "count": 33,
+     "share": 0.5789
     },
     "neighborhood": {
-     "count": 0,
-     "share": 0.0
+     "count": 11,
+     "share": 0.193
     },
     "zip": {
      "count": 0,
@@ -527,28 +528,28 @@
      "share": 0.0
     },
     "none": {
-     "count": 0,
-     "share": 0.0
+     "count": 13,
+     "share": 0.2281
     }
    },
    "basis": {
-    "residence": 0,
+    "residence": 24,
     "issue": 18,
     "both": 2
    },
-   "with_tract": 20,
-   "with_tract_share": 1.0
+   "with_tract": 44,
+   "with_tract_share": 0.7719
   },
   "MOCK-26-904": {
-   "n": 13,
+   "n": 24,
    "tiers": {
     "address": {
-     "count": 9,
-     "share": 0.6923
+     "count": 12,
+     "share": 0.5
     },
     "neighborhood": {
-     "count": 0,
-     "share": 0.0
+     "count": 2,
+     "share": 0.0833
     },
     "zip": {
      "count": 0,
@@ -559,92 +560,92 @@
      "share": 0.0
     },
     "none": {
-     "count": 4,
-     "share": 0.3077
+     "count": 10,
+     "share": 0.4167
     }
    },
    "basis": {
-    "residence": 3,
+    "residence": 8,
     "issue": 6,
     "both": 0
    },
-   "with_tract": 9,
-   "with_tract_share": 0.6923
+   "with_tract": 14,
+   "with_tract_share": 0.5833
   },
   "MOCK-26-905": {
-   "n": 10,
+   "n": 38,
    "tiers": {
     "address": {
-     "count": 1,
-     "share": 0.1
+     "count": 14,
+     "share": 0.3684
     },
     "neighborhood": {
-     "count": 2,
-     "share": 0.2
+     "count": 9,
+     "share": 0.2368
     },
     "zip": {
-     "count": 0,
-     "share": 0.0
+     "count": 1,
+     "share": 0.0263
     },
     "district": {
      "count": 0,
      "share": 0.0
     },
     "none": {
-     "count": 7,
-     "share": 0.7
+     "count": 14,
+     "share": 0.3684
     }
    },
    "basis": {
-    "residence": 1,
+    "residence": 22,
     "issue": 2,
     "both": 0
    },
-   "with_tract": 3,
-   "with_tract_share": 0.3
+   "with_tract": 24,
+   "with_tract_share": 0.6316
   },
   "MOCK-26-906": {
-   "n": 39,
+   "n": 75,
    "tiers": {
     "address": {
-     "count": 4,
-     "share": 0.1026
+     "count": 17,
+     "share": 0.2267
     },
     "neighborhood": {
-     "count": 15,
-     "share": 0.3846
+     "count": 24,
+     "share": 0.32
     },
     "zip": {
      "count": 0,
      "share": 0.0
     },
     "district": {
-     "count": 0,
-     "share": 0.0
+     "count": 1,
+     "share": 0.0133
     },
     "none": {
-     "count": 20,
-     "share": 0.5128
+     "count": 33,
+     "share": 0.44
     }
    },
    "basis": {
-    "residence": 18,
+    "residence": 41,
     "issue": 1,
     "both": 0
    },
-   "with_tract": 19,
-   "with_tract_share": 0.4872
+   "with_tract": 41,
+   "with_tract_share": 0.5467
   },
   "MOCK-26-907": {
-   "n": 8,
+   "n": 38,
    "tiers": {
     "address": {
-     "count": 2,
-     "share": 0.25
+     "count": 17,
+     "share": 0.4474
     },
     "neighborhood": {
-     "count": 3,
-     "share": 0.375
+     "count": 8,
+     "share": 0.2105
     },
     "zip": {
      "count": 0,
@@ -655,60 +656,60 @@
      "share": 0.0
     },
     "none": {
-     "count": 3,
-     "share": 0.375
+     "count": 13,
+     "share": 0.3421
     }
    },
    "basis": {
-    "residence": 1,
+    "residence": 21,
     "issue": 4,
     "both": 0
    },
-   "with_tract": 5,
-   "with_tract_share": 0.625
+   "with_tract": 25,
+   "with_tract_share": 0.6579
   },
   "MOCK-26-908": {
-   "n": 8,
+   "n": 33,
    "tiers": {
     "address": {
-     "count": 0,
-     "share": 0.0
+     "count": 9,
+     "share": 0.2727
     },
     "neighborhood": {
-     "count": 1,
-     "share": 0.125
+     "count": 9,
+     "share": 0.2727
     },
     "zip": {
-     "count": 0,
-     "share": 0.0
+     "count": 2,
+     "share": 0.0606
     },
     "district": {
      "count": 0,
      "share": 0.0
     },
     "none": {
-     "count": 7,
-     "share": 0.875
+     "count": 13,
+     "share": 0.3939
     }
    },
    "basis": {
-    "residence": 0,
+    "residence": 19,
     "issue": 1,
     "both": 0
    },
-   "with_tract": 1,
-   "with_tract_share": 0.125
+   "with_tract": 20,
+   "with_tract_share": 0.6061
   },
   "MOCK-26-909": {
-   "n": 7,
+   "n": 52,
    "tiers": {
     "address": {
-     "count": 1,
-     "share": 0.1429
+     "count": 20,
+     "share": 0.3846
     },
     "neighborhood": {
-     "count": 2,
-     "share": 0.2857
+     "count": 11,
+     "share": 0.2115
     },
     "zip": {
      "count": 0,
@@ -719,59 +720,27 @@
      "share": 0.0
     },
     "none": {
-     "count": 4,
-     "share": 0.5714
+     "count": 21,
+     "share": 0.4038
     }
    },
    "basis": {
-    "residence": 2,
+    "residence": 30,
     "issue": 1,
     "both": 0
    },
-   "with_tract": 3,
-   "with_tract_share": 0.4286
+   "with_tract": 31,
+   "with_tract_share": 0.5962
   },
   "MOCK-26-910": {
-   "n": 2,
+   "n": 12,
    "tiers": {
     "address": {
-     "count": 2,
-     "share": 1.0
+     "count": 10,
+     "share": 0.8333
     },
     "neighborhood": {
-     "count": 0,
-     "share": 0.0
-    },
-    "zip": {
-     "count": 0,
-     "share": 0.0
-    },
-    "district": {
-     "count": 0,
-     "share": 0.0
-    },
-    "none": {
-     "count": 0,
-     "share": 0.0
-    }
-   },
-   "basis": {
-    "residence": 0,
-    "issue": 1,
-    "both": 1
-   },
-   "with_tract": 2,
-   "with_tract_share": 1.0
-  },
-  "MOCK-GEN": {
-   "n": 6,
-   "tiers": {
-    "address": {
      "count": 2,
-     "share": 0.3333
-    },
-    "neighborhood": {
-     "count": 1,
      "share": 0.1667
     },
     "zip": {
@@ -783,28 +752,62 @@
      "share": 0.0
     },
     "none": {
-     "count": 3,
-     "share": 0.5
+     "count": 0,
+     "share": 0.0
     }
    },
    "basis": {
-    "residence": 2,
+    "residence": 9,
+    "issue": 1,
+    "both": 2
+   },
+   "with_tract": 12,
+   "with_tract_share": 1.0
+  },
+  "MOCK-GEN": {
+   "n": 123,
+   "tiers": {
+    "address": {
+     "count": 49,
+     "share": 0.3984
+    },
+    "neighborhood": {
+     "count": 34,
+     "share": 0.2764
+    },
+    "zip": {
+     "count": 0,
+     "share": 0.0
+    },
+    "district": {
+     "count": 2,
+     "share": 0.0163
+    },
+    "none": {
+     "count": 38,
+     "share": 0.3089
+    }
+   },
+   "basis": {
+    "residence": 84,
     "issue": 1,
     "both": 0
    },
-   "with_tract": 3,
-   "with_tract_share": 0.5
+   "with_tract": 83,
+   "with_tract_share": 0.6748
   }
  },
  "by_council_district": {
-  "2": 8,
-  "3": 43,
-  "4": 13,
-  "5": 42,
-  "6": 14,
-  "7": 42,
-  "8": 1,
-  "9": 2
+  "1": 28,
+  "10": 37,
+  "2": 38,
+  "3": 52,
+  "4": 35,
+  "5": 55,
+  "6": 45,
+  "7": 54,
+  "8": 40,
+  "9": 44
  },
  "by_matched_name": [
   {
@@ -828,6 +831,11 @@
    "precision": "neighborhood"
   },
   {
+   "name": "North San José",
+   "count": 5,
+   "precision": "neighborhood"
+  },
+  {
    "name": "San José State University",
    "count": 4,
    "precision": "address"
@@ -838,8 +846,8 @@
    "precision": "neighborhood"
   },
   {
-   "name": "North San José",
-   "count": 3,
+   "name": "Willow Glen",
+   "count": 4,
    "precision": "neighborhood"
   },
   {
@@ -853,7 +861,12 @@
    "precision": "neighborhood"
   },
   {
-   "name": "Willow Glen",
+   "name": "Blossom Valley",
+   "count": 3,
+   "precision": "address"
+  },
+  {
+   "name": "Mount Pleasant Foothills",
    "count": 3,
    "precision": "neighborhood"
   },
@@ -883,9 +896,19 @@
    "precision": "neighborhood"
   },
   {
+   "name": "Shasta Hanchett Park",
+   "count": 2,
+   "precision": "neighborhood"
+  },
+  {
    "name": "Tully Road",
    "count": 2,
    "precision": "address"
+  },
+  {
+   "name": "Evergreen",
+   "count": 2,
+   "precision": "neighborhood"
   },
   {
    "name": "Coyote Creek",
@@ -893,9 +916,84 @@
    "precision": "neighborhood"
   },
   {
-   "name": "Blossom Valley",
+   "name": "Coyote Valley",
    "count": 2,
-   "precision": "address"
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Village Oaks",
+   "count": 2,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Chaboya",
+   "count": 2,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Briarwood",
+   "count": 2,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Cadwallader",
+   "count": 2,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "North Valley",
+   "count": 2,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Silver Creek",
+   "count": 2,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "San Tomas Aquino Park",
+   "count": 2,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Los Paseos",
+   "count": 2,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Flickinger",
+   "count": 2,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Santa Teresa",
+   "count": 2,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Lincoln Glen",
+   "count": 2,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Willow Glen South",
+   "count": 2,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Meadowlands",
+   "count": 2,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Communications Hill",
+   "count": 2,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Sierra Vista Hills",
+   "count": 2,
+   "precision": "neighborhood"
   },
   {
    "name": "Roosevelt Park",
@@ -923,16 +1021,6 @@
    "precision": "neighborhood"
   },
   {
-   "name": "Shasta Hanchett Park",
-   "count": 1,
-   "precision": "neighborhood"
-  },
-  {
-   "name": "Evergreen",
-   "count": 1,
-   "precision": "neighborhood"
-  },
-  {
    "name": "Cambrian",
    "count": 1,
    "precision": "neighborhood"
@@ -943,14 +1031,284 @@
    "precision": "address"
   },
   {
-   "name": "Coyote Valley",
+   "name": "Monterey Road corridor",
+   "count": 1,
+   "precision": "address"
+  },
+  {
+   "name": "Rancho Rinconada",
    "count": 1,
    "precision": "neighborhood"
   },
   {
-   "name": "Monterey Road corridor",
+   "name": "Farnham",
    "count": 1,
-   "precision": "address"
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Lynbrook",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Warm Springs",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Norwood",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Holy Spirit",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Tamien",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Sierramont",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Calico Creek",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "San Tomas West",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Sakamota",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Dove Hill",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Steindorf-Doerr",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Kooser",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Hillview",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Winchester",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Alta Vista",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Playa del Rey",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Owsley",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Cambrian Park",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Valley Christian",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Las Plumas",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Valley View Reed",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Pinehurst",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "English Estates",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Baker West",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Palmhaven",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "McKean",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Buena Vista",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Almaden Valley",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Sheppard",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Guadalupe Oak Grove",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Good Samaritan",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Rosenbaum",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Willow Glen West",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Los Alamitos Creek",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "La Colina",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Los Gatos Memorial",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "River Glen",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Bagby",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Moreland West",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Meadowfair",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Eastridge",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Chesbro",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Quimby Oak",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Westfield Oakridge",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Palmia Park",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Vinci Park",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Oak Grove",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "South Stokes",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Narvaez",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Silver Leaf",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Belwood-Belgatos",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Santa Teresa Hills",
+   "count": 1,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "Umbarger",
+   "count": 1,
+   "precision": "neighborhood"
   }
  ]
 }

@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-23T19:51:12-07:00",
+ "generated_at": "2026-10-23T21:20:44-07:00",
  "aif360_version": "0.6.1",
  "unit": "census tract (each tract one unit; population-weighted variant uses instance_weights = population)",
  "families": {
@@ -15,18 +15,18 @@
  "voice_location_basis": "residence",
  "voice_location_basis_detail": {
   "used": "residence",
-  "located_rows": 153,
-  "residence_rows": 77,
+  "located_rows": 413,
+  "residence_rows": 337,
   "by_basis": {
-   "both": 11,
+   "both": 12,
    "issue": 76,
-   "residence": 66
+   "residence": 325
   },
   "min_residence_rows": 30,
   "rule": "participation counts rows with location_basis in ['residence', 'both']; falls back to all located rows when fewer than 30 have that basis; region/map counts always use all located rows"
  },
  "city_median_rate_per_1k": {
-  "voice": 0.0,
+  "voice": 0.2652519893899204,
   "problems": 150.60544904137234
  },
  "median_over": "all 215 tracts, computed once",

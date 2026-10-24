@@ -304,7 +304,7 @@ async function mount(root,init){
   stage.style.setProperty('--rp',Math.round(Math.min(620,288+(W-BW)*0.65))+'px')};
  fit();addEventListener('resize',()=>{fit();clearTimeout(_rt);_rt=setTimeout(()=>{if(typeof render==='function')render()},120)});
  let maps=[];
- const dotFilter=c=>(stV(c)==='none'||S.stance[c.stance])&&(!Object.keys(S.cats).length||S.cats[c.cat]);
+ const dotFilter=c=>(stV(c)==='none'||S.stance[c.stance])&&(!Object.keys(S.cats).length||S.cats[c.cat]||S.cats['sub:'+c.subKey]);
  const filtered=()=>D.comments.filter(dotFilter);
  const city=fairness(D.tracts,S.attr);
  const R=()=>S.region?regionTracts(S.region.poly):null;
@@ -322,7 +322,13 @@ async function mount(root,init){
 
  function filters(){const fc=filtered();const cc={};D.comments.forEach(c=>cc[c.cat]=(cc[c.cat]||0)+1);const sc={};D.comments.forEach(c=>sc[c.stance]=(sc[c.stance]||0)+1);
  return `<div class="sec"><div class="sech"><h4>Filters</h4><button class="link" data-act="togglefilters">${S.filtersOpen?'Hide':'Show'}</button></div>${S.filtersOpen?`
- <div class="lbl" style="margin-top:0">Subcategory</div><div class="sublist">${(()=>{const mx=Math.max(1,CATS.reduce((t,c)=>t+(cc[c.k]||0),0));const any=Object.keys(S.cats).length;return CATS.map(c=>{const on=!!S.cats[c.k];const n=cc[c.k]||0;return `<button class="subrow ${on?'on':''} ${any&&!on?'dim':''}" data-act="cat" data-v="${c.k}" aria-pressed="${on}"><span class="sbx">${on?'✓':''}</span><span class="snm">${c.n}</span><span class="sct num">${n}</span><span class="sbar"><i style="width:${n/mx*100}%"></i></span></button>`}).join('')})()}</div>
+ <div class="lbl" style="margin-top:0">${ITEM.id==='all'?'Section':'Subcategory'}</div><div class="sublist">${(()=>{const mx=Math.max(1,CATS.reduce((t,c)=>t+(cc[c.k]||0),0));const any=Object.keys(S.cats).length;
+  const row=(k,label,n,mxv,cls='')=>{const on=!!S.cats[k];return `<button class="subrow ${cls} ${on?'on':''} ${any&&!on?'dim':''}" data-act="cat" data-v="${k}" aria-pressed="${on}"><span class="sbx">${on?'✓':''}</span><span class="snm">${label}</span><span class="sct num">${n}</span><span class="sbar"><i style="width:${n/mxv*100}%"></i></span></button>`};
+  return CATS.map(c=>{const n=cc[c.k]||0;if(ITEM.id!=='all')return row(c.k,c.n,n,mx);
+   /* All sections: each section can open to filter by one of its subsections */
+   const key=c.k.slice(4);const def=(D.catDefs||[]).find(x=>x.key===key);const subs=def?def.subcategories:[];const open=!!(S.catExp||{})[key];
+   const sc={};D.comments.forEach(x=>{if(x.catKey===key)sc[x.subKey]=(sc[x.subKey]||0)+1});const smx=Math.max(1,...Object.values(sc));
+   return `<div class="subgrp${open?' open':''}">${row(c.k,c.n,n,mx)}${subs.length?`<button class="sexp" data-act="catexp" data-v="${key}" aria-expanded="${open}" aria-label="${open?'Hide':'Show'} subsections of ${esc(c.n)}">${open?'▴':'▾'}</button>`:''}</div>${open?`<div class="subnest">${subs.filter(x=>sc[x.key]).map(x=>row('sub:'+x.key,esc(x.label),sc[x.key],smx,'nested')).join('')}</div>`:''}`}).join('')})()}</div>
  ${ITEM.id==='all'||!D.comments.some(c=>c.stance!=='none')?'':`<div class="lbl">Stance</div><div class="chips">${STANCES.map(s=>`<button class="fchip ${S.stance[s]?'on':''}" data-act="stance" data-v="${s}" aria-pressed="${!!S.stance[s]}">${stIco(s,9)}${stLabel[s]}<span class="ct num">${sc[s]||0}</span></button>`).join('')}</div>`}
  <div class="small muted" style="margin-top:10px"><b class="num" style="color:var(--ink)">${fmt(fc.length)}</b> of ${fmt(D.located)} shown</div>`:`<div class="small muted">${fmt(fc.length)} of ${fmt(D.located)} shown</div>`}</div>`}
 
@@ -691,6 +697,7 @@ async function mount(root,init){
   case 'left':S.left=!S.left;break;case 'right':S.right=!S.right;break;
   case 'tab':if(v==='region'&&!S.region&&S.tab!=='region'){S.modal=true}else S.tab=v;S.right=true;break;
   case 'stance':S.stance[v]=S.stance[v]?0:1;break;
+  case 'catexp':S.catExp=S.catExp||{};S.catExp[v]=!S.catExp[v];break;
   case 'cat':if(S.cats[v])delete S.cats[v];else S.cats[v]=1;break;
   case 'togglefilters':S.filtersOpen=!S.filtersOpen;break;
   case 'fairopen':S.fairOpen=!S.fairOpen;break;

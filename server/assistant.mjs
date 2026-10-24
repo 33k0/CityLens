@@ -38,8 +38,7 @@ const envGet = (k, d = '') => process.env[k] || envLocal()[k] || d
 const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 function redact(s) {
   let out = String(s ?? '').replace(/bob_prod_[A-Za-z0-9_-]+/g, '[REDACTED]')
-  const key = envGet('BOB_API_KEY')
-  if (key && key.length > 6) out = out.replace(new RegExp(escapeRe(key), 'g'), '[REDACTED]')
+  for (const key of [envGet('BOB_API_KEY'), envGet('BOB_API_KEY_BACKUP')]) if (key && key.length > 6) out = out.replace(new RegExp(escapeRe(key), 'g'), '[REDACTED]')
   return out
 }
 
@@ -394,10 +393,11 @@ export function validate(parsed, question) {
 }
 
 /* ---------- run the agent ---------- */
-function runAgent(bin, prompt) {
+const KEY_FAILURE = /quota|credit|insufficient|balance|exceed|billing|payment|usage limit|limit reached|rate.?limit|unauthori[sz]ed|forbidden|invalid|expired|api key|\b40[1-3]\b|\b429\b/i
+function runAgent(bin, prompt, key = envGet('BOB_API_KEY')) {
   return new Promise((resolve) => {
     const args = ['run', '--mode', 'agent', '--format', 'json', '-w', REPO, '--trust', '--max-turns', envGet('BOB_CHAT_MAX_TURNS', '12'), '--max-cost', envGet('BOB_CHAT_MAX_COST', '0.9'), prompt]
-    const child = spawn(bin.cmd, [...bin.pre, ...args], { cwd: REPO, env: { ...process.env, HOME, BOB_API_KEY: envGet('BOB_API_KEY') }, stdio: ['ignore', 'pipe', 'pipe'] })
+    const child = spawn(bin.cmd, [...bin.pre, ...args], { cwd: REPO, env: { ...process.env, HOME, BOB_API_KEY: key }, stdio: ['ignore', 'pipe', 'pipe'] })
     let out = '', err = '', timedOut = false
     const timer = setTimeout(() => { timedOut = true; child.kill('SIGTERM'); setTimeout(() => child.kill('SIGKILL'), 3000) }, TIMEOUT_MS)
     child.stdout.on('data', (d) => { out += d })
@@ -446,13 +446,21 @@ export async function handle(body) {
   if (spent >= cap) return { status: 429, body: { error: 'daily chat budget reached', spent_usd: +spent.toFixed(4), cap_usd: cap } }
 
   const t0 = Date.now()
-  const r = await runAgent(bin, buildPrompt(body))
+  const prompt = buildPrompt(body)
+  let r = await runAgent(bin, prompt)
+  // the main key is out of credit or refused: retry once with the backup key (BOB_API_KEY_BACKUP), if one is set
+  const backup = envGet('BOB_API_KEY_BACKUP')
+  if (backup && !r.timedOut && resultLine(r.out)?.status !== 'success' && KEY_FAILURE.test(`${r.err}\n${r.out}`)) {
+    console.warn('[assistant] main key refused; retrying with the backup key')
+    r = await runAgent(bin, prompt, backup)
+    r.usedBackup = true
+  }
   const seconds = +((Date.now() - t0) / 1000).toFixed(1)
   const result = resultLine(r.out)
   const st = result?.stats || {}
   const cost = Number(st.session_costs) || 0
   const rec = { date: today(), started_at: new Date(t0).toISOString(), question_chars: q.length, context_n: body.context?.length || 0,
-    task_id: st.task_id ?? null, status: r.timedOut ? 'timeout' : (result?.status ?? `exit ${r.code}`), seconds, session_costs: cost, tool_calls: st.tool_calls ?? null }
+    task_id: st.task_id ?? null, key: r.usedBackup ? 'backup' : 'main', status: r.timedOut ? 'timeout' : (result?.status ?? `exit ${r.code}`), seconds, session_costs: cost, tool_calls: st.tool_calls ?? null }
   let out
   if (r.timedOut) out = { status: 504, body: { error: 'agent timed out' } }
   else if (!result || result.status !== 'success') out = { status: 502, body: { error: 'agent run failed', detail: redact((r.err || r.out).slice(-300)) } }

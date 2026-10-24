@@ -258,9 +258,9 @@ H.legend=(sch)=>{
  const lab=b=>{const r=(a,c)=>f(a)===f(c)?f(a):`${f(a)}–${f(c)}`;return ['0',`<${f(b[0])}`,r(b[0],b[1]),r(b[1],b[2]),`${f(b[2])}+`]};
  const ramp=(P,z)=>`<div class="ramp">${P.map((c,i)=>`<div style="background:${i?c:z}"></div>`).join('')}</div>`;
  const keyAll=`<details class="mapkey"${S_KEY.open?' open':''}><summary>Map key · all colors</summary>
-  <div class="kr"><div class="ramp">${RAW.map((c,i)=>`<div style="background:${i?c:RAWZ}"></div>`).join('')}</div><b>Voice</b> comments per 1,000 residents. Where people write in to Council. Hatched = no comment located.</div>
-  ${ITEM.n311?`<div class="kr"><div class="ramp">${PROB.map(c=>`<div style="background:${c}"></div>`).join('')}</div><b>Problems</b> 311 problem reports per 1,000 residents per year. Where people report problems.</div>`:'<div class="kr muted"><b>Problems</b> not available: no 311 data for this section.</div>'}
-  <div class="kr"><div class="ramp">${GAPM.map(c=>`<div style="background:${c}"></div>`).join('')}</div><b>Underheard</b> ${ITEM.n311?'reported-problems rank minus comment rank (0–100). Darkest = many problems reported, few comments.':'how far a census tract falls below its population share of comments. Darkest = silent.'}</div></details>`;
+  <div class="kr"><div class="ramp">${RAW.map((c,i)=>`<div style="background:${i?c:RAWZ}"></div>`).join('')}</div><b>Voice</b> · comments per 1,000 people</div>
+  ${ITEM.n311?`<div class="kr"><div class="ramp">${PROB.map(c=>`<div style="background:${c}"></div>`).join('')}</div><b>Problems</b> · reports per 1,000 people a year</div>`:'<div class="kr muted"><b>Problems</b> · no data for this section</div>'}
+  <div class="kr"><div class="ramp">${GAPM.map(c=>`<div style="background:${c}"></div>`).join('')}</div><b>Underheard</b> · ${ITEM.n311?'many problems, few comments':'fewest comments for its size'}</div></details>`;
  const L=(t,sub,r,l)=>`<div class="legend"><div class="lt">${t}</div><div class="small muted" style="margin:-4px 0 6px">${sub}</div>${r}<div class="rampl">${l.map(x=>`<span>${x}</span>`).join('')}</div>${keyAll}</div>`;
  if(sch==='prob'){if(!ITEM.n311)return '';return L('Problems · 311','Reported problems per 1,000 residents per year',ramp(PROB,PROB[0]),lab(qb.prob))}
  if(sch==='gap'){if(!ITEM.n311)return L('Underheard · participation gap','Comments vs. population share',ramp(GAPM,GAPM[0]),['0%','−30%','−55%','−80%','−100%']);

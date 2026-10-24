@@ -528,3 +528,4 @@ details.mapkey .kr .ramp div{height:7px}
 .vs{display:inline-block;margin-left:8px;font-size:11px;padding:1px 6px;border-radius:10px;font-weight:500;min-width:52px;text-align:center}
 .vs.hi{background:#FBE3D6;color:#9A3A12}.vs.md{background:#FDF1DC;color:#8A5A0B}.vs.lo{background:#F0F0EC;color:#6B6B66}
 .mvkey .vs{margin:0 2px;min-width:0}
+.dfl[data-def]{cursor:help;text-decoration:underline dotted #B5B5AE;text-underline-offset:3px}

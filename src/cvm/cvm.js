@@ -52,6 +52,8 @@ const ICON={
  chat:'<svg width="16" height="16" viewBox="0 0 16 16"><path d="M2.5 3h11v7.5H7L4 13v-2.5H2.5z" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>'};
 const stLabel={support:'Support',oppose:'Oppose',neutral:'Neutral',unclear:'Unclear',none:'Report or request'};
 const stV=c=>ITEM.id==='all'?'none':c.stance
+const DEFS={"Residents": "People living here (ACS 5-year estimate, 2020–2024).", "English-only households": "Share of households where only English is spoken at home.", "Limited-English": "Share of households where no one 14 or older speaks English very well.", "Renters": "Share of occupied homes that are rented rather than owned.", "Median income": "Middle household income here compared with the San José median. High or Low means 10% or more above or below.", "Equity Priority": "Census tracts the regional planning agency (MTC) flags as Equity Priority Communities: many low-income residents plus other disadvantage factors.", "Comments (no copies)": "Public comments counted once each. Exact duplicates and form-letter copies are folded into one.", "Comments located here": "Comments whose writer’s location falls inside this area.", "Residents where we heard nothing": "Share of residents living in census tracts that sent zero located comments.", "311 problem reports / 1,000 / yr": "311 service requests per 1,000 residents per year. Shows where people report problems, separate from public comments.", "311 problem reports": "311 service requests per 1,000 residents per year. Shows where people report problems, separate from public comments.", "Ask for a specific fix": "Share of comments that report a concrete problem or request a specific city action, not just a support or oppose vote.", "Representation ratio": "Comments received divided by comments expected from this area’s share of residents. 1.0 means a fair share; below 0.5 means underheard.", "Placed on the map": "Share of comments we could place in a census tract from an address, intersection, neighborhood or ZIP.", "Real (not simulated)": "Share of comments from real public letters. The rest are simulated emails used for the demo.", "Average AI label confidence": "How sure the AI was, on average, about each comment’s section label (0–100%).", "Labeled by the AI assistant": "Share of comments whose section was assigned by IBM Bob. None have been reviewed by staff yet.", "How much to trust these numbers": "Data-quality checks. Low values mean the numbers below are rougher.", "Who we are not hearing from": "Census tracts sending under half the comments their population share would predict.", "Local or citywide?": "For each section, the share of its located comments that come from its single busiest census tract.", "Support vs opposition": "For policy sections only: comments for minus comments against, as a share of those taking a side.", "What people write about": "Comments by section, as labeled by IBM Bob.", "What people report to 311": "311 service requests grouped into the same sections as comments.", "When comments arrived": "Comments per month by the date they were received.", "Who is writing": "How many different people wrote, how many comments are form-letter copies, and how many came from organizations.", "Languages": "Language of each comment, compared with the languages spoken at home here.", "Here vs citywide": "This area’s share for each section compared with the whole city.", "311 problem reports over time": "311 service requests per month."};
+const defA=l=>DEFS[l]?` data-def="${esc(DEFS[l])}"`:'';
 const stIco=(s,z)=>(ICON[s]||ICON.unclear)(z);
 
 /* ---------- data ---------- */
@@ -430,7 +432,7 @@ async function mount(root,init){
   const tr=regionTracts(reg.poly);const ids=new Set(tr.map(t=>t.id));const CT=D.tracts;const city=kind==='city';
   const scope=city?D.itemAll:D.itemAll.filter(c=>c.tract&&ids.has(c.tract));const loc=scope.filter(c=>c.t);const W=city?scope:loc;
   const f=areaFacts(tr);const pop=f.pop;const P=P0;
-  const card=(q,lead,body,cls='')=>`<section class="card ${cls}"><h4>${q}</h4>${lead?`<p class="lead">${lead}</p>`:''}${body}</section>`;
+  const card=(q,lead,body,cls='')=>`<section class="card ${cls}"><h4><span class="dfl"${defA(q)}>${q}</span></h4>${lead?`<p class="lead">${lead}</p>`:''}${body}</section>`;
   const small=n=>n<C.small_n?`<span class="nodata" style="margin-left:6px"><i></i>small sample · ${n}</span>`:'';
   const cnt=(L,fn)=>{const o={};L.forEach(c=>{const k=fn(c);o[k]=(o[k]||0)+1});return o};const secLabel=k=>(ITEMS[k]||{}).title||k;
   /* monthly 311 per 1k: area vs city */
@@ -441,10 +443,10 @@ async function mount(root,init){
   const actC=D.itemAll.filter(c=>c.actionable!=null),actRC=actC.length?actC.filter(c=>c.actionable).length/actC.length:null;
   const locAll=D.comments.length||1;const cShare=loc.length/locAll,pShare=pop/D.totPop,rr=pShare?cShare/pShare:null;
   /* ---- header facts strip ---- */
-  const fact=(l,v,s)=>`<div class="hf"><span>${l}</span><b>${v}</b>${s?`<em>${s}</em>`:''}</div>`;
+  const fact=(l,v,s)=>`<div class="hf"><span class="dfl"${defA(l)}>${l}</span><b>${v}</b>${s?`<em>${s}</em>`:''}</div>`;
   const head=`<section class="card span2 hfacts"><div class="hfs">${fact('Residents',fmt(pop),`${fmt(f.hh)} households`)}${fact('English-only households',P(f.eng),city?'':'city '+P(f.engC))}${fact('Limited-English',P(f.lep),city?'':'city '+P(f.lepC))}${fact('Renters',P(f.ren),city?'':'city '+P(f.renC))}${fact('Median income',f.incWord,incLine(f))}${fact('Equity Priority',kind==='tract'?(f.isEPC(tr[0])?tr[0].epc:'No'):`${f.epcT.length} of ${tr.length} census tracts`,'MTC 2024')}</div></section>`;
   /* ---- KPI tiles ---- */
-  const tile=(label,big,sub,extra='',cls='')=>`<div class="kpi ${cls}"><div class="kl">${label}</div><div class="kb">${big}</div><div class="ks">${sub}</div>${extra}</div>`;
+  const tile=(label,big,sub,extra='',cls='')=>`<div class="kpi ${cls}"><div class="kl"><span class="dfl"${defA(label)}>${label}</span></div><div class="kb">${big}</div><div class="ks">${sub}</div>${extra}</div>`;
   const expN=tr.reduce((s,t)=>s+t.exp,0);
   const silent=(city?CT:tr).filter(t=>t.n===0);
   const kpis=`<section class="span2 kpis">
@@ -455,7 +457,7 @@ async function mount(root,init){
   </section>`;
   /* ---- trust ---- */
   const confs=W.map(c=>c.conf).filter(x=>x!=null);const mean=confs.length?confs.reduce((a,b)=>a+b,0)/confs.length:null;
-  const meter=(l,v,s)=>`<div class="mt" ${tipA(`${l}: ${P(v)}`)}><div class="mtl"><span>${l}</span><b>${P(v)}</b></div><div class="mtb"><i style="width:${(v||0)*100}%"></i></div>${s?`<em>${s}</em>`:''}</div>`;
+  const meter=(l,v,s)=>`<div class="mt" ${tipA(`${l}: ${P(v)}`)}><div class="mtl"><span class="dfl"${defA(l)}>${l}</span><b>${P(v)}</b></div><div class="mtb"><i style="width:${(v||0)*100}%"></i></div>${s?`<em>${s}</em>`:''}</div>`;
   const trust=card('How much to trust these numbers','Read every number below with these in mind.',`<div class="mts">${meter('Placed on the map',scope.length?loc.length/scope.length:null,'the rest gave no usable location')}${meter('Real (not simulated)',W.length?1-W.filter(c=>c.mock).length/W.length:null,'simulated emails make numbers illustrative')}${meter('Average AI label confidence',mean,'every label cites an exact quote')}${meter('Labeled by the AI assistant',W.length?W.filter(c=>c.engine==='bob').length/W.length:null,'not yet checked against human review')}</div>`,'span2');
   let M=trust+head+kpis;
   /* ---- what people write about: donut + here vs city ---- */

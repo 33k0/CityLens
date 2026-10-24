@@ -15,7 +15,7 @@ export function startTour({ S, D, ITEM, render, maps }) {
 
   const steps = [
     { title: 'Welcome to CityLens', text: 'CityLens shows council staff <b>who they are hearing from, and who they are not</b>. This tour clicks through the app for you. It takes about a minute.', run: home },
-    { el: '.top .picker', title: 'Pick a section', text: 'Every comment is labeled into a section, like housing or transportation. Pick one here and the whole app updates. <b>All sections</b> shows everything.', run: home },
+    { el: '.top .picker', also: '.top .menu', title: 'Pick a section', text: 'Every comment is labeled into a section, like housing or transportation. Pick one from this list and the whole app updates. <b>All sections</b> shows everything.', run: () => { home(); S.menu = 'item' } },
     { el: '#m0', title: 'Voice map', text: 'Each shape is a census tract. <b>Darker red = more public comments per 1,000 residents.</b> Hatched means no comments yet.', run: () => { home(); S.scheme = 'voice' } },
     { el: '#m0', title: 'Problems map', text: 'The same census tracts, colored by <b>311 reports per 1,000 residents a year</b>. You can switch this to police calls in the filters.', skip: () => !ITEM.n311, run: () => { home(); S.scheme = 'prob' } },
     { el: '#m0', title: 'Underheard map', text: '<b>Purple = many problems, few comments.</b> The darkest census tracts are where problems outpace voice the most. These are the places worth reaching out to.', run: () => { home(); S.scheme = 'gap' } },
@@ -43,7 +43,9 @@ export function startTour({ S, D, ITEM, render, maps }) {
     card.style.width = cw + 'px'
     root.classList.toggle('nohl', !t)
     if (!t) { hl.style.cssText = `left:${W / 2}px;top:${Hh / 2}px;width:0;height:0`; card.style.left = (W - cw) / 2 + 'px'; card.style.top = Math.max(16, Hh / 2 - card.offsetHeight / 2) + 'px'; return }
-    const r = t.getBoundingClientRect(), p = 6
+    let r = t.getBoundingClientRect(), p = 6
+    const t2 = s.also && qs(s.also)
+    if (t2) { const r2 = t2.getBoundingClientRect(); r = { left: Math.min(r.left, r2.left), top: Math.min(r.top, r2.top), right: Math.max(r.right, r2.right), bottom: Math.max(r.bottom, r2.bottom) } }
     const x = Math.max(4, r.left - p), y = Math.max(4, r.top - p), w = Math.min(W - 8, r.right + p) - x, h = Math.min(Hh - 8, r.bottom + p) - y
     hl.style.cssText = `left:${x}px;top:${y}px;width:${w}px;height:${h}px`
     const ch = card.offsetHeight, g = 14

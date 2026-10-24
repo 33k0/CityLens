@@ -559,3 +559,13 @@ details.mapkey .kr .ramp div{height:7px}
 .mvtab .lp{font-weight:500}.mvtab .lp.hi{color:#5B3FA0;font-weight:700}
 .mvtab .lp.hi::before{content:'';display:inline-block;width:7px;height:7px;border-radius:50%;background:#7357B4;margin-right:6px;vertical-align:1px}
 .mvkey{display:flex;flex-wrap:wrap;align-items:center;gap:4px}
+/* hover card: long labels wrap instead of pushing values out */
+.ttip dt{min-width:0;overflow-wrap:anywhere}.ttip dd{white-space:nowrap}
+.ttip .small{overflow-wrap:anywhere}
+/* bottom bar: never wider than the window; sources shrink first, then low-priority items drop */
+.foot{min-width:0}
+.foot .fi{flex:none;min-width:0}
+.foot .fi:first-child{flex:0 1 auto;display:block;line-height:18px;overflow:hidden;text-overflow:ellipsis}
+@media (max-width:1360px){.foot .fi:last-child{display:none}.foot .fi:nth-last-child(2){border-right:0}}
+@media (max-width:1080px){.foot .fi:nth-last-child(2){display:none}.foot .fi:nth-last-child(3){border-right:0}}
+.ttip{width:290px}

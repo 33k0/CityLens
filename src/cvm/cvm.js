@@ -125,7 +125,7 @@ function setItem(id){const T=D.tracts;const def=ITEMS[id];
  const C=all.filter(c=>c.t);
  const cnt={};T.forEach(t=>cnt[t.id]=0);C.forEach(c=>cnt[c.tract]++);
  T.forEach(t=>t.n=cnt[t.id]);const located=C.length;
- T.forEach(t=>{t.exp=+(t.pop/D.totPop*located).toFixed(1);t.gap=t.exp>0?Math.round((t.n-t.exp)/t.exp*100):0;const tc=C.filter(c=>c.tract===t.id);t.prec=[tc.filter(c=>c.tier==='address').length,tc.filter(c=>c.tier==='neighborhood').length,tc.filter(c=>c.tier==='zip').length]});
+ T.forEach(t=>{t.exp=t.pop/D.totPop*located;t.gap=t.exp>0?Math.round((t.n-t.exp)/t.exp*100):0;const tc=C.filter(c=>c.tract===t.id);t.prec=[tc.filter(c=>c.tier==='address').length,tc.filter(c=>c.tier==='neighborhood').length,tc.filter(c=>c.tier==='zip').length]});
  /* citywide median comment rate for this section, computed once over all census tracts (never per region) */
  const rates=T.map(t=>t.n/t.pop*1000).sort((a,b)=>a-b);D.vMed=rates[Math.floor(rates.length/2)];D.hvTh=D.vMed;
  const p=D.p311[id]||{};T.forEach(t=>{t.p311=def.n311?(p[t.id]||0):0});

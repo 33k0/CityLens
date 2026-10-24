@@ -482,3 +482,40 @@ Dates are absolute. Newest at the bottom of each section.
   comment id) for the pulse highlight, never at true coordinates.
 - Bug found during wiring: an earlier test overwrote the label cache, so a cache replay restored only 427 of 435 Bob
   labels. `bob_label.py` now reuses every label Bob wrote in `data/bob_work/`; replay gives 435/435 Bob, no new calls.
+
+## Milestone 7, round 2 — real assistant, analytics hierarchy, map key (2026-10-23)
+
+- **Chat runs on IBM Bob as the app's assistant** (user decision; Bob no longer classifies anything). Dev-server bridge
+  `server/assistant.mjs` (plugin in `vite.config.ts`) runs `bob run --mode agent --format json` with the skill
+  `.bob/skills/app-analyst/SKILL.md`: a dictionary of every app data file, citation formats (`[[comment_id]]`,
+  `[[metric:H5]]`, `[[file:path#key]]`), the voice/311 separation and simulated-email rules, a "how to use CityLens"
+  guide, and an allowed action list (open a section, switch the map scheme, zoom to a tract, open analytics, open a
+  comment, filter stance). The server validates every citation against the data files and every action against known
+  ids; answers that make claims without valid citations are rejected and the client falls back to local search.
+  Measured: 9–15 s and $0.07–0.15 per question. The canned demo conversation was removed; the panel starts empty with
+  suggested questions. Static builds (no server) answer by local retrieval only and say so.
+- **Bob budget** raised by the user to $50 total. The chat stops at `BOB_TOTAL_USD=50` (pipeline + chat spend) or
+  `BOB_CHAT_DAILY_USD=10` per day; chat runs are logged without question text to gitignored `data/bob_chat_runs.json`.
+- **Actionable labels.** Before the user's "no more classification" instruction arrived, one Bob pass labeled each
+  comment actionable or not ($0.64; Bob pipeline total $8.99): 129 actionable, 306 not. Actionable = reports a
+  specific problem or asks for a specific city action beyond a vote position. Kept because "actionable comment rate"
+  is on the user's metric list; no further Bob classification runs.
+- **New data:** household language by tract (ACS C16002 from the cached summary file: English only, Spanish, other
+  Indo-European, Asian & Pacific Island, other) and MTC Equity Priority Communities 2024 (ACS 2018–2022, 2020 tracts,
+  via the city's mirror `DOT/DOT_AllReferenceLayers/MapServer/12`): 59 of our tracts are High/Higher/Highest, 1 tract
+  is missing from MTC's data. Anonymous participant numbers (P0001…) are derived from the dedup hash in the export; the
+  hash itself never reaches the browser.
+- **Team settings** in `public/data/config.json` (not chosen by the app or AI): under-represented = comment share
+  below 0.5× population share; stance shown only for policy sections (housing, governance, environment & development,
+  public safety, code enforcement); low confidence < 0.8; "small sample" warning under 10 comments.
+- **Analytics** (City analytics button, or Open analytics from a region or tract): area info first (residents,
+  households, comments, 311 reports and rate, median income as High/Average/Low with % vs the city tract median,
+  English-only and limited-English households, renters, non-white share, Equity Priority status, council district),
+  then — citywide: public input (comments without copies, submissions incl. copies, location unknown, actionable),
+  comments by section and subsection, support/opposition for policy sections, volume over time by channel,
+  representation (under-represented tract rate, residents in them, Equity Priority comment vs population share),
+  geographic concentration per section, 311 rate and mix, AI label confidence; per tract or area: comments and
+  representation ratio, issue share vs city with gap, languages (households vs comments, ratio), who is writing
+  (distinct writers, comments per writer, form-letter share, actionable, organizations), 311, AI confidence.
+- **Map key**: the legend has a "Map key · all colors" section explaining Voice, Problems and Underheard together.
+  The pop card shows residents (and households for a tract) first.

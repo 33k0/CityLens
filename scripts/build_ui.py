@@ -49,6 +49,15 @@ def main() -> int:
     nb = pd.read_csv(ROOT / "data" / "neighborhoods.csv", dtype=str).fillna("")
     dist = gpd.read_file(PUB / "council_districts.geojson")
     meta = json.loads((PUB / "fairness" / "meta.json").read_text())
+    # household language (ACS C16002, cached by build_tracts.py): households by language spoken at home
+    lang = pd.read_csv(ROOT / "data" / "raw" / "census" / "acs5_2024_c16002_06085.psv", sep="|", dtype=str)
+    lang["tract_id"] = lang["GEO_ID"].str[-11:]
+    lang = lang.set_index("tract_id")
+    LCOL = {"english_only": "C16002_E002", "spanish": "C16002_E003", "other_indo_european": "C16002_E006",
+            "asian_pacific": "C16002_E009", "other": "C16002_E012"}
+    # MTC Equity Priority Communities 2024 (ACS 2018-2022, 2020 tracts), via the city's mirror of the MTC layer
+    epc_raw = json.loads((ROOT / "data" / "raw" / "census" / "sjgis_equity_priority_communities.json").read_text())
+    epc = {str(f["attributes"]["GEOID"]).zfill(11): f["attributes"]["EQUITYPRIORITYCOMMUNITYCLASS"] for f in epc_raw["features"]}
 
     # display name: a neighborhood whose containing tract (first in its list) is this tract; curated names first
     curated = nb[(nb["source"] == "hand") | (nb["aliases"] != "")]
@@ -80,11 +89,17 @@ def main() -> int:
             "c": [round(c.x, 5), round(c.y, 5)], "pop": int(a["population"]),
             "renter": round(float(a["pct_renter"]), 4), "lep": round(float(a["pct_lep"]), 4),
             "income": int(a["median_income"]), "nonwhite": round(float(a["pct_nonwhite"]), 4),
-            "district": int(dmap[t]) if t in dmap else None, "geometry": rnd(row.geometry)})
+            "district": int(dmap[t]) if t in dmap else None,
+            "households": int(lang.loc[t, "C16002_E001"]) if t in lang.index else None,
+            "lang": ({k: round(int(lang.loc[t, v]) / max(1, int(lang.loc[t, "C16002_E001"])), 4) for k, v in LCOL.items()}
+                     if t in lang.index else None),
+            "epc": epc.get(t),  # High | Higher | Highest = Equity Priority Community; NA = not; None = not in MTC data
+            "geometry": rnd(row.geometry)})
     city = tg.to_crs(3310).buffer(1).union_all().buffer(-1)
     city = gpd.GeoSeries([city], crs=3310).to_crs(4326).iloc[0].simplify(0.0002)
     th = {k: v.get("threshold") for k, v in meta["attributes"].items()}
-    OUT.write_text(json.dumps({"source": "TIGER 2024 tracts clipped to San José city limits; ACS 5-year 2020–2024",
+    OUT.write_text(json.dumps({"source": "TIGER 2024 tracts clipped to San José city limits; ACS 5-year 2020–2024; "
+                               "household language ACS C16002; MTC Equity Priority Communities 2024 (ACS 2018–2022)",
                                "acs_years": "2020–2024", "thresholds": th, "attributes": meta["attributes"],
                                "city": rnd(city), "tracts": tracts}, separators=(",", ":"), allow_nan=False))
     print(f"wrote {OUT.relative_to(ROOT)}: {len(tracts)} tracts, {OUT.stat().st_size // 1024} KB; "

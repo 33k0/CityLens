@@ -20,3 +20,7 @@
 7. **Simulated data is labeled.** Emails are simulated (`mock=true`). Every count that includes them says so.
    Never generate mock "Letters from the Public".
 8. **Campaigns count once.** Form-letter campaigns (`campaign_id`) count as one voice by default, with their size shown.
+
+The staff chat (`/api/assistant`, `server/assistant.mjs`) runs Bob with the read-only `app-analyst` skill
+(`.bob/skills/app-analyst/SKILL.md`): answers come only from the app's data files, with `[[comment_id]]`,
+`[[metric:<id>]]` and `[[file:<path>#<key>]]` citations.

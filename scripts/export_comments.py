@@ -46,7 +46,11 @@ def main() -> int:
     for c in KEEP:
         if c not in voice.columns:
             voice[c] = ""
-    voice = voice[KEEP].copy().fillna("")  # channel-specific columns (e.g. to_office) are blank, never NaN
+    # anonymous participant number: same sender -> same P-number; the hash itself never leaves the pipeline
+    ih = voice["identity_hash"].fillna("").astype(str) if "identity_hash" in voice.columns else pd.Series([""] * len(voice))
+    order = {h: i for i, h in enumerate(sorted({h for h in ih if h}))}
+    voice["participant"] = [f"P{order[h] + 1:04d}" if h else f"P-{cid}" for h, cid in zip(ih, voice["comment_id"])]
+    voice = voice[KEEP + ["participant"]].copy().fillna("")  # channel-specific columns (e.g. to_office) are blank, never NaN
 
     loc = read(D / "locations.csv")
     if loc is not None:
@@ -55,6 +59,11 @@ def main() -> int:
         log(f"  locations joined: {voice['tract_id'].replace('', pd.NA).notna().sum()} with a tract")
     else:
         log("  -- locations.csv missing: tract_id empty, precision 'none'")
+    act = read(D / "actionable.csv")
+    if act is not None:
+        voice = voice.merge(act[["comment_id", "actionable", "reason"]].rename(columns={"reason": "actionable_reason"}),
+                            on="comment_id", how="left")
+        log(f"  actionable joined: {(voice['actionable'].fillna('') != '').sum()} labeled")
     cls = read(D / "classifications.csv")
     if cls is not None:
         # classify.py owns these fields; its duplicate_of/language win when set, else keep the ingest values
@@ -93,6 +102,9 @@ def main() -> int:
         for k in ("pdf_page_start", "pdf_page_end", "pages_total", "pages_exhibit"):
             r[k] = int(float(r[k])) if str(r[k]).strip() not in ("", "nan") else None
         r["family"] = "voice"
+        a = str(r.get("actionable", "")).strip().lower()
+        r["actionable"] = True if a == "true" else False if a == "false" else None
+        r["actionable_reason"] = r.get("actionable_reason") or ""
         recs.append(r)
 
     items = {}

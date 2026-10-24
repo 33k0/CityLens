@@ -408,3 +408,15 @@ html,body{overflow:hidden}
 
 /* window-filling layout: chat panel takes most of the extra width */
 .rpanel{width:var(--rp,288px)}
+
+/* map key covering all three schemes */
+.legend{width:300px}
+details.mapkey{margin-top:8px;border-top:1px solid #EEEEEA;padding-top:6px;font-size:11.5px;line-height:1.35}
+details.mapkey summary{cursor:pointer;color:var(--ink2);font-weight:500;list-style:none}
+details.mapkey summary::before{content:'▸ ';font-size:9px}
+details.mapkey[open] summary::before{content:'▾ '}
+details.mapkey .kr{margin-top:7px;color:var(--ink)}
+details.mapkey .kr .ramp{margin-bottom:3px}
+details.mapkey .kr .ramp div{height:7px}
+.anside .kv{display:grid;grid-template-columns:1fr 1fr;gap:14px 12px}
+.anside .stat b{font-size:18px}

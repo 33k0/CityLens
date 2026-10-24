@@ -216,6 +216,58 @@
       "session_costs": 0.16458,
       "tool_calls": 4,
       "last_message": "8 objects written.\n\n**Category breakdown:**\n- `governance_civic_rights / immigrant_protection_sanctuary` — 2 (Lc6dca3de, L184a861e)\n- `environment_development_review / eir_environmental_review` — 1 (E9b1e4268)\n- `environment_development_review / traffic_neighborhood_character` — 1 (E81b23973)\n- `infrastructure_streets / streetlight_outage` — 1 (E6804f12c)\n- `infrastructure_streets / pothole_pavement_repair` — 1 (Efae87bdb)\n- `code_enforcement_habitability / habitability_hot_water_mold` — 1 (E3d037e79)\n- `housing_affordability_policy / rent_stabilization` — 1 (E05626c1e)"
+    },
+    {
+      "engine": "bob",
+      "kind": "actionable_batch_50",
+      "status": "success",
+      "started_at": "2026-10-24T02:59:38+00:00",
+      "seconds": 41.9,
+      "exit_code": 0,
+      "task_id": "b93b0528d3a20f6265053a2e8901b6f6",
+      "duration_ms": 40989,
+      "session_costs": 0.269018,
+      "tool_calls": 4,
+      "last_message": "**60 objects written.**\n\nBreakdown:\n- **4 actionable (`true`):**\n  - [`L9fec9efd`](data/bob_work/act_batch_50.jsonl:8) — requests specific state funding reallocation to active/public transportation (Vision Zero, SHOPP, MTC flex)\n  - [`L3109f199`](data/bob_work/act_batch_50.jsonl:14) — directs city staff to return in 60 days with updated alternative-response recommendations for disability community\n  - [`Laaa7f51a`](data/bob_work/act_batch_50.jsonl:15) — defers report; directs staff to return with specific updated options and an official DHCS funding-legality response\n  - [`L28430c0e`](data/bob"
+    },
+    {
+      "engine": "bob",
+      "kind": "actionable_batch_51",
+      "status": "success",
+      "started_at": "2026-10-24T03:00:19+00:00",
+      "seconds": 29.8,
+      "exit_code": 0,
+      "task_id": "04d63928f68ccabef916a7597ca664a7",
+      "duration_ms": 29028,
+      "session_costs": 0.14401799999999998,
+      "tool_calls": 2,
+      "last_message": "**60 objects written.**\n\nBreakdown by theme:\n- **Lines 1–16** (D3 appointment endorsements) → all `false`; pure candidate support letters\n- **Line 10** (`L75c95384`) → `true`; demands ADA accommodation process and staff training\n- **Lines 17–19** → `true`; drainage repair request, sidewalk/derelict-building process reform, Japantown blight code enforcement\n- **Lines 20–41** (immigrant protection resolution) → mixed; most are `false` (position support), but `Lb0785379` (expanded legal aid + specific measures), `Lb6d4a9c3` (revise resolution language), and `L3a1dbca5` (police/ICE separation + Ra"
+    },
+    {
+      "engine": "bob",
+      "kind": "actionable_batch_52",
+      "status": "success",
+      "started_at": "2026-10-24T03:00:49+00:00",
+      "seconds": 30.0,
+      "exit_code": 0,
+      "task_id": "5643235184ce9453ae08f6e99a9e44c6",
+      "duration_ms": 29280,
+      "session_costs": 0.11384,
+      "tool_calls": 2,
+      "last_message": "**60 objects written.**\n\nLabels summary by topic:\n- **Streetlight outage (E34f…–E4d4d…):** 20 comments — 18 actionable (specific repairs, temp towers, solar conversion, policy equality, escalation), 2 non-actionable (undecided general opinion; vague conditional support)\n- **Alma Ave pothole (Ed080…–E978d…):** 12 comments — all 12 actionable (every one names the specific location and requests a repair, scheduled date, or proper method)\n- **Cedar Court hot water (E3d4a…–E2d5d…):** 10 comments — 9 actionable (inspection, enforcement, penalties, rent abatement, anti-retaliation); 1 non-actionable "
+    },
+    {
+      "engine": "bob",
+      "kind": "actionable_batch_53",
+      "status": "success",
+      "started_at": "2026-10-24T03:01:19+00:00",
+      "seconds": 24.0,
+      "exit_code": 0,
+      "task_id": "39f4ab9fc69f5a93ce59ad8a5b890304",
+      "duration_ms": 23329,
+      "session_costs": 0.110778,
+      "tool_calls": 2,
+      "last_message": "**55 objects written.**\n\nBreakdown: 39 actionable `true`, 16 actionable `false`.\n\nThe `false` labels are bare vote positions or general opinions on the rent cap (lines 1–6, 8–10, 12–13, 16–17, 21, 23, 49) plus one vague frustration with no specific request (`Ec8d3d493`). Every other comment names a specific problem, place, or asks for a concrete city action — permit fixes, creek cleanup, pothole repairs, patrols, program funding, etc."
     }
   ]
 }

@@ -4,6 +4,7 @@
    Channel rule: voice and 311 are never summed; they meet only through per-1k-rate percentiles. */
 import * as d3 from 'd3'
 import './cvm.css'
+import { askAssistant } from './assistant.js'
 
 const COL={support:'#1F7A6E',oppose:'#B3412B',neutral:'#6B7280',unclear:'#8A6D3B',amber:'#B7791F'};
 const GAP=['#EDE9F7','#C9BEE8','#9F8AD3','#7357B4','#4A2C8C'];
@@ -13,6 +14,7 @@ const PROB=['#E3F1EF','#A9D8D1','#5FB3A8','#22877C','#0B5249'];
 const RAWZ=`repeating-linear-gradient(45deg,#E4E0D8 0 3px,#C9C4BA 3px 4.5px)`;
 const CATS=[];const CATN={};const ITEM={};
 const STANCES=['support','oppose','neutral','unclear'];
+const S_KEY={open:false};
 /* thresholds come from public/data/ui.json (written from fairness/meta.json); labels are filled in at load */
 const ATTRS={renter:{l:'Renter-majority',s:'Renter-majority',f:null,acs:'ACS B25003',key:'renter_majority'},income:{l:'Below-median income',s:'Below-median-income',f:null,acs:'ACS B19013',key:'low_income'},nonwhite:{l:'Majority non-white',s:'Majority non-white',f:null,acs:'ACS B03002',key:'majority_nonwhite'},lep:{l:'High limited-English',s:'High limited-English',f:null,acs:'ACS C16002',key:'high_lep'}};
 const ITEMS={};
@@ -57,7 +59,9 @@ const getJ=p=>fetch(`${BASE}/data/${p}`).then(r=>{if(!r.ok)throw new Error(`${p}
 function jitter(c,t){const R=rng(seedOf(c.id));const bb=t.cb||bbox(t.geometry);let p,k=0;do{p=[bb[0]+R()*(bb[2]-bb[0]),bb[1]+R()*(bb[3]-bb[1])];k++}while(!(inGeom(p,t.geometry)&&inGeom(p,D.city.geometry))&&k<400);return k>=400?t.c:p}
 async function load(){
  if(D.ready)return D;
- const [ui,voice,p311,inbox]=await Promise.all([getJ('ui.json'),getJ('comments.json'),getJ('requests_311_by_tract.json'),getJ('inbox.json').catch(()=>({emails:[]}))]);
+ const [ui,voice,p311,inbox,cfg,met]=await Promise.all([getJ('ui.json'),getJ('comments.json'),getJ('requests_311_by_tract.json'),getJ('inbox.json').catch(()=>({emails:[]})),getJ('config.json').catch(()=>({})),getJ('metrics.json').catch(()=>({metrics:{}}))]);
+ D.metrics=(met&&met.metrics)||{};
+ D.cfg=Object.assign({underrepresented_ratio:0.5,policy_sections:[],low_confidence:0.8,small_n:10},cfg);
  D.city={type:'Feature',geometry:ui.city,properties:{}};
  D.tracts=ui.tracts;D.thr=ui.thresholds;D.acsYears=ui.acs_years;D.attrMeta=ui.attributes;
  const T=D.tracts;
@@ -79,7 +83,7 @@ async function load(){
    src:c.channel==='letter'?'Letter':c.channel==='email'?'Email':'Site',mock:!!c.mock,when:c.received_at?new Date(c.received_at):null,
    attach:a,photo:a.some(x=>x.kind==='image'),camp:c.campaign_id||null,campSize:c.campaign_id?campSize[c.campaign_id]:0,
    evq:c.evidence_quote||'',sev:c.stance_evidence||'',conf:c.confidence,engine:c.engine||'',agenda:c.item,agendaTitle:c.item_title||'',meeting:c.meeting_date||'',
-   ocr:!!c.ocr,pages:c.pages_total,exhibit:c.pages_exhibit,srcUrl:c.source_url||'',office:c.to_office||'',via:c.submitted_via||'',commenter:c.commenter_type||'',inherited:c.inherited_from||''}});
+   ocr:!!c.ocr,pages:c.pages_total,actionable:c.actionable??null,actReason:c.actionable_reason||'',participant:c.participant||'',exhibit:c.pages_exhibit,srcUrl:c.source_url||'',office:c.to_office||'',via:c.submitted_via||'',commenter:c.commenter_type||'',inherited:c.inherited_from||''}});
  D.voice.forEach(c=>{if(c.t)c.ll=jitter(c,c.t)});
  /* 311: problem reports per tract per category, summed over the window (separate family) */
  D.p311={all:{}};D.m311=p311.months_covered;D.p311Labels=p311.category_labels||{};
@@ -237,7 +241,11 @@ H.legend=(sch)=>{
  if(sch==='raw'||sch==='pop')sch='voice';const qb=D.qb||{voice:[1,2,3],prob:[1,2,3],gap:[1,2,3]};const f=v=>v>=10?Math.round(v):v>=1?v.toFixed(1):v.toFixed(2);
  const lab=b=>{const r=(a,c)=>f(a)===f(c)?f(a):`${f(a)}–${f(c)}`;return ['0',`<${f(b[0])}`,r(b[0],b[1]),r(b[1],b[2]),`${f(b[2])}+`]};
  const ramp=(P,z)=>`<div class="ramp">${P.map((c,i)=>`<div style="background:${i?c:z}"></div>`).join('')}</div>`;
- const L=(t,sub,r,l)=>`<div class="legend"><div class="lt">${t}</div><div class="small muted" style="margin:-4px 0 6px">${sub}</div>${r}<div class="rampl">${l.map(x=>`<span>${x}</span>`).join('')}</div></div>`;
+ const keyAll=`<details class="mapkey"${S_KEY.open?' open':''}><summary>Map key · all colors</summary>
+  <div class="kr"><div class="ramp">${RAW.map((c,i)=>`<div style="background:${i?c:RAWZ}"></div>`).join('')}</div><b>Voice</b> comments per 1,000 residents. Where people write in to Council. Hatched = no comment located.</div>
+  ${ITEM.n311?`<div class="kr"><div class="ramp">${PROB.map(c=>`<div style="background:${c}"></div>`).join('')}</div><b>Problems</b> 311 problem reports per 1,000 residents per year. Where people report problems.</div>`:'<div class="kr muted"><b>Problems</b> not available: no 311 data for this section.</div>'}
+  <div class="kr"><div class="ramp">${GAPM.map(c=>`<div style="background:${c}"></div>`).join('')}</div><b>Underheard</b> ${ITEM.n311?'311 rank minus comment rank (0–100). Darkest = many problems reported, few comments.':'how far a tract falls below its population share of comments. Darkest = silent.'}</div></details>`;
+ const L=(t,sub,r,l)=>`<div class="legend"><div class="lt">${t}</div><div class="small muted" style="margin:-4px 0 6px">${sub}</div>${r}<div class="rampl">${l.map(x=>`<span>${x}</span>`).join('')}</div>${keyAll}</div>`;
  if(sch==='prob'){if(!ITEM.n311)return '';return L('Problems · 311','Reported problems per 1,000 residents per year',ramp(PROB,PROB[0]),lab(qb.prob))}
  if(sch==='gap'){if(!ITEM.n311)return L('Underheard · participation gap','Comments vs. population share',ramp(GAPM,GAPM[0]),['0%','−30%','−55%','−80%','−100%']);
   return L('Underheard · problems without voice','311 rank − comment rank (0–100 each, per 1,000 residents)',ramp(GAPM,GAPM[0]),['≤0',`<${Math.round(qb.gap[0])}`,`${Math.round(qb.gap[0])}+`,`${Math.round(qb.gap[1])}+`,`${Math.round(qb.gap[2])}+`])}
@@ -245,7 +253,7 @@ H.legend=(sch)=>{
 H.tip=(t)=>{const ex=t.exp.toFixed(1);if(t.n===0)return `<div class="h">${t.nbhd}</div><div class="s">Tract ${t.id}</div><div class="zero">No comments located here</div><dl><dt>Expected from population share</dt><dd>${ex}</dd><dt>Population</dt><dd>${fmt(t.pop)}</dd><dt>Comments per 1k</dt><dd>${(t.vrate||0).toFixed(2)}</dd>${ITEM.n311?`<dt>Reported problems per 1k / yr</dt><dd>${(t.prate||0).toFixed(1)}</dd><dt>Rank: 311 · comments</dt><dd class="gp">${Math.round(t.ppct||0)} · ${Math.round(t.vpct||0)}</dd>${t.pwv?'<dt>Problems without voice</dt><dd class="gp">Yes</dd>':''}`:''}<dt>Renter households</dt><dd>${pct(t.renter)}</dd><dt>Limited-English households</dt><dd>${pct(t.lep)}</dd></dl>`;
  const tot=t.prec[0]+t.prec[1]+t.prec[2];
  return `<div class="h">${t.nbhd}</div><div class="s">Tract ${t.id}</div><dl><dt>Population</dt><dd>${fmt(t.pop)}</dd><dt>Comments per 1k</dt><dd>${(t.vrate||0).toFixed(2)}</dd>${ITEM.n311?`<dt>Reported problems per 1k / yr</dt><dd>${(t.prate||0).toFixed(1)}</dd><dt>Rank: 311 · comments</dt><dd class="gp">${Math.round(t.ppct||0)} · ${Math.round(t.vpct||0)}</dd>${t.pwv?'<dt>Problems without voice</dt><dd class="gp">Yes</dd>':''}`:''}<dt>Comments located</dt><dd>${t.n}</dd><dt>Expected from population share</dt><dd>${ex}</dd><dt>Participation gap</dt><dd class="gp">${sgn(t.gap)}%</dd><dt>Renter households</dt><dd>${pct(t.renter)}</dd><dt>Limited-English households</dt><dd>${pct(t.lep)}</dd></dl><div class="pstrip"><div class="pbar"><i style="flex:${t.prec[1]};background:#5C5C58"></i><i style="flex:${t.prec[0]};background:#1B1B1B"></i><i style="flex:${t.prec[2]};background:#B6B0A5"></i></div><div class="small muted">located by: ${t.prec[1]} neighborhood · ${t.prec[0]} address · ${t.prec[2]} zip</div></div>`};
-H.cite=(c,extra='')=>`<button class="cite" data-act="cite" data-id="${c.id}" data-src="Comment ${c.id} · ${c.src}${c.mock?' (simulated)':''} · ${fdate(c)}">${stIco(c.stance,9)}<code>${c.id.slice(0,7)}…</code><span class="tn">${c.t.nbhd}</span>${extra}</button>`;
+H.cite=(c,extra='')=>`<button class="cite" data-act="cite" data-id="${c.id}" data-src="Comment ${c.id} · ${c.src}${c.mock?' (simulated)':''} · ${fdate(c)}">${stIco(c.stance,9)}<code>${c.id.slice(0,7)}…</code><span class="tn">${c.t?c.t.nbhd:c.src}</span>${extra}</button>`;
 H.src=(txt,src)=>`<span class="src" data-src="${esc(src)}">${txt}</span>`;
 const incLabel=t=>{const r=t.income/D.medInc;return r<0.9?'Below San José median income':r>1.1?'Above San José median income':'Average San José median income'};
 H.acs=(t)=>`<span class="acs">${pct(t.renter)} renters</span><span class="acs">${pct(t.lep)} limited-English</span><span class="acs">${incLabel(t)}</span>`;
@@ -261,7 +269,7 @@ function briefFor(t,cs){const tc=cs.filter(c=>c.tract===t.id);const cats={};tc.f
 /* ---------- app ---------- */
 async function mount(root,init){
  await load();
- const S=Object.assign({scheme:'voice',tab:'comments',sbs:false,left:true,right:true,fairOpen:false,filtersOpen:true,attr:'renter',drawer:false,region:null,regions:[],compare:false,rmode:'raw',stance:{support:1,oppose:1,neutral:1,unclear:1},cats:{},mvOpen:-1,affected:new Set(),state:null,chatRegion:true,inspector:null,lightbox:null,menu:null,armed:false,hint:null,pin:null,chatExtra:[],regionState:null},init||{});
+ const S=Object.assign({scheme:'voice',tab:'comments',sbs:false,left:true,right:true,fairOpen:false,filtersOpen:true,attr:'renter',drawer:false,region:null,regions:[],compare:false,rmode:'raw',stance:{support:1,oppose:1,neutral:1,unclear:1},cats:{},mvOpen:-1,affected:new Set(),state:null,chatRegion:true,inspector:null,lightbox:null,menu:null,armed:false,hint:null,pin:null,chatExtra:[],regionState:null,chat:[],chatBusy:false},init||{});
  const circ=(c,r)=>Array.from({length:28},(_,i)=>{const a=i/28*Math.PI*2;return [c[0]+Math.cos(a)*r*1.25,c[1]+Math.sin(a)*r]});
  const EAST={name:'East Side — Story Rd corridor',poly:EAST_REGION},WG={name:'Willow Glen — Lincoln Ave',poly:WG_REGION};
  if(S.region==='east')S.region=EAST;
@@ -287,9 +295,10 @@ async function mount(root,init){
 
  function top(){if(S.scheme==='raw'||S.scheme==='pop'||(S.scheme==='prob'&&!ITEM.n311))S.scheme='voice';const sch=S.scheme;return `<div class="top"><div class="brand"><b>CityLens</b><span>San José · Council staff</span></div><div class="vsep"></div>
  ${S.state==='noitem'?`<button class="picker" data-act="menu" data-m="item"><div><div class="t">Select a section</div><div class="m">No section loaded</div></div><span class="caret"></span></button>`:`<button class="picker" data-act="menu" data-m="item"><div style="min-width:0"><div class="t">${ITEM.title}</div><div class="m">${fmt(ITEM.total)} comments · ${srcLine(ITEM)}</div></div>${ITEM.n311?`<span class="badge">${n311(ITEM)}</span>`:''}<span class="caret"></span></button>`}
- ${S.view==='analytics'?`<div class="seg" aria-label="Data">${[['raw','Raw data'],['adj','Bias-adjusted']].map(([k,l])=>`<button class="${(S.anMode||'raw')===k?'on':''}" data-act="anmode" data-v="${k}">${l}</button>`).join('')}</div>`:`<div class="seg" role="tablist" aria-label="Map scheme">${[['voice','Voice'],...(ITEM.n311?[['prob','Problems']]:[]),['gap','Underheard']].map(([k,l])=>`<button data-def="${{voice:'Voice: public comments per 1,000 residents. Where people are writing in to Council.',prob:'Problems: reported problems (311 service requests) per 1,000 residents per year. Where people report issues. A separate family from comments.',gap:ITEM.n311?'Underheard: 311 rank minus comment rank (0–100 each, per 1,000 residents). High where problems are reported but few comments come in.':'Underheard: how far each tract falls below its population share of comments.'}[k]}" class="${!S.sbs&&sch===k?'on':''}" data-act="scheme" data-v="${k}">${l}</button>`).join('')}</div>
+ ${S.view==='analytics'?`<button class="tbtn" data-act="back">${ICON.chevL}Back to map</button>${(S.region&&S.region.poly==='city'&&!S.tractDetail)?'':'<button class="tbtn" data-act="cityan">'+ICON.gauge+'City analytics</button>'}`:`<div class="seg" role="tablist" aria-label="Map scheme">${[['voice','Voice'],...(ITEM.n311?[['prob','Problems']]:[]),['gap','Underheard']].map(([k,l])=>`<button data-def="${{voice:'Voice: public comments per 1,000 residents. Where people are writing in to Council.',prob:'Problems: reported problems (311 service requests) per 1,000 residents per year. Where people report issues. A separate family from comments.',gap:ITEM.n311?'Underheard: 311 rank minus comment rank (0–100 each, per 1,000 residents). High where problems are reported but few comments come in.':'Underheard: how far each tract falls below its population share of comments.'}[k]}" class="${!S.sbs&&sch===k?'on':''}" data-act="scheme" data-v="${k}">${l}</button>`).join('')}</div>
  <button class="tbtn ${S.sbs?'on':''}" data-act="sbs">${ICON.split}Side-by-side</button>${ITEM.n311?'':'<span class="nodata" style="height:28px"><i></i>No reported-problem data</span>'}`}
  <div class="spacer"></div>
+ ${S.view==='analytics'?'':`<button class="tbtn" data-act="cityan">${ICON.gauge}City analytics</button>`}
   <button class="tbtn" data-act="menu" data-m="saved">Saved regions <span class="cnt">${S.saved.length}</span>${ICON.chevD}</button>
  ${S.menu==='item'?`<div class="menu" style="left:186px;width:440px"><div class="mh">Section</div>${D.itemOrder.map(k=>ITEMS[k]).map(d=>`<div class="mi" data-act="pickitem" data-id="${d.id}"><div><div style="font-weight:500">${d.title}</div><div class="small muted">${fmt(d.total)} comments · ${srcLine(d)} ${d.n311?' · '+n311(d):''}</div></div>${ITEM.id===d.id?'<span style="margin-left:auto;font-size:12px;color:var(--ink2);padding-top:2px">Current</span>':''}</div>`).join('')}</div>`:''}
  ${S.menu==='saved'?`<div class="menu" style="right:16px;width:300px">${S.saved.map((r,i)=>`<div class="mi" data-act="loadregion" data-i="${i}"><span style="width:10px;height:10px;border:1.5px dashed ${GAP[4]};border-radius:50%;margin-top:4px;flex:none"></span><div style="flex:1"><div style="font-weight:500">${esc(r.name)}</div><div class="small muted">${regionTracts(r.poly).length} tracts</div></div></div>`).join('')}${S.saved.length>1?'<div style="border-top:1px solid var(--line);margin:6px -6px 0;padding:8px 10px 2px"><button class="btn" data-act="compare">Compare first two</button></div>':''}</div>`:''}
@@ -363,30 +372,109 @@ async function mount(root,init){
  <details class="sec bx"><summary><h4>Outreach brief</h4><button class="btn" data-act="copy">Copy brief</button></summary><p style="margin:10px 0 0;line-height:1.6;text-wrap:pretty">${briefFor(t,D.comments)}</p></details>`}
  function regionBrief(tr,cs,silent){const pop=tr.reduce((s,t)=>s+t.pop,0);const ren=tr.reduce((s,t)=>s+t.renter*t.pop,0)/pop;const lep=tr.reduce((s,t)=>s+t.lep*t.pop,0)/pop;const tot=catTotals(cs,'raw').sort((a,b)=>b.tot-a.tot)[0];const ex=cs.find(c=>c.cat===tot.k);const sp=silent.reduce((s,t)=>s+t.pop,0);
  return `This area has ${H.src(fmt(pop)+' residents across '+tr.length+' tracts','ACS 5-year B01003 · total population')}, ${H.src(pct(ren)+' in renter households','ACS 5-year B25003')} and ${H.src(pct(lep)+' in limited-English households','ACS 5-year C16002')}. ${H.src(silent.length+' tracts with '+fmt(sp)+' residents','Pipeline · tracts with 0 comments or gap below −55%')} sent few or no comments. Among comments that were received, the most frequent topic is ${H.src(tot.n.toLowerCase(),'Comment '+(ex?ex.id:'')+' and '+(tot.count-1)+' others')}. A translated mailer and a session at a school in the area would reach the tracts listed above.`}
+ /* ---------- analytics: area info first, then the picked metrics (docs/METRICS.md) ---------- */
  function analyticsView(){
+  const C=D.cfg;const kind=S.tractDetail?'tract':(S.region&&S.region.poly==='city')?'city':'region';
   const reg=S.tractDetail?{name:D.byTract[S.tractDetail].nbhd,sub:'Tract '+S.tractDetail,poly:{tract:S.tractDetail}}:S.region;
-  const tr=regionTracts(reg.poly);const ids=new Set(tr.map(t=>t.id));const cs=D.comments.filter(c=>ids.has(c.tract));
-  const pop=tr.reduce((s,t)=>s+t.pop,0),exp=tr.reduce((s,t)=>s+t.exp,0);const gap=exp?Math.round((cs.length-exp)/exp*100):0;const silent=tr.filter(t=>t.n===0).length;
-  const adj=S.anMode==='adj';const share=list=>{const o={};CATS.forEach(c=>o[c.k]=0);const w=adj?weights(list,'pop'):list.map(()=>1);let n=0;list.forEach((c,i)=>{o[c.cat]+=w[i];n+=w[i]});CATS.forEach(c=>o[c.k]/=(n||1));return o};const keepRM=S.rmode;S.rmode=adj?'pop':'raw';
-  const rs=share(cs),city=share(D.comments);
-  const rows=CATS.map(c=>({k:c.k,n:c.n,r:rs[c.k],c:city[c.k],x:city[c.k]?rs[c.k]/city[c.k]:0,count:cs.filter(x=>x.cat===c.k).length})).sort((a,b)=>b.x-a.x);
-  const top=rows[0];const maxS=Math.max(...rows.map(r=>Math.max(r.r,r.c)),0.01);
-  const heat=v=>d3.interpolateRgb('#FBE9E4','#8E2A1C')(Math.min(1,v/0.4));
-  const areaList=[...S.saved.filter(r=>r!==S.region&&Array.isArray(r.poly)).map(r=>{const s2=new Set(regionTracts(r.poly).map(t=>t.id));return {name:r.name,cs:D.comments.filter(c=>s2.has(c.tract))}}),{name:reg.name,cs,me:1},{name:'All of San José',cs:D.comments}];
-  const colCats=CATS.slice(0,6);
-  const mode=t=>{const o={};D.comments.forEach(c=>{if(c.tract===t.id)o[c.cat]=(o[c.cat]||0)+1});const e=Object.entries(o).sort((a,b)=>b[1]-a[1])[0];return e?CATN[e[0]]:'—'};
-  const pctS=v=>Math.round(v*100)+'%';
-  return `<div class="body"><div class="an"><aside class="anside"><div class="mini" data-act="back" title="Back to map"><div class="map" id="mini"></div><span>← Back to map</span></div><div><h1>${esc(reg.name)}</h1><div class="small muted">${reg.sub?reg.sub+' · ':''}${ITEM.title}</div></div>
-  <div class="kv">${stat(fmt(pop),'residents')}${stat(tr.length,'tracts')}${stat(cs.length+'<small> / '+Math.round(exp)+'</small>','comments / expected')}${stat('<span style="color:var(--g4)">'+sgn(gap)+'%</span>','participation gap')}${stat(silent,'tracts with no comments')}</div></aside>
-  <div class="anmain">
-  <section class="card span2"><h4>Issues that stand out here</h4>${cs.length?`${reg.poly==='city'?(()=>{const b=[...rows].sort((p,q)=>q.r-p.r)[0];return `<p class="lead"><b style="font-weight:600">${b.n}</b> is the most common issue citywide: <b style="font-weight:600">${Math.round(b.r*100)}%</b> of ${adj?'bias-adjusted':'raw'} comments.</p>`})():`<p class="lead"><b style="font-weight:600">${top.n}</b> comes up <b style="font-weight:600">${top.x.toFixed(1)}×</b> as often here as citywide.</p>`}
-   <div class="xrow xh"><span></span><span><i class="sw" style="background:#B3412B"></i>This area <i class="sw" style="background:#B6B0A5;margin-left:10px"></i>Citywide</span><span>Share</span><span>vs city</span></div>
-   ${rows.map(r=>`<div class="xrow"><span>${r.n}</span><div class="xbars"><i style="width:${r.r/maxS*100}%;background:#B3412B"></i><i style="width:${r.c/maxS*100}%;background:#B6B0A5"></i></div><span class="num">${pctS(r.r)} vs ${pctS(r.c)}</span><span class="num" style="font-weight:${r.x>=1.3?600:400};color:${r.x>=1.3?'#8E2A1C':'var(--ink2)'}">${r.x.toFixed(1)}×</span></div>`).join('')}`:'<div class="small muted">No comments located in this area.</div>'}</section>
-  <section class="card"><h4>Issue share by area</h4><table class="ht"><thead><tr><th></th>${colCats.map(c=>`<th>${c.n.split(' ')[0].replace(/[&,]/g,'')}</th>`).join('')}</tr></thead><tbody>${areaList.map(a=>{const sh=share(a.cs);return `<tr style="${a.me?'font-weight:600':''}"><td>${esc(a.name)}</td>${colCats.map(c=>`<td style="background:${heat(sh[c.k])};color:${sh[c.k]>.24?'#fff':'var(--ink)'}">${pctS(sh[c.k])}</td>`).join('')}</tr>`}).join('')}</tbody></table><div class="small muted" style="margin-top:8px">Share of each area’s comments. Deeper red = larger share.</div></section>
-  <section class="card"><h4>Stance by issue</h4>${saidBars(cs)}<div class="stkey" style="border:0;padding-top:4px"><span>${stIco('support',9)}Support</span><span>${stIco('oppose',9)}Oppose</span><span>${stIco('neutral',9)}Neutral</span><span>${stIco('unclear',9)}Unclear</span></div></section>
-  <section class="card span2"><h4>Missing voices</h4><div class="small muted" style="margin:-6px 0 10px">Tracts sending the fewest comments relative to population. No comments located — unknown, not absent.</div>${[...tr].sort((a,b)=>(b.exp-b.n)-(a.exp-a.n)).slice(0,5).map((t,i)=>`<div class="mvl" data-act="seltract" data-t="${t.id}"><span class="rankn">${i+1}</span><div><b style="font-weight:600">${t.nbhd}</b> <span class="tid">${t.id}</span></div><div class="gbar"><div class="b"><i style="width:${Math.min(100,Math.abs(Math.min(0,t.gap)))}%;background:${t.n===0?`repeating-linear-gradient(45deg,${GAP[4]} 0 3px,#7B62B8 3px 4.5px)`:GAPM[gapBin(t)]}"></i></div></div><span class="num small">${t.n} of ${t.exp<1?t.exp.toFixed(1):Math.round(t.exp)}</span><div class="chips">${H.acs(t)}</div></div>`).join('')}</section>
-  <section class="card span2"><h4>Tracts in this area</h4><table class="ht tt"><thead><tr><th>Tract</th><th>Residents</th><th>Comments</th><th>Expected</th><th>Gap</th><th>Top issue</th></tr></thead><tbody>${[...tr].sort((a,b)=>a.gap-b.gap).slice(0,14).map(t=>`<tr><td><b style="font-weight:500">${t.nbhd}</b> <span class="tid">${t.id}</span></td><td>${fmt(t.pop)}</td><td>${t.n}</td><td>${Math.round(t.exp)}</td><td style="color:var(--g4);font-weight:500">${sgn(t.gap)}%</td><td>${mode(t)}</td></tr>`).join('')}</tbody></table>${tr.length>14?`<div class="small muted" style="margin-top:6px">+ ${tr.length-14} more tracts</div>`:''}</section>
-  </div></div></div>`+(S.rmode=keepRM,'')}
+  const tr=regionTracts(reg.poly);const ids=new Set(tr.map(t=>t.id));
+  const scope=kind==='city'?D.itemAll:D.itemAll.filter(c=>c.tract&&ids.has(c.tract));const located=scope.filter(c=>c.t);
+  const pop=tr.reduce((s,t)=>s+t.pop,0)||1,hh=tr.reduce((s,t)=>s+(t.households||0),0)||1;
+  const wavg=(L,f,w)=>{let a=0,b=0;L.forEach(t=>{const v=f(t);if(v!=null&&!isNaN(v)){a+=v*w(t);b+=w(t)}});return b?a/b:null};
+  const byPop=t=>t.pop,byHH=t=>t.households||0;const CT=D.tracts;
+  const P=(x,d=0)=>x==null?'—':(x*100).toFixed(d)+'%';const pp=x=>(x>0?'+':'')+(x*100).toFixed(1)+' pts';
+  const cmp=(here,city,f=P)=>kind==='city'?'':`<span class="small muted">city ${f(city)}</span>`;
+  const info=(v,l,sub)=>`<div class="stat"><b>${v}</b><span>${l}</span>${sub?`<span class="small muted" style="font-size:11px">${sub}</span>`:''}</div>`;
+  /* --- general area info --- */
+  const inc=kind==='tract'?tr[0].income:wavg(tr,t=>t.income,byPop);const incR=inc/D.medInc-1;
+  const incWord=incR>=0.1?'High':incR<=-0.1?'Low':'Average';
+  const eng=wavg(tr,t=>t.lang&&t.lang.english_only,byHH),engC=wavg(CT,t=>t.lang&&t.lang.english_only,byHH);
+  const lep=wavg(tr,t=>t.lep,byHH),lepC=wavg(CT,t=>t.lep,byHH);
+  const ren=wavg(tr,t=>t.renter,byPop),renC=wavg(CT,t=>t.renter,byPop);
+  const nw=wavg(tr,t=>t.nonwhite,byPop),nwC=wavg(CT,t=>t.nonwhite,byPop);
+  const isEPC=t=>['High','Higher','Highest'].includes(t.epc);const epcT=tr.filter(isEPC),epcPop=epcT.reduce((s,t)=>s+t.pop,0);
+  const p311=tr.reduce((s,t)=>s+t.p311,0);const p311rate=p311/pop*1000*12/D.m311;const p311C=CT.reduce((s,t)=>s+t.p311,0)/D.totPop*1000*12/D.m311;
+  const dists=[...new Set(tr.map(t=>t.district).filter(Boolean))].sort((a,b)=>a-b);
+  const areaCard=`<div class="kv">
+   ${info(fmt(pop),'residents',kind==='city'?'ACS 5-year '+D.acsYears:`${(pop/D.totPop*100).toFixed(1)}% of the city`)}
+   ${kind!=='tract'?info(fmt(tr.length),'census tracts',''):''}
+   ${info(fmt(Math.round(hh)),'households','')}
+   ${info(fmt(scope.length),'comments',`${ITEM.title}${kind==='city'?` · ${fmt(D.itemAll.filter(c=>c.mock).length)} simulated`:''}`)}
+   ${ITEM.n311?info(fmt(p311),'311 problem reports',`${p311rate.toFixed(0)} per 1,000 / yr${kind==='city'?'':' · city '+p311C.toFixed(0)}`):info('—','311 problem reports','none for this section')}
+   ${info(incWord,'median income',`${Math.abs(incR*100).toFixed(0)}% ${incR>=0?'above':'below'} the city tract median ($${fmt(Math.round(D.medInc))})${kind==='tract'?'':' · population-weighted'}`)}
+   ${info(P(eng),'English-only households',kind==='city'?'':'city '+P(engC))}
+   ${info(P(lep),'limited-English households',kind==='city'?'':'city '+P(lepC))}
+   ${info(P(ren),'renter households',kind==='city'?'':'city '+P(renC))}
+   ${info(P(nw),'residents not non-Hispanic white',kind==='city'?'':'city '+P(nwC))}
+   ${kind==='tract'?info(isEPC(tr[0])?tr[0].epc:'No','Equity Priority Community','MTC 2024'):info(`${epcT.length} of ${tr.length}`,'Equity Priority tracts',`${(epcPop/pop*100).toFixed(0)}% of residents · MTC 2024`)}
+   ${dists.length?info(dists.length>3?dists.length+' districts':'D'+dists.join(', D'),'council district',''):''}
+  </div>`;
+  /* --- shared pieces --- */
+  const small=n=>n<C.small_n?` <span class="nodata" title="Fewer than ${C.small_n} comments: read as a hint, not a measure"><i></i>small sample (${n})</span>`:'';
+  const bar=(w,col)=>`<i style="display:block;height:8px;width:${Math.max(1,Math.min(100,w))}%;background:${col}"></i>`;
+  const secOf=c=>c.catKey;const secLabel=k=>(ITEMS[k]||{}).title||k;
+  const share=(L,f)=>{const o={};L.forEach(c=>{const k=f(c);o[k]=(o[k]||0)+1});return o};
+  const sectionRows=(L,ref)=>{const here=share(L,secOf),city=share(ref,secOf);const ks=[...new Set([...Object.keys(here),...Object.keys(city)])];
+   return ks.map(k=>({k,n:here[k]||0,s:(here[k]||0)/Math.max(1,L.length),c:(city[k]||0)/Math.max(1,ref.length)})).sort((a,b)=>b.n-a.n||b.c-a.c)};
+  const subRows=L=>{const o={};L.forEach(c=>{const k=c.catKey+'|'+c.subKey;o[k]=(o[k]||0)+1});return Object.entries(o).map(([k,n])=>{const [ck,sk]=k.split('|');const cd=D.catDefs.find(x=>x.key===ck);return {ck,sk,n,l:(cd&&cd.subcategories.find(s=>s.key===sk)||{}).label||sk}}).sort((a,b)=>b.n-a.n)};
+  const conf=L=>{const v=L.map(c=>c.conf).filter(x=>x!=null);return {mean:v.length?v.reduce((a,b)=>a+b,0)/v.length:null,low:v.length?v.filter(x=>x<C.low_confidence).length/v.length:null,ai:L.filter(c=>c.engine==='bob').length,n:L.length,inh:L.filter(c=>c.inherited).length}};
+  const card=(title,body,span)=>`<section class="card${span?' span2':''}"><h4>${title}</h4>${body}</section>`;
+  const mix311=()=>{const o={};const keys=Object.keys(D.p311).filter(k=>k!=='all');keys.forEach(k=>{o[k]=tr.reduce((s,t)=>s+((D.p311[k]||{})[t.id]||0),0)});const tot=Object.values(o).reduce((a,b)=>a+b,0)||1;
+   return Object.entries(o).filter(x=>x[1]>0).sort((a,b)=>b[1]-a[1]).map(([k,n])=>`<div class="xrow" style="grid-template-columns:220px minmax(0,1fr) 120px"><span>${esc(D.p311Labels[k]||k)}</span><div class="xbars">${bar(n/tot*100,'#22877C')}</div><span class="num">${fmt(n)} · ${P(n/tot)}</span></div>`).join('')};
+  const c311=card('311 problem reports',`<p class="lead">${p311rate.toFixed(0)} problem reports per 1,000 residents per year${kind==='city'?'':` <span class="small muted">· city ${p311C.toFixed(0)}</span>`}</p><div class="small muted" style="margin:-6px 0 8px">All 311 problem types in this area (billing and account requests excluded). 311 is a separate family: never added to comment counts.</div>${mix311()}`);
+  const cf=conf(scope);const act=scope.filter(c=>c.actionable!=null),actY=act.filter(c=>c.actionable).length;
+  const cAI=card('How sure the AI labels are',`<div class="stats" style="grid-template-columns:repeat(3,1fr)">${stat(cf.mean==null?'—':(cf.mean*100).toFixed(0)+'%','average label confidence')}${stat(P(cf.low),'below '+(C.low_confidence*100)+'% confidence')}${stat(P(cf.n?cf.ai/cf.n:null),'labeled by the AI assistant')}</div><div class="small muted" style="margin-top:8px">Every section and stance label cites an exact quote from its comment (open any comment to see it highlighted). ${cf.inh?`${fmt(cf.inh)} form-letter copies reuse the label of their original after the quote was re-checked in each copy. `:''}Labels are not yet audited against human review.</div>`);
+  const cAct=`${stat(act.length?P(actY/act.length):'—','actionable')}`;
+  let main='';
+  if(kind==='city'){
+   const raw=ITEM.id==='all'?D.rawRows:null;const unk=scope.filter(c=>!c.t).length;
+   const sim=scope.filter(c=>c.mock).length;
+   main+=card('Public input',`<div class="stats" style="grid-template-columns:repeat(4,1fr)">${stat(fmt(scope.length),'comments (no copies)')}${raw!=null?stat(fmt(raw),'submissions incl. copies'):stat(fmt(located.length),'on the map')}${stat(P(unk/Math.max(1,scope.length)),'location unknown')}${cAct}</div><div class="small muted" style="margin-top:8px">${fmt(sim)} of ${fmt(scope.length)} comments are simulated emails; numbers that include them are illustrative. Actionable = reports a specific problem or asks for a specific city action, not just a vote position.</div>`,1);
+   /* comments per section, with subsections */
+   const secs=sectionRows(scope,scope);const subs=subRows(scope);const mx=Math.max(1,...secs.map(r=>r.n));
+   main+=card(ITEM.id==='all'?'Comments by section and subsection':'Comments by subsection',ITEM.id==='all'?secs.map(r=>`<div class="xrow" style="grid-template-columns:230px minmax(0,1fr) 110px"><span><a class="link" data-act="pickitem" data-id="${r.k}" style="font-size:12.5px">${esc(secLabel(r.k))}</a></span><div class="xbars">${bar(r.n/mx*100,'#7357B4')}</div><span class="num">${fmt(r.n)} · ${P(r.s)}</span></div><div class="small muted" style="margin:-3px 0 6px 0">${subs.filter(s=>s.ck===r.k).slice(0,3).map(s=>`${esc(s.l)} ${s.n}`).join(' · ')}</div>`).join(''):subs.map(s=>`<div class="xrow" style="grid-template-columns:260px minmax(0,1fr) 110px"><span>${esc(s.l)}</span><div class="xbars">${bar(s.n/Math.max(1,subs[0].n)*100,'#7357B4')}</div><span class="num">${s.n} · ${P(s.n/scope.length)}</span></div>`).join(''),1);
+   /* stance, policy sections only */
+   const pol=C.policy_sections.filter(k=>scope.some(c=>c.catKey===k));
+   main+=card('Support and opposition · policy sections',pol.length?pol.map(k=>{const L=scope.filter(c=>c.catKey===k);const n=L.length;const st=s=>L.filter(c=>c.stance===s).length;const S_=st('support'),O=st('oppose');const net=S_+O?Math.round((S_-O)/(S_+O)*100):null;
+    return `<div style="margin-bottom:10px"><div class="bl" style="display:flex;justify-content:space-between;font-size:12.5px"><span>${esc(secLabel(k))}</span><span class="num muted">${n} · net ${net==null?'—':sgn(net)}</span></div><div class="sbar" style="display:flex;height:9px;gap:1px">${STANCES.map(s=>`<i title="${stLabel[s]} ${st(s)}" style="flex:0 0 ${st(s)/n*100}%;background:${COL[s]}"></i>`).join('')}</div></div>`}).join('')+`<div class="stkey" style="border:0;padding-top:0">${STANCES.map(s=>`<span>${stIco(s,9)}${stLabel[s]}</span>`).join('')}</div><div class="small muted">Net = (support − oppose) ÷ (support + oppose). Service sections (streets, sanitation, other) are about problems, so no stance is shown for them.</div>`:'<div class="small muted">No policy section in view. Stance is shown only for policy sections.</div>');
+   /* volume over time */
+   const months={};scope.forEach(c=>{if(!c.when)return;const m=c.when.toISOString().slice(0,7);(months[m]=months[m]||{L:0,E:0})[c.src==='Letter'?'L':'E']++});const mk=Object.keys(months).sort();const mm=Math.max(1,...mk.map(m=>months[m].L+months[m].E));
+   const trend=mk.length>1?(()=>{const a=months[mk[mk.length-1]],b=months[mk[mk.length-2]];const x=a.L+a.E,y=b.L+b.E;return y?Math.round((x-y)/y*100):null})():null;
+   main+=card('Comment volume over time',`<div style="display:flex;align-items:flex-end;gap:4px;height:110px">${mk.map(m=>{const v=months[m];return `<div title="${m}: ${v.L} letters, ${v.E} emails" style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;height:100%"><i style="display:block;height:${v.E/mm*100}%;background:#E8957D"></i><i style="display:block;height:${v.L/mm*100}%;background:#8E2A1C"></i><span style="font-size:10px;color:var(--ink2);text-align:center">${m.slice(2)}</span></div>`}).join('')}</div><div class="stkey" style="border:0"><span><i class="sw" style="background:#8E2A1C;width:10px;height:8px;display:inline-block"></i>letters (real)</span><span><i class="sw" style="background:#E8957D;width:10px;height:8px;display:inline-block"></i>emails (simulated)</span>${trend!=null?`<span>last month ${sgn(trend)}% vs the month before</span>`:''}</div><div class="small muted">Real letters cover Jan–Feb 2025 (the PDFs ingested so far); simulated emails cover Aug–Oct 2026. Gaps are missing data, not quiet months.</div>`);
+   /* representation */
+   const locN=located.length||1;const ratio=t=>{const n=located.filter(c=>c.tract===t.id).length;return (n/locN)/(t.pop/D.totPop)};
+   const under=CT.filter(t=>ratio(t)<C.underrepresented_ratio);const uPop=under.reduce((s,t)=>s+t.pop,0);
+   const epcC=located.filter(c=>isEPC(c.t)).length/locN,epcP=CT.filter(isEPC).reduce((s,t)=>s+t.pop,0)/D.totPop;
+   main+=card('Who is represented',`<div class="stats" style="grid-template-columns:repeat(3,1fr)">${stat(P(under.length/CT.length),'tracts under-represented')}${stat(fmt(uPop),'residents in them')}${stat(P(uPop/D.totPop),'of residents')}</div>
+    <div class="small muted" style="margin:6px 0 10px">Under-represented = a tract's share of located comments is below ${C.underrepresented_ratio}× its share of residents (team setting). Based on the ${P(located.length/Math.max(1,scope.length))} of comments that could be located.</div>
+    <div class="stats" style="grid-template-columns:repeat(3,1fr)">${stat(P(epcC),'comments from Equity Priority tracts')}${stat(P(epcP),'residents in those tracts')}${stat((epcC/epcP).toFixed(2),'representation ratio')}</div><div class="small muted" style="margin-top:6px">1.0 = proportional, below 1 = under-represented. Equity Priority Communities: MTC 2024. These compare areas, not people.</div>${small(located.length)}`);
+   /* geographic concentration */
+   const conc=Object.keys(ITEMS).filter(k=>k!=='all').map(k=>{const L=located.filter(c=>c.catKey===k);if(L.length<5)return null;const o=share(L,c=>c.tract);const [tid,n]=Object.entries(o).sort((a,b)=>b[1]-a[1])[0];return {k,tid,n,N:L.length}}).filter(Boolean).sort((a,b)=>b.n/b.N-a.n/a.N);
+   main+=card('Where each section’s comments concentrate',conc.length?conc.map(r=>`<div class="xrow" style="grid-template-columns:220px minmax(0,1fr) 150px"><span>${esc(secLabel(r.k))}</span><div class="xbars">${bar(r.n/r.N*100,'#B3412B')}</div><span class="small"><a class="link" data-act="seltract" data-t="${r.tid}">${esc(D.byTract[r.tid].nbhd)}</a> · ${P(r.n/r.N)}</span></div>`).join('')+'<div class="small muted">Share of a section’s located comments that come from its single busiest tract. High = one neighborhood’s issue, not a citywide one. Sections with fewer than 5 located comments are left out.</div>':'<div class="small muted">Too few located comments to measure.</div>');
+   if(ITEM.n311)main+=c311;
+   main+=cAI;
+  }else{
+   /* per tract / drawn area */
+   const locN=D.comments.length||1;const cs=located;const cShare=cs.length/locN,pShare=pop/D.totPop;const rr=pShare?cShare/pShare:null;
+   main+=card('Comments from here',`<div class="stats" style="grid-template-columns:repeat(4,1fr)">${stat(fmt(cs.length),'comments located here')}${stat(P(cShare,1),'of the city’s located comments')}${stat(P(pShare,1),'of the city’s residents')}${stat(rr==null?'—':rr.toFixed(2),'representation ratio')}</div><div class="small muted" style="margin-top:8px">${rr==null?'':rr>=1?`Sends ${rr.toFixed(1)}× its population share of comments.`:rr<C.underrepresented_ratio?`Under-represented: below ${C.underrepresented_ratio}× its population share (team setting).`:'Below its population share.'} Only the ${ITEM.pct}% of comments that could be located count; silence can also mean a writer didn't say where they live.${small(cs.length)}</div>`,1);
+   const secs=sectionRows(cs,D.comments);
+   main+=card('What people here wrote about',cs.length?`<div class="xrow xh" style="grid-template-columns:220px minmax(0,1fr) 110px 70px"><span></span><span><i class="sw" style="background:#B3412B"></i>here <i class="sw" style="background:#B6B0A5;margin-left:8px"></i>citywide</span><span>share</span><span>gap</span></div>${secs.filter(r=>r.n||r.c>0.04).map(r=>`<div class="xrow" style="grid-template-columns:220px minmax(0,1fr) 110px 70px"><span>${esc(secLabel(r.k))}</span><div class="xbars">${bar(r.s*100,'#B3412B')}${bar(r.c*100,'#B6B0A5')}</div><span class="num">${P(r.s)} vs ${P(r.c)}</span><span class="num" style="color:${r.s-r.c>0.1?'#8E2A1C':'var(--ink2)'}">${pp(r.s-r.c)}</span></div>`).join('')}<div class="small muted">Gap = share here minus share citywide, in percentage points.${small(cs.length)}</div>`:'<div class="small muted">No comments located here — unknown, not absent.</div>',1);
+   /* languages */
+   const L5=['english_only','spanish','asian_pacific','other_indo_european','other'];const LN={english_only:'English only',spanish:'Spanish',asian_pacific:'Asian & Pacific Island',other_indo_european:'Other Indo-European',other:'Other'};
+   const hhS=k=>wavg(tr,t=>t.lang&&t.lang[k],byHH);const cl={english_only:cs.filter(c=>c.langCode==='en').length,spanish:cs.filter(c=>c.langCode==='es').length,asian_pacific:cs.filter(c=>c.langCode==='vi').length};
+   main+=card('Languages',`<div class="xrow xh" style="grid-template-columns:170px minmax(0,1fr) 140px 80px"><span></span><span><i class="sw" style="background:#5C5C58"></i>households <i class="sw" style="background:#B3412B;margin-left:8px"></i>comments</span><span>share</span><span>ratio</span></div>${L5.map(k=>{const h=hhS(k)||0;const c=cs.length&&cl[k]!=null?cl[k]/cs.length:null;const r=c!=null&&h>0?c/h:null;return `<div class="xrow" style="grid-template-columns:170px minmax(0,1fr) 140px 80px"><span>${LN[k]}</span><div class="xbars">${bar(h*100,'#5C5C58')}${c!=null?bar(c*100,'#B3412B'):''}</div><span class="num">${P(h)}${c!=null?' · '+P(c):''}</span><span class="num">${r==null?'—':r.toFixed(2)}</span></div>`}).join('')}<div class="small muted">Households by language spoken at home (ACS C16002) vs the language comments were written in. Ratio = comment share ÷ household share. Vietnamese is counted under Asian &amp; Pacific Island. Compares languages, not people.${small(cs.length)}</div>`);
+   /* participation, actionable, 311, AI */
+   const parts=new Set(cs.map(c=>c.participant||c.id)).size;const camp=cs.filter(c=>c.camp).length;
+   main+=card('Who is writing',`<div class="stats" style="grid-template-columns:repeat(3,1fr)">${stat(fmt(parts),'distinct writers')}${stat(parts?(cs.length/parts).toFixed(2):'—','comments per writer')}${stat(P(cs.length?camp/cs.length:null),'form-letter copies')}</div><div class="stats" style="grid-template-columns:repeat(3,1fr);margin-top:10px">${cAct}${stat(fmt(cs.filter(c=>c.commenter==='organization').length),'from organizations')}${stat(fmt(cs.filter(c=>c.mock).length),'simulated')}</div><div class="small muted" style="margin-top:8px">Writers are matched by an anonymous code; names and emails were removed at ingest. Actionable = reports a specific problem or asks for a specific city action.</div>`);
+   if(ITEM.n311)main+=c311;
+   main+=cAI;
+  }
+  if(kind!=='tract'){
+   const mode=t=>{const o={};D.comments.forEach(c=>{if(c.tract===t.id)o[c.cat]=(o[c.cat]||0)+1});const e=Object.entries(o).sort((a,b)=>b[1]-a[1])[0];return e?CATN[e[0]]:'—'};
+   main+=card('Missing voices',`<div class="small muted" style="margin:-6px 0 10px">Tracts sending the fewest comments relative to population. No comments located — unknown, not absent.</div>${[...tr].sort((a,b)=>(b.exp-b.n)-(a.exp-a.n)).slice(0,5).map((t,i)=>`<div class="mvl" data-act="seltract" data-t="${t.id}"><span class="rankn">${i+1}</span><div><b style="font-weight:600">${t.nbhd}</b> <span class="tid">${t.id}</span></div><div class="gbar"><div class="b"><i style="width:${Math.min(100,Math.abs(Math.min(0,t.gap)))}%;background:${t.n===0?`repeating-linear-gradient(45deg,${GAP[4]} 0 3px,#7B62B8 3px 4.5px)`:GAPM[gapBin(t)]}"></i></div></div><span class="num small">${t.n} of ${t.exp<1?t.exp.toFixed(1):Math.round(t.exp)}</span><div class="chips">${H.acs(t)}</div></div>`).join('')}`,1);
+   main+=card('Tracts in this area',`<table class="ht tt"><thead><tr><th>Tract</th><th>Residents</th><th>Comments</th><th>Expected</th><th>Gap</th><th>Top issue</th></tr></thead><tbody>${[...tr].sort((a,b)=>a.gap-b.gap).slice(0,14).map(t=>`<tr><td><a class="link" data-act="seltract" data-t="${t.id}" style="font-size:12px">${t.nbhd}</a> <span class="tid">${t.id}</span></td><td>${fmt(t.pop)}</td><td>${t.n}</td><td>${Math.round(t.exp)}</td><td style="color:var(--g4);font-weight:500">${sgn(t.gap)}%</td><td>${mode(t)}</td></tr>`).join('')}</tbody></table>${tr.length>14?`<div class="small muted" style="margin-top:6px">+ ${tr.length-14} more tracts</div>`:''}`,1);
+  }
+  return `<div class="body"><div class="an"><aside class="anside" style="overflow:auto"><div class="mini" data-act="back" title="Back to map"><div class="map" id="mini"></div><span>← Back to map</span></div><div><h1>${esc(reg.name)}</h1><div class="small muted">${reg.sub?reg.sub+' · ':''}${esc(ITEM.title)}</div></div>${areaCard}</aside>
+  <div class="anmain">${main}</div></div></div>`}
  function popBlock(){
   const isT=!!S.tractDetail;const reg=S.region;const t0=isT?D.byTract[S.tractDetail]:null;const city=!isT&&reg&&reg.poly==='city';
   const tr=isT?[t0]:regionTracts(reg.poly);const ids=new Set(tr.map(t=>t.id));const cs=D.comments.filter(c=>ids.has(c.tract));
@@ -398,6 +486,7 @@ async function mount(root,init){
   const row=(v,l,sm)=>`<div class="prow"><b>${v}</b><div><div class="pl">${l}</div>${sm?`<div class="ps">${sm}</div>`:''}</div></div>`;
   const vs=(a,b)=>`${pct(a)} citywide${a>0&&b/a>=1.25?` · ${(b/a).toFixed(1)}× higher here`:''}`;
   let rows='';
+  rows+=row(fmt(pop),'residents',isT?`${(pop/D.totPop*100).toFixed(2)}% of the city · ${t0.households?fmt(t0.households)+' households':''}`:city?'ACS 5-year '+D.acsYears:`${tr.length} tracts · ${(pop/D.totPop*100).toFixed(1)}% of the city`);
   if(city){const rk=ranks(D.comments,S.attr);rows+=row(fmt(D.located),'comments on the map',`${ITEM.pct}% of ${fmt(ITEM.total)} received could be located`);
    rows+=row(CATN[topK[0]],'top issue, raw count',`Population-weighted, the top issue is ${(rk.find(r=>r.pop===1)||{}).n}`);
    rows+=row(`${silent.length}`,'tracts with no comments',`${fmt(sPop)} residents · unknown, not absent`);}
@@ -423,33 +512,43 @@ async function mount(root,init){
   if(S.compare&&S.regions.length>1)return `<div style="display:grid;grid-template-columns:1fr 1fr;min-height:0;flex:1"><div class="scroll" style="border-right:1px solid var(--line)">${regionBlock(S.regions[0],true)}</div><div class="scroll">${regionBlock(S.regions[1],true)}</div></div>`;
   return `<div class="scroll">${regionBlock(S.region)}</div>`}
 
- /* Offline answer engine: retrieval over the ingested comments only. Every claim cites comment ids; when
-    nothing matches it says so rather than guessing. Scope = the section, narrowed to the drawn area or tract. */
- const STOP=new Set('what which who whom whose where when why how does do did done is are was were be been being the a an and or of to in on at for from with about into over under this that these those here there their them they residents resident people say says said think thinks feel want wants comments comment show tell me us our your any some all much many more most please can could would should area tract region city san jose josé'.split(' '));
- function answerQ(q,cs,useR){const terms=(q.toLowerCase().match(/[a-záéíóúñđàảãạăắằẳẵặâấầẩẫậêếềểễệôốồổỗộơớờởỡợưứừửữựýỳỷỹỵ0-9]+/g)||[]).filter(w=>w.length>=4&&!STOP.has(w));
-  const stem=w=>w.replace(/(ies|es|s)$/,'');const ts=[...new Set(terms.map(stem))];const where=useR?(S.tractDetail?' located in '+esc(D.byTract[S.tractDetail].nbhd):' located in the area you drew'):'';
-  const hit=c=>{const tx=(c.subject+' '+c.text).toLowerCase();return ts.filter(t=>tx.includes(t)).length};
-  const scored=ts.length?cs.map(c=>[c,hit(c)]).filter(x=>x[1]>0).sort((a,b)=>b[1]-a[1]):[];
-  const out=[`<div class="mu">${esc(q)}</div>`];
-  if(!scored.length){const other=ts.length?D.voice.filter(c=>c.t&&!cs.includes(c)&&hit(c)>0).length:0;
-   out.push(`<div class="ma refuse"><div class="rt">No supporting comments</div><p style="margin:0">None of the ingested comments in this section${where} mention ${ts.length?esc(ts.join(', ')):'that'}, so I can’t answer this from the comments.${other?` ${other} located comment${other===1?'':'s'} in other sections or areas do.`:''}</p></div>`);return out}
-  const hits=scored.map(x=>x[0]);const by={};hits.forEach(c=>by[c.cat]=(by[c.cat]||0)+1);const top=Object.entries(by).sort((a,b)=>b[1]-a[1]);
-  const st={};hits.forEach(c=>st[c.stance]=(st[c.stance]||0)+1);const sim=hits.filter(c=>c.mock).length;
-  const seen=new Set(),pick=[];for(const c of hits){if(pick.length>=3)break;if(!seen.has(c.text)){seen.add(c.text);pick.push(c)}}
-  out.push(`<div class="ma"><div class="who">Assistant</div>${useR?'<div class="inarea">'+(S.tractDetail?'In '+esc(D.byTract[S.tractDetail].nbhd):'In the area you drew')+'</div>':''}<p>${hits.length} comment${hits.length===1?'':'s'}${where} mention${hits.length===1?'s':''} ${esc(ts.length>1?ts.slice(0,-1).join(', ')+' or '+ts[ts.length-1]:ts[0])}. Most fall under ${esc(CATN[top[0][0]]||top[0][0])}${top[1]?` (${top[0][1]}), then ${esc(CATN[top[1][0]]||top[1][0])} (${top[1][1]})`:''}. Stance: ${STANCES.filter(k=>st[k]).map(k=>`${st[k]} ${k}`).join(', ')}.${sim?` ${sim} of them are simulated emails.`:''}</p><div class="cites">${pick.map(c=>H.cite(c)).join('')}</div>${pick.map(c=>S.openCite===c.id?`<div class="inl">“${esc(c.evq||clip(c.text,300))}”</div>`:'').join('')}</div>`);return out}
- function chatTab(compact){const drawn=!!S.region&&Array.isArray(S.region.poly);const useR=S.chatRegion&&(drawn||!!S.tractDetail);const tr=S.tractDetail?[D.byTract[S.tractDetail]]:drawn?regionTracts(S.region.poly):[];const ids=new Set(tr.map(t=>t.id));const cs=useR?D.comments.filter(c=>ids.has(c.tract)):D.comments;const by=k=>cs.filter(c=>c.cat===k);const tops=catTotals(cs,'raw').sort((a,b)=>b.count-a.count);const t1=tops[0],t2=tops[1];const pick=(a,n)=>{const s=new Set(),o=[];for(const c of a){if(o.length>=n)break;if(!s.has(c.text)){s.add(c.text);o.push(c)}}return o};const ph=cs.filter(c=>c.photo).slice(0,4);
- const inArea=!useR?'':S.tractDetail?`<div class="inarea">In ${esc(D.byTract[S.tractDetail].nbhd)}</div>`:'<div class="inarea">In the area you drew</div>';
- const open=S.openCite;const card=id=>{if(open!==id)return '';const c=D.comments.find(x=>x.id===id);return `<div class="inl"><div class="crow" style="margin-bottom:4px"><span class="st ${c.stance}">${stIco(c.stance,10)}${stLabel[c.stance]}</span><span class="cat">${CATN[c.cat]}</span><span>${c.t.nbhd} · ${c.tract}</span></div>“${esc(c.evq||clip(c.text,300))}”${c.langCode&&c.langCode!=='en'?`<div class="small muted">${c.lang}, not translated</div>`:''}<div style="margin-top:6px"><button class="link" data-act="inspect" data-id="${c.id}">Open full comment</button></div></div>`};
- const cites=a=>`<div class="cites">${a.map(c=>H.cite(c)).join('')}</div>${a.map(c=>card(c.id)).join('')}`;
- const xa=pick(by(t1.k),3),la=pick(by(t2.k),2);
- const msgs=[`<div class="mu">What are the top concerns here?</div>`,
- `<div class="ma${t1.count?'':' refuse'}">${t1.count?'<div class="who">Assistant</div>':'<div class="rt">No supporting comments</div>'}${inArea}${t1.count?`<p>The most frequent topic is ${t1.n.toLowerCase()}, with ${t1.count} comment${t1.count===1?'':'s'}.</p>${cites(xa)}${t2&&t2.count?`<p style="margin-top:10px">${t2.n} comes second, with ${t2.count}.</p>${cites(la)}`:''}`:`<p style="margin:0">No comments on this item${useR?' were located '+(S.tractDetail?'in this tract':'in the area you drew'):''}, so there is nothing to summarize.</p>`}</div>`,
- ...(compact?[]:[`<div class="mu">Show me photos residents attached.</div>`,
- `<div class="ma"><div class="who">Assistant</div>${inArea}<p>${ph.length?ph.length+' comments list photo attachments. Photos stay withheld until faces and license plates are redacted.':'None of these comments include photos.'}</p><div class="thumbs" style="margin-bottom:6px">${ph.map(c=>H.thumb(CATN[c.cat].split(' ')[0].toLowerCase()+' · '+c.t.nbhd,c.id)).join('')}</div>${cites(ph.slice(0,2))}</div>`,
- ...answerQ('What do residents here say about library hours?',cs,useR)]),...S.chatExtra];
- const ctx=S.tractDetail?D.byTract[S.tractDetail].nbhd:S.region?S.region.name:null;S._scope={cs,useR};
- return `${ctx?`<div class="ctxbar"><div style="min-width:0"><div class="small muted">${S.tractDetail?'Tract':'Region'}</div><div style="font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(ctx)}</div></div><button class="btn" data-act="analytics">View analytics</button></div>`:''}<div class="scroll"><div class="msgs">${msgs.join('')}</div></div><div class="compose"><div class="notice"><i></i>Answers only from ingested comments on this item. Not public-facing.</div><div class="cbox">${useR?`<div><span class="composer-chip">${S.tractDetail?'Tract: '+esc(D.byTract[S.tractDetail].nbhd):'Region: '+esc(S.region.name.split(' — ')[0])+' — '+tr.length+' tracts'}<button data-act="rmchip" aria-label="Remove region">×</button></span></div>`:''}<textarea rows="2" placeholder="Ask about this item or the area you drew"></textarea><div class="r"><span></span><button class="btn pri" style="height:30px" data-act="send">Send</button></div></div></div>`}
-
+ /* ---------- chat: the in-app assistant (IBM Bob behind /api/assistant, search fallback in static builds) ---------- */
+ function chatScope(){const drawn=!!S.region&&Array.isArray(S.region.poly);const useR=S.chatRegion&&(drawn||!!S.tractDetail);
+  const tr=S.tractDetail?[D.byTract[S.tractDetail]]:drawn?regionTracts(S.region.poly):[];const ids=new Set(tr.map(t=>t.id));
+  const cs=useR?D.itemAll.filter(c=>c.tract&&ids.has(c.tract)):D.itemAll;
+  const label=S.tractDetail?`${D.byTract[S.tractDetail].nbhd} (tract ${S.tractDetail})`:useR?S.region.name:'All of San José';
+  return {useR,tr,cs,label}}
+ function chatNumbers(sc){const cs=sc.cs;const cnt=f=>{const o={};cs.forEach(c=>{const k=f(c);o[k]=(o[k]||0)+1});return o};
+  const T=sc.useR?sc.tr:D.tracts;const pop=T.reduce((s,t)=>s+t.pop,0);const by={};Object.keys(D.p311).filter(k=>k!=='all').forEach(k=>{by[D.p311Labels[k]||k]=T.reduce((s,t)=>s+((D.p311[k]||{})[t.id]||0),0)});
+  const tot=Object.values(by).reduce((a,b)=>a+b,0);
+  return {scope:sc.label,section:ITEM.title,
+   voice:{comments_no_copies:cs.length,located:cs.filter(c=>c.t).length,simulated:cs.filter(c=>c.mock).length,by_section:cnt(c=>(ITEMS[c.catKey]||{}).title||c.catKey),by_stance:cnt(c=>c.stance),by_channel:cnt(c=>c.src),actionable:cs.filter(c=>c.actionable).length},
+   requests_311:{problem_reports:tot,residents:pop,per_1000_per_year:pop?+(tot/pop*1000*12/D.m311).toFixed(1):null,by_category:by,months:D.m311}}}
+ function chatText(txt){let h=esc(txt||'').replace(/\n{2,}/g,'</p><p>').replace(/\n/g,'<br>');
+  return h.replace(/\[\[([^\]]+)\]\]/g,(m,id)=>{if(id.startsWith('metric:')){const k=id.slice(7);const mm=(D.metrics||{})[k];return `<span class="cite" data-src="Metric ${esc(k)}${mm?' · '+esc(mm.name):''}"><code>${esc(k)}</code><span class="tn">${mm?esc(clip(mm.name,28)):'metric'}</span></span>`}
+   if(id.startsWith('file:')){const f=id.slice(5);return `<span class="cite" data-src="${esc(f)}"><span class="tn">source · ${esc(clip(f.replace(/^public\/data\//,'').replace(/^data\//,''),34))}</span></span>`}
+   const c=D.voice.find(x=>x.id===id);return c?H.cite(c):''})}
+ const ACT_LABEL={select_section:a=>'opened '+((ITEMS[a.id]||{}).title||a.id),set_scheme:a=>'switched the map to '+({voice:'Voice',prob:'Problems',gap:'Underheard'}[a.id]||a.id),zoom_tract:a=>'zoomed to '+((D.byTract[a.id]||{}).nbhd||a.id),open_analytics:a=>'opened '+a.scope+' analytics',open_comment:a=>'opened comment '+a.id,filter_stance:a=>'filtered stance to '+(a.ids||[]).join(', ')};
+ function runActions(acts){let zoom=null;(acts||[]).forEach(a=>{
+  if(a.type==='select_section'&&ITEMS[a.id]){setItem(a.id);S.cats={}}
+  else if(a.type==='set_scheme'){S.scheme=a.id;S.sbs=false;S.view='main'}
+  else if(a.type==='zoom_tract'&&D.byTract[a.id]){S.view='main';S.selTract=a.id;S.tractDetail=a.id;S.modal=true;zoom=a.id}
+  else if(a.type==='open_analytics'){if(a.scope==='city'){S.tractDetail=null;S.region={name:'All of San José',poly:'city'};S.regions=[S.region]}S.view='analytics';S.modal=false}
+  else if(a.type==='open_comment'){const c=D.voice.find(x=>x.id===a.id);if(c)S.inspector=c}
+  else if(a.type==='filter_stance'&&Array.isArray(a.ids)){STANCES.forEach(s=>S.stance[s]=a.ids.includes(s)?1:0)}});return zoom}
+ async function sendChat(q){q=(q||'').trim();if(!q||S.chatBusy)return;const sc=chatScope();const entry={q,pending:true,scope:sc.label};S.chat.push(entry);S.chatBusy=true;render();
+  const comments=sc.cs.map(c=>({id:c.id,text:c.text,subject:c.subject,section:(ITEMS[c.catKey]||{}).title||c.catKey,subsection:CATN['sub:'+c.subKey]||(D.catDefs.find(x=>x.key===c.catKey)?.subcategories.find(s=>s.key===c.subKey)||{}).label||'',stance:c.stance,lang:c.lang,mock:c.mock,nbhd:c.t?c.t.nbhd:'',tract:c.tract,evq:c.evq}));
+  const history=S.chat.filter(e=>!e.pending&&e.res).slice(-3).map(e=>({q:e.q,text:e.res.text}));
+  let res;try{res=await askAssistant({question:q,scopeLabel:sc.label,sectionTitle:ITEM.title,comments,numbers:chatNumbers(sc),history,regionTracts:sc.useR?sc.tr.map(t=>t.id):undefined})}catch(e){res={text:'',cited:[],engine:'search',note:'Something went wrong. Try again.'}}
+  entry.pending=false;entry.res=res;S.chatBusy=false;const zoom=runActions(res.actions);entry.did=(res.actions||[]).map(a=>(ACT_LABEL[a.type]||(()=>a.type))(a));render();
+  if(zoom)maps.forEach(m=>m.zoomTo(D.byTract[zoom]));const sc2=document.querySelector('.rpanel .scroll');if(sc2)sc2.scrollTop=sc2.scrollHeight}
+ function chatTab(){const sc=chatScope();const ctx=S.tractDetail?D.byTract[S.tractDetail].nbhd:S.region?S.region.name:null;
+  const sugg=sc.useR?['What are people here most concerned about?','Who are we not hearing from here?','How many 311 reports come from here, and what kind?','Open analytics for this area']:['What are the top concerns citywide?','Which neighborhoods report many problems but send few comments?','Show me the Underheard map','How is the fairness number computed?'];
+  const msgs=S.chat.map(e=>`<div class="mu">${esc(e.q)}</div>${e.pending?`<div class="ma"><div class="who">Assistant</div><p class="muted"><span class="skel" style="display:inline-block;width:10px;height:10px;border-radius:50%;vertical-align:-1px"></span> Working on it… looking through comments and app data for ${esc(e.scope)}</p></div>`:
+   (()=>{const r=e.res||{};const body=r.text?`<p>${chatText(r.text)}</p>`:'';const note=r.note?`<p class="small muted" style="margin:0">${esc(r.note)}</p>`:'';const did=e.did&&e.did.length?`<div class="small" style="color:#33205F;margin-top:4px">Did: ${esc(e.did.join(' · '))}</div>`:'';
+    return `<div class="ma${!r.text&&!did?' refuse':''}"><div class="who">Assistant${r.engine==='search'?' · search only':''}</div>${body||note?body+note:'<p class="muted" style="margin:0">No answer.</p>'}${did}</div>`})()}`).join('');
+  const empty=`<div class="ma"><div class="who">Assistant</div><p style="margin:0 0 8px">Ask about comments, 311 reports, neighborhoods, metrics, or how a number is computed. I can also move around the app: open a section, switch the map, zoom to a tract, open analytics.</p><div style="display:flex;flex-direction:column;gap:6px">${sugg.map(s=>`<button class="btn" style="justify-content:flex-start;height:auto;min-height:30px;padding:5px 10px;text-align:left;white-space:normal" data-act="suggest" data-q="${esc(s)}">${esc(s)}</button>`).join('')}</div></div>`;
+  return `${ctx?`<div class="ctxbar"><div style="min-width:0"><div class="small muted">${S.tractDetail?'Tract':'Region'}</div><div style="font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(ctx)}</div></div><button class="btn" data-act="analytics">View analytics</button></div>`:''}<div class="scroll"><div class="msgs">${S.chat.length?msgs:empty}</div></div><div class="compose"><div class="notice"><i></i>Answers come only from the comments and data in this app, with sources. Not public-facing.</div><div class="cbox">${sc.useR?`<div><span class="composer-chip">${S.tractDetail?'Tract: '+esc(D.byTract[S.tractDetail].nbhd):'Region: '+esc(S.region.name.split(' — ')[0])+' — '+sc.tr.length+' tracts'}<button data-act="rmchip" aria-label="Remove region">×</button></span></div>`:''}<textarea rows="2" placeholder="Ask anything about this app's data" ${S.chatBusy?'disabled':''}></textarea><div class="r"><span>${S.chat.length?'<button class="link" data-act="clearchat">Clear</button>':''}</span><button class="btn pri" style="height:30px" data-act="send" ${S.chatBusy?'disabled':''}>${S.chatBusy?'Working…':'Send'}</button></div></div></div>`}
  function rightPanel(){const tabs=[['chat','Chat',ICON.chat]];S.tab='chat';
  if(!S.right)return `<aside class="rpanel col"><div class="iconrail"><button data-act="right" aria-label="Expand panel">${ICON.chevL}</button>${tabs.map(t=>`<button class="${S.tab===t[0]?'on':''}" data-act="tab" data-v="${t[0]}" title="${t[1]}">${t[2]}</button>`).join('')}</div></aside>`;
  let body='';
@@ -542,7 +641,7 @@ async function mount(root,init){
   case 'scheme':S.scheme=v;S.sbs=false;break;
   case 'sbs':S.sbs=!S.sbs;S.drawer=false;break;
   case 'menu':S.menu=S.menu===a.dataset.m?null:a.dataset.m;break;
-  case 'pickitem':S.menu=null;S.state=null;setItem(a.dataset.id);S.selTract=null;S.tractDetail=null;S.cats={};S.mvOpen=-1;S.chatExtra=[];S.openCite=null;break;
+  case 'pickitem':S.menu=null;S.state=null;setItem(a.dataset.id);if(S.view==='analytics'){render();return}S.selTract=null;S.tractDetail=null;S.cats={};S.mvOpen=-1;S.chatExtra=[];S.openCite=null;break;
   case 'loadregion':S.menu=null;S.tractDetail=null;S.selTract=null;{const r=S.saved[+a.dataset.i];S.region=r;S.regions=[r];S.compare=false;S.modal=true;S.right=true}break;
   case 'compare':S.menu=null;S.regions=S.saved.slice(0,2);S.region=S.regions[0];S.compare=true;S.modal=true;S.sbs=false;break;
   case 'draw':S.armed=!S.armed;S.sbs=false;S.hint=S.armed?'Click to place the first point':null;S.preDraw=false;break;
@@ -571,16 +670,21 @@ async function mount(root,init){
   case 'save':if(S.region&&!S.saved.includes(S.region))S.saved.push(S.region);break;
   case 'rename':{const i=document.querySelector('.rname');if(i){i.focus();i.select()}return}
   case 'del':S.modal=false;S.tractDetail=null;S.region={name:'All of San José',poly:'city'};S.regions=[S.region];S.compare=false;S.tab='missing';break;
-  case 'docksend':{const q=(document.querySelector('.dockin')||{}).value||'';S.tab='chat';S.chatRegion=!!S.region;if(q.trim()){const sc=S._scope||{cs:D.comments,useR:false};S.chatExtra.push(...answerQ(q.trim(),sc.cs,sc.useR))}}break;
+  case 'docksend':{const q=(document.querySelector('.dockin')||{}).value||'';S.tab='chat';sendChat(q)}return;
   case 'untract':S.tractDetail=null;S.selTract=null;S.modal=!!S.region;break;
   case 'anmode':S.anMode=v;break;
   case 'closemodal':S.modal=false;break;
   case 'analytics':S.view='analytics';S.modal=false;break;
+  case 'cityan':S.tractDetail=null;S.selTract=null;S.region={name:'All of San José',poly:'city'};S.regions=[S.region];S.compare=false;S.view='analytics';S.modal=false;S.menu=null;break;
   case 'back':S.view='main';S.modal=true;break;
-  case 'send':{const ta=document.querySelector('.cbox textarea');const q=ta.value.trim();if(!q)return;{const sc=S._scope||{cs:D.comments,useR:false};S.chatExtra.push(...answerQ(q,sc.cs,sc.useR))}}break;
+  case 'send':{const ta=document.querySelector('.cbox textarea');const q=ta?ta.value:'';sendChat(q)}return;
+  case 'suggest':sendChat(a.dataset.q);return;
+  case 'clearchat':S.chat=[];break;
   }
   render();
  });
+ stage.addEventListener('keydown',e=>{if(e.target.matches&&e.target.matches('.cbox textarea')&&e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChat(e.target.value)}});
+ stage.addEventListener('toggle',e=>{if(e.target.classList&&e.target.classList.contains('mapkey'))S_KEY.open=e.target.open},true);
  stage.addEventListener('change',e=>{const a=e.target.dataset.actChange;if(a==='attr'){S.attr=e.target.value;render()}});
  stage.addEventListener('input',e=>{if(e.target.classList.contains('rname')&&S.region){S.region.name=e.target.value;const n=document.querySelector('.rhandle .nm');if(n)n.lastChild.textContent=e.target.value}});
  stage.addEventListener('mouseover',e=>{const df=e.target.closest('[data-def]');if(df){const r=df.getBoundingClientRect();srcTip.innerHTML=esc(df.dataset.def);srcTip.style.display='block';srcTip.style.left=r.left+'px';srcTip.style.top=(r.bottom+8)+'px';srcTip.dataset.fixed='1';return}const q=e.target.closest('[data-hover]');if(q&&maps[0]){maps[0].pulse(D.comments.find(c=>c.id===q.dataset.hover))}const s=e.target.closest('[data-src]');if(s){srcTip.innerHTML='Source: <code>'+esc(s.dataset.src)+'</code>';srcTip.style.display='block'}});

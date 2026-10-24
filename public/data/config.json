@@ -1,0 +1,10 @@
+{
+  "_note": "Team settings. These cutoffs are policy choices made by the team, not computed by the app or chosen by AI. Change them here.",
+  "underrepresented_ratio": 0.5,
+  "underrepresented_ratio_note": "A tract is under-represented when its share of located comments is below this fraction of its share of residents.",
+  "policy_sections": ["housing_affordability_policy", "governance_civic_rights", "environment_development_review", "public_safety_emergency_response", "code_enforcement_habitability"],
+  "policy_sections_note": "Stance (support/oppose) is shown only for these sections; service-request sections (streets, sanitation, other) are about problems, not positions.",
+  "low_confidence": 0.8,
+  "small_n": 10,
+  "small_n_note": "Ratios computed from fewer comments than this are shown with a 'small sample' warning."
+}

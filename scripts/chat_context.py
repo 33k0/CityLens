@@ -81,7 +81,8 @@ def main() -> int:
              "nonwhite": "non-white share", "spanish": "Spanish-speaking households", "asian_pacific": "Asian/Pacific-language households",
              "epc": "Equity Priority Community"}
     outs = {"voice_per_1k": "comments per 1,000 (voice)", "p311_per_1k_yr": "311 problem reports per 1,000 a year (all)"}
-    outs |= {f"p311_{k}_per_1k_yr": f"311 reports per 1,000 a year: {k}" for k in cats if t[f"p311_{k}_per_1k_yr"].fillna(0).sum() > 0}
+    lab = {c["key"]: c["label"] for c in com["categories"]}
+    outs |= {f"p311_{k}_per_1k_yr": f"311 reports per 1,000 a year: {lab[k]}" for k in cats if t[f"p311_{k}_per_1k_yr"].fillna(0).sum() > 0}
     res = []
     d = t[t["pop"] > 0]
     for a, al in attrs.items():

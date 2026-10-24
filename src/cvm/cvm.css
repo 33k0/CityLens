@@ -512,3 +512,19 @@ details.mapkey .kr .ramp div{height:7px}
 .mvc{display:grid;grid-template-columns:minmax(0,1fr) 54px;gap:8px;align-items:center}.mvc>div{height:8px;background:#F2F2EF;border-radius:0 4px 4px 0}
 .mvc>div i{display:block;height:100%;border-radius:0 4px 4px 0}.mvc b{font-size:12.5px;font-weight:500;text-align:right;font-variant-numeric:tabular-nums}
 .lbl .lbln{font-weight:400;color:var(--ink2);margin-left:6px;font-size:11px;text-transform:none;letter-spacing:0}
+/* who we are not hearing from: readable table */
+.mvkey{font-size:12px;color:var(--ink2);margin:2px 0 10px;line-height:1.9}
+.mvtab{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.mvtab th{font-size:12px;font-weight:500;color:var(--ink);text-align:right;padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:bottom;white-space:nowrap}
+.mvtab th em{display:block;font-style:normal;font-weight:400;font-size:11px;color:var(--ink2);margin-top:2px}
+.mvtab th.srt{cursor:pointer}.mvtab th.srt:hover{color:#000;text-decoration:underline}
+.mvtab th.on{color:#000;font-weight:600}
+.mvtab .l{text-align:left;padding-left:4px}
+.mvtab td{padding:11px 12px;border-bottom:1px solid #F0F0EC;text-align:right;font-size:13px;white-space:nowrap}
+.mvtab td b{font-weight:600;font-size:14px}
+.mvtab td.l b{font-size:13.5px}
+.mvtab tbody tr{cursor:pointer}.mvtab tbody tr:hover{background:#FAFAF8}
+.mvtab .epc{display:inline-block;margin-left:8px;font-size:10.5px;padding:1px 6px;border-radius:3px;background:#EFEAF8;color:#5B3FA0;vertical-align:1px}
+.vs{display:inline-block;margin-left:8px;font-size:11px;padding:1px 6px;border-radius:10px;font-weight:500;min-width:52px;text-align:center}
+.vs.hi{background:#FBE3D6;color:#9A3A12}.vs.md{background:#FDF1DC;color:#8A5A0B}.vs.lo{background:#F0F0EC;color:#6B6B66}
+.mvkey .vs{margin:0 2px;min-width:0}

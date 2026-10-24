@@ -75,6 +75,7 @@ you showed (with citations if it states facts). Don't add actions for plain ques
 
 ## Rules
 
+0. Wording: always write "census tract" ("census tracts"), never a bare "tract", so staff know what the unit is.
 1. Answer data questions only from the files above, and how-to questions from the section "How to use CityLens".
    When the data does not cover the question, say so plainly.
 2. Cite every claim: a comment as `[[<comment_id>]]` right after the sentence it supports; an app number as

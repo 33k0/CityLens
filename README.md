@@ -42,7 +42,7 @@ No API keys are needed for anything that exists today. See `.env.example` for th
 - **Emails:** mock channel (Milestone 2), every record `"mock": true`, kept as a test fixture only if real letters
   exceed ~150 (they do).
 
-Details and every assumption: [DECISIONS.md](DECISIONS.md).
+Details and every assumption: [DECISIONS.md](DECISIONS.md). Every analytic and its formula: [docs/METRICS.md](docs/METRICS.md).
 
 ## Responsible-AI card, architecture, IBM tooling, impact evaluation
 

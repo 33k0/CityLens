@@ -59,6 +59,7 @@ def main() -> int:
     if cls is not None:
         # classify.py owns these fields; its duplicate_of/language win when set, else keep the ingest values
         voice = voice.merge(cls, on="comment_id", how="left", suffixes=("", "_cls"))
+        voice = voice.drop(columns=[c for c in voice.columns if c.endswith("_cls") and c[:-4] not in ("duplicate_of", "language")])
         for c in ("duplicate_of", "language"):
             if f"{c}_cls" in voice.columns:
                 newer = voice[f"{c}_cls"].fillna("").astype(str)

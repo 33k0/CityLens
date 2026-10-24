@@ -656,7 +656,7 @@ async function mount(root,init){
   case 'scheme':S.scheme=v;S.sbs=false;break;
   case 'sbs':S.sbs=!S.sbs;S.drawer=false;break;
   case 'menu':S.menu=S.menu===a.dataset.m?null:a.dataset.m;break;
-  case 'pickitem':S.menu=null;S.state=null;setItem(a.dataset.id);if(S.view==='analytics'){render();return}S.selTract=null;S.tractDetail=null;S.cats={};S.mvOpen=-1;S.chatExtra=[];S.openCite=null;break;
+  case 'pickitem':S.menu=null;S.state=null;setItem(a.dataset.id);if(S.view==='analytics'){S.view='main';S.modal=false}S.selTract=null;S.tractDetail=null;S.cats={};S.mvOpen=-1;S.chatExtra=[];S.openCite=null;break;
   case 'loadregion':S.menu=null;S.tractDetail=null;S.selTract=null;{const r=S.saved[+a.dataset.i];S.region=r;S.regions=[r];S.compare=false;S.modal=true;S.right=true}break;
   case 'compare':S.menu=null;S.regions=S.saved.slice(0,2);S.region=S.regions[0];S.compare=true;S.modal=true;S.sbs=false;break;
   case 'draw':S.armed=!S.armed;S.sbs=false;S.hint=S.armed?'Click to place the first point':null;S.preDraw=false;break;

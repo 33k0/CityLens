@@ -358,29 +358,12 @@ export function validateActions(list) {
         v = { type: a.type, scope: String(a.scope) }
         if (a.section && (a.section === 'all' || sectionKeys().has(String(a.section)))) v.section = String(a.section)
       } break
-      case 'set_view': if (['sbs', 'map'].includes(id)) v = { type: a.type, id }; break
       case 'select_district': { const t = areaIndex().districts[String(parseInt(id, 10))]; if (t?.length) v = { type: a.type, id: String(parseInt(id, 10)), tracts: t } } break
       case 'select_area': { const ar = findArea(a.name ?? a.id); if (ar) v = { type: a.type, name: ar.name, tracts: ar.tracts } } break
-      case 'split_view': {
-        /* side by side with a place and/or map type per side: {district}|{area}|{tract}, scheme voice|prob|gap */
-        const SCH = ['voice', 'prob', 'gap']
-        const side = (x) => {
-          if (!x || typeof x !== 'object') return null
-          const o = {}
-          if (SCH.includes(String(x.scheme))) o.scheme = String(x.scheme)
-          let pl = null
-          if (x.district != null) { const t = areaIndex().districts[String(parseInt(x.district, 10))]; if (t?.length) pl = { name: `Council District ${parseInt(x.district, 10)}`, tracts: t } }
-          else if (x.tract != null && tractIds().has(String(x.tract))) { const t = (cachedJson('public/data/ui.json')?.tracts || []).find((r) => r.id === String(x.tract)); pl = { name: t?.nbhd || 'Census tract', tracts: [String(x.tract)] } }
-          else if (x.area != null || x.name != null) { const ar = findArea(x.area ?? x.name); if (ar) pl = { name: ar.name, tracts: ar.tracts } }
-          if (pl) Object.assign(o, pl)
-          return Object.keys(o).length ? o : null
-        }
-        const L = side(a.left), Rt = side(a.right)
-        if (L || Rt) v = { type: a.type, left: L, right: Rt }
-      } break
       case 'compare_places': {
         const ps = (Array.isArray(a.places) ? a.places : []).slice(0, 2).map((p) => {
           if (p?.district != null) { const t = areaIndex().districts[String(parseInt(p.district, 10))]; return t?.length ? { name: `Council District ${parseInt(p.district, 10)}`, tracts: t } : null }
+          if (p?.tract != null) { const id = String(p.tract); if (!tractIds().has(id)) return null; const t = (cachedJson('public/data/ui.json')?.tracts || []).find((r) => r.id === id); return { name: t?.nbhd || 'Census tract', tracts: [id] } }
           const ar = findArea(p?.area ?? p?.name); return ar ? { name: ar.name, tracts: ar.tracts } : null
         }).filter(Boolean)
         if (ps.length === 2 && ps[0].name !== ps[1].name) v = { type: a.type, places: ps }

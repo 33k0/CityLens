@@ -165,7 +165,7 @@ export function searchAnswer({ question, scopeLabel, sectionTitle, comments, num
   return { ...out, engine: 'search', note: 'Keyword search summary — the written answer is unavailable right now.' }
 }
 
-const ACTION_TYPES = new Set(['select_section', 'set_scheme', 'zoom_tract', 'open_analytics', 'open_comment', 'filter_stance', 'set_view', 'select_district', 'select_area', 'select_tracts', 'compare_places', 'split_view'])
+const ACTION_TYPES = new Set(['select_section', 'set_scheme', 'zoom_tract', 'open_analytics', 'open_comment', 'filter_stance', 'select_district', 'select_area', 'select_tracts', 'compare_places'])
 
 /* ---------- main entry ----------
    askAssistant({question, scopeLabel, sectionTitle, comments, numbers, history, regionTracts})

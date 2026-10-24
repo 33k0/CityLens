@@ -640,17 +640,13 @@ async function mount(root,init){
   return h.replace(/\[\[([^\]]+)\]\]/g,(m,id)=>{if(id.startsWith('metric:')){const k=id.slice(7);const mm=(D.metrics||{})[k];return `<button class="cite" data-act="srcview" data-ref="${esc(id)}" data-src="Metric ${esc(k)}${mm?' · '+esc(mm.name):''} · click to view"><code>${esc(k)}</code><span class="tn">${mm?esc(clip(mm.name,28)):'metric'}</span></button>`}
    if(id.startsWith('file:')){const f=id.slice(5);return `<button class="cite" data-act="srcview" data-ref="${esc(id)}" data-src="${esc(f)} · click to view"><span class="tn">source · ${esc(clip(f.replace(/^public\/data\//,'').replace(/^data\//,''),34))}</span></button>`}
    const c=D.voice.find(x=>x.id===id);return c?H.cite(c):''})}
- const ACT_LABEL={select_section:a=>'opened '+((ITEMS[a.id]||{}).title||a.id),set_scheme:a=>'switched the map to '+({voice:'Voice',prob:'Problems',gap:'Underheard'}[a.id]||a.id),zoom_tract:a=>'zoomed to '+((D.byTract[a.id]||{}).nbhd||a.id),open_analytics:a=>'opened '+a.scope+' analytics',open_comment:a=>'opened comment '+a.id,filter_stance:a=>'filtered stance to '+(a.ids||[]).join(', '),set_view:a=>a.id==='sbs'?'opened side-by-side maps':'went back to the single map',select_district:a=>`opened Council District ${a.id} (${a.tracts.length} census tracts)`,select_area:a=>`opened ${a.name} (${a.tracts.length} census tracts)`,select_tracts:a=>`opened ${a.name} (${a.ids.length} census tracts)`,compare_places:a=>`compared ${(a.places||[]).map(p=>p.name).join(' and ')}`,split_view:a=>`opened side by side: ${[a.left,a.right].map(x=>x&&(x.name||({voice:'Voice',prob:'Problems',gap:'Underheard'}[x.scheme]))).filter(Boolean).join(' | ')}`};
+ const ACT_LABEL={select_section:a=>'opened '+((ITEMS[a.id]||{}).title||a.id),set_scheme:a=>'switched the map to '+({voice:'Voice',prob:'Problems',gap:'Underheard'}[a.id]||a.id),zoom_tract:a=>'zoomed to '+((D.byTract[a.id]||{}).nbhd||a.id),open_analytics:a=>'opened '+a.scope+' analytics',open_comment:a=>'opened comment '+a.id,filter_stance:a=>'filtered stance to '+(a.ids||[]).join(', '),select_district:a=>`opened Council District ${a.id} (${a.tracts.length} census tracts)`,select_area:a=>`opened ${a.name} (${a.tracts.length} census tracts)`,select_tracts:a=>`opened ${a.name} (${a.ids.length} census tracts)`,compare_places:a=>`compared ${(a.places||[]).map(p=>p.name).join(' and ')}`};
  function runActions(acts){let zoom=null;(acts||[]).forEach(a=>{
   if(a.type==='select_section'&&ITEMS[a.id]){setItem(a.id);S.cats={};S.svc={}}
   else if(a.type==='set_scheme'){S.scheme=a.id;S.sbs=false;S.view='main'}
   else if(a.type==='zoom_tract'&&D.byTract[a.id]){S.view='main';S.selTract=a.id;S.tractDetail=a.id;S.modal=true;zoom=a.id}
   else if(a.type==='open_analytics'){if(a.section&&ITEMS[a.section]){setItem(a.section);S.cats={}}if(a.scope==='city'){S.tractDetail=null;S.region={name:'All of San José',poly:'city'};S.regions=[S.region]}S.view='analytics';S.modal=false}
-  else if(a.type==='set_view'){S.view='main';S.sbs=a.id==='sbs';S.armed=false}
   else if(a.type==='compare_places'&&Array.isArray(a.places)){comparePlaces(a.places)}
-  else if(a.type==='split_view'){const mk=x=>x&&x.tracts&&x.tracts.some(i=>D.byTract[i])?areaRegion(x.tracts.filter(i=>D.byTract[i]),x.name):null;
-   S.view='main';S.sbs=true;S.armed=false;S.drawer=false;S.sbsPl=[mk(a.left),mk(a.right)];if(!S.sbsPl[0]&&!S.sbsPl[1])S.sbsPl=null;S._sbsFit=null;S._sbsT=null;
-   const d=sbsSch();S.sbsSch=[(a.left&&a.left.scheme)||d[0],(a.right&&a.right.scheme)||d[1]]}
   else if((a.type==='select_district'||a.type==='select_area'||a.type==='select_tracts')){const ids=(a.tracts||a.ids||[]).filter(i=>D.byTract[i]);if(ids.length){regionFromTracts(ids,a.type==='select_district'?`Council District ${a.id}`:a.name);S.view='main';S.sbs=false}}
   else if(a.type==='open_comment'){const c=D.voice.find(x=>x.id===a.id);if(c)S.inspector=c}
   else if(a.type==='filter_stance'&&Array.isArray(a.ids)){STANCES.forEach(s=>S.stance[s]=a.ids.includes(s)?1:0)}});return zoom}
@@ -744,7 +740,7 @@ async function mount(root,init){
  function regionFromTracts(ids,name){S.tractDetail=null;S.selTract=null;S.region=areaRegion(ids,name);S.regions=[S.region];S.compare=false;S.modal=true;S.right=true}
  /* two named places at once: both outlined, compared side by side in the card */
  function comparePlaces(list){const rs=list.map(p=>areaRegion(p.tracts.filter(i=>D.byTract[i]),p.name)).filter(r=>regionTracts(r.poly).length);if(rs.length<2)return;
-  S.tractDetail=null;S.selTract=null;S.regions=rs;S.region=rs[0];S.compare=true;S.modal=true;S.right=true;S.view='main'}
+  S.tractDetail=null;S.selTract=null;S.regions=rs;S.region=rs[0];S.compare=true;S.modal=true;S.right=true;S.view='main';S.sbs=false;S.drawer=false}
  function popCompare(){const city=D.tracts;const UR=underRule();const col=r=>{const tr=regionTracts(r.poly);const ids=new Set(tr.map(t=>t.id));const f=areaFacts(tr);const n=D.comments.filter(c=>ids.has(c.tract)).length;const p311=tr.reduce((a,t)=>a+t.p311,0)/f.pop*1000*12/D.m311;return {r,tr,f,n,v:n/f.pop*1000,p311,u:tr.filter(UR.is).length}};
   const A=col(S.regions[0]),B=col(S.regions[1]);const cv=D.comments.length/D.totPop*1000;
   const row=(l,a,b,c)=>`<div class="cmr"><span class="cml">${l}${c?`<em>city ${c}</em>`:''}</span><b>${a}</b><b>${b}</b></div>`;

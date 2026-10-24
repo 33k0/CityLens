@@ -501,3 +501,11 @@ details.mapkey .kr .ramp div{height:7px}
 .kpi .spark{position:static;display:block;margin-top:8px;width:100%;height:34px}
 .div .dvh{grid-template-columns:180px minmax(0,1fr) minmax(0,1fr) 44px;gap:0 2px;margin-left:8px}
 .div .dvh span:first-child{grid-column:2;text-align:right;padding-right:6px}.div .dvh span:last-child{grid-column:3;text-align:left;padding-left:6px}
+
+/* who we are not hearing from */
+.mvh{display:flex;align-items:center;gap:8px;justify-content:flex-end;font-size:11.5px;color:var(--ink2);margin-bottom:6px}.mvh>span:first-child{margin-right:auto}
+.mvr{display:grid;grid-template-columns:22px minmax(0,1.4fr) repeat(3,minmax(0,1fr));gap:14px;align-items:center;padding:9px 6px;border-bottom:1px solid #F0F0EC;cursor:pointer}
+.mvr:hover{background:#FAFAF8}.mvr.hd{cursor:default;font-size:11px;color:var(--ink2);padding-top:0}.mvr.hd:hover{background:none}
+.mvn b{font-weight:600;font-size:13px}.mvn em{display:block;font-style:normal;font-size:11px;color:var(--ink2)}
+.mvc{display:grid;grid-template-columns:minmax(0,1fr) 54px;gap:8px;align-items:center}.mvc>div{height:8px;background:#F2F2EF;border-radius:0 4px 4px 0}
+.mvc>div i{display:block;height:100%;border-radius:0 4px 4px 0}.mvc b{font-size:12.5px;font-weight:500;text-align:right;font-variant-numeric:tabular-nums}

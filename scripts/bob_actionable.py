@@ -48,12 +48,17 @@ def main() -> int:
     env = B.load_env()
     B.WORK.mkdir(exist_ok=True)
     labels: dict[str, dict] = {}
+    # Bob task ids are only known at run time; keep the ones recorded by the run that wrote each reused label
+    prev_task = {}
+    if OUT.exists():
+        prev = pd.read_csv(OUT, dtype=str, keep_default_na=False)
+        prev_task = dict(zip(prev["comment_id"], prev["bob_task_id"]))
     for f in sorted(B.WORK.glob("act_labels_*.json")):  # reuse anything already written
         try:
             for o in B.load_labels_file(f):
                 if isinstance(o, dict) and isinstance(o.get("actionable"), bool):
                     labels[o["comment_id"]] = {"actionable": o["actionable"], "reason": str(o.get("reason", ""))[:80],
-                                               "engine": "bob", "bob_task_id": ""}
+                                               "engine": "bob", "bob_task_id": prev_task.get(o["comment_id"], "")}
         except Exception:  # noqa: BLE001
             pass
     todo = [u for u in units if u["comment_id"] not in labels]

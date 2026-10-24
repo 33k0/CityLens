@@ -10,5 +10,10 @@
   "policy_sections_note": "Stance (support/oppose/neutral) is shown only for these sections, where comments take a position on a proposal or agenda item. Streets, sanitation, public safety, code enforcement and other are mostly reports and requests, so their comments show as 'Report or request' with no stance.",
   "low_confidence": 0.8,
   "small_n": 10,
-  "small_n_note": "Ratios computed from fewer comments than this are shown with a 'small sample' warning."
+  "small_n_note": "Ratios computed from fewer comments than this are shown with a 'small sample' warning.",
+  "underheard_rule": {
+    "problems_vs_city": 1.0,
+    "limited_english_vs_city": 1.5
+  },
+  "underheard_rule_note": "A census tract is underheard only if it sends under underrepresented_ratio of its population share of comments AND either reports 311 problems at or above problems_vs_city times the city rate, or has limited-English households at or above limited_english_vs_city times the city share. Few comments with few problems and normal factors counts as quiet, not underheard. Sections without 311 data use the limited-English test only."
 }

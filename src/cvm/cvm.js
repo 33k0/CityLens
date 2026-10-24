@@ -320,17 +320,17 @@ async function mount(root,init){
  ${S.menu==='saved'?`<div class="menu" style="right:16px;width:300px">${S.saved.map((r,i)=>`<div class="mi" data-act="loadregion" data-i="${i}"><span style="width:10px;height:10px;border:1.5px dashed ${GAP[4]};border-radius:50%;margin-top:4px;flex:none"></span><div style="flex:1"><div style="font-weight:500">${esc(r.name)}</div><div class="small muted">${regionTracts(r.poly).length} census tracts</div></div></div>`).join('')}${S.saved.length>1?'<div style="border-top:1px solid var(--line);margin:6px -6px 0;padding:8px 10px 2px"><button class="btn" data-act="compare">Compare first two</button></div>':''}</div>`:''}
  </div>`}
 
- function filters(){const fc=filtered();const cc={};D.comments.forEach(c=>cc[c.cat]=(cc[c.cat]||0)+1);const sc={};D.comments.forEach(c=>sc[c.stance]=(sc[c.stance]||0)+1);
+ function filters(){const fc=filtered();/* counts are every voice comment (letters and emails), placed on the map or not */const cc={};D.itemAll.forEach(c=>cc[c.cat]=(cc[c.cat]||0)+1);const sc={};D.itemAll.forEach(c=>sc[c.stance]=(sc[c.stance]||0)+1);const fa=D.itemAll.filter(dotFilter);
  return `<div class="sec"><div class="sech"><h4>Filters</h4><button class="link" data-act="togglefilters">${S.filtersOpen?'Hide':'Show'}</button></div>${S.filtersOpen?`
  <div class="lbl" style="margin-top:0">${ITEM.id==='all'?'Section':'Subcategory'}</div><div class="sublist">${(()=>{const mx=Math.max(1,CATS.reduce((t,c)=>t+(cc[c.k]||0),0));const any=Object.keys(S.cats).length;
   const row=(k,label,n,mxv,cls='')=>{const on=!!S.cats[k];return `<button class="subrow ${cls} ${on?'on':''} ${any&&!on?'dim':''}" data-act="cat" data-v="${k}" aria-pressed="${on}"><span class="sbx">${on?'✓':''}</span><span class="snm">${label}</span><span class="sct num">${n}</span><span class="sbar"><i style="width:${n/mxv*100}%"></i></span></button>`};
   return CATS.map(c=>{const n=cc[c.k]||0;if(ITEM.id!=='all')return row(c.k,c.n,n,mx);
    /* All sections: each section can open to filter by one of its subsections */
    const key=c.k.slice(4);const def=(D.catDefs||[]).find(x=>x.key===key);const subs=def?def.subcategories:[];const open=!!(S.catExp||{})[key];
-   const sc={};D.comments.forEach(x=>{if(x.catKey===key)sc[x.subKey]=(sc[x.subKey]||0)+1});const smx=Math.max(1,...Object.values(sc));
+   const sc={};D.itemAll.forEach(x=>{if(x.catKey===key)sc[x.subKey]=(sc[x.subKey]||0)+1});const smx=Math.max(1,...Object.values(sc));
    return `<div class="subgrp${open?' open':''}">${row(c.k,c.n,n,mx)}${subs.length?`<button class="sexp" data-act="catexp" data-v="${key}" aria-expanded="${open}" aria-label="${open?'Hide':'Show'} subsections of ${esc(c.n)}">${open?'▴':'▾'}</button>`:''}</div>${open?`<div class="subnest">${subs.filter(x=>sc[x.key]).map(x=>row('sub:'+x.key,esc(x.label),sc[x.key],smx,'nested')).join('')}</div>`:''}`}).join('')})()}</div>
  ${ITEM.id==='all'||!D.comments.some(c=>c.stance!=='none')?'':`<div class="lbl">Stance</div><div class="chips">${STANCES.map(s=>`<button class="fchip ${S.stance[s]?'on':''}" data-act="stance" data-v="${s}" aria-pressed="${!!S.stance[s]}">${stIco(s,9)}${stLabel[s]}<span class="ct num">${sc[s]||0}</span></button>`).join('')}</div>`}
- <div class="small muted" style="margin-top:10px"><b class="num" style="color:var(--ink)">${fmt(fc.length)}</b> of ${fmt(D.located)} shown</div>`:`<div class="small muted">${fmt(fc.length)} of ${fmt(D.located)} shown</div>`}</div>`}
+ <div class="small muted" style="margin-top:10px"><b class="num" style="color:var(--ink)">${fmt(fa.length)}</b> of ${fmt(D.itemAll.length)} comments · ${fmt(fc.length)} on the map</div>`:`<div class="small muted">${fmt(fa.length)} of ${fmt(D.itemAll.length)} comments · ${fmt(fc.length)} on the map</div>`}</div>`}
 
  function fairCard(){const f=fairness(D.tracts,S.attr);const A=ATTRS[S.attr];const rk=ranks(D.comments,S.attr);
  const spdC=`${A.l} census tracts are ${Math.abs(Math.round(f.spd*100))} points ${f.spd<0?'less':'more'} likely to ${D.vMed===0?'have any located comment':'be above the citywide median comment rate'}.`;

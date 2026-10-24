@@ -47,7 +47,9 @@ export function ratePer1k(count: number, population: number | undefined, monthsC
 }
 
 /**
- * Citywide percentile rank (0-100) with mid-rank ties: 100 * (below + 0.5 * equal) / n.
+ * Citywide percentile rank (0-100) = share of tracts with a strictly lower rate: 100 * below / n.
+ * Ties sit at the bottom of their tie, so a tract with zero comments scores 0 even when most tracts are tied at zero
+ * (mid-rank would put all of them at ~43 and "problems without voice" could never fire).
  * Null rates are excluded from the ranking and come back null.
  */
 export function percentileRanks(rates: Record<string, number | null>): Record<string, number | null> {
@@ -66,10 +68,7 @@ export function percentileRanks(rates: Record<string, number | null>): Record<st
       if (vals[mid] < v) lo = mid + 1
       else hi = mid
     }
-    const below = lo
-    let equal = 0
-    while (below + equal < n && vals[below + equal] === v) equal++
-    out[k] = (100 * (below + 0.5 * equal)) / n
+    out[k] = (100 * lo) / n
   }
   return out
 }

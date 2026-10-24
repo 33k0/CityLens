@@ -362,3 +362,86 @@ Dates are absolute. Newest at the bottom of each section.
   reproduces the output exactly.
 - Pipeline order fixed: `export_comments.py` (h) now runs before `fairness.py`, which reads the export; the offline
   flag reaches the location and Bob steps so `npm run demo` makes no network or paid calls.
+
+### 311 categories mapped by IBM Bob (2026-10-23, supersedes the hand mapping)
+
+- 311 rows are never sent to a model one by one (455,545 rows; the city already assigns a request type). Instead the
+  97 distinct (Service Type, Category) combinations since 2025-07-01 (`data/taxonomy_311_combos.csv`, with counts and
+  modal department) were given to IBM Bob in one run together with Bob's own voice taxonomy
+  (`data/categories.json`). Bob assigned each combination one voice category key or `none`
+  (`data/taxonomy_311_bob.json`, with a reason per row). Run: task `e88e0f6a081dcd03e85bd3fe4da06cfa`, 46.7 s,
+  $0.19, 4 tool calls. Validated: 97 rows in order, every key exists in categories.json.
+- Bob's result by rows: sanitation & environmental quality 287,165; streets & infrastructure 75,043; other 40,353;
+  none 35,854; public safety & emergency response 14,076; code enforcement & permitting 2,971; housing &
+  affordability 83. `none` covers billing, payments, accounts, e-billing, logins, property tax, parking permits,
+  county/external routing, IT validation and community WiFi. Those rows stay in totals but are excluded from the
+  problems layer, so 311 rates per 1k now count problem reports only. Bob's own calls stand as made (e.g. "Vehicle
+  Concerns" → streets & infrastructure, "Encampment Concerns" → public safety).
+- Because 311 and voice now share category keys, category-level comparisons are possible, but shares are still
+  computed within each family and counts are never added across families. The earlier hand mapping
+  (`data/taxonomy_311.csv`) is kept only as `category_hand` in the gitignored row-level CSV for comparison.
+
+## Milestone 5 — categories and labels by IBM Bob (2026-10-23)
+
+- **No preset categories.** A first taxonomy was drafted by the build agent while Bob was blocked; the user rejected it
+  because categories must come from the data via Bob. The draft was moved out of Bob's workspace and is committed only as
+  `data/categories.draft_build_agent.json` (marked rejected) for the comparison in `BOB_USAGE.md`, the `categorize-comments` skill was rewritten to state only how to derive a taxonomy
+  (no category names or tie-breaks), and Bob derived 8 categories from the letters and emails on its own:
+  Housing & Affordability Policy; Public Safety & Emergency Response; Streets & Infrastructure; Environment &
+  Development Review; Code Enforcement & Permitting; Governance & Civic Rights; Sanitation & Environmental Quality;
+  Other / General. A second Bob run added 3–5 subcategories under each from a digest of every unique comment; the
+  top-level keys were frozen because the 311 mapping depends on them.
+- **Bob labels every comment, not Granite** (user decision). `scripts/bob_label.py` collapses exact duplicates and
+  MinHash form-letter campaigns (4 campaigns) so Bob labels 235 distinct texts in 6 batches of 40, 4 runs in parallel.
+  Each label has category, subcategory, confidence, an evidence quote, stance and stance evidence, and is validated:
+  keys must exist, the subcategory must sit under its category, and both quotes must be exact substrings of the
+  comment. Invalid rows got one Bob retry batch. Campaign copies inherit the representative's label only after both
+  quotes are re-located verbatim in the copy (rapidfuzz alignment ≥ 85 picks the copy's own text; 103 copies needed
+  it because OCR noise differs between copies); the 8 copies that could not be aligned were labeled by Bob directly.
+- **Result: all 435 comments labeled by Bob**, 0 by Granite, 0 by rules, 0 by the build agent; every quote verified as
+  an exact substring. Three batch files had invalid JSON because Bob copied quotes containing unescaped double quotes
+  (report titles); they were repaired locally at no cost and the prompt now asks for escaping.
+- **Cost:** $8.36 total across every Bob run in the project (probe, taxonomy $2.44, subcategories, 311 mapping, label,
+  retry and copy batches), under the $10 cap. Per-run detail in `BOB_USAGE.md` and `data/bob_runs.json`.
+- Granite 4.1 8B stays installed as the second-line fallback and the rule engine as the last; both write
+  `engine` per row. `--offline` (the demo path) replays cached Bob labels and fails rather than calling Bob.
+- Distribution (simulated emails / real letters): Streets & Infrastructure 61 / 1; Housing 51 / 2; Code Enforcement
+  19 / 2; Environment & Development Review 13 / 0; Sanitation 9 / 0; Public Safety 7 / 5; Other 4 / 15; Governance &
+  Civic Rights 0 / 246. The real letters are dominated by two governance matters (the immigrant-safety resolution
+  campaign and the District 3 appointment). Stance: support 87 / 237, oppose 58 / 17, neutral 13 / 2, unclear 6 / 15.
+- `data/labeled_sample_template.csv` has 100 comments with empty `true_category` / `true_stance` for a human audit;
+  the classifier is **not yet audited** and no labels were fabricated.
+
+## Milestone 6 — fairness with AI Fairness 360 (`scripts/fairness.py`, `web/fairness.js`, 2026-10-23)
+
+- Unit: census tract (215). Per family, separately: favorable = per-1k rate above the citywide median over all 215
+  tracts, computed once, stored in `public/data/fairness/meta.json`, never recomputed for a region. Voice =
+  "comment participation above median"; Problems = "311 reporting above median". Never blended.
+- Protected attributes (unprivileged side): low_income (median income < $141,289, the median of tract medians; default),
+  majority_nonwhite (> 50%), renter_majority (> 50%), high_lep (limited-English households above the 75th percentile,
+  17.6%). DI = P(fav | unprivileged) / P(fav | privileged); SPD = the difference. AIF360 0.6.1
+  `BinaryLabelDatasetMetric` is the source of record; a pandas computation must match to 1e-9 or the script stops.
+  Population-weighted variants use AIF360 instance weights (verified to match the weighted pandas formula).
+- **311 (real, problem reports only, median 150.6 per 1k per year):** low_income DI 2.08 / SPD 0.35;
+  majority_nonwhite 1.79 / 0.23; renter_majority 2.00 / 0.37; high_lep 1.71 / 0.30. Lower-income, majority-nonwhite,
+  renter-majority and high-LEP tracts report problems to 311 above the median at 1.7–2.1× the rate of the others.
+- **Voice (illustrative because simulated emails contribute):** 239 voices after duplicates and campaigns count once;
+  participation counts residence/both-basis locations (77 rows). The voice median is 0, so "favorable" means any
+  located comment. Most region-level voice views will return `not_enough_data` (< 5 tracts, < 2 tracts in a group, or
+  < 10 voices). A letters-only (real) variant is exported alongside.
+- Reweighing vs population weighting: AIF360 Reweighing balances how many tracts per group are favorable and gives
+  each comment one of two group weights, so it reorders themes only when their comments split very differently by group
+  (here: no rank changes). Population weighting (population share ÷ comment share, per tract) down-weights a few
+  high-volume tracts regardless of group and reorders mid-ranked themes. Both are shown next to raw; neither is "the"
+  fair ranking. Theme ranking is voice-only; 311 gets a category-by-volume table.
+- Participation gap per tract: expected = population share × located voices; gap = (expected − observed)/expected.
+  Underheard ranking = gap × relevance (1.0 inside an item's `affected_tracts` in staff-editable
+  `public/data/affected.json`, 0.25 outside). Outreach briefs are template facts with generic channels; "unfair",
+  "biased" and "apathetic" are banned and tests scan for them; briefs never describe what a tract's residents think.
+- **Percentile fix.** With mid-rank ties every tract with zero located comments (184 of 215) shared voice percentile
+  ~43, so "problems without voice" (problem ≥ 70th and voice ≤ 30th percentile) could never fire. Percentile is now the
+  share of tracts with a strictly lower rate (`families.py`, `families.ts`, `web/fairness.js`, shared fixture
+  regenerated), so silent tracts score 0. Result: 47 tracts are problems without voice; the top three
+  (06085501402, 06085501601, 06085506305) sit at the 97th–99th 311 percentile with no located comment.
+- `web/fairness.js` is a dependency-free port used for drawn regions; `web/fairness.test.mjs` checks it against the
+  AIF360 outputs in `public/data/fairness/parity_fixtures.json` to 1e-9 (weighted and unweighted, every attribute).

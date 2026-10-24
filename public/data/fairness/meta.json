@@ -1,0 +1,151 @@
+{
+ "generated_at": "2026-10-23T18:03:00-07:00",
+ "aif360_version": "0.6.1",
+ "unit": "census tract (each tract one unit; population-weighted variant uses instance_weights = population)",
+ "families": {
+  "voice": [
+   "letter",
+   "email",
+   "site"
+  ],
+  "problems": [
+   "311"
+  ]
+ },
+ "voice_location_basis": "residence",
+ "voice_location_basis_detail": {
+  "used": "residence",
+  "located_rows": 153,
+  "residence_rows": 77,
+  "by_basis": {
+   "both": 11,
+   "issue": 76,
+   "residence": 66
+  },
+  "min_residence_rows": 30,
+  "rule": "participation counts rows with location_basis in ['residence', 'both']; falls back to all located rows when fewer than 30 have that basis; region/map counts always use all located rows"
+ },
+ "city_median_rate_per_1k": {
+  "voice": 0.0,
+  "problems": 150.60544904137234
+ },
+ "median_over": "all 215 tracts, computed once",
+ "outcome": {
+  "voice": "comment participation above median",
+  "problems": "311 reporting above median"
+ },
+ "favorable": "rate_per_1k > city_median_rate_per_1k",
+ "attributes": {
+  "low_income": {
+   "column": "median_income",
+   "unprivileged": "median_income < city median of tract median incomes",
+   "privileged": "median_income >= that median",
+   "threshold": 141289.0,
+   "privileged_value": 1,
+   "unprivileged_value": 0,
+   "n_privileged": 108,
+   "n_unprivileged": 107
+  },
+  "majority_nonwhite": {
+   "column": "pct_nonwhite",
+   "unprivileged": "pct_nonwhite > 0.5",
+   "privileged": "pct_nonwhite <= 0.5",
+   "threshold": 0.5,
+   "privileged_value": 1,
+   "unprivileged_value": 0,
+   "n_privileged": 14,
+   "n_unprivileged": 201
+  },
+  "renter_majority": {
+   "column": "pct_renter",
+   "unprivileged": "pct_renter > 0.5",
+   "privileged": "pct_renter <= 0.5",
+   "threshold": 0.5,
+   "privileged_value": 1,
+   "unprivileged_value": 0,
+   "n_privileged": 137,
+   "n_unprivileged": 78
+  },
+  "high_lep": {
+   "column": "pct_lep",
+   "unprivileged": "pct_lep > 75th percentile of tracts (pandas quantile, linear)",
+   "privileged": "pct_lep <= that threshold",
+   "threshold": 0.17595,
+   "privileged_value": 1,
+   "unprivileged_value": 0,
+   "n_privileged": 161,
+   "n_unprivileged": 54
+  }
+ },
+ "attribute_default": "low_income",
+ "metrics": {
+  "di": "P(fav|unprivileged) / P(fav|privileged)",
+  "spd": "P(fav|unprivileged) - P(fav|privileged)",
+  "crosscheck": "AIF360 vs pandas, |diff| <= 1e-09, asserted on every computation (weighted and unweighted)",
+  "aif360_weights": "BinaryLabelDatasetMetric base rates sum instance_weights, so instance_weights=population gives the population-weighted DI/SPD; verified equal to the pandas weighted formula"
+ },
+ "counting": {
+  "voice_default": "duplicate_of rows dropped; each campaign_id counts once citywide (split evenly over its rows' tracts)",
+  "voice_raw": "every row counts 1 (exported as measure_raw_counts)",
+  "voice_rate": "per 1k residents over the corpus window (not annualized)",
+  "problems_rate": "per 1k residents, annualized via months_covered",
+  "unlocated_voice": "excluded from geography, reported in totals"
+ },
+ "correction": {
+  "reweighing": "AIF360 Reweighing W(g,l)=P(g)P(l)/P(g,l) over tracts",
+  "population_weight": "population_share / comment_share per tract (voice only; null for tracts with no located comments)"
+ },
+ "gap": "expected = population_share x located voice total; gap = (expected - observed) / expected",
+ "relevance": {
+  "inside": 1.0,
+  "outside": 0.25,
+  "source": "public/data/affected.json"
+ },
+ "region_rule": {
+  "not_enough_data_if": [
+   "tracts < 5",
+   "privileged or unprivileged tracts < 2",
+   "voice count < 10"
+  ],
+  "outcome_median": "citywide (never recomputed)"
+ },
+ "problems_without_voice": {
+  "problem_pct_min": 70,
+  "voice_pct_max": 30
+ },
+ "wording": {
+  "banned_words": [
+   "unfair",
+   "biased",
+   "apathetic"
+  ],
+  "rules": [
+   "facts only: population, renter share, LEP share, observed vs expected comments, 311 percentile",
+   "never describe what residents of a tract with few comments think or want",
+   "never name specific organizations; outreach channels are generic",
+   "never present a blended voice + 311 number"
+  ],
+  "channels": [
+   "multilingual mailer",
+   "community meeting at a nearby library/community center",
+   "door-hanger",
+   "partner with local organizations"
+  ]
+ },
+ "categories_source": "ibm-bob",
+ "categories": {
+  "path": "data/categories.json",
+  "authored_by": "ibm-bob",
+  "version": "v1.0",
+  "keys": [
+   "housing_affordability_policy",
+   "public_safety_emergency_response",
+   "infrastructure_streets",
+   "environment_development_review",
+   "code_enforcement_habitability",
+   "governance_civic_rights",
+   "sanitation_environment_quality",
+   "other"
+  ]
+ }
+}

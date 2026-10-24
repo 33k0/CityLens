@@ -1,0 +1,89 @@
+{
+ "_note": "Staff-editable. affected_tracts: tract_ids that an item affects (relevance 1.0; others 0.25). Empty list with default 'all' = citywide (every tract relevance 1.0).",
+ "items": {
+  "25-008": {
+   "affected_tracts": [],
+   "default": "all"
+  },
+  "25-011": {
+   "affected_tracts": [],
+   "default": "all"
+  },
+  "25-012": {
+   "affected_tracts": [],
+   "default": "all"
+  },
+  "25-018": {
+   "affected_tracts": [],
+   "default": "all"
+  },
+  "25-025": {
+   "affected_tracts": [],
+   "default": "all"
+  },
+  "25-054": {
+   "affected_tracts": [],
+   "default": "all"
+  },
+  "25-059": {
+   "affected_tracts": [],
+   "default": "all"
+  },
+  "25-065": {
+   "affected_tracts": [],
+   "default": "all"
+  },
+  "25-081": {
+   "affected_tracts": [],
+   "default": "all"
+  },
+  "25-085": {
+   "affected_tracts": [],
+   "default": "all"
+  },
+  "MOCK-26-901": {
+   "affected_tracts": [],
+   "default": "all"
+  },
+  "MOCK-26-902": {
+   "affected_tracts": [],
+   "default": "all"
+  },
+  "MOCK-26-903": {
+   "affected_tracts": [],
+   "default": "all"
+  },
+  "MOCK-26-904": {
+   "affected_tracts": [],
+   "default": "all"
+  },
+  "MOCK-26-905": {
+   "affected_tracts": [],
+   "default": "all"
+  },
+  "MOCK-26-906": {
+   "affected_tracts": [],
+   "default": "all"
+  },
+  "MOCK-26-907": {
+   "affected_tracts": [],
+   "default": "all"
+  },
+  "MOCK-26-908": {
+   "affected_tracts": [],
+   "default": "all"
+  },
+  "MOCK-26-909": {
+   "affected_tracts": [],
+   "default": "all"
+  },
+  "MOCK-26-910": {
+   "affected_tracts": [],
+   "default": "all"
+  },
+  "MOCK-GEN": {
+   "affected_tracts": [],
+   "default": "all"
+  }
+ }
+}

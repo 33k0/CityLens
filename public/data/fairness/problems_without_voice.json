@@ -1,0 +1,248 @@
+{
+ "rule": "problem_pct >= 70 and voice_pct <= 30 (citywide percentiles of per-1k rates = share of tracts with a strictly lower rate, so tied zero-comment tracts score 0)",
+ "real": false,
+ "label": "illustrative",
+ "families": [
+  "problems",
+  "voice"
+ ],
+ "note": "Percentiles only; voice and 311 counts are never combined.",
+ "rows": [
+  {
+   "tract_id": "06085501402",
+   "problem_pct": 98.6046511627907,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085501601",
+   "problem_pct": 98.13953488372093,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085506305",
+   "problem_pct": 96.74418604651163,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085501800",
+   "problem_pct": 95.81395348837209,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085501502",
+   "problem_pct": 95.34883720930233,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085501602",
+   "problem_pct": 94.88372093023256,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085503112",
+   "problem_pct": 93.95348837209302,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085501102",
+   "problem_pct": 93.48837209302326,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085503113",
+   "problem_pct": 93.02325581395348,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085503710",
+   "problem_pct": 92.09302325581395,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085501401",
+   "problem_pct": 91.62790697674419,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085503708",
+   "problem_pct": 91.16279069767442,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085501000",
+   "problem_pct": 90.69767441860465,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085503601",
+   "problem_pct": 90.23255813953489,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085501200",
+   "problem_pct": 89.76744186046511,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085506304",
+   "problem_pct": 89.30232558139535,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085503713",
+   "problem_pct": 88.37209302325581,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085506301",
+   "problem_pct": 87.44186046511628,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085501901",
+   "problem_pct": 86.97674418604652,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085504317",
+   "problem_pct": 86.51162790697674,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085503711",
+   "problem_pct": 86.04651162790698,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085503127",
+   "problem_pct": 85.11627906976744,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085503210",
+   "problem_pct": 84.65116279069767,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085506601",
+   "problem_pct": 84.18604651162791,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085505100",
+   "problem_pct": 81.86046511627907,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085512056",
+   "problem_pct": 81.3953488372093,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085501300",
+   "problem_pct": 80.93023255813954,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085512032",
+   "problem_pct": 80.46511627906976,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085506504",
+   "problem_pct": 80.0,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085503212",
+   "problem_pct": 79.53488372093024,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085506401",
+   "problem_pct": 79.06976744186046,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085502002",
+   "problem_pct": 78.6046511627907,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085506204",
+   "problem_pct": 78.13953488372093,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085511915",
+   "problem_pct": 77.67441860465117,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085503207",
+   "problem_pct": 76.74418604651163,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085503510",
+   "problem_pct": 75.81395348837209,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085512027",
+   "problem_pct": 75.34883720930233,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085502203",
+   "problem_pct": 74.88372093023256,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085512023",
+   "problem_pct": 74.4186046511628,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085503336",
+   "problem_pct": 73.95348837209302,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085503111",
+   "problem_pct": 73.48837209302326,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085502104",
+   "problem_pct": 72.55813953488372,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085512100",
+   "problem_pct": 72.09302325581395,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085503329",
+   "problem_pct": 71.62790697674419,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085502910",
+   "problem_pct": 71.16279069767442,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085503305",
+   "problem_pct": 70.69767441860465,
+   "voice_pct": 0.0
+  },
+  {
+   "tract_id": "06085500400",
+   "problem_pct": 70.23255813953489,
+   "voice_pct": 0.0
+  }
+ ],
+ "zero_voice_tracts": 184
+}

@@ -16,8 +16,8 @@ def test_refuses_cross_family_sum():
         f.sum_within_family("voice", [{"channel": "letter", "n": 3}, {"channel": "311", "n": 2300}])
 
 
-def test_percentiles_mid_rank():
-    assert f.percentile_ranks({"a": 0, "b": 0, "c": 10, "d": 20, "e": None}) == {"a": 25, "b": 25, "c": 62.5, "d": 87.5, "e": None}
+def test_percentiles_ties_at_bottom():
+    assert f.percentile_ranks({"a": 0, "b": 0, "c": 10, "d": 20, "e": None}) == {"a": 0, "b": 0, "c": 50, "d": 75, "e": None}
 
 
 def test_fixture_parity():

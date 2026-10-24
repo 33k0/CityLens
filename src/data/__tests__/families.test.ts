@@ -27,9 +27,9 @@ describe('rates and percentiles', () => {
     expect(ratePer1k(50, 1000, 6)).toBe(100)
     expect(ratePer1k(5, 0)).toBeNull()
   })
-  it('mid-ranks ties and skips nulls', () => {
+  it('puts ties at the bottom and skips nulls', () => {
     const p = percentileRanks({ a: 0, b: 0, c: 10, d: 20, e: null })
-    expect(p).toEqual({ a: 25, b: 25, c: 62.5, d: 87.5, e: null })
+    expect(p).toEqual({ a: 0, b: 0, c: 50, d: 75, e: null })
   })
   it('flags problems without voice by percentile only', () => {
     const rows = problemsWithoutVoice({ a: 90, b: 75, c: 50, d: 95 }, { a: 10, b: 30, c: 0, d: 40 })

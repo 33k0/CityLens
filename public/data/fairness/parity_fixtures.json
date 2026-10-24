@@ -1,0 +1,1094 @@
+{
+ "generator": "scripts/fairness.py synthetic(seed=7, n=40)",
+ "aif360_version": "0.6.1",
+ "city_median_rate_per_1k": {
+  "voice": 0.6423871889082653,
+  "problems": 68.95120547021011
+ },
+ "attributes": [
+  "low_income",
+  "majority_nonwhite",
+  "renter_majority",
+  "high_lep"
+ ],
+ "tracts": [
+  {
+   "tract_id": "s000",
+   "population": 8586,
+   "voice_count": 3.0,
+   "problems_count": 581.0,
+   "voice_rate": 0.3494060097833683,
+   "problems_rate": 67.66829722804566,
+   "low_income": 0,
+   "majority_nonwhite": 1,
+   "renter_majority": 1,
+   "high_lep": 1
+  },
+  {
+   "tract_id": "s001",
+   "population": 6188,
+   "voice_count": 3.0,
+   "problems_count": 468.0,
+   "voice_rate": 0.48480930833872016,
+   "problems_rate": 75.63025210084034,
+   "low_income": 0,
+   "majority_nonwhite": 0,
+   "renter_majority": 0,
+   "high_lep": 1
+  },
+  {
+   "tract_id": "s002",
+   "population": 6631,
+   "voice_count": 4.0,
+   "problems_count": 256.0,
+   "voice_rate": 0.6032272658724174,
+   "problems_rate": 38.60654501583471,
+   "low_income": 1,
+   "majority_nonwhite": 0,
+   "renter_majority": 0,
+   "high_lep": 0
+  },
+  {
+   "tract_id": "s003",
+   "population": 8229,
+   "voice_count": 2.0,
+   "problems_count": 553.0,
+   "voice_rate": 0.24304289707133309,
+   "problems_rate": 67.2013610402236,
+   "low_income": 0,
+   "majority_nonwhite": 1,
+   "renter_majority": 0,
+   "high_lep": 1
+  },
+  {
+   "tract_id": "s004",
+   "population": 5837,
+   "voice_count": 5.0,
+   "problems_count": 202.0,
+   "voice_rate": 0.8566044200788077,
+   "problems_rate": 34.60681857118383,
+   "low_income": 1,
+   "majority_nonwhite": 0,
+   "renter_majority": 0,
+   "high_lep": 1
+  },
+  {
+   "tract_id": "s005",
+   "population": 7317,
+   "voice_count": 3.0,
+   "problems_count": 305.0,
+   "voice_rate": 0.4100041000410004,
+   "problems_rate": 41.68375017083504,
+   "low_income": 1,
+   "majority_nonwhite": 0,
+   "renter_majority": 0,
+   "high_lep": 1
+  },
+  {
+   "tract_id": "s006",
+   "population": 7752,
+   "voice_count": 1.0,
+   "problems_count": 577.0,
+   "voice_rate": 0.12899896800825592,
+   "problems_rate": 74.43240454076368,
+   "low_income": 0,
+   "majority_nonwhite": 0,
+   "renter_majority": 1,
+   "high_lep": 1
+  },
+  {
+   "tract_id": "s007",
+   "population": 3189,
+   "voice_count": 3.0,
+   "problems_count": 247.0,
+   "voice_rate": 0.9407337723424272,
+   "problems_rate": 77.45374725619317,
+   "low_income": 0,
+   "majority_nonwhite": 1,
+   "renter_majority": 0,
+   "high_lep": 1
+  },
+  {
+   "tract_id": "s008",
+   "population": 1916,
+   "voice_count": 1.0,
+   "problems_count": 151.0,
+   "voice_rate": 0.521920668058455,
+   "problems_rate": 78.81002087682671,
+   "low_income": 0,
+   "majority_nonwhite": 0,
+   "renter_majority": 0,
+   "high_lep": 1
+  },
+  {
+   "tract_id": "s009",
+   "population": 3751,
+   "voice_count": 0.0,
+   "problems_count": 286.0,
+   "voice_rate": 0.0,
+   "problems_rate": 76.24633431085044,
+   "low_income": 0,
+   "majority_nonwhite": 1,
+   "renter_majority": 0,
+   "high_lep": 1
+  },
+  {
+   "tract_id": "s010",
+   "population": 3638,
+   "voice_count": 3.0,
+   "problems_count": 281.0,
+   "voice_rate": 0.8246289169873557,
+   "problems_rate": 77.24024189114898,
+   "low_income": 0,
+   "majority_nonwhite": 1,
+   "renter_majority": 1,
+   "high_lep": 0
+  },
+  {
+   "tract_id": "s011",
+   "population": 8051,
+   "voice_count": 6.0,
+   "problems_count": 295.0,
+   "voice_rate": 0.74524903738666,
+   "problems_rate": 36.641411004844116,
+   "low_income": 1,
+   "majority_nonwhite": 0,
+   "renter_majority": 0,
+   "high_lep": 1
+  },
+  {
+   "tract_id": "s012",
+   "population": 8344,
+   "voice_count": 8.0,
+   "problems_count": 304.0,
+   "voice_rate": 0.9587727708533077,
+   "problems_rate": 36.4333652924257,
+   "low_income": 1,
+   "majority_nonwhite": 0,
+   "renter_majority": 1,
+   "high_lep": 1
+  },
+  {
+   "tract_id": "s013",
+   "population": 1539,
+   "voice_count": 0.0,
+   "problems_count": 113.0,
+   "voice_rate": 0.0,
+   "problems_rate": 73.42430149447694,
+   "low_income": 0,
+   "majority_nonwhite": 0,
+   "renter_majority": 1,
+   "high_lep": 1
+  },
+  {
+   "tract_id": "s014",
+   "population": 5248,
+   "voice_count": 7.0,
+   "problems_count": 209.0,
+   "voice_rate": 1.3338414634146343,
+   "problems_rate": 39.82469512195122,
+   "low_income": 1,
+   "majority_nonwhite": 1,
+   "renter_majority": 1,
+   "high_lep": 0
+  },
+  {
+   "tract_id": "s015",
+   "population": 7659,
+   "voice_count": 6.0,
+   "problems_count": 275.0,
+   "voice_rate": 0.7833920877399138,
+   "problems_rate": 35.90547068807939,
+   "low_income": 1,
+   "majority_nonwhite": 0,
+   "renter_majority": 1,
+   "high_lep": 1
+  },
+  {
+   "tract_id": "s016",
+   "population": 2485,
+   "voice_count": 5.0,
+   "problems_count": 90.0,
+   "voice_rate": 2.012072434607646,
+   "problems_rate": 36.21730382293763,
+   "low_income": 1,
+   "majority_nonwhite": 1,
+   "renter_majority": 0,
+   "high_lep": 0
+  },
+  {
+   "tract_id": "s017",
+   "population": 7478,
+   "voice_count": 8.0,
+   "problems_count": 300.0,
+   "voice_rate": 1.0698047606311847,
+   "problems_rate": 40.11767852366943,
+   "low_income": 1,
+   "majority_nonwhite": 1,
+   "renter_majority": 1,
+   "high_lep": 1
+  },
+  {
+   "tract_id": "s018",
+   "population": 2393,
+   "voice_count": 3.0,
+   "problems_count": 186.0,
+   "voice_rate": 1.253656498119515,
+   "problems_rate": 77.72670288340996,
+   "low_income": 0,
+   "majority_nonwhite": 1,
+   "renter_majority": 0,
+   "high_lep": 1
+  },
+  {
+   "tract_id": "s019",
+   "population": 5009,
+   "voice_count": 6.0,
+   "problems_count": 182.0,
+   "voice_rate": 1.1978438810141745,
+   "problems_rate": 36.334597724096625,
+   "low_income": 1,
+   "majority_nonwhite": 1,
+   "renter_majority": 0,
+   "high_lep": 0
+  },
+  {
+   "tract_id": "s020",
+   "population": 7623,
+   "voice_count": 6.0,
+   "problems_count": 579.0,
+   "voice_rate": 0.7870916961826052,
+   "problems_rate": 75.9543486816214,
+   "low_income": 0,
+   "majority_nonwhite": 0,
+   "renter_majority": 0,
+   "high_lep": 1
+  },
+  {
+   "tract_id": "s021",
+   "population": 3772,
+   "voice_count": 2.0,
+   "problems_count": 290.0,
+   "voice_rate": 0.5302226935312832,
+   "problems_rate": 76.88229056203605,
+   "low_income": 1,
+   "majority_nonwhite": 0,
+   "renter_majority": 0,
+   "high_lep": 1
+  },
+  {
+   "tract_id": "s022",
+   "population": 4062,
+   "voice_count": 0.0,
+   "problems_count": 308.0,
+   "voice_rate": 0.0,
+   "problems_rate": 75.8247168882324,
+   "low_income": 0,
+   "majority_nonwhite": 0,
+   "renter_majority": 0,
+   "high_lep": 1
+  },
+  {
+   "tract_id": "s023",
+   "population": 3588,
+   "voice_count": 3.0,
+   "problems_count": 252.0,
+   "voice_rate": 0.8361204013377926,
+   "problems_rate": 70.23411371237458,
+   "low_income": 0,
+   "majority_nonwhite": 0,
+   "renter_majority": 1,
+   "high_lep": 0
+  },
+  {
+   "tract_id": "s024",
+   "population": 6896,
+   "voice_count": 9.0,
+   "problems_count": 244.0,
+   "voice_rate": 1.3051044083526682,
+   "problems_rate": 35.382830626450115,
+   "low_income": 1,
+   "majority_nonwhite": 0,
+   "renter_majority": 1,
+   "high_lep": 1
+  },
+  {
+   "tract_id": "s025",
+   "population": 3411,
+   "voice_count": 1.0,
+   "problems_count": 253.0,
+   "voice_rate": 0.2931691586045148,
+   "problems_rate": 74.17179712694225,
+   "low_income": 0,
+   "majority_nonwhite": 1,
+   "renter_majority": 1,
+   "high_lep": 0
+  },
+  {
+   "tract_id": "s026",
+   "population": 8928,
+   "voice_count": 2.0,
+   "problems_count": 678.0,
+   "voice_rate": 0.22401433691756273,
+   "problems_rate": 75.94086021505376,
+   "low_income": 0,
+   "majority_nonwhite": 0,
+   "renter_majority": 1,
+   "high_lep": 1
+  },
+  {
+   "tract_id": "s027",
+   "population": 4838,
+   "voice_count": 1.0,
+   "problems_count": 393.0,
+   "voice_rate": 0.20669698222405952,
+   "problems_rate": 81.23191401405539,
+   "low_income": 0,
+   "majority_nonwhite": 0,
+   "renter_majority": 1,
+   "high_lep": 1
+  },
+  {
+   "tract_id": "s028",
+   "population": 5086,
+   "voice_count": 3.0,
+   "problems_count": 179.0,
+   "voice_rate": 0.5898545025560362,
+   "problems_rate": 35.19465198584349,
+   "low_income": 1,
+   "majority_nonwhite": 1,
+   "renter_majority": 0,
+   "high_lep": 1
+  },
+  {
+   "tract_id": "s029",
+   "population": 5284,
+   "voice_count": 6.0,
+   "problems_count": 198.0,
+   "voice_rate": 1.1355034065102196,
+   "problems_rate": 37.471612414837246,
+   "low_income": 1,
+   "majority_nonwhite": 0,
+   "renter_majority": 1,
+   "high_lep": 0
+  },
+  {
+   "tract_id": "s030",
+   "population": 5869,
+   "voice_count": 4.0,
+   "problems_count": 187.0,
+   "voice_rate": 0.6815471119441132,
+   "problems_rate": 31.86232748338729,
+   "low_income": 1,
+   "majority_nonwhite": 0,
+   "renter_majority": 0,
+   "high_lep": 1
+  },
+  {
+   "tract_id": "s031",
+   "population": 5651,
+   "voice_count": 2.0,
+   "problems_count": 409.0,
+   "voice_rate": 0.3539196602371262,
+   "problems_rate": 72.3765705184923,
+   "low_income": 0,
+   "majority_nonwhite": 0,
+   "renter_majority": 1,
+   "high_lep": 0
+  },
+  {
+   "tract_id": "s032",
+   "population": 5320,
+   "voice_count": 6.0,
+   "problems_count": 183.0,
+   "voice_rate": 1.1278195488721805,
+   "problems_rate": 34.3984962406015,
+   "low_income": 1,
+   "majority_nonwhite": 1,
+   "renter_majority": 0,
+   "high_lep": 1
+  },
+  {
+   "tract_id": "s033",
+   "population": 8966,
+   "voice_count": 2.0,
+   "problems_count": 715.0,
+   "voice_rate": 0.2230649118893598,
+   "problems_rate": 79.74570600044613,
+   "low_income": 0,
+   "majority_nonwhite": 0,
+   "renter_majority": 0,
+   "high_lep": 1
+  },
+  {
+   "tract_id": "s034",
+   "population": 7557,
+   "voice_count": 1.0,
+   "problems_count": 564.0,
+   "voice_rate": 0.1323276432446738,
+   "problems_rate": 74.63279078999604,
+   "low_income": 1,
+   "majority_nonwhite": 1,
+   "renter_majority": 1,
+   "high_lep": 1
+  },
+  {
+   "tract_id": "s035",
+   "population": 7444,
+   "voice_count": 2.0,
+   "problems_count": 554.0,
+   "voice_rate": 0.2686727565824826,
+   "problems_rate": 74.42235357334766,
+   "low_income": 0,
+   "majority_nonwhite": 0,
+   "renter_majority": 0,
+   "high_lep": 0
+  },
+  {
+   "tract_id": "s036",
+   "population": 6752,
+   "voice_count": 11.0,
+   "problems_count": 256.0,
+   "voice_rate": 1.6291469194312795,
+   "problems_rate": 37.91469194312796,
+   "low_income": 1,
+   "majority_nonwhite": 0,
+   "renter_majority": 0,
+   "high_lep": 1
+  },
+  {
+   "tract_id": "s037",
+   "population": 6166,
+   "voice_count": 8.0,
+   "problems_count": 220.0,
+   "voice_rate": 1.2974375608173856,
+   "problems_rate": 35.67953292247811,
+   "low_income": 1,
+   "majority_nonwhite": 1,
+   "renter_majority": 0,
+   "high_lep": 1
+  },
+  {
+   "tract_id": "s038",
+   "population": 4057,
+   "voice_count": 6.0,
+   "problems_count": 162.0,
+   "voice_rate": 1.4789253142716292,
+   "problems_rate": 39.93098348533399,
+   "low_income": 1,
+   "majority_nonwhite": 0,
+   "renter_majority": 0,
+   "high_lep": 1
+  },
+  {
+   "tract_id": "s039",
+   "population": 8917,
+   "voice_count": 3.0,
+   "problems_count": 695.0,
+   "voice_rate": 0.336436021083324,
+   "problems_rate": 77.94101155097005,
+   "low_income": 0,
+   "majority_nonwhite": 0,
+   "renter_majority": 1,
+   "high_lep": 1
+  }
+ ],
+ "expected": {
+  "voice": {
+   "low_income": {
+    "unweighted": {
+     "di": 0.3333333333333333,
+     "spd": -0.5,
+     "privileged": {
+      "n": 20,
+      "favorable": 15
+     },
+     "unprivileged": {
+      "n": 20,
+      "favorable": 5
+     }
+    },
+    "population_weighted": {
+     "di": 0.24671651518234392,
+     "spd": -0.5639743880810896,
+     "privileged": {
+      "n": 20,
+      "favorable": 15
+     },
+     "unprivileged": {
+      "n": 20,
+      "favorable": 5
+     }
+    }
+   },
+   "majority_nonwhite": {
+    "unweighted": {
+     "di": 0.7333333333333334,
+     "spd": -0.15999999999999998,
+     "privileged": {
+      "n": 15,
+      "favorable": 9
+     },
+     "unprivileged": {
+      "n": 25,
+      "favorable": 11
+     }
+    },
+    "population_weighted": {
+     "di": 0.861439738026298,
+     "spd": -0.07312714107156693,
+     "privileged": {
+      "n": 15,
+      "favorable": 9
+     },
+     "unprivileged": {
+      "n": 25,
+      "favorable": 11
+     }
+    }
+   },
+   "renter_majority": {
+    "unweighted": {
+     "di": 1.108695652173913,
+     "spd": 0.051150895140664954,
+     "privileged": {
+      "n": 17,
+      "favorable": 8
+     },
+     "unprivileged": {
+      "n": 23,
+      "favorable": 12
+     }
+    },
+    "population_weighted": {
+     "di": 1.0886441079392566,
+     "spd": 0.040515830142774156,
+     "privileged": {
+      "n": 17,
+      "favorable": 8
+     },
+     "unprivileged": {
+      "n": 23,
+      "favorable": 12
+     }
+    }
+   },
+   "high_lep": {
+    "unweighted": {
+     "di": 1.2857142857142856,
+     "spd": 0.1333333333333333,
+     "privileged": {
+      "n": 30,
+      "favorable": 14
+     },
+     "unprivileged": {
+      "n": 10,
+      "favorable": 6
+     }
+    },
+    "population_weighted": {
+     "di": 1.1154347356334249,
+     "spd": 0.0540059340204368,
+     "privileged": {
+      "n": 30,
+      "favorable": 14
+     },
+     "unprivileged": {
+      "n": 10,
+      "favorable": 6
+     }
+    }
+   }
+  },
+  "problems": {
+   "low_income": {
+    "unweighted": {
+     "di": 9.0,
+     "spd": 0.8,
+     "privileged": {
+      "n": 20,
+      "favorable": 2
+     },
+     "unprivileged": {
+      "n": 20,
+      "favorable": 18
+     }
+    },
+    "population_weighted": {
+     "di": 9.043252496339724,
+     "spd": 0.754208872279236,
+     "privileged": {
+      "n": 20,
+      "favorable": 2
+     },
+     "unprivileged": {
+      "n": 20,
+      "favorable": 18
+     }
+    }
+   },
+   "majority_nonwhite": {
+    "unweighted": {
+     "di": 1.4000000000000001,
+     "spd": 0.16000000000000003,
+     "privileged": {
+      "n": 15,
+      "favorable": 6
+     },
+     "unprivileged": {
+      "n": 25,
+      "favorable": 14
+     }
+    },
+    "population_weighted": {
+     "di": 1.7089873249978984,
+     "spd": 0.21886941393656267,
+     "privileged": {
+      "n": 15,
+      "favorable": 6
+     },
+     "unprivileged": {
+      "n": 25,
+      "favorable": 14
+     }
+    }
+   },
+   "renter_majority": {
+    "unweighted": {
+     "di": 0.7391304347826086,
+     "spd": -0.15345268542199492,
+     "privileged": {
+      "n": 17,
+      "favorable": 10
+     },
+     "unprivileged": {
+      "n": 23,
+      "favorable": 10
+     }
+    },
+    "population_weighted": {
+     "di": 0.7376092499351502,
+     "spd": -0.1390735256268858,
+     "privileged": {
+      "n": 17,
+      "favorable": 10
+     },
+     "unprivileged": {
+      "n": 23,
+      "favorable": 10
+     }
+    }
+   },
+   "high_lep": {
+    "unweighted": {
+     "di": 1.0,
+     "spd": 0.0,
+     "privileged": {
+      "n": 30,
+      "favorable": 15
+     },
+     "unprivileged": {
+      "n": 10,
+      "favorable": 5
+     }
+    },
+    "population_weighted": {
+     "di": 1.10294173306381,
+     "spd": 0.045774815042759265,
+     "privileged": {
+      "n": 30,
+      "favorable": 15
+     },
+     "unprivileged": {
+      "n": 10,
+      "favorable": 5
+     }
+    }
+   }
+  }
+ },
+ "regions": [
+  {
+   "name": "all",
+   "tract_ids": [
+    "s000",
+    "s001",
+    "s002",
+    "s003",
+    "s004",
+    "s005",
+    "s006",
+    "s007",
+    "s008",
+    "s009",
+    "s010",
+    "s011",
+    "s012",
+    "s013",
+    "s014",
+    "s015",
+    "s016",
+    "s017",
+    "s018",
+    "s019",
+    "s020",
+    "s021",
+    "s022",
+    "s023",
+    "s024",
+    "s025",
+    "s026",
+    "s027",
+    "s028",
+    "s029",
+    "s030",
+    "s031",
+    "s032",
+    "s033",
+    "s034",
+    "s035",
+    "s036",
+    "s037",
+    "s038",
+    "s039"
+   ],
+   "attr": "low_income",
+   "not_enough_data": false,
+   "voice": {
+    "unweighted": {
+     "di": 0.3333333333333333,
+     "spd": -0.5
+    },
+    "population_weighted": {
+     "di": 0.24671651518234392,
+     "spd": -0.5639743880810896
+    }
+   },
+   "requests_311": {
+    "unweighted": {
+     "di": 9.0,
+     "spd": 0.8
+    },
+    "population_weighted": {
+     "di": 9.043252496339724,
+     "spd": 0.754208872279236
+    }
+   }
+  },
+  {
+   "name": "first_half",
+   "tract_ids": [
+    "s000",
+    "s001",
+    "s002",
+    "s003",
+    "s004",
+    "s005",
+    "s006",
+    "s007",
+    "s008",
+    "s009",
+    "s010",
+    "s011",
+    "s012",
+    "s013",
+    "s014",
+    "s015",
+    "s016",
+    "s017",
+    "s018",
+    "s019"
+   ],
+   "attr": "low_income",
+   "not_enough_data": false,
+   "voice": {
+    "unweighted": {
+     "di": 0.37499999999999994,
+     "spd": -0.5
+    },
+    "population_weighted": {
+     "di": 0.24981060136406255,
+     "spd": -0.5868455791543025
+    }
+   },
+   "requests_311": {
+    "unweighted": {
+     "di": null,
+     "spd": 0.8
+    },
+    "population_weighted": {
+     "di": null,
+     "spd": 0.6436065365295351
+    }
+   }
+  },
+  {
+   "name": "tiny",
+   "tract_ids": [
+    "s000",
+    "s001",
+    "s002",
+    "s003"
+   ],
+   "attr": "low_income",
+   "not_enough_data": true
+  },
+  {
+   "name": "low_voice",
+   "tract_ids": [
+    "s009",
+    "s013",
+    "s022"
+   ],
+   "attr": "low_income",
+   "not_enough_data": true
+  }
+ ],
+ "gaps": [
+  {
+   "tract_id": "s000",
+   "expected": 5.750539046870071,
+   "observed": 3.0,
+   "gap": 0.47830977660557694
+  },
+  {
+   "tract_id": "s001",
+   "expected": 4.144460240162124,
+   "observed": 3.0000000000000004,
+   "gap": 0.27614216902641936
+  },
+  {
+   "tract_id": "s002",
+   "expected": 4.441162872093576,
+   "observed": 4.0,
+   "gap": 0.09933499058673588
+  },
+  {
+   "tract_id": "s003",
+   "expected": 5.5114355714761025,
+   "observed": 2.0,
+   "gap": 0.6371181384482103
+  },
+  {
+   "tract_id": "s004",
+   "expected": 3.9093753105730964,
+   "observed": 5.0,
+   "gap": -0.2789767169392143
+  },
+  {
+   "tract_id": "s005",
+   "expected": 4.900616609125124,
+   "observed": 3.0,
+   "gap": 0.38783213638588004
+  },
+  {
+   "tract_id": "s006",
+   "expected": 5.191961179983321,
+   "observed": 1.0,
+   "gap": 0.8073945537467958
+  },
+  {
+   "tract_id": "s007",
+   "expected": 2.135857095325956,
+   "observed": 3.0,
+   "gap": -0.40458835310897323
+  },
+  {
+   "tract_id": "s008",
+   "expected": 1.2832556270443811,
+   "observed": 1.0,
+   "gap": 0.22073203582732842
+  },
+  {
+   "tract_id": "s009",
+   "expected": 2.5122608857220636,
+   "observed": 0.0,
+   "gap": 1.0
+  },
+  {
+   "tract_id": "s010",
+   "expected": 2.436578273062348,
+   "observed": 3.0,
+   "gap": -0.23123481530085643
+  },
+  {
+   "tract_id": "s011",
+   "expected": 5.392218712596196,
+   "observed": 6.0,
+   "gap": -0.11271450951795221
+  },
+  {
+   "tract_id": "s012",
+   "expected": 5.588457699404132,
+   "observed": 8.0,
+   "gap": -0.43152197445334484
+  },
+  {
+   "tract_id": "s013",
+   "expected": 1.030756998967277,
+   "observed": 0.0,
+   "gap": 1.0
+  },
+  {
+   "tract_id": "s014",
+   "expected": 3.5148880640547557,
+   "observed": 7.0,
+   "gap": -0.9915285700236036
+  },
+  {
+   "tract_id": "s015",
+   "expected": 5.129673720006741,
+   "observed": 6.0,
+   "gap": -0.1696650367057099
+  },
+  {
+   "tract_id": "s016",
+   "expected": 1.6643477208795863,
+   "observed": 5.0,
+   "gap": -2.004179918218991
+  },
+  {
+   "tract_id": "s017",
+   "expected": 5.008447588224365,
+   "observed": 8.0,
+   "gap": -0.5973013312167303
+  },
+  {
+   "tract_id": "s018",
+   "expected": 1.6027300185371631,
+   "observed": 3.0,
+   "gap": -0.8718062089697098
+  },
+  {
+   "tract_id": "s019",
+   "expected": 3.3548159894912866,
+   "observed": 6.0,
+   "gap": -0.7884736506546282
+  },
+  {
+   "tract_id": "s020",
+   "expected": 5.105562445177097,
+   "observed": 6.0,
+   "gap": -0.17518883853194703
+  },
+  {
+   "tract_id": "s021",
+   "expected": 2.5263257960393557,
+   "observed": 2.0,
+   "gap": 0.2083364690589402
+  },
+  {
+   "tract_id": "s022",
+   "expected": 2.7205555099448206,
+   "observed": 0.0,
+   "gap": 1.0
+  },
+  {
+   "tract_id": "s023",
+   "expected": 2.403090391354509,
+   "observed": 3.0,
+   "gap": -0.2483924910993636
+  },
+  {
+   "tract_id": "s024",
+   "expected": 4.618648645145122,
+   "observed": 9.0,
+   "gap": -0.9486219220118254
+  },
+  {
+   "tract_id": "s025",
+   "expected": 2.28454329010876,
+   "observed": 1.0,
+   "gap": 0.5622757492363416
+  },
+  {
+   "tract_id": "s026",
+   "expected": 5.979596157751689,
+   "observed": 2.0,
+   "gap": 0.6655292519366401
+  },
+  {
+   "tract_id": "s027",
+   "expected": 3.2402874340504777,
+   "observed": 1.0,
+   "gap": 0.6913854031924682
+  },
+  {
+   "tract_id": "s028",
+   "expected": 3.4063873273213585,
+   "observed": 3.0,
+   "gap": 0.11930156152880143
+  },
+  {
+   "tract_id": "s029",
+   "expected": 3.5389993388843997,
+   "observed": 6.0,
+   "gap": -0.6953944958609071
+  },
+  {
+   "tract_id": "s030",
+   "expected": 3.9308075548661137,
+   "observed": 4.0,
+   "gap": -0.017602603070259716
+  },
+  {
+   "tract_id": "s031",
+   "expected": 3.7848003906199366,
+   "observed": 2.0,
+   "gap": 0.47157054703421036
+  },
+  {
+   "tract_id": "s032",
+   "expected": 3.563110613714044,
+   "observed": 6.0,
+   "gap": -0.6839219015280135
+  },
+  {
+   "tract_id": "s033",
+   "expected": 6.005046947849646,
+   "observed": 2.0,
+   "gap": 0.6669468170076202
+  },
+  {
+   "tract_id": "s034",
+   "expected": 5.06135844132275,
+   "observed": 1.0,
+   "gap": 0.8024245839149347
+  },
+  {
+   "tract_id": "s035",
+   "expected": 4.985675828663034,
+   "observed": 2.0,
+   "gap": 0.5988507739508762
+  },
+  {
+   "tract_id": "s036",
+   "expected": 4.522203545826546,
+   "observed": 11.0,
+   "gap": -1.4324424782143401
+  },
+  {
+   "tract_id": "s037",
+   "expected": 4.129725572210675,
+   "observed": 8.0,
+   "gap": -0.937174725079259
+  },
+  {
+   "tract_id": "s038",
+   "expected": 2.717206721774037,
+   "observed": 6.0,
+   "gap": -1.208149991651228
+  },
+  {
+   "tract_id": "s039",
+   "expected": 5.972228823775963,
+   "observed": 3.0,
+   "gap": 0.49767497386290044
+  }
+ ],
+ "rules": {
+  "min_tracts": 5,
+  "min_group_tracts": 2,
+  "min_voice": 10
+ }
+}

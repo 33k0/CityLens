@@ -1,12 +1,12 @@
 """Channel separation rule, build-time mirror of src/data/families.ts.
 
 Voice = letters + email + site. Problems = 311. Never summed, pooled or ranked together; cross-family
-comparison uses citywide percentiles of per-1k-resident rates. tests/fixtures/families_parity.json is checked
+comparison uses citywide percentiles of per-1k-resident rates (share of tracts strictly below). tests/fixtures/families_parity.json is checked
 by both pytest and vitest so the two implementations cannot drift.
 """
 from __future__ import annotations
 
-from bisect import bisect_left, bisect_right
+from bisect import bisect_left
 
 FAMILY_OF = {"letter": "voice", "email": "voice", "site": "voice", "311": "problems"}
 PROBLEM_PCT_MIN = 70
@@ -36,9 +36,9 @@ def percentile_ranks(rates: dict[str, float | None]) -> dict[str, float | None]:
         if v is None or n == 0:
             out[k] = None
             continue
-        below = bisect_left(vals, v)
-        equal = bisect_right(vals, v) - below
-        out[k] = 100 * (below + 0.5 * equal) / n
+        # share of tracts strictly below: tied tracts (e.g. every tract with zero comments) sit at the bottom of their
+        # tie, so silent tracts score 0 instead of the middle of a large tie
+        out[k] = 100 * bisect_left(vals, v) / n
     return out
 
 

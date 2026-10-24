@@ -595,7 +595,8 @@ details.mapkey .kr .ramp div{height:7px}
 .cmr:last-child{border-bottom:0}
 .cmr b{text-align:right;font-size:14px;font-weight:600;font-variant-numeric:tabular-nums}
 .cmr .cml em{display:block;font-style:normal;font-size:11px;color:var(--ink2)}
-.cmr.hd b{font-size:12.5px;display:flex;align-items:center;justify-content:flex-end;gap:6px;line-height:1.25}
+.cmr.hd b{font-size:12.5px;display:block;text-align:right;line-height:1.3;min-width:0;overflow-wrap:anywhere}
+.cmr.hd .cmk{display:inline-block;vertical-align:-1px;margin-right:6px}
 .cmk{width:10px;height:10px;border-radius:2px;flex:none;border:2px solid}.cmk.a{border-color:#4A2C8C;background:rgba(74,44,140,.15)}.cmk.b{border-color:#C2410C;background:rgba(194,65,12,.15)}
 /* source viewer */
 .modal.srcm{width:760px;max-width:calc(100vw - 32px);max-height:80vh}

@@ -747,7 +747,7 @@ async function mount(root,init){
   const A=col(S.regions[0]),B=col(S.regions[1]);const cv=D.comments.length/D.totPop*1000;
   const row=(l,a,b,c)=>`<div class="cmr"><span class="cml">${l}${c?`<em>city ${c}</em>`:''}</span><b>${a}</b><b>${b}</b></div>`;
   return `<div class="rmh"><div style="min-width:0"><div class="pt">Comparing two places</div><div class="small muted">${esc(ITEM.title)}</div></div><button class="colbtn" data-act="closemodal" aria-label="Close">×</button></div>
-   <div class="cmp"><div class="cmr hd"><span></span><b><i class="cmk a"></i>${esc(A.r.name)}</b><b><i class="cmk b"></i>${esc(B.r.name)}</b></div>
+   <div class="cmp"><div class="cmr hd"><span></span><b><i class="cmk a"></i><span>${esc(A.r.name)}</span></b><b><i class="cmk b"></i><span>${esc(B.r.name)}</span></b></div>
    ${row('Census tracts',A.tr.length,B.tr.length)}${row('Residents',fmt(A.f.pop),fmt(B.f.pop))}
    ${row('Comments per 1,000',A.v.toFixed(2),B.v.toFixed(2),cv.toFixed(2))}
    ${ITEM.n311?row('311 reports per 1,000 a year',Math.round(A.p311),Math.round(B.p311),Math.round(city.reduce((a,t)=>a+t.p311,0)/D.totPop*1000*12/D.m311)):''}

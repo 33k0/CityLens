@@ -551,3 +551,11 @@ details.mapkey .kr .ramp div{height:7px}
 .composer-chip .ccn{flex:none;white-space:nowrap;font-weight:400;opacity:.8}
 .composer-chip button{flex:none}
 .ctxbar>div:first-child{flex:1 1 auto}
+/* voice-for-its-problems heat: deep red = almost no voice for its 311 problems, yellow = city level */
+.hc{display:inline-block;min-width:58px;padding:3px 8px;border-radius:4px;font-weight:600;font-size:13px;text-align:center}
+.hk{display:inline-block;padding:1px 7px;border-radius:3px;font-size:11px;font-weight:500;margin:0 2px}
+.h0{background:#9B1C1C;color:#fff}.h1{background:#D9462F;color:#fff}.h2{background:#F08A3C;color:#2B1406}.h3{background:#F6C24A;color:#2E2205}.h4{background:#FBEBA5;color:#3D3209}
+.mvtab td.rt,.mvtab th.rt{text-align:center}
+.mvtab .lp{font-weight:500}.mvtab .lp.hi{color:#5B3FA0;font-weight:700}
+.mvtab .lp.hi::before{content:'';display:inline-block;width:7px;height:7px;border-radius:50%;background:#7357B4;margin-right:6px;vertical-align:1px}
+.mvkey{display:flex;flex-wrap:wrap;align-items:center;gap:4px}

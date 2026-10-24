@@ -646,3 +646,22 @@ button.cite{font:inherit;cursor:pointer}
 .sbslink{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);z-index:6;border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:5px 12px;font:inherit;font-size:12px;color:var(--ink2);cursor:pointer;box-shadow:0 2px 8px rgba(27,27,27,.08)}
 .sbslink.on{color:var(--ink);border-color:#9F8AD3;background:#F4F2FA}
 .sbslink:hover{border-color:#9F8AD3}
+/* guided tour */
+.tour{position:fixed;inset:0;z-index:1000;font:14px/1.5 "Public Sans",system-ui,sans-serif;color:var(--ink)}
+.tourblock{position:absolute;inset:0}
+.tourhl{position:absolute;border-radius:8px;box-shadow:0 0 0 2px #fff,0 0 0 9999px rgba(24,22,30,.58);transition:left .35s ease,top .35s ease,width .35s ease,height .35s ease;pointer-events:none}
+.tourcard{position:absolute;background:var(--panel);border-radius:10px;padding:16px 18px 14px;box-shadow:0 12px 40px rgba(0,0,0,.28);transition:left .35s ease,top .35s ease}
+.tourcard h3{margin:4px 0 6px;font-size:17px;font-weight:600;letter-spacing:-.01em}
+.tourcard p{margin:0 0 14px;color:var(--ink2)}.tourcard p b{color:var(--ink);font-weight:600}
+.tc-top{display:flex;align-items:center;justify-content:space-between}
+.tc-n{font-size:12px;font-weight:600;color:var(--g3);letter-spacing:.02em}
+.tc-x{border:0;background:none;font-size:20px;line-height:1;color:var(--ink2);cursor:pointer;padding:0 2px}.tc-x:hover{color:var(--ink)}
+.tc-bot{display:flex;align-items:center;gap:8px}
+.tc-dots{display:flex;gap:4px;margin-right:auto;flex-wrap:wrap}
+.tc-dots i{width:6px;height:6px;border-radius:50%;background:var(--line)}.tc-dots i.done{background:var(--g1)}.tc-dots i.on{background:var(--g3);width:16px;border-radius:3px}
+.tourcard .btn{height:32px}.tourcard .btn.pri{height:32px;font-size:13px}
+.tc-skip{border-color:transparent;background:none;color:var(--ink2)}
+@media (prefers-reduced-motion:reduce){.tourhl,.tourcard{transition:none}}
+.tour.nohl .tourblock{background:rgba(24,22,30,.58)}.tour.nohl .tourhl{opacity:0}
+.tbtn.tourbtn{background:var(--g3);border-color:var(--g3);color:#fff;font-weight:500}
+.tbtn.tourbtn:hover{background:var(--g4);border-color:var(--g4)}

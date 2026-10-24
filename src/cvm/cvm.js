@@ -1,10 +1,11 @@
-/* CityLens map UI — design by the team (docs/design), wired to real pipeline data.
+/* CityLens map UI — design by the team, wired to real pipeline data.
    Data: public/data/ui.json (census tracts + ACS), comments.json (voice: Legistar letters real, emails simulated),
    requests_311_by_tract.json (real 311, separate family), inbox.json (email attachments metadata).
    Channel rule: voice and 311 are never summed; they meet only through per-1k-rate percentiles. */
 import * as d3 from 'd3'
 import './cvm.css'
 import { askAssistant } from './assistant.js'
+import { startTour, tourSeen } from './tour.js'
 import CONTEXT_MD from '../../docs/CONTEXT_SAN_JOSE.md?raw'
 import { union as tUnion, polygon as tPoly, featureCollection as tFC } from '@turf/turf'
 
@@ -322,6 +323,7 @@ async function mount(root,init){
  <button class="tbtn ${S.sbs?'on':''}" data-act="sbs">${ICON.split}Side-by-side</button>${ITEM.n311?'':'<span class="nodata" style="height:28px"><i></i>No reported-problem data</span>'}`}
  <div class="spacer"></div>
  ${S.view==='analytics'?'':`<button class="tbtn" data-act="cityan">${ICON.gauge}City analytics</button>`}
+  <button class="tbtn tourbtn" data-act="tour" data-def="A one-minute guided tour of every part of the app."><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="6.5"/><path d="M6.2 6.3a1.9 1.9 0 1 1 2.6 1.8c-.5.2-.8.6-.8 1.1v.4" stroke-linecap="round"/><circle cx="8" cy="11.6" r=".5" fill="currentColor" stroke="none"/></svg>Tour</button>
   <button class="tbtn" data-act="menu" data-m="saved">Saved regions <span class="cnt">${S.saved.length}</span>${ICON.chevD}</button>
  ${S.menu==='item'?`<div class="menu" style="left:186px;width:440px"><div class="mh">Section</div>${D.itemOrder.map(k=>ITEMS[k]).map(d=>`<div class="mi" data-act="pickitem" data-id="${d.id}"><div><div style="font-weight:500">${d.title}</div><div class="small muted">${fmt(d.total)} comments · ${srcLine(d)} ${d.n311?' · '+n311(d):''}</div></div>${ITEM.id===d.id?'<span style="margin-left:auto;font-size:12px;color:var(--ink2);padding-top:2px">Current</span>':''}</div>`).join('')}</div>`:''}
  ${S.menu==='saved'?`<div class="menu" style="right:16px;width:300px">${S.saved.map((r,i)=>`<div class="mi" data-act="loadregion" data-i="${i}"><span style="width:10px;height:10px;border:1.5px dashed ${GAP[4]};border-radius:50%;margin-top:4px;flex:none"></span><div style="flex:1"><div style="font-weight:500">${esc(r.name)}</div><div class="small muted">${regionTracts(r.poly).length} census tracts</div></div></div>`).join('')}${S.saved.length>1?'<div style="border-top:1px solid var(--line);margin:6px -6px 0;padding:8px 10px 2px"><button class="btn" data-act="compare">Compare first two</button></div>':''}</div>`:''}
@@ -866,6 +868,7 @@ async function mount(root,init){
   case 'send':{const ta=document.querySelector('.cbox textarea');const q=ta?ta.value:'';sendChat(q)}return;
   case 'suggest':sendChat(a.dataset.q);return;
   case 'clearchat':S.chat=[];break;
+  case 'tour':S.menu=null;startTour({S,D,ITEM,render,maps:()=>maps});return;
   }
   render();
  });
@@ -880,6 +883,7 @@ async function mount(root,init){
  stage.addEventListener('mouseout',e=>{const df=e.target.closest('[data-def]');if(df&&!df.contains(e.relatedTarget)){srcTip.style.display='none';delete srcTip.dataset.fixed;return}const q=e.target.closest('[data-hover]');if(q&&!q.contains(e.relatedTarget)&&maps[0]&&!S.pulseId)maps[0].pulse(null);const s=e.target.closest('[data-src]');if(s&&!s.contains(e.relatedTarget))srcTip.style.display='none'});
  addEventListener('keydown',e=>{if(e.key==='Escape'){if(S.armed)S.modal=!!(S.region&&Array.isArray(S.region.poly));S.armed=false;S.hint=null;S.inspector=null;S.srcView=null;S.lightbox=null;S.menu=null;render()}});
  render();
+ if(!init.screen&&!new URLSearchParams(location.search).get('screen')&&!tourSeen())setTimeout(()=>startTour({S,D,ITEM,render,maps:()=>maps}),400);
  if(S.srcDemo){const el=document.querySelector(S.srcDemo);if(el){const r=el.getBoundingClientRect();srcTip.innerHTML='Source: <code>'+esc(el.dataset.src)+'</code>';srcTip.style.display='block';srcTip.style.left=r.left+'px';srcTip.style.top=(r.bottom+6)+'px'}}
  return {S,render,maps:()=>maps};
 }

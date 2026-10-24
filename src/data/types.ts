@@ -96,6 +96,7 @@ export interface VoiceComment {
   tract_id: string | null
   location_precision: 'address' | 'neighborhood' | 'zip' | 'none' | string
   location_source?: string
+  location_basis?: 'residence' | 'issue' | 'both' | ''
   multi_tract: boolean
   council_district: number | null
   matched_name?: string

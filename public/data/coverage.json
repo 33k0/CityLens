@@ -1,55 +1,72 @@
 {
- "generated_at": "2026-10-23T17:05:42-0700",
+ "generated_at": "2026-10-23T17:41:14-0700",
  "tract_count": 215,
  "n": 435,
  "tiers": {
   "address": {
-   "count": 17,
-   "share": 0.0391
+   "count": 96,
+   "share": 0.2207
   },
   "neighborhood": {
-   "count": 66,
-   "share": 0.1517
+   "count": 49,
+   "share": 0.1126
   },
   "zip": {
    "count": 8,
    "share": 0.0184
   },
   "district": {
-   "count": 14,
-   "share": 0.0322
+   "count": 12,
+   "share": 0.0276
   },
   "none": {
-   "count": 330,
-   "share": 0.7586
+   "count": 270,
+   "share": 0.6207
   }
  },
- "with_tract": 91,
- "with_tract_share": 0.2092,
- "distinct_tracts": 28,
- "multi_tract": 67,
+ "basis": {
+  "residence": 78,
+  "issue": 76,
+  "both": 11
+ },
+ "with_tract": 153,
+ "with_tract_share": 0.3517,
+ "distinct_tracts": 36,
+ "multi_tract": 76,
  "by_source": {
   "address/body": 1,
-  "address/intersection": 4,
-  "address/landmark": 5,
+  "address/intersection": 22,
+  "address/landmark": 10,
   "address/signature": 7,
-  "district/body": 14,
-  "neighborhood/body": 43,
-  "neighborhood/signature": 23,
-  "none/-": 330,
+  "address/street_anchor": 56,
+  "district/body": 12,
+  "neighborhood/body": 29,
+  "neighborhood/signature": 19,
+  "neighborhood/subject": 1,
+  "none/-": 270,
   "zip/signature": 8
+ },
+ "by_basis": {
+  "address/both": 11,
+  "address/issue": 57,
+  "address/residence": 28,
+  "district/residence": 12,
+  "neighborhood/issue": 19,
+  "neighborhood/residence": 30,
+  "none/-": 270,
+  "zip/residence": 8
  },
  "by_channel": {
   "email": {
    "n": 164,
    "tiers": {
     "address": {
-     "count": 8,
-     "share": 0.0488
+     "count": 77,
+     "share": 0.4695
     },
     "neighborhood": {
-     "count": 50,
-     "share": 0.3049
+     "count": 33,
+     "share": 0.2012
     },
     "zip": {
      "count": 0,
@@ -60,19 +77,24 @@
      "share": 0.0
     },
     "none": {
-     "count": 106,
-     "share": 0.6463
+     "count": 54,
+     "share": 0.3293
     }
    },
-   "with_tract": 58,
-   "with_tract_share": 0.3537
+   "basis": {
+    "residence": 31,
+    "issue": 68,
+    "both": 11
+   },
+   "with_tract": 110,
+   "with_tract_share": 0.6707
   },
   "letter": {
    "n": 271,
    "tiers": {
     "address": {
-     "count": 9,
-     "share": 0.0332
+     "count": 19,
+     "share": 0.0701
     },
     "neighborhood": {
      "count": 16,
@@ -83,16 +105,21 @@
      "share": 0.0295
     },
     "district": {
-     "count": 14,
-     "share": 0.0517
+     "count": 12,
+     "share": 0.0443
     },
     "none": {
-     "count": 224,
-     "share": 0.8266
+     "count": 216,
+     "share": 0.797
     }
    },
-   "with_tract": 33,
-   "with_tract_share": 0.1218
+   "basis": {
+    "residence": 47,
+    "issue": 8,
+    "both": 0
+   },
+   "with_tract": 43,
+   "with_tract_share": 0.1587
   }
  },
  "by_item": {
@@ -104,8 +131,8 @@
      "share": 0.0
     },
     "neighborhood": {
-     "count": 0,
-     "share": 0.0
+     "count": 1,
+     "share": 1.0
     },
     "zip": {
      "count": 0,
@@ -116,12 +143,17 @@
      "share": 0.0
     },
     "none": {
-     "count": 1,
-     "share": 1.0
+     "count": 0,
+     "share": 0.0
     }
    },
-   "with_tract": 0,
-   "with_tract_share": 0.0
+   "basis": {
+    "residence": 0,
+    "issue": 1,
+    "both": 0
+   },
+   "with_tract": 1,
+   "with_tract_share": 1.0
   },
   "25-011": {
    "n": 10,
@@ -146,6 +178,11 @@
      "count": 8,
      "share": 0.8
     }
+   },
+   "basis": {
+    "residence": 2,
+    "issue": 0,
+    "both": 0
    },
    "with_tract": 2,
    "with_tract_share": 0.2
@@ -174,6 +211,11 @@
      "share": 0.0
     }
    },
+   "basis": {
+    "residence": 1,
+    "issue": 0,
+    "both": 0
+   },
    "with_tract": 1,
    "with_tract_share": 1.0
   },
@@ -200,6 +242,11 @@
      "count": 3,
      "share": 0.75
     }
+   },
+   "basis": {
+    "residence": 1,
+    "issue": 0,
+    "both": 0
    },
    "with_tract": 1,
    "with_tract_share": 0.25
@@ -228,6 +275,11 @@
      "share": 1.0
     }
    },
+   "basis": {
+    "residence": 0,
+    "issue": 0,
+    "both": 0
+   },
    "with_tract": 0,
    "with_tract_share": 0.0
   },
@@ -255,6 +307,11 @@
      "share": 0.5
     }
    },
+   "basis": {
+    "residence": 1,
+    "issue": 0,
+    "both": 0
+   },
    "with_tract": 1,
    "with_tract_share": 0.5
   },
@@ -262,39 +319,44 @@
    "n": 57,
    "tiers": {
     "address": {
-     "count": 2,
-     "share": 0.0351
+     "count": 9,
+     "share": 0.1579
     },
     "neighborhood": {
-     "count": 11,
-     "share": 0.193
+     "count": 12,
+     "share": 0.2105
     },
     "zip": {
      "count": 0,
      "share": 0.0
     },
     "district": {
-     "count": 10,
-     "share": 0.1754
+     "count": 8,
+     "share": 0.1404
     },
     "none": {
-     "count": 34,
-     "share": 0.5965
+     "count": 28,
+     "share": 0.4912
     }
    },
-   "with_tract": 13,
-   "with_tract_share": 0.2281
+   "basis": {
+    "residence": 23,
+    "issue": 6,
+    "both": 0
+   },
+   "with_tract": 21,
+   "with_tract_share": 0.3684
   },
   "25-065": {
    "n": 3,
    "tiers": {
     "address": {
-     "count": 1,
-     "share": 0.3333
+     "count": 2,
+     "share": 0.6667
     },
     "neighborhood": {
-     "count": 1,
-     "share": 0.3333
+     "count": 0,
+     "share": 0.0
     },
     "zip": {
      "count": 0,
@@ -308,6 +370,11 @@
      "count": 0,
      "share": 0.0
     }
+   },
+   "basis": {
+    "residence": 2,
+    "issue": 1,
+    "both": 0
    },
    "with_tract": 2,
    "with_tract_share": 0.6667
@@ -316,12 +383,12 @@
    "n": 188,
    "tiers": {
     "address": {
-     "count": 1,
-     "share": 0.0053
-    },
-    "neighborhood": {
      "count": 3,
      "share": 0.016
+    },
+    "neighborhood": {
+     "count": 2,
+     "share": 0.0106
     },
     "zip": {
      "count": 8,
@@ -332,12 +399,17 @@
      "share": 0.016
     },
     "none": {
-     "count": 173,
-     "share": 0.9202
+     "count": 172,
+     "share": 0.9149
     }
    },
-   "with_tract": 12,
-   "with_tract_share": 0.0638
+   "basis": {
+    "residence": 16,
+    "issue": 0,
+    "both": 0
+   },
+   "with_tract": 13,
+   "with_tract_share": 0.0691
   },
   "25-085": {
    "n": 4,
@@ -363,6 +435,11 @@
      "share": 0.75
     }
    },
+   "basis": {
+    "residence": 1,
+    "issue": 0,
+    "both": 0
+   },
    "with_tract": 1,
    "with_tract_share": 0.25
   },
@@ -370,12 +447,108 @@
    "n": 11,
    "tiers": {
     "address": {
+     "count": 3,
+     "share": 0.2727
+    },
+    "neighborhood": {
+     "count": 8,
+     "share": 0.7273
+    },
+    "zip": {
      "count": 0,
      "share": 0.0
     },
+    "district": {
+     "count": 0,
+     "share": 0.0
+    },
+    "none": {
+     "count": 0,
+     "share": 0.0
+    }
+   },
+   "basis": {
+    "residence": 4,
+    "issue": 5,
+    "both": 2
+   },
+   "with_tract": 11,
+   "with_tract_share": 1.0
+  },
+  "MOCK-26-902": {
+   "n": 40,
+   "tiers": {
+    "address": {
+     "count": 33,
+     "share": 0.825
+    },
     "neighborhood": {
-     "count": 7,
-     "share": 0.6364
+     "count": 1,
+     "share": 0.025
+    },
+    "zip": {
+     "count": 0,
+     "share": 0.0
+    },
+    "district": {
+     "count": 0,
+     "share": 0.0
+    },
+    "none": {
+     "count": 6,
+     "share": 0.15
+    }
+   },
+   "basis": {
+    "residence": 0,
+    "issue": 28,
+    "both": 6
+   },
+   "with_tract": 34,
+   "with_tract_share": 0.85
+  },
+  "MOCK-26-903": {
+   "n": 20,
+   "tiers": {
+    "address": {
+     "count": 20,
+     "share": 1.0
+    },
+    "neighborhood": {
+     "count": 0,
+     "share": 0.0
+    },
+    "zip": {
+     "count": 0,
+     "share": 0.0
+    },
+    "district": {
+     "count": 0,
+     "share": 0.0
+    },
+    "none": {
+     "count": 0,
+     "share": 0.0
+    }
+   },
+   "basis": {
+    "residence": 0,
+    "issue": 18,
+    "both": 2
+   },
+   "with_tract": 20,
+   "with_tract_share": 1.0
+  },
+  "MOCK-26-904": {
+   "n": 13,
+   "tiers": {
+    "address": {
+     "count": 9,
+     "share": 0.6923
+    },
+    "neighborhood": {
+     "count": 0,
+     "share": 0.0
     },
     "zip": {
      "count": 0,
@@ -387,99 +560,23 @@
     },
     "none": {
      "count": 4,
-     "share": 0.3636
+     "share": 0.3077
     }
    },
-   "with_tract": 7,
-   "with_tract_share": 0.6364
-  },
-  "MOCK-26-902": {
-   "n": 40,
-   "tiers": {
-    "address": {
-     "count": 3,
-     "share": 0.075
-    },
-    "neighborhood": {
-     "count": 6,
-     "share": 0.15
-    },
-    "zip": {
-     "count": 0,
-     "share": 0.0
-    },
-    "district": {
-     "count": 0,
-     "share": 0.0
-    },
-    "none": {
-     "count": 31,
-     "share": 0.775
-    }
+   "basis": {
+    "residence": 3,
+    "issue": 6,
+    "both": 0
    },
    "with_tract": 9,
-   "with_tract_share": 0.225
-  },
-  "MOCK-26-903": {
-   "n": 20,
-   "tiers": {
-    "address": {
-     "count": 0,
-     "share": 0.0
-    },
-    "neighborhood": {
-     "count": 8,
-     "share": 0.4
-    },
-    "zip": {
-     "count": 0,
-     "share": 0.0
-    },
-    "district": {
-     "count": 0,
-     "share": 0.0
-    },
-    "none": {
-     "count": 12,
-     "share": 0.6
-    }
-   },
-   "with_tract": 8,
-   "with_tract_share": 0.4
-  },
-  "MOCK-26-904": {
-   "n": 13,
-   "tiers": {
-    "address": {
-     "count": 0,
-     "share": 0.0
-    },
-    "neighborhood": {
-     "count": 3,
-     "share": 0.2308
-    },
-    "zip": {
-     "count": 0,
-     "share": 0.0
-    },
-    "district": {
-     "count": 0,
-     "share": 0.0
-    },
-    "none": {
-     "count": 10,
-     "share": 0.7692
-    }
-   },
-   "with_tract": 3,
-   "with_tract_share": 0.2308
+   "with_tract_share": 0.6923
   },
   "MOCK-26-905": {
    "n": 10,
    "tiers": {
     "address": {
-     "count": 0,
-     "share": 0.0
+     "count": 1,
+     "share": 0.1
     },
     "neighborhood": {
      "count": 2,
@@ -494,23 +591,28 @@
      "share": 0.0
     },
     "none": {
-     "count": 8,
-     "share": 0.8
+     "count": 7,
+     "share": 0.7
     }
    },
-   "with_tract": 2,
-   "with_tract_share": 0.2
+   "basis": {
+    "residence": 1,
+    "issue": 2,
+    "both": 0
+   },
+   "with_tract": 3,
+   "with_tract_share": 0.3
   },
   "MOCK-26-906": {
    "n": 39,
    "tiers": {
     "address": {
-     "count": 1,
-     "share": 0.0256
+     "count": 4,
+     "share": 0.1026
     },
     "neighborhood": {
-     "count": 18,
-     "share": 0.4615
+     "count": 15,
+     "share": 0.3846
     },
     "zip": {
      "count": 0,
@@ -525,6 +627,11 @@
      "share": 0.5128
     }
    },
+   "basis": {
+    "residence": 18,
+    "issue": 1,
+    "both": 0
+   },
    "with_tract": 19,
    "with_tract_share": 0.4872
   },
@@ -532,12 +639,12 @@
    "n": 8,
    "tiers": {
     "address": {
-     "count": 3,
-     "share": 0.375
+     "count": 2,
+     "share": 0.25
     },
     "neighborhood": {
-     "count": 0,
-     "share": 0.0
+     "count": 3,
+     "share": 0.375
     },
     "zip": {
      "count": 0,
@@ -548,12 +655,17 @@
      "share": 0.0
     },
     "none": {
-     "count": 5,
-     "share": 0.625
+     "count": 3,
+     "share": 0.375
     }
    },
-   "with_tract": 3,
-   "with_tract_share": 0.375
+   "basis": {
+    "residence": 1,
+    "issue": 4,
+    "both": 0
+   },
+   "with_tract": 5,
+   "with_tract_share": 0.625
   },
   "MOCK-26-908": {
    "n": 8,
@@ -579,6 +691,11 @@
      "share": 0.875
     }
    },
+   "basis": {
+    "residence": 0,
+    "issue": 1,
+    "both": 0
+   },
    "with_tract": 1,
    "with_tract_share": 0.125
   },
@@ -586,12 +703,12 @@
    "n": 7,
    "tiers": {
     "address": {
-     "count": 0,
-     "share": 0.0
+     "count": 1,
+     "share": 0.1429
     },
     "neighborhood": {
-     "count": 3,
-     "share": 0.4286
+     "count": 2,
+     "share": 0.2857
     },
     "zip": {
      "count": 0,
@@ -606,6 +723,11 @@
      "share": 0.5714
     }
    },
+   "basis": {
+    "residence": 2,
+    "issue": 1,
+    "both": 0
+   },
    "with_tract": 3,
    "with_tract_share": 0.4286
   },
@@ -613,8 +735,8 @@
    "n": 2,
    "tiers": {
     "address": {
-     "count": 0,
-     "share": 0.0
+     "count": 2,
+     "share": 1.0
     },
     "neighborhood": {
      "count": 0,
@@ -629,23 +751,28 @@
      "share": 0.0
     },
     "none": {
-     "count": 2,
-     "share": 1.0
+     "count": 0,
+     "share": 0.0
     }
    },
-   "with_tract": 0,
-   "with_tract_share": 0.0
+   "basis": {
+    "residence": 0,
+    "issue": 1,
+    "both": 1
+   },
+   "with_tract": 2,
+   "with_tract_share": 1.0
   },
   "MOCK-GEN": {
    "n": 6,
    "tiers": {
     "address": {
-     "count": 1,
-     "share": 0.1667
-    },
-    "neighborhood": {
      "count": 2,
      "share": 0.3333
+    },
+    "neighborhood": {
+     "count": 1,
+     "share": 0.1667
     },
     "zip": {
      "count": 0,
@@ -660,66 +787,65 @@
      "share": 0.5
     }
    },
+   "basis": {
+    "residence": 2,
+    "issue": 1,
+    "both": 0
+   },
    "with_tract": 3,
    "with_tract_share": 0.5
   }
  },
  "by_council_district": {
-  "10": 1,
-  "2": 3,
-  "3": 45,
-  "4": 8,
-  "5": 24,
-  "6": 11,
-  "7": 10,
+  "2": 8,
+  "3": 43,
+  "4": 13,
+  "5": 42,
+  "6": 14,
+  "7": 42,
   "8": 1,
   "9": 2
  },
  "by_matched_name": [
   {
-   "name": "Washington-Guadalupe",
-   "count": 8,
-   "precision": "neighborhood"
-  },
-  {
-   "name": "Japantown",
-   "count": 6,
-   "precision": "neighborhood"
-  },
-  {
    "name": "Downtown",
-   "count": 6,
+   "count": 9,
    "precision": "neighborhood"
+  },
+  {
+   "name": "Washington-Guadalupe",
+   "count": 9,
+   "precision": "address"
   },
   {
    "name": "Alviso",
-   "count": 6,
-   "precision": "neighborhood"
+   "count": 7,
+   "precision": "address"
   },
   {
-   "name": "East San José",
+   "name": "Japantown",
    "count": 5,
    "precision": "neighborhood"
   },
   {
-   "name": "Tully Road",
-   "count": 5,
-   "precision": "neighborhood"
-  },
-  {
-   "name": "Story Road",
-   "count": 4,
-   "precision": "neighborhood"
-  },
-  {
-   "name": "Kelley Park",
+   "name": "San José State University",
    "count": 4,
    "precision": "address"
   },
   {
-   "name": "King Road",
+   "name": "East San José",
+   "count": 4,
+   "precision": "neighborhood"
+  },
+  {
+   "name": "North San José",
    "count": 3,
    "precision": "neighborhood"
+  },
+  {
+   "name": "Kelley Park",
+   "count": 3,
+   "precision": "address"
   },
   {
    "name": "Alum Rock",
@@ -732,9 +858,19 @@
    "precision": "neighborhood"
   },
   {
+   "name": "Berryessa",
+   "count": 2,
+   "precision": "neighborhood"
+  },
+  {
    "name": "Vendome",
    "count": 2,
    "precision": "neighborhood"
+  },
+  {
+   "name": "San José City College",
+   "count": 2,
+   "precision": "address"
   },
   {
    "name": "Naglee Park",
@@ -747,9 +883,24 @@
    "precision": "neighborhood"
   },
   {
-   "name": "Little Portugal",
-   "count": 1,
+   "name": "Tully Road",
+   "count": 2,
+   "precision": "address"
+  },
+  {
+   "name": "Coyote Creek",
+   "count": 2,
    "precision": "neighborhood"
+  },
+  {
+   "name": "Blossom Valley",
+   "count": 2,
+   "precision": "address"
+  },
+  {
+   "name": "Roosevelt Park",
+   "count": 1,
+   "precision": "address"
   },
   {
    "name": "Diridon Station",
@@ -767,27 +918,12 @@
    "precision": "neighborhood"
   },
   {
-   "name": "North San José",
-   "count": 1,
-   "precision": "neighborhood"
-  },
-  {
-   "name": "Gardner",
-   "count": 1,
-   "precision": "neighborhood"
-  },
-  {
    "name": "Rose Garden",
    "count": 1,
    "precision": "neighborhood"
   },
   {
-   "name": "Almaden Valley",
-   "count": 1,
-   "precision": "neighborhood"
-  },
-  {
-   "name": "Berryessa",
+   "name": "Shasta Hanchett Park",
    "count": 1,
    "precision": "neighborhood"
   },
@@ -802,9 +938,19 @@
    "precision": "neighborhood"
   },
   {
-   "name": "Monterey Road corridor",
+   "name": "Story Road",
+   "count": 1,
+   "precision": "address"
+  },
+  {
+   "name": "Coyote Valley",
    "count": 1,
    "precision": "neighborhood"
+  },
+  {
+   "name": "Monterey Road corridor",
+   "count": 1,
+   "precision": "address"
   }
  ]
 }

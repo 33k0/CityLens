@@ -50,7 +50,7 @@ def main() -> int:
 
     loc = read(D / "locations.csv")
     if loc is not None:
-        cols = [c for c in ["comment_id", "tract_id", "location_precision", "location_source", "multi_tract", "council_district", "matched_name"] if c in loc.columns]
+        cols = [c for c in ["comment_id", "tract_id", "location_precision", "location_source", "location_basis", "multi_tract", "council_district", "matched_name"] if c in loc.columns]
         voice = voice.merge(loc[cols], on="comment_id", how="left")
         log(f"  locations joined: {voice['tract_id'].replace('', pd.NA).notna().sum()} with a tract")
     else:
@@ -68,7 +68,7 @@ def main() -> int:
     else:
         log("  -- classifications.csv missing: category empty, stance 'unclear'")
 
-    for c, default in [("tract_id", ""), ("location_precision", "none"), ("multi_tract", "False"), ("council_district", ""),
+    for c, default in [("tract_id", ""), ("location_precision", "none"), ("location_basis", ""), ("multi_tract", "False"), ("council_district", ""),
                        ("category", ""), ("confidence", ""), ("evidence_quote", ""), ("stance", "unclear"),
                        ("stance_source", "pending_llm"), ("stance_evidence", ""), ("campaign_id", ""), ("engine", "")]:
         if c not in voice.columns:

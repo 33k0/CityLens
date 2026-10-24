@@ -301,3 +301,64 @@ Dates are absolute. Newest at the bottom of each section.
 - Thresholds (85 fuzzy, 92 landmarks, 45-character proximity window, 1 km crossing ambiguity, 500 people per zip)
   were tuned by hand on these 435 rows. Not resolved by design: single streets without a cross street ("traffic on
   Zanker", "the Alma Ave pothole") and the 30-mile Coyote Creek Trail.
+
+## IBM Bob and Granite availability (correction 2, 2026-10-23)
+
+- **Ollama** 0.40.9 installed via Homebrew and run as a brew service. The spec's `granite4.2:8b` tag does not exist in
+  the Ollama library; `granite4.1:8b` (5.3 GB, the newest 8B Granite) is used, plus `nomic-embed-text`. Smoke test:
+  ~82 tokens/s on this laptop.
+- **IBM Bob Shell 2.0.6** installed from IBM's official script (`bob.ibm.com/download/bobshell.sh`, which downloads the
+  tarball from IBM Cloud Object Storage and verifies its SHA-256). The global npm prefix needed root, so the same
+  verified tarball was installed with `npm install -g --prefix ~/.local`; `bob` resolves from `~/.local/bin`.
+- The CLI differs from the addendum's assumed form. Working headless form:
+  `bob run --accept-license --mode agent --format json --max-turns N "<prompt>"` (also `-w <workspace>`, `--trust`,
+  `--max-cost`). Output is one JSON line with `status`, `stats.task_id`, `stats.duration_ms`, `stats.session_costs`,
+  and `last_message`.
+- Without a key: `Error: Bob API key is required. Set BOB_API_KEY environment variable.` With a key but no license:
+  `Error: A license agreement is required.` **The user supplied a Bob API key and explicitly accepted the IBM license
+  (IBM Bob-Shell V2.0, 5900-BVU, L/N L-EBQG-R9G8MA) on 2026-10-23.** The key lives only in gitignored, owner-only
+  `.env.local`. Test call `"reply with the word ok"` → `status: success`, `last_message: "ok"`, 2.1 s, $0.027.
+- Budget guard: `BOB_MAX_RUNS=6` per pipeline run, `--max-cost 3` per Bob run. Every run is recorded in
+  `public/data/provenance.json` and summarized in `BOB_USAGE.md`.
+
+### Milestone 4 revision — locate the place a comment is about, not only the writer (2026-10-23)
+
+- The user pointed out that the simulated emails were written with about 71 precise / 41 neighborhood / 52 none
+  location mentions, while the first resolver gave 8 / 50 / 106. The first version located only the writer's
+  residence and suppressed places named in the item title, which contradicted the spec ("the crosswalk at Story and
+  King" should resolve to address precision). That rule is gone.
+- **A location is the place a comment is about or where the writer is, whichever is finer.** New column
+  `location_basis`: `residence` (residence/proximity cue, signature, organization letterhead, stated zip or district),
+  `issue` (the place is the subject), or `both`. Within a tier, residence/both beats issue. Fairness participation
+  ("who is heard") counts residence/both by default; the map and region counts use every located row.
+- **New forms:** "Story and King", "King & Story", "Story/King", "First @ Alma St.", "corner of X and Y", "I cross X and
+  Y", "X near Y", Spanish/Vietnamese connectors, and ranges ("King Road between Story and Tully" → midpoint of the two
+  crossings). Street names are validated against all 11,962 San José GIS street names.
+- **Single streets are anchored** (`location_source=street_anchor`, 56 rows), in order: a co-mentioned cross street; the
+  nearest point to a co-mentioned neighborhood or landmark within 3 km; the segment nearest the centroid of the item's
+  other located comments when they cluster within ~3 km (33 rows; this places the item, not the writer, so the UI
+  labels every street anchor "street, approximate"); the street's same-named corridor (4 rows). `multi_tract` when the
+  street crosses a tract line within 300 m.
+- Fictional buildings and projects (Cedar Court, Terra Verde) are never geocoded by name; they resolve through the real
+  street they are near or off, and that point carries to other comments on the same item, except for names that
+  appear in the item title.
+- **Result:**
+
+  | tier | emails (164, simulated) | letters (271, real) | combined (435) |
+  |---|---|---|---|
+  | address | 77 (47.0%) | 19 (7.0%) | 96 (22.1%) |
+  | neighborhood | 33 (20.1%) | 16 (5.9%) | 49 (11.3%) |
+  | zip | 0 | 8 (3.0%) | 8 (1.8%) |
+  | district only | 0 | 12 (4.4%) | 12 (2.8%) |
+  | none | 54 (32.9%) | 216 (79.7%) | 270 (62.1%) |
+  | with a tract | 110 (67.1%) | 43 (15.9%) | 153 in 36 tracts |
+
+  Emails land at 77 / 33 / 54 against the user's 71 / 41 / 52 with general rules only, no per-row cases. Basis:
+  emails residence 31, issue 68, both 11; letters residence 47, issue 8. Likely disagreements with the user's labels:
+  a few cluster-anchored single streets ("traffic on Zanker") count as precise; Terra Verde emails that name only
+  Alviso or North San José stay at neighborhood; "my place by 101", "by the creek", "my block" stay at none.
+- Hand-picked thresholds: 3 km anchor radius, 5 km cluster cap, 3 km cluster spread, 300 m multi-tract buffer,
+  fuzzy 85 with every word ≥ 80. Street geometry (public) is cached in gitignored `data/raw/sjgis/` so `--offline`
+  reproduces the output exactly.
+- Pipeline order fixed: `export_comments.py` (h) now runs before `fairness.py`, which reads the export; the offline
+  flag reaches the location and Bob steps so `npm run demo` makes no network or paid calls.

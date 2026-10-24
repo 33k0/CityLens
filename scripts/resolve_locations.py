@@ -58,7 +58,9 @@ CENSUS_URL = "https://geocoding.geo.census.gov/geocoder/geographies/onelineaddre
 STREETS_LAYER = "https://geo.sanjoseca.gov/server/rest/services/OPN/OPN_OpenDataService/MapServer/60"
 
 TIERS = ["address", "neighborhood", "zip", "district", "none"]
-OUT_COLS = ["comment_id", "tract_id", "location_precision", "location_source", "multi_tract", "council_district",
+BASES = ["residence", "issue", "both"]
+OUT_COLS = ["comment_id", "tract_id", "location_precision", "location_source", "location_basis", "multi_tract",
+            "council_district",
             "matched_name"]
 
 # --------------------------------------------------------------------------------------------- gazetteer
@@ -115,8 +117,8 @@ LANDMARKS: dict[str, tuple[Optional[float], Optional[float], list[str]]] = {
 # Names that are common English words in /usr/share/dict/words are checked at runtime; this fallback keeps the
 # behaviour stable where that file is missing.
 GENERIC_FALLBACK = {"commercial", "union", "airport", "estates", "villages", "orchard", "cherry", "university",
-                    "noble", "hammer", "glider", "checkers", "majestic", "cypress", "sundown", "mulberry", "southwest",
-                    "reed", "alma", "monroe", "toyon", "cahalan", "carden", "kirk", "muir", "parma", "hayes", "lido",
+                    "hammer", "glider", "checkers", "majestic", "cypress", "sundown", "mulberry", "southwest",
+                    "reed", "alma", "monroe", "cahalan", "carden", "kirk", "muir", "parma", "hayes", "lido",
                     "poco", "dahl", "oster", "rogers", "williams", "redmond", "baldwin", "carlton", "coleman",
                     "brokaw", "branham", "metcalf", "starbird", "stokes", "guadalupe", "alameda", "fairground",
                     "civic center", "the plant", "the woods", "the willows", "the glens", "the villages", "park view"}
@@ -139,7 +141,7 @@ KNOWN_STREETS = {"story", "king", "tully", "alum rock", "monterey", "senter", "c
                  "fifth", "sixth", "seventh", "tenth", "eleventh", "24th", "33rd", "snell", "cottle", "santa teresa",
                  "great oaks", "hellyer", "lucretia", "ocala", "jose figueres", "white", "piedmont", "sierra",
                  "noble", "toyon", "flickinger", "capitol expressway", "lawrence", "de anza", "moorpark",
-                 "southwest", "park", "naglee", "the alameda", "race", "lincoln", "delmas", "bird", "minnesota"}
+                 "naglee", "the alameda", "lincoln", "delmas", "minnesota"}
 
 # ------------------------------------------------------------------------------------------- text utilities
 
@@ -214,7 +216,9 @@ CUE_BEFORE = re.compile(
     r"(?:\w+\s+)?$", re.I)
 CUE_RESIDE_BEFORE = re.compile(
     r"\b(?:live|living|lived|reside|residing|resident|residents|homeowner|homeowners|neighbor|neighbors|grew up|"
-    r"raised|here)\b(?:\s+\w+){0,3}\s+(?:in|at|near|by|on|of|off)\s+(?:the\s+|our\s+|my\s+)?$|"
+    r"raised|here|rented|renting|rent|rents|renter|renters|tenant|tenants|been|own|owns|owner|units?|based|"
+    r"households?)\b(?:\s+\w+){0,4}"
+    r"\s+(?:in|at|near|by|on|of|off)\s+(?:the\s+|our\s+|my\s+)?$|"
     r"\b(?:vivo|vivimos|resido)\s+(?:en|cerca de|cerca del)\s+(?:la zona de\s+)?$|"
     r"\b(?:mi|nuestro)\s+(?:vecindario|barrio)\s+(?:en|cerca de|cerca del)\s+$|"
     r"\b(?:tôi|chúng tôi)\b[^.\n]{0,40}\b(?:gần|ở khu|ở)\s+$", re.I)
@@ -224,12 +228,11 @@ CUE_AFTER_PERSON = re.compile(r"^\s*(?:resident|residents|homeowner|homeowners|n
 NEAR_BEFORE = re.compile(r"\b(?:near|by|around|next to|across from|across the street from|behind|along|outside|"
                          r"in front of|close to|walking distance (?:of|from|to)|blocks? from|cerca de|cerca del|"
                          r"junto a|junto al|gần)\s+(?:the\s+|el\s+|la\s+)?(?:parque\s+)?$", re.I)
-PERSONAL_CUE = re.compile(r"\b(?:I|I'm|live|living|lived|my|our|near|home|walk|walking|neighbou?rs?|me|we)\b", re.I)
 WRITING = re.compile(r"\b(?:I'm|I am|I)\s+(?:writing|write)\b[^.]*", re.I)
 MY_BEFORE = re.compile(r"\b(?:my|our)\s+(?:\w+\s+){0,1}$", re.I)
 ORG_AFTER = re.compile(r"^\s*(?:union|unified|elementary|school district|community college|college|hall of fame|"
                        r"square|d\.?\s?c\b|high school|foundation|county|state\b|university|trustee)", re.I)
-ORG_BEFORE = re.compile(r"\b(?:somos)\s*$", re.I)
+ORG_BEFORE = re.compile(r"\b(?:somos)\W*$", re.I)
 SUFFIX_AFTER = re.compile(r"^\s*(?:" + STREET_SUFFIX + r")\b\.?", re.I)
 
 NUM_WORDS = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven": 7, "eight": 8, "nine": 9,
@@ -256,11 +259,6 @@ ADDR_CUE_BEFORE = re.compile(r"\b(?:live|living|reside|home|house|apartment|prop
                              r"(?:at|on)\s+$", re.I)
 CITY_HALL = re.compile(r"^200\s+e(?:ast)?\.?\s+santa\s+clara", re.I)
 ZIP_RE = re.compile(r"\b(9[0-6]\d{3})(?:-\d{4})?\b")
-NAME = (r"(?:[NSEW]\.?\s+)?(?:\d{1,2}(?:st|nd|rd|th)|[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)"
-        r"(?:\s+(?:" + STREET_SUFFIX + r"))?\.?")
-INTER_RE = re.compile(r"\b(?:corner of|intersection of|at|near|by|on|off|around|cross|crossing)\s+(?:the\s+)?(?:corner of\s+)?"
-                      r"(" + NAME + r")\s*(?:and|&|/|@)\s*(" + NAME + r")")
-INTER_AMP = re.compile(r"(?<![\w])(" + NAME + r")\s*(?:&|/)\s*(" + NAME + r")")
 
 
 # ------------------------------------------------------------------------------------------- reference data
@@ -275,6 +273,8 @@ class Refs:
     nb_tracts: dict = field(default_factory=dict)
     lm_names: list = field(default_factory=list)   # (norm alias, canonical)
     xwalk: dict = field(default_factory=dict)      # zcta -> (primary tract, multi)
+    tract_pt: dict = field(default_factory=dict)   # tract -> (lon, lat) representative point
+    nb_pt: dict = field(default_factory=dict)      # neighborhood -> (lon, lat) from neighborhoods.csv
 
 
 def common_words() -> set:
@@ -313,6 +313,8 @@ def load_refs(with_geo: bool = True) -> Refs:
         j = gpd.sjoin(pts, dist, how="left", predicate="within")
         tract_district = {t: (int(d) if pd.notna(d) else None) for t, d in zip(j.tract_id, j.district)}
     refs = Refs(tract_ids=set(pop), pop=pop, tract_district=tract_district, tract_geom=gdf)
+    if gdf is not None:
+        refs.tract_pt = {t: (p.x, p.y) for t, p in zip(gdf.tract_id, gdf.geometry.representative_point())}
     return add_names(refs, pd.read_csv(NBHD_CSV, dtype=str).fillna(""))
 
 
@@ -326,6 +328,10 @@ def add_names(refs: Refs, nb: pd.DataFrame, words: Optional[set] = None) -> Refs
         if not tids:
             continue
         refs.nb_tracts[r["name"]] = tids
+        try:
+            refs.nb_pt[r["name"]] = (float(r["lon"]), float(r["lat"]))
+        except (TypeError, ValueError):
+            pass
         for n in [r["name"]] + aliases:
             if eligible_name(n, curated, words):
                 nn = norm(n)
@@ -438,7 +444,7 @@ def point_tract(refs: Refs, lat: float, lon: float) -> Optional[str]:
     if refs.tract_geom is None:
         return None
     p = Point(lon, lat)
-    hit = refs.tract_geom[refs.tract_geom.contains(p)]
+    hit = refs.tract_geom[refs.tract_geom.covers(p)]   # covers: a point on a tract line still lands
     return hit.iloc[0].tract_id if len(hit) else None
 
 
@@ -467,101 +473,153 @@ def make_census_geocoder(refs: Refs, cache: Cache, net: Net) -> Callable[[str], 
     return geocode
 
 
+TYPE_SET = set(TYPE_CANON.values()) | {"st", "ave", "rd", "blvd", "dr", "ct", "ln", "pl", "way", "expy", "pkwy", "hwy",
+                                       "cir", "ter", "sq", "loop"}
+ORDMAP = {"first": "1st", "second": "2nd", "third": "3rd", "fourth": "4th", "fifth": "5th", "sixth": "6th",
+          "seventh": "7th", "eighth": "8th", "ninth": "9th", "tenth": "10th", "eleventh": "11th"}
+DIRS = {"n": "n", "s": "s", "e": "e", "w": "w", "north": "n", "south": "s", "east": "e", "west": "w"}
+FREEWAYS = {"101", "280", "680", "880", "87", "85"}
+STREET_NAMES_RAW = RAW / "sjgis" / "street_names.json"
+STREET_GEOM_DIR = RAW / "sjgis" / "streets"
+
+
 def _street_regex(name: str) -> tuple[str, Optional[str], str]:
-    """'N First St' -> (base 'first', type 'st', direction 'n')."""
-    n = norm(name).replace(".", "")
-    toks = n.split()
-    d = toks[0] if toks and toks[0] in {"n", "s", "e", "w", "north", "south", "east", "west"} and len(toks) > 1 else ""
-    if d:
-        toks = toks[1:]
+    """'N First St' -> (base '1st', type 'st', direction 'n'); 'Story' -> ('story', None, '')."""
+    toks = norm(name).replace(".", "").split()
+    d = ""
+    if len(toks) > 1 and toks[0] in DIRS:
+        d, toks = DIRS[toks[0]], toks[1:]
     typ = None
-    if len(toks) > 1:
-        t = TYPE_CANON.get(toks[-1], toks[-1])
-        if t in set(TYPE_CANON.values()) | {"st", "ave", "rd", "blvd", "dr", "ct", "ln", "pl", "way", "expy", "pkwy",
-                                            "hwy", "cir", "ter", "sq"}:
-            typ = t
-            toks = toks[:-1]
-    ordmap = {"first": "1st", "second": "2nd", "third": "3rd", "fourth": "4th", "fifth": "5th", "sixth": "6th",
-              "seventh": "7th", "eighth": "8th", "ninth": "9th", "tenth": "10th", "eleventh": "11th"}
-    base = " ".join(ordmap.get(t, t) for t in toks)
-    return base, typ, d[:1]
+    if len(toks) > 1 and TYPE_CANON.get(toks[-1], toks[-1]) in TYPE_SET:
+        typ, toks = TYPE_CANON.get(toks[-1], toks[-1]), toks[:-1]
+    if len(toks) > 1 and toks[-1] in DIRS:   # "N Bayshore W"
+        toks = toks[:-1]
+    return " ".join(ORDMAP.get(t, t) for t in toks), typ, d
 
 
-def make_intersection_lookup(refs: Refs, cache: Cache, net: Net) -> Callable[[str, str], Optional[str]]:
-    from shapely.geometry import MultiPoint, Point, shape
-    from shapely.ops import unary_union
+class Streets:
+    """San José street centerlines (SJ GIS OPN/OPN_OpenDataService/MapServer/60 'Streets', FULLNAME), public data
+    cached under data/raw/sjgis/ so --offline can still anchor streets and compute intersections."""
 
-    def fetch(base: str) -> Optional[list]:
-        feats, offset = [], 0
-        b = base.upper().replace("'", "''")
-        where = f"UPPER(FULLNAME) LIKE '{b} %' OR UPPER(FULLNAME) LIKE '% {b} %' OR UPPER(FULLNAME) = '{b}'"
-        while True:
-            js = net.get_json(f"{STREETS_LAYER}/query", {"where": where, "outFields": "FULLNAME", "outSR": 4326,
-                                                         "f": "geojson", "resultOffset": offset,
-                                                         "resultRecordCount": 2000})
-            if js is None:
-                return None
-            fs = js.get("features") or []
-            feats += fs
-            if len(fs) < 2000 or offset > 10000:
-                return feats
-            offset += 2000
+    def __init__(self, net: "Net"):
+        self.net = net
+        self.bases: dict[str, set] = {}
+        self._feats: dict[str, Optional[list]] = {}
+        self._load_names()
 
-    def groups(feats, base, typ, d) -> dict:
+    def _load_names(self):
+        names = None
+        if STREET_NAMES_RAW.exists():
+            names = json.loads(STREET_NAMES_RAW.read_text())
+        elif not self.net.offline:
+            names, off = set(), 0
+            while True:
+                js = self.net.get_json(f"{STREETS_LAYER}/query", {
+                    "where": "1=1", "outFields": "FULLNAME", "returnDistinctValues": "true",
+                    "returnGeometry": "false", "orderByFields": "FULLNAME", "resultOffset": off,
+                    "resultRecordCount": 2000, "f": "json"})
+                if js is None:
+                    names = None
+                    break
+                fs = js.get("features") or []
+                names |= {f["attributes"]["FULLNAME"] for f in fs if f["attributes"].get("FULLNAME")}
+                if len(fs) < 2000 and not js.get("exceededTransferLimit"):
+                    break
+                off += len(fs)
+            if names:
+                names = sorted(names)
+                STREET_NAMES_RAW.parent.mkdir(parents=True, exist_ok=True)
+                STREET_NAMES_RAW.write_text(json.dumps(names))
+        for n in names or []:
+            b, t, _ = _street_regex(n)
+            if b:
+                self.bases.setdefault(b, set()).add(t or "")
+        if not self.bases:   # offline with no cache: fall back to the curated arterial list
+            self.bases = {b: {""} for b in KNOWN_STREETS | FREEWAYS}
+
+    def is_street(self, base: str) -> bool:
+        return base in self.bases
+
+    def _features(self, base: str) -> Optional[list]:
+        if base in self._feats:
+            return self._feats[base]
+        path = STREET_GEOM_DIR / (re.sub(r"[^a-z0-9]+", "_", base) + ".geojson")
+        feats = None
+        if path.exists():
+            feats = json.loads(path.read_text())["features"]
+        elif not self.net.offline:
+            b = base.upper().replace("'", "''")
+            where = f"UPPER(FULLNAME) LIKE '{b} %' OR UPPER(FULLNAME) LIKE '% {b} %' OR UPPER(FULLNAME) = '{b}'"
+            feats, off = [], 0
+            while True:
+                js = self.net.get_json(f"{STREETS_LAYER}/query", {"where": where, "outFields": "FULLNAME",
+                                                                  "outSR": 4326, "f": "geojson",
+                                                                  "resultOffset": off, "resultRecordCount": 2000})
+                if js is None:
+                    feats = None
+                    break
+                fs = js.get("features") or []
+                feats += fs
+                if len(fs) < 2000 or off > 20000:
+                    break
+                off += 2000
+            if feats is not None:
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text(json.dumps({"type": "FeatureCollection", "features": feats}))
+        self._feats[base] = feats
+        return feats
+
+    def groups(self, name: str) -> dict:
+        """{street type: merged geometry} for every SJ street with this base name (and type/direction if given)."""
+        from shapely.geometry import shape
+        from shapely.ops import unary_union
+        base, typ, d = _street_regex(name)
+        feats = self._features(base) if base else None
         out = defaultdict(list)
-        pat = re.compile(r"^(?:([nsew]) )?" + re.escape(base) + r"(?: ([a-z]+))?(?: [nsew])?$")
-        for f in feats:
-            fn = norm(f["properties"].get("FULLNAME", "")).replace(".", "")
-            m = pat.match(fn)
-            if not m or not f.get("geometry"):
+        for f in feats or []:
+            if not f.get("geometry"):
                 continue
-            t = m.group(2) or ""
-            if typ and t != typ:
+            fb, ft, fd = _street_regex(f["properties"].get("FULLNAME", ""))
+            if fb != base or (d and fd and fd != d):
                 continue
-            if d and m.group(1) and m.group(1) != d:
-                continue
-            out[t].append(shape(f["geometry"]))
+            out[ft or ""].append(shape(f["geometry"]))
+        if typ and typ in out:   # "Alma St." when only Alma Ave exists: keep every type rather than nothing
+            out = {typ: out[typ]}
         return {t: unary_union(g) for t, g in out.items()}
 
-    def lookup(a: str, b: str) -> Optional[str]:
-        pa, pb = _street_regex(a), _street_regex(b)
-        if not pa[0] or not pb[0] or pa[0] == pb[0]:
+    def geometry(self, name: str):
+        """One street: the given type, else the longest major-type street of that name."""
+        g = self.groups(name)
+        if not g:
             return None
-        key = "intersection|" + "|".join(sorted([" ".join(filter(None, pa)), " ".join(filter(None, pb))]))
-        c = cache.get(key)
-        if c is not None:
-            return c["tract_id"] or None
-        fa, fb = fetch(pa[0]), fetch(pb[0])
-        if fa is None or fb is None:
+        major = {t: v for t, v in g.items() if t in MAJOR_TYPES or t == ""}
+        pool = major or g
+        return max(pool.values(), key=lambda v: v.length)
+
+    def intersection(self, a: str, b: str):
+        """Point where two named streets cross; None if they don't, or if their crossings are > ~1 km apart."""
+        from shapely.geometry import MultiPoint
+        from shapely.ops import nearest_points
+        if _street_regex(a)[0] == _street_regex(b)[0]:
             return None
-        ga, gb = groups(fa, *pa), groups(fb, *pb)
-        best_pts = []
+        ga, gb = self.groups(a), self.groups(b)
         for major_only in (True, False):
             pts = []
             for ta, geo_a in ga.items():
                 for tb, geo_b in gb.items():
-                    if major_only and not (ta in MAJOR_TYPES and tb in MAJOR_TYPES):
+                    if major_only and not ((ta in MAJOR_TYPES or ta == "") and (tb in MAJOR_TYPES or tb == "")):
                         continue
                     inter = geo_a.intersection(geo_b)
                     if inter.is_empty:
                         if geo_a.distance(geo_b) < 0.00015:   # ~15 m: centerlines that just miss
-                            from shapely.ops import nearest_points
                             pts.append(nearest_points(geo_a, geo_b)[0])
                         continue
                     pts += [g.centroid for g in getattr(inter, "geoms", [inter])]
             if pts:
-                best_pts = pts
-                break
-        tid = None
-        if best_pts:
-            mp = MultiPoint(best_pts)
-            minx, miny, maxx, maxy = mp.bounds
-            if max(maxx - minx, maxy - miny) < 0.01:   # one place (~1 km); two far-apart crossings are ambiguous
-                cen = mp.centroid
-                tid = point_tract(refs, cen.y, cen.x)
-        cache.put(key, tid, bool(best_pts), "sjgis_streets_intersection")
-        return tid
-    return lookup
+                mp = MultiPoint(pts)
+                minx, miny, maxx, maxy = mp.bounds
+                return mp.centroid if max(maxx - minx, maxy - miny) < 0.01 else None
+        return None
 
 
 # ------------------------------------------------------------------------------------------- matching
@@ -607,7 +665,7 @@ def find_mentions(text: str, names: list, threshold: int = 85) -> list[Mention]:
                     continue
                 s = fuzz.ratio(cand, nn)
                 # every token must also look alike ("san jose i" is not "san jose high")
-                if s >= threshold and min(fuzz.ratio(x, y) for x, y in zip(cand.split(), nn.split())) < 75:
+                if s >= threshold and min(fuzz.ratio(x, y) for x, y in zip(cand.split(), nn.split())) < 80:
                     continue
                 if s > score:
                     best, score = canon, s
@@ -630,16 +688,16 @@ def signature_line(line: str, m: Mention) -> bool:
 
 
 def mention_strength(text: str, m: Mention, sig_start: int) -> int:
-    """3 residence cue, 2 signature line, 1 locative preposition, 0 reject."""
+    """3 residence cue, 2 signature line / 'X area', 1 locative preposition, 0 bare mention, -1 reject."""
     before = text[max(0, m.start - 70):m.start]
     after = text[m.end:m.end + 40]
     line_before = before.split("\n")[-1]
     if ORG_AFTER.match(after) or ORG_BEFORE.search(before) or \
             (SUFFIX_AFTER.match(after) and not MY_BEFORE.search(line_before)):   # "Almaden Rd" is a street
-        return 0
+        return -1
     sent = sentence_around(text, m.start, m.end)
     if NEGATION.search(sent):
-        return 0
+        return -1
     s0 = text.rfind(sent.strip()[:20], 0, m.end) if sent.strip() else -1
     prefix = text[s0:m.start] if 0 <= s0 <= m.start else line_before
     person_after = CUE_AFTER_PERSON.match(after) and (FIRST_PERSON.search(prefix) or len(prefix.strip(" -,(")) <= 3
@@ -670,13 +728,143 @@ class Result:
     multi: bool = False
     district: Optional[int] = None
     matched_name: str = ""
+    basis: str = ""
+    point: Optional[tuple] = None   # (lon, lat): in memory only, for item clusters; never written out
+
+
+@dataclass
+class Cand:
+    rank: int            # 0 house address, 1 intersection/range, 2 landmark, 3 anchored street, 4 cluster-anchored
+    source: str          # street, 5 neighborhood, 6 zip
+    basis: str           # residence | issue | both
+    pos: int
+    tract_id: str = ""
+    multi: bool = False
+    matched_name: str = ""
+    point: Optional[tuple] = None
+
+
+@dataclass
+class StreetMention:
+    name: str
+    base: str
+    start: int
+    end: int
+    explicit: bool       # carried a suffix ("Alma Ave") or is a freeway number
+    part: str = "body"
+
+
+RANK_PRECISION = {0: "address", 1: "address", 2: "address", 3: "address", 4: "address", 5: "neighborhood", 6: "zip"}
+BASIS_ORDER = {"residence": 0, "both": 0, "issue": 1}
+SUFFIX_WORDS = {"st", "street", "ave", "avenue", "blvd", "boulevard", "rd", "road", "dr", "drive", "way", "ct",
+                "court", "ln", "lane", "pl", "place", "cir", "circle", "ter", "terrace", "expy", "expressway", "hwy",
+                "highway", "pkwy", "parkway"}
+ABBREV = {"st", "ave", "rd", "blvd", "dr", "ln", "ct", "expy", "pkwy", "hwy"}
+# "Cedar Court Apartments", "Terra Verde Plaza": a named building/project, not a street (fictional or not, it is
+# never geocoded by name; the real street or area it is "near"/"off" anchors it)
+FAKE_AFTER = re.compile(r"^\s*(?:apartments?|apts?\b|plaza|center|centre|mall|homes|village|complex|towers?|condos?|"
+                        r"lofts|school|elementary|library|shopping|business park|data center|project)\b", re.I)
+STREET_PREP = re.compile(r"(?:\b(?:on|along|off|onto|down|up|cross|crossing|near|by|at|across|en|cerca de|cerca del|"
+                         r"gần|khu|ở|đường)|\bal)\s+(?:the\s+|la\s+|el\s+)?$", re.I)
+STRONG_STREET_PREP = re.compile(r"\b(?:on|along|off|onto|down|up|cross|crossing|đường)\s+(?:the\s+)?$", re.I)
+FREEWAY_RE = re.compile(r"\b(?:(?:US|U\.S\.|Hwy|Highway|Interstate|I|SR|Route|CA)[- ]?(101|280|680|880|87|85)\b|"
+                        r"the (101|280|680|880|87|85)\b|(?:by|near|along|off|on|next to)\s+(101|280|680|880|87|85)\b|(101|280|680|880|87|85)\s+(?:freeway|fwy|highway|overpass|"
+                        r"underpass|on-?ramp|off-?ramp|exit|interchange))", re.I)
+PAIR_BETWEEN = re.compile(r"^\s*(?:and|&|/|@|at|y|và|with|x)\s*$", re.I)
+NEAR_BETWEEN = re.compile(r"^\s*,?\s*(?:just\s+)?(?:near|by|close to|cerca de|cerca del|gần|off)\s+(?:the\s+)?$", re.I)
+RANGE_FROM = re.compile(r"^\s*,?\s*(?:between|from|entre|giữa)\s+$", re.I)
+RANGE_AND = re.compile(r"^\s*(?:and|to|y|&|và)\s+$", re.I)
+PROX_FIRST = re.compile(r"\b(?:I|I'm|I've|we|we're|my|our|me|vivo|mi|mis|tôi|chúng tôi)\b[^.\n!?]{0,40}\b(?:live|living|"
+                        r"walk|walking|cross|crossing|drive|driving|commute|bike|biking|home|homes|block|street|"
+                        r"neighbou?rs?|shop|kids|family|rent|rents|apartment|house|vecindario|barrio|nhà)\b"
+                        r"[^.\n!?]{0,30}$", re.I)
+AFFIL_BEFORE = re.compile(r"\b(?:graduate[ds]?|alumn\w*|student|professor|faculty|director|staff|employee|employed|"
+                          r"hired|program|position|work(?:s|ed|ing)?|trustee|board|chair\w*|serves?|served|"
+                          r"volunteer\w*|president|met|known|attended|attends|studied|taught|teach(?:es|ing)?)\b"
+                          r"[^.\n]{0,40}\b(?:at|of|from|with|for|in)\s+(?:the\s+)?$", re.I)
+ANCHOR_MAX_DEG = 0.03    # ~3 km: a co-mentioned place further than this from the street is not its anchor
+CLUSTER_MAX_DEG = 0.05   # ~5 km
+M300_DEG = 0.0027        # 300 m in degrees latitude
+
+
+def residence_cue(text: str, start: int, end: int, sig_start: int, canon: str = "") -> bool:
+    m = Mention(canon or text[start:end], start, end, True)
+    if mention_strength(text, m, sig_start) >= 3:
+        return True
+    before = WRITING.sub(" ", text[max(0, start - 80):start].split("\n")[-1])
+    return bool(PROX_FIRST.search(before))
+
+
+_WORDS: Optional[set] = None
+
+
+def _common(w: str) -> bool:
+    global _WORDS
+    if _WORDS is None:
+        _WORDS = common_words()
+    return w in _WORDS
+
+
+def find_streets(text: str, streets, nb_norms: set) -> list[StreetMention]:
+    """Street mentions: '<name> <suffix>' validated against SJ street names, bare arterial names ('Story', '5th'),
+    and freeway numbers. Bare names are kept with explicit=False; callers decide whether they stand alone."""
+    toks = [(m.start(), m.end(), m.group(0)) for m in re.finditer(r"[A-Za-zÀ-ỹ0-9]+(?:['’][A-Za-z]+)?\.?", text)]
+    out, used = [], set()
+    for i, (s, e, raw) in enumerate(toks):
+        w = norm(raw)
+        if w not in SUFFIX_WORDS or i == 0 or FAKE_AFTER.match(text[e:e + 30]):
+            continue
+        for k in (3, 2, 1):
+            j = i - k
+            if j < 0 or any(x in used for x in range(j, i)) or "\n" in text[toks[j][0]:e]:
+                continue
+            name = text[toks[j][0]:e]
+            b, _, _ = _street_regex(name)
+            if not b or not streets.is_street(b) or b in {"the", "my", "our", "this", "that", "a"}:
+                continue
+            cap = toks[j][2][:1].isupper() or toks[j][2][:1].isdigit()
+            if not cap and not (w in ABBREV or b in KNOWN_STREETS):
+                continue
+            if j > 0 and norm(toks[j - 1][2]) in DIRS and toks[j - 1][2][:1].isupper() and \
+                    "\n" not in text[toks[j - 1][0]:toks[j][0]]:
+                j -= 1
+                name = text[toks[j][0]:e]
+            out.append(StreetMention(name, b, toks[j][0], e, True))
+            used.update(range(j, i + 1))
+            break
+    for m in FREEWAY_RE.finditer(text):
+        num = next(g for g in m.groups() if g)
+        if streets.is_street(num) and not any(x.start <= m.start() < x.end for x in out):
+            out.append(StreetMention(num, num, m.start(), m.end(), True))
+    for i, (s, e, raw) in enumerate(toks):
+        # lowercase only right after on/along/off ("off tully"), never a dictionary word ("on the market")
+        lower_ok = (re.search(r"\b(?:on|along|off|onto)\s+$", text[max(0, s - 12):s], re.I) and len(raw) >= 4
+                    and not _common(norm(raw)))
+        if i in used or not (raw[:1].isupper() or raw[:1].isdigit() or lower_ok):
+            continue
+        for k in (2, 1):
+            if i + k > len(toks) or any(x in used for x in range(i, i + k)):
+                continue
+            span_end = toks[i + k - 1][1]
+            b = _street_regex(text[s:span_end])[0]
+            ordinal = re.fullmatch(r"\d{1,2}(?:st|nd|rd|th)", b or "")
+            if not (b in KNOWN_STREETS or ordinal) or not streets.is_street(b):
+                continue
+            nxt = toks[i + k][2] if i + k < len(toks) else ""
+            gap = text[span_end:toks[i + k][0]] if i + k < len(toks) else ""
+            if nxt[:1].isupper() and not gap.strip() and "\n" not in gap and not text[span_end - 1] == ".":
+                continue   # part of a longer proper noun ("Willow Glen", "Santa Clara County")
+            out.append(StreetMention(text[s:span_end].rstrip("."), b, s, span_end, False))
+            used.update(range(i, i + k))
+            break
+    return sorted(out, key=lambda m: m.start)
 
 
 class Resolver:
-    def __init__(self, refs: Refs, geocode: Callable[[str], Optional[str]],
-                 intersect: Callable[[str, str], Optional[str]], hints: dict):
-        self.refs, self.geocode, self.intersect, self.hints = refs, geocode, intersect, hints
+    def __init__(self, refs: Refs, geocode: Callable[[str], Optional[str]], streets, hints: dict):
+        self.refs, self.geocode, self.streets, self.hints = refs, geocode, streets, hints
         self.stats = Counter()
+        self.nb_norms = {n for n, *_ in refs.nb_names} | {n for n, _ in refs.lm_names}
 
     # -- helpers
     def primary_tract(self, nb: str) -> tuple[str, bool]:
@@ -688,13 +876,10 @@ class Resolver:
         t = title or ""
         names = {m.canon for m in find_mentions(t, self.refs.nb_names)}
         names |= {m.canon for m in find_mentions(t, self.refs.lm_names, 90)}
-        streets = {_street_regex(m.group(0))[0] for m in
-                   re.finditer(r"(?:[NSEW]\.?\s+)?(?:\d{1,2}(?:st|nd|rd|th)|[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)"
-                               r"(?:\s+(?:" + STREET_SUFFIX + r"))?", t)}
-        addrs = {norm(m.group(0)) for m in HOUSE_RE.finditer(t)}
-        return names | {"street:" + s for s in streets} | {"addr:" + a for a in addrs}
+        names |= {"street:" + m.base for m in find_streets(t, self.streets, self.nb_norms)}
+        return names
 
-    def stated_district(self, parts: list[tuple[str, str]], title_pl: set) -> tuple[Optional[int], str]:
+    def stated_district(self, parts: list[tuple[str, str]]) -> tuple[Optional[int], str]:
         for src, t in parts:
             for p in DISTRICT_PATTERNS:
                 m = p.search(t)
@@ -703,137 +888,219 @@ class Resolver:
                     return (NUM_WORDS.get(g) or int(g)), src
         return None, ""
 
-    # -- tiers
-    def tier_address(self, cid: str, parts: list[tuple[str, str]], title_pl: set, row: dict) -> Optional[Result]:
+    def street_multi(self, geom, pt) -> bool:
+        """True when the street crosses tract lines within 300 m of the anchored point."""
+        import math
+        from shapely.affinity import scale
+        if self.refs.tract_geom is None or geom is None:
+            return False
+        buf = scale(pt.buffer(M300_DEG), xfact=1 / math.cos(math.radians(pt.y)), yfact=1.0)
+        seg = geom.intersection(buf)
+        if seg.is_empty:
+            return False
+        return int(self.refs.tract_geom.intersects(seg).sum()) > 1
+
+    def point_cand(self, rank, source, basis, pos, pt, multi=False, name="") -> Optional[Cand]:
+        tid = point_tract(self.refs, pt.y, pt.x)
+        if not tid:
+            self.stats["point_outside_tracts"] += 1
+            return None
+        return Cand(rank, source, basis, pos, tid, multi, name, (pt.x, pt.y))
+
+    @staticmethod
+    def basis(cue: bool, key: str, title_pl: set, subject: str, mentioned_in_subject: bool) -> str:
+        if not cue:
+            return "issue"
+        return "both" if (key in title_pl or mentioned_in_subject) else "residence"
+
+    # -- candidates
+    def address_cands(self, cid, parts, row) -> tuple[list[Cand], list[tuple[int, int, str]]]:
+        """House-number addresses. Returns candidates and the consumed spans (so their street isn't reused)."""
         body = dict(parts).get("body", "")
-        # 1a. signature hints from ingest (raw, gitignored)
         h = self.hints.get(cid) or {}
-        cands = []
+        raw = []
         if h.get("address"):
-            cands.append(("signature", h["address"], h.get("zip", "")))
+            raw.append(("signature", h["address"], h.get("zip", ""), "residence", -1))
+        spans = []
         for src, t in parts:
             for m in HOUSE_RE.finditer(t):
+                spans.append((m.start(), m.end(), src))
                 after, before = t[m.end():m.end() + 90], t[max(0, m.start() - 40):m.start()]
                 blk = CITY_AFTER.match(after)
-                if not blk and not ADDR_CUE_BEFORE.search(before):
-                    continue   # an address in a sentence is usually the project site, not the writer
-                cands.append(("body" if src == "body" else src, m.group(0), (blk.group(2) or "") if blk else ""))
-        seen = set()
-        for src, addr, z in cands:
+                # an address block (letterhead/signature) or "I live at ..." is where the writer is;
+                # an address inside a sentence is what the comment is about (project site, problem spot)
+                basis = "residence" if (blk or ADDR_CUE_BEFORE.search(before)) else "issue"
+                raw.append((src, m.group(0), (blk.group(2) or "") if blk else "", basis, m.start()))
+        out, seen = [], set()
+        for src, addr, z, basis, pos in raw:
             a = re.sub(r"\s+", " ", addr).strip().rstrip(".")
             if norm(a) in seen:
                 continue
             seen.add(norm(a))
-            if CITY_HALL.match(a) or "addr:" + norm(a) in title_pl:
-                self.stats["address_skipped_cityhall_or_title"] += 1
+            if CITY_HALL.match(a):
+                self.stats["address_skipped_cityhall"] += 1
                 continue
             city, zip_ = "San Jose", z
-            i = body.find(a.split()[0] + " " + a.split()[1]) if len(a.split()) > 1 else -1
+            toks = a.split()
+            i = body.find(toks[0] + " " + toks[1]) if len(toks) > 1 else -1
             if i >= 0:
                 blk = CITY_AFTER.match(body[i + len(a): i + len(a) + 90])
                 if blk:
-                    city = blk.group(1)
-                    zip_ = blk.group(2) or zip_
+                    city, zip_ = blk.group(1), blk.group(2) or zip_
             if not re.search(r"(?:^| )san ?jose$", norm(city)):
                 self.stats["address_outside_sj"] += 1
                 continue
-            q = f"{a}, San Jose, CA" + (f" {zip_}" if zip_ else "")
-            tid = self.geocode(q)
+            tid = self.geocode(f"{a}, San Jose, CA" + (f" {zip_}" if zip_ else ""))
             if tid:
                 if h.get("address") and norm(a) == norm(h["address"]):
-                    src = "signature"
-                return Result(tid, "address", src)
-        # 1b. intersections
-        for src, t in parts:
-            for rx in (INTER_RE, INTER_AMP):
-                for m in rx.finditer(t):
-                    a, b = m.group(1), m.group(2)
-                    ba, bb = _street_regex(a)[0], _street_regex(b)[0]
-                    has_sfx = lambda s: bool(re.search(r"\b(?:" + STREET_SUFFIX + r")\.?$", s, re.I)) or \
-                        bool(re.match(r"^(?:[NSEW]\.?\s+)?\d", s))
-                    if not ((ba in KNOWN_STREETS or has_sfx(a) or ba in {"1st", "2nd", "3rd", "4th", "5th", "6th",
-                                                                       "7th", "8th", "9th", "10th", "11th"})
-                            and (bb in KNOWN_STREETS or has_sfx(b) or re.match(r"^\d", bb))):
-                        continue
-                    sent = sentence_around(t, m.start(), m.end())
-                    in_title = {"street:" + ba, "street:" + bb} <= title_pl
-                    near = t[max(0, m.start() - 60):m.start()]
-                    if NEGATION.search(sent) or (in_title and not PERSONAL_CUE.search(near)):
-                        continue
-                    tid = self.intersect(a, b)
-                    if tid:
-                        return Result(tid, "address", "intersection")
-        # 1c. landmarks (exact / near-exact name)
-        for src, t in parts:
-            sig_start = t.find(signature_block(t)) if signature_block(t) else len(t)
-            for m in find_mentions(t, self.refs.lm_names, 92):
-                lat, lon, _ = LANDMARKS[m.canon]
-                if lat is None or (m.canon in title_pl and mention_strength(t, m, sig_start) < 3):
-                    continue
-                before = t[max(0, m.start - 60):m.start].split("\n")[-1]
-                in_sig = m.start >= sig_start and signature_line(
-                    t[t.rfind("\n", 0, m.start) + 1:(t.find("\n", m.end) if t.find("\n", m.end) >= 0 else len(t))], m)
-                if not (NEAR_BEFORE.search(before) or CUE_RESIDE_BEFORE.search(before) or in_sig) or \
-                        NEGATION.search(sentence_around(t, m.start, m.end)):
-                    continue   # "graduate of SJSU", "development of Diridon Station" say nothing about where
-                tid = point_tract(self.refs, lat, lon)
-                if tid:
-                    return Result(tid, "address", "landmark", matched_name=m.canon)
-        return None
+                    src, basis = "signature", "residence"
+                out.append(Cand(0, src, basis, pos, tid, False, "", self.refs.tract_pt.get(tid)))
+        return out, spans
 
-    def tier_neighborhood(self, parts: list[tuple[str, str]], title_pl: set, row: dict) -> Optional[Result]:
-        field_nb = str(row.get("neighborhood") or "").strip()
-        trust_field = row.get("channel") != "letter"   # letters' field is a regex guess by ingest; re-derived here
-        if field_nb and field_nb.lower() != "nan" and trust_field:
-            ms = find_mentions(field_nb, self.refs.nb_names)
-            if ms:
-                tid, multi = self.primary_tract(ms[0].canon)
-                return Result(tid, "neighborhood", "field", multi, matched_name=ms[0].canon)
-        best = None
+    def place_mentions(self, parts, row) -> tuple[list, list]:
+        """Accepted neighborhood and landmark mentions: (part, Mention, strength, residence?, sig_start)."""
+        nbs, lms = [], []
         for src, t in parts:
             sig = signature_block(t) if src == "body" else ""
             sig_start = t.rfind(sig) if sig else len(t)
             for m in find_mentions(t, self.refs.nb_names):
-                s = mention_strength(t, m, sig_start)
-                corridor = _street_regex(m.canon)[0] if re.search(r"(?i)\b(road|avenue|expressway|corridor)\b",
-                                                                   m.canon) else ""
-                corridor = re.sub(r" (road|avenue|expressway|corridor)$", "", corridor)
-                if (m.canon in title_pl or (corridor and "street:" + corridor in title_pl)) and s < 3:
+                st = mention_strength(t, m, sig_start)
+                if st < 0:
                     continue
-                if s == 0:
+                res = st >= 3 or (st == 2 and m.start >= sig_start)
+                nbs.append((src, m, st, res, sig_start))
+            for m in find_mentions(t, self.refs.lm_names, 92):
+                st = mention_strength(t, m, sig_start)
+                before = t[max(0, m.start - 70):m.start].split("\n")[-1]
+                line = t[t.rfind("\n", 0, m.start) + 1:(t.find("\n", m.end) if t.find("\n", m.end) >= 0 else len(t))]
+                in_sig = m.start >= sig_start and len(line.strip()) <= 70
+                institution = bool(re.search(r"(?i)university|college|high school|\bsjsu\b|\bsjcc\b|san jos[eé] state",
+                                             m.canon + " " + t[m.start:m.end]))
+                if st < 0 or (AFFIL_BEFORE.search(before) and st < 3):
+                    continue   # "graduate of SJSU", "worked with him at San José State"
+                if institution and not (st >= 3 or NEAR_BEFORE.search(before) or in_sig):
+                    continue   # an employer or alma mater is not where the comment is
+                if st < 1 and src != "subject" and not in_sig:
+                    continue   # "transit mega-projects (such as Diridon Station)" is an example, not a place
+                if in_sig and st < 3:
+                    st = 2   # signature/letterhead affiliation: the organisation's base
+                res = st >= 3 or (st == 2 and m.start >= sig_start)
+                lms.append((src, m, st, res, sig_start))
+        return nbs, lms
+
+    def street_cands(self, parts, consumed, anchors, title_pl, subject):
+        """Intersections, ranges, 'X near Y', and single streets anchored to a cross street or a co-mentioned
+        place. Returns (candidates, pending single streets for the item-cluster pass)."""
+        from shapely.ops import nearest_points
+        from shapely.geometry import Point
+        cands, pending = [], []
+        for src, t in parts:
+            sig = signature_block(t) if src == "body" else ""
+            sig_start = t.rfind(sig) if sig else len(t)
+            ms = [m for m in find_streets(t, self.streets, self.nb_norms)
+                  if not any(a <= m.start < b and s == src for a, b, s in consumed)]
+            for m in ms:
+                m.part = src
+            used = set()
+
+            def cue_basis(a, b, key):
+                if NEGATION.search(sentence_around(t, a, b)):
+                    return None
+                return self.basis(residence_cue(t, a, b, sig_start), key, title_pl, subject,
+                                  src == "subject" or key.replace("street:", "") in norm(subject))
+
+            # ranges: "King Road between Story and Tully" -> midpoint of the two crossings
+            for i in range(len(ms) - 2):
+                m1, m2, m3 = ms[i], ms[i + 1], ms[i + 2]
+                if RANGE_FROM.match(t[m1.end:m2.start]) and RANGE_AND.match(t[m2.end:m3.start]):
+                    p1, p2 = self.streets.intersection(m1.name, m2.name), self.streets.intersection(m1.name, m3.name)
+                    pts = [p for p in (p1, p2) if p is not None]
+                    b = cue_basis(m1.start, m3.end, "street:" + m1.base)
+                    if pts and b:
+                        pt = Point(sum(p.x for p in pts) / len(pts), sum(p.y for p in pts) / len(pts))
+                        c = self.point_cand(1, "intersection", b, m1.start, pt,
+                                            multi=self.street_multi(self.streets.geometry(m1.name), pt))
+                        if c:
+                            cands.append(c)
+                            used |= {i, i + 1, i + 2}
+            # pairs: "Story and King", "King & Story", "Story/King", "5th and William", "X near Y"
+            for i in range(len(ms) - 1):
+                if i in used or i + 1 in used:
                     continue
-                where = "signature" if (src == "body" and m.start >= sig_start) else src
-                if best is None or s > best[0]:
-                    best = (s, m.canon, where)
-        if best:
-            tid, multi = self.primary_tract(best[1])
-            return Result(tid, "neighborhood", best[2], multi, matched_name=best[1])
-        return None
+                m1, m2 = ms[i], ms[i + 1]
+                btw = t[m1.end:m2.start]
+                is_pair, is_near = PAIR_BETWEEN.match(btw), NEAR_BETWEEN.match(btw)
+                if not (is_pair or is_near):
+                    continue
+                b = cue_basis(m1.start, m2.end, "street:" + m1.base)
+                if not b:
+                    continue
+                pt = self.streets.intersection(m1.name, m2.name)
+                if pt is not None:
+                    c = self.point_cand(1, "intersection", b, m1.start, pt)
+                    if c:
+                        cands.append(c)
+                        used |= {i, i + 1}
+                elif is_near and m1.explicit:
+                    g1, g2 = self.streets.geometry(m1.name), self.streets.geometry(m2.name)
+                    if g1 is not None and g2 is not None and g1.distance(g2) < ANCHOR_MAX_DEG:
+                        pt = nearest_points(g1, g2)[0]
+                        c = self.point_cand(3, "street_anchor", b, m1.start, pt, self.street_multi(g1, pt))
+                        if c:
+                            cands.append(c)
+                            used |= {i, i + 1}
+            # single streets
+            for i, m in enumerate(ms):
+                if i in used:
+                    continue
+                before = t[max(0, m.start - 40):m.start]
+                if not m.explicit:
+                    if not STREET_PREP.search(before):
+                        continue
+                    if m.base in self.nb_norms and not STRONG_STREET_PREP.search(before):
+                        continue   # "near Berryessa" is the neighborhood; "on Berryessa" is the road
+                b = cue_basis(m.start, m.end, "street:" + m.base)
+                if not b:
+                    continue
+                g = self.streets.geometry(m.name)
+                if g is None:
+                    continue
+                done = False
+                for j, o in enumerate(ms):   # (a) a co-mentioned cross street
+                    if j == i or o.base == m.base:
+                        continue
+                    pt = self.streets.intersection(m.name, o.name)
+                    if pt is not None:
+                        c = self.point_cand(3, "street_anchor", b, m.start, pt, self.street_multi(g, pt))
+                        if c:
+                            cands.append(c)
+                            done = True
+                            break
+                if done:
+                    continue
+                best, self_anchor = None, None   # (b) a co-mentioned neighborhood or landmark
+                for name, (lon, lat), a_res, (asrc, a0, a1) in anchors:
+                    d = g.distance(Point(lon, lat))
+                    if (asrc == src and a0 < m.end and m.start < a1) or \
+                            re.sub(r" (?:road|rd|corridor|avenue|ave|expressway)$", "", norm(name)) == m.base:
+                        # the street's own name matched a corridor alias ("Story Rd", "Blossom Hill"): circular,
+                        # so only a last resort after the item cluster
+                        if d < ANCHOR_MAX_DEG:
+                            self_anchor = (name, Point(lon, lat))
+                        continue
+                    if d < ANCHOR_MAX_DEG and (best is None or d < best[0]):
+                        best = (d, name, Point(lon, lat), a_res)
+                if best:
+                    pt = nearest_points(g, best[2])[0]
+                    bb = "both" if (best[3] and b == "issue") else b
+                    c = self.point_cand(3, "street_anchor", bb, m.start, pt, self.street_multi(g, pt), best[1])
+                    if c:
+                        cands.append(c)
+                        continue
+                pending.append((m, b, g, self_anchor))   # (c) left for the item-cluster pass
+        return cands, pending
 
-    def tier_zip(self, parts: list[tuple[str, str]], row: dict) -> Optional[Result]:
-        z = str(row.get("zip") or "").split(".")[0].strip()
-        src = "signature" if row.get("channel") == "letter" else "field"
-        cands = [(z, src)] if re.fullmatch(r"9\d{4}", z) else []
-        body = dict(parts).get("body", "")
-        sig = signature_block(body)
-        for line in sig.split("\n"):
-            for m in ZIP_RE.finditer(line):
-                cands.append((m.group(1), "signature"))
-        for zz, s in cands:
-            # recipient block ("200 E Santa Clara St, San Jose, CA 95113") is City Hall, not the writer
-            i = body.find(zz)
-            ctx = body[max(0, i - 120):i] if i >= 0 else ""
-            if re.search(r"200\s+E\.?\s+Santa\s+Clara", ctx, re.I):
-                continue
-            city = re.search(r"([A-Z][A-Za-z]+(?:\s+[A-Z][A-Za-z]+)?)\s*,?\s*(?:CA|California)\s*,?\s*$", ctx)
-            if city and not re.search(r"(?:^| )(?:san ?jose|california)$", norm(city.group(1))):
-                continue
-            if zz in self.refs.xwalk:
-                tid, multi = self.refs.xwalk[zz]
-                return Result(tid, "zip", s, multi)
-        return None
-
-    def resolve(self, row: dict) -> Result:
+    def resolve(self, row: dict) -> tuple[Result, list]:
         cid = str(row["comment_id"])
         title = str(row.get("item_title") or "")
         body = strip_title_lines(clean_ocr(row.get("text") or ""), title)
@@ -842,14 +1109,198 @@ class Resolver:
             subject = ""
         parts = [("body", body), ("subject", subject)]
         title_pl = self.title_places(title)
-        district, dsrc = self.stated_district(parts, title_pl)
-        r = (self.tier_address(cid, parts, title_pl, row) or self.tier_neighborhood(parts, title_pl, row)
-             or self.tier_zip(parts, row))
-        if r is None:
-            r = Result(precision="district", source=dsrc, district=district) if district else Result()
-        else:
-            r.district = district or self.refs.tract_district.get(r.tract_id)
-        return r
+        district, dsrc = self.stated_district(parts)
+
+        cands, consumed = self.address_cands(cid, parts, row)
+        nbs, lms = self.place_mentions(parts, row)
+        anchors = []
+        field_nb = str(row.get("neighborhood") or "").strip()
+        if field_nb and field_nb.lower() != "nan" and row.get("channel") != "letter":
+            # user-entered field (email/site); a letter's field is ingest's regex guess, re-derived from text
+            ms = find_mentions(field_nb, self.refs.nb_names)
+            if ms:
+                tid, multi = self.primary_tract(ms[0].canon)
+                cands.append(Cand(5, "field", "residence", -1, tid, multi, ms[0].canon,
+                                  self.refs.nb_pt.get(ms[0].canon)))
+                if self.refs.nb_pt.get(ms[0].canon):
+                    anchors.append((ms[0].canon, self.refs.nb_pt[ms[0].canon], True, ("field", -1, -1)))
+        for src, m, st, res, ss in lms:
+            lat, lon, _ = LANDMARKS[m.canon]
+            if lat is None:
+                continue
+            from shapely.geometry import Point
+            b = self.basis(res, m.canon, title_pl, subject, m.canon in {x.canon for x in
+                                                                         find_mentions(subject, self.refs.lm_names, 92)})
+            c = self.point_cand(2, "landmark", b, m.start, Point(lon, lat), name=m.canon)
+            if c:
+                cands.append(c)
+                anchors.append((m.canon, (lon, lat), res, (src, m.start, m.end)))
+        for src, m, st, res, ss in nbs:
+            tid, multi = self.primary_tract(m.canon)
+            where = "signature" if (src == "body" and m.start >= ss) else src
+            b = self.basis(res, m.canon, title_pl, subject, src == "subject")
+            cands.append(Cand(5, where, b, m.start, tid, multi, m.canon, self.refs.nb_pt.get(m.canon)))
+            if self.refs.nb_pt.get(m.canon):
+                anchors.append((m.canon, self.refs.nb_pt[m.canon], res, (src, m.start, m.end)))
+        sc, pending = self.street_cands(parts, consumed, anchors, title_pl, subject)
+        cands += sc
+        z = self.zip_cand(parts, row)
+        if z:
+            cands.append(z)
+        return self.finish(cands, district, dsrc), pending
+
+    def finish(self, cands: list[Cand], district, dsrc) -> Result:
+        if not cands:
+            if district:
+                return Result(precision="district", source=dsrc, district=district, basis="residence")
+            return Result()
+        c = min(cands, key=lambda c: (c.rank, BASIS_ORDER.get(c.basis, 1), c.pos))
+        # council_district describes the resolved place; a stated district is used only when there is no tract
+        return Result(c.tract_id, RANK_PRECISION[c.rank], c.source, c.multi,
+                      self.refs.tract_district.get(c.tract_id) or district, c.matched_name, c.basis, c.point)
+
+    def anchor_to_cluster(self, pending: list, centroid: tuple) -> Optional[Cand]:
+        """Single street with nothing else to pin it: the segment nearest the item's located cluster."""
+        from shapely.geometry import Point
+        from shapely.ops import nearest_points
+        cen = Point(*centroid)
+        best = None
+        for m, b, g, _ in pending:
+            d = g.distance(cen)
+            if d < CLUSTER_MAX_DEG and (best is None or d < best[0]):
+                best = (d, m, b, g)
+        if not best:
+            return None
+        _, m, b, g = best
+        pt = nearest_points(g, cen)[0]
+        return self.point_cand(4, "street_anchor", b, m.start, pt, self.street_multi(g, pt))
+
+    def zip_cand(self, parts, row) -> Optional[Cand]:
+        z = str(row.get("zip") or "").split(".")[0].strip()
+        src = "signature" if row.get("channel") == "letter" else "field"
+        cands = [(z, src)] if re.fullmatch(r"9\d{4}", z) else []
+        body = dict(parts).get("body", "")
+        for line in signature_block(body).split("\n"):
+            for m in ZIP_RE.finditer(line):
+                cands.append((m.group(1), "signature"))
+        for zz, s in cands:
+            i = body.find(zz)
+            ctx = body[max(0, i - 120):i] if i >= 0 else ""
+            if re.search(r"200\s+E\.?\s+Santa\s+Clara", ctx, re.I):   # City Hall recipient block
+                continue
+            city = re.search(r"([A-Z][A-Za-z]+(?:\s+[A-Z][A-Za-z]+)?)\s*,?\s*(?:CA|California)\s*,?\s*$", ctx)
+            if city and not re.search(r"(?:^| )(?:san ?jose|california)$", norm(city.group(1))):
+                continue
+            if zz in self.refs.xwalk:
+                tid, multi = self.refs.xwalk[zz]
+                return Cand(6, s, "residence", 10 ** 6, tid, multi, "", self.refs.tract_pt.get(tid))
+        return None
+
+
+NAMED_BEFORE = re.compile(r"((?:[A-Z][\w'’-]+\s+){0,2}[A-Z][\w'’-]+)\s+(?:(?:Apartments?|Apts\.?|Plaza|Center|data center|"
+                          r"Data Center|project|Project|Homes|Village|Towers?)\s*)?[(,]?\s*(?:near|off|by|cerca de|"
+                          r"gần)\s+(?:the\s+)?$")
+NAME_STOP = {"the", "at", "a", "tenants", "i", "we", "my", "our", "dear", "hello", "hi", "in", "en", "los", "las",
+             "apartamentos", "proposed", "approving", "certifying", "oppose", "support"}
+
+
+def learn_named_places(res: Resolver, rows: list[dict], out: list[Result]) -> dict:
+    """'Cedar Court Apartments near Tully Road', 'Terra Verde data center off Gold Street': a named building or
+    project (often fictional) is never geocoded by name; when one comment pins it to a real street, the other
+    comments on the same item that name it get that comment's point."""
+    learned = defaultdict(dict)
+    for row, r in zip(rows, out):
+        if r.precision != "address" or r.source not in ("street_anchor", "intersection") or not r.point:
+            continue
+        text = clean_ocr(row.get("text") or "") + "\n" + clean_ocr(row.get("subject") or "")
+        for m in find_streets(text, res.streets, res.nb_norms):
+            nm = NAMED_BEFORE.search(text[max(0, m.start - 90):m.start])
+            if not nm:
+                continue
+            words = nm.group(1).split()
+            while words and norm(words[0]) in NAME_STOP:
+                words = words[1:]
+            while words and re.fullmatch(r"(?i)apartments?|apts\.?|plaza|center|homes|village|towers?|project", words[-1]):
+                words = words[:-1]
+            name = norm(" ".join(words))
+            typed = bool(re.search(r"(?:Apartments?|Apts|Plaza|Center|data center|project|Homes|Village|Tower)",
+                                   nm.group(0), re.I))
+            b, t, _ = _street_regex(name)
+            if len(name) < 5 or name in res.nb_norms or (t and res.streets.is_street(b) and not typed):
+                continue
+            learned[row.get("item", "")][name] = r.point
+    return learned
+
+
+CLUSTER_SPREAD_DEG = 0.03   # ~3 km: a cluster anchors only when its members' median distance to it is below this
+
+
+def resolve_all(res: Resolver, rows: list[dict]) -> list[Result]:
+    """Pass 1 per comment. Pass 2, for comments still coarser than address:
+      (i)   a named place (building/project) that another comment on the same item pinned to a street;
+      (ii)  a single street anchored to the item's located cluster: the segment nearest the centroid of the item's
+            other located comments, when that cluster is compact;
+      (iii) a single street anchored to its own same-named corridor/area (last resort)."""
+    from shapely.geometry import Point
+    from shapely.ops import nearest_points
+    import statistics
+    out, pend = [], []
+    for row in rows:
+        r, p = res.resolve(row)
+        out.append(r)
+        pend.append(p)
+    pts = defaultdict(list)
+    for i, (row, r) in enumerate(zip(rows, out)):
+        if r.point and r.precision in ("address", "neighborhood"):
+            pts[row.get("item", "")].append((i, r.point))
+    street_hit = {}
+    for i, (row, r, p) in enumerate(zip(rows, out, pend)):
+        if r.precision == "address" or not p:
+            continue
+        hit = None
+        others = [pt for j, pt in pts.get(row.get("item", ""), []) if j != i]
+        if others:
+            cen = (sum(x for x, _ in others) / len(others), sum(y for _, y in others) / len(others))
+            spread = statistics.median(((x - cen[0]) ** 2 + (y - cen[1]) ** 2) ** 0.5 for x, y in others)
+            if spread < CLUSTER_SPREAD_DEG:
+                hit = res.anchor_to_cluster(p, cen)
+                if hit:
+                    res.stats["cluster_anchored"] += 1
+        if hit is None:
+            for m, b, g, sa in p:
+                if sa:
+                    pt = nearest_points(g, sa[1])[0]
+                    hit = res.point_cand(4, "street_anchor", b, m.start, pt, res.street_multi(g, pt), sa[0])
+                    if hit:
+                        res.stats["self_named_anchor"] += 1
+                        break
+        if hit:
+            street_hit[i] = hit
+
+    def as_result(hit, r):
+        return Result(hit.tract_id, "address", hit.source, hit.multi,
+                      res.refs.tract_district.get(hit.tract_id) or r.district, hit.matched_name, hit.basis, hit.point)
+
+    mid = [as_result(street_hit[i], r) if i in street_hit else r for i, r in enumerate(out)]
+    learned = learn_named_places(res, rows, mid)
+    final = list(mid)
+    for i, (row, r) in enumerate(zip(rows, mid)):
+        if r.precision == "address":
+            continue
+        title = norm(row.get("item_title") or "")
+        text = strip_accents(clean_ocr(row.get("text") or "") + "\n" + clean_ocr(row.get("subject") or ""))
+        for name, pt in learned.get(row.get("item", ""), {}).items():
+            if name in title:
+                continue   # the item's own subject (e.g. the project the agenda item is about) says nothing finer
+            mm = re.search(r"(?i)(?<![\w])" + r"\s+".join(map(re.escape, name.split())) + r"(?![\w])", text)
+            if mm:
+                cue = residence_cue(text, mm.start(), mm.end(), len(text))
+                c = res.point_cand(3, "street_anchor", "residence" if cue else "issue", mm.start(), Point(*pt))
+                if c:
+                    res.stats["named_place_propagated"] += 1
+                    final[i] = as_result(c, r)
+                    break
+    return final
 
 
 # ------------------------------------------------------------------------------------------- io
@@ -890,6 +1341,7 @@ def coverage(df: pd.DataFrame, loc: pd.DataFrame, n_tracts: int) -> dict:
         c = g.location_precision.value_counts()
         return {"n": n, "tiers": {t: {"count": int(c.get(t, 0)), "share": round(c.get(t, 0) / n, 4) if n else 0}
                                   for t in TIERS},
+                "basis": {b: int((g.location_basis == b).sum()) for b in BASES},
                 "with_tract": int((g.tract_id != "").sum()),
                 "with_tract_share": round((g.tract_id != "").sum() / n, 4) if n else 0}
 
@@ -898,6 +1350,8 @@ def coverage(df: pd.DataFrame, loc: pd.DataFrame, n_tracts: int) -> dict:
            "multi_tract": int((m.multi_tract == "true").sum()),
            "by_source": {f"{p}/{s or '-'}": int(n) for (p, s), n in
                          m.groupby(["location_precision", "location_source"]).size().items()},
+           "by_basis": {f"{p}/{b or '-'}": int(n) for (p, b), n in
+                        m.groupby(["location_precision", "location_basis"]).size().items()},
            "by_channel": {ch: tiers(g) for ch, g in m.groupby("channel")},
            "by_item": {it: tiers(g) for it, g in m.groupby("item")},
            "by_council_district": {str(k): int(v) for k, v in
@@ -912,7 +1366,7 @@ def coverage(df: pd.DataFrame, loc: pd.DataFrame, n_tracts: int) -> dict:
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--input", action="append", type=Path, help="CSV(s) with comment_id,text[,neighborhood,zip]")
-    ap.add_argument("--offline", action="store_true", help="use only data/geocode_cache.json (no network)")
+    ap.add_argument("--offline", action="store_true", help="use only cached lookups (no network)")
     ap.add_argument("--out", type=Path, default=OUT_LOC)
     ap.add_argument("--coverage", type=Path, default=OUT_COV)
     a = ap.parse_args(argv)
@@ -920,18 +1374,17 @@ def main(argv=None):
     refs = load_refs()
     load_crosswalk(refs, a.offline)
     cache, net = Cache(CACHE_PATH), Net(a.offline)
-    res = Resolver(refs, make_census_geocoder(refs, cache, net), make_intersection_lookup(refs, cache, net),
-                   load_hints())
+    res = Resolver(refs, make_census_geocoder(refs, cache, net), Streets(net), load_hints())
     df = load_inputs(a.input or DEFAULT_INPUTS)
-    rows = []
+    recs = df.to_dict("records")
     try:
-        for row in df.to_dict("records"):
-            r = res.resolve(row)
-            rows.append({"comment_id": row["comment_id"], "tract_id": r.tract_id, "location_precision": r.precision,
-                         "location_source": r.source, "multi_tract": "true" if r.multi else "false",
-                         "council_district": str(r.district) if r.district else "", "matched_name": r.matched_name})
+        results = resolve_all(res, recs)
     finally:
         cache.save()
+    rows = [{"comment_id": row["comment_id"], "tract_id": r.tract_id, "location_precision": r.precision,
+             "location_source": r.source, "location_basis": r.basis, "multi_tract": "true" if r.multi else "false",
+             "council_district": str(r.district) if r.district else "", "matched_name": r.matched_name}
+            for row, r in zip(recs, results)]
     loc = pd.DataFrame(rows, columns=OUT_COLS)
     assert not loc.astype(str).apply(lambda c: c.str.contains(HOUSE_RE)).any().any(), "street address in output"
     loc.to_csv(a.out, index=False)
@@ -944,7 +1397,9 @@ def main(argv=None):
         c = cov["tiers"][t]
         print(f"  {t:13s} {c['count']:4d}  {c['share']:.1%}")
     for ch, v in cov["by_channel"].items():
-        print(f"  [{ch}] n={v['n']} with tract {v['with_tract']} ({v['with_tract_share']:.1%})")
+        tiers_s = " ".join(f"{t}={v['tiers'][t]['count']}" for t in TIERS)
+        print(f"  [{ch}] n={v['n']} {tiers_s} | with tract {v['with_tract']} ({v['with_tract_share']:.1%}) "
+              f"| basis {v['basis']}")
     print(f"  sources: {cov['by_source']}")
     print(f"  network calls={net.calls} failures={net.failures} stats={dict(res.stats)}")
 

@@ -15,7 +15,9 @@ const STANCE: Record<Stance, { glyph: string; label: string; cls: string }> = {
 const STANCES: Stance[] = ['support', 'oppose', 'neutral', 'unclear']
 const TYPE_LABEL: Record<CommenterType, string> = { resident: 'resident', organization: 'organization', developer_or_counsel: 'developer / counsel', government: 'government' }
 const TYPE_CLS: Record<CommenterType, string> = { resident: 'bg-stone-100 text-stone-800', organization: 'bg-violet-100 text-violet-900', developer_or_counsel: 'bg-orange-100 text-orange-900', government: 'bg-sky-100 text-sky-900' }
-const PRECISION_LABEL: Record<string, string> = { address: 'located by address', neighborhood: 'located by neighborhood', zip: 'located by zip', none: 'no location' }
+const PRECISION_LABEL: Record<string, string> = { address: 'located by address', neighborhood: 'located by neighborhood', zip: 'located by zip', district: 'council district only', none: 'no location' }
+const SOURCE_LABEL: Record<string, string> = { intersection: 'intersection', street_anchor: 'street, approximate', landmark: 'landmark', signature: 'signature block', body: 'text', subject: 'subject line' }
+const BASIS_LABEL: Record<string, string> = { residence: 'where the writer is', issue: 'place the comment is about', both: 'writer’s own area' }
 type View = { kind: '311' } | { kind: 'inbox' } | { kind: 'voice'; item: string } // item 'all' = all voice
 type ChannelF = 'all' | 'letter' | 'email'
 
@@ -236,7 +238,12 @@ function Row({ c, showItem, catLabel, open, onToggle, campaignSize }: { c: Voice
         <span className={`rounded px-1.5 py-0.5 ${TYPE_CLS[c.commenter_type] ?? 'bg-stone-100'}`}>{TYPE_LABEL[c.commenter_type] ?? c.commenter_type}</span>
         <span>{fmtDate(c.received_at)}</span>
         {showItem && <span className="max-w-xs truncate text-stone-600">{c.item} · {shortTitle(c.item_title)}</span>}
-        <span className="rounded bg-teal-50 px-1.5 py-0.5 text-teal-900">{PRECISION_LABEL[c.location_precision] ?? c.location_precision}{c.tract_id ? ` · tract ${c.tract_id}` : ''}{c.multi_tract ? ' (spans tracts)' : ''}</span>
+        <span className="rounded bg-teal-50 px-1.5 py-0.5 text-teal-900" title={c.location_basis ? `Location basis: ${BASIS_LABEL[c.location_basis] ?? c.location_basis}` : undefined}>
+          {PRECISION_LABEL[c.location_precision] ?? c.location_precision}
+          {c.location_source && SOURCE_LABEL[c.location_source] ? ` (${SOURCE_LABEL[c.location_source]})` : ''}
+          {c.tract_id ? ` · tract ${c.tract_id}` : ''}{c.multi_tract ? ' · spans tracts' : ''}
+          {c.location_basis ? ` · ${BASIS_LABEL[c.location_basis] ?? c.location_basis}` : ''}
+        </span>
         {c.campaign_id && <span className="rounded bg-amber-100 px-1.5 py-0.5 text-amber-900">campaign {c.campaign_id}{campaignSize ? ` · ${campaignSize} copies` : ''}</span>}
         {c.duplicate_of && <span className="rounded bg-amber-100 px-1.5 py-0.5 text-amber-900">duplicate of {c.duplicate_of}</span>}
         {c.ocr && <span className="rounded bg-amber-100 px-1.5 py-0.5 text-amber-900">OCR</span>}

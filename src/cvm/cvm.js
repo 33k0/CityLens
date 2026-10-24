@@ -453,7 +453,11 @@ async function mount(root,init){
    ${ITEM.n311?tile('311 problem reports / 1,000 / yr',rate311.toFixed(0),city?`${fmt(tr.reduce((s,t)=>s+((D.p311.all||{})[t.id]||0),0))} reports in ${ms.length} months`:delta(rate311,rate311C,{fmtv:v=>v.toFixed(0)}),spark(areaM,'#22877C')):tile('311 problem reports','—','no 311 data for this section')}
    ${tile('Asking for something specific',P(actR),city?`${fmt(actY)} of ${fmt(act.length)} comments`:delta(actR,actRC,{fmtv:v=>P(v)}))}
   </section>`;
-  let M=head+kpis;
+  /* ---- trust ---- */
+  const confs=W.map(c=>c.conf).filter(x=>x!=null);const mean=confs.length?confs.reduce((a,b)=>a+b,0)/confs.length:null;
+  const meter=(l,v,s)=>`<div class="mt" ${tipA(`${l}: ${P(v)}`)}><div class="mtl"><span>${l}</span><b>${P(v)}</b></div><div class="mtb"><i style="width:${(v||0)*100}%"></i></div>${s?`<em>${s}</em>`:''}</div>`;
+  const trust=card('How much to trust these numbers','Read every number below with these in mind.',`<div class="mts">${meter('Placed on the map',scope.length?loc.length/scope.length:null,'the rest gave no usable location')}${meter('Real (not simulated)',W.length?1-W.filter(c=>c.mock).length/W.length:null,'simulated emails make numbers illustrative')}${meter('Average AI label confidence',mean,'every label cites an exact quote')}${meter('Labeled by the AI assistant',W.length?W.filter(c=>c.engine==='bob').length/W.length:null,'not yet checked against human review')}</div>`,'span2');
+  let M=trust+head+kpis;
   /* ---- what people write about: donut + here vs city ---- */
   const here=cnt(W,c=>c.catKey),cityC=cnt(D.itemAll,c=>c.catKey);const totC=D.itemAll.length||1;
   const keys=D.catDefs.map(c=>c.key).filter(k=>(here[k]||0)>0||(!city&&(cityC[k]||0)>0));
@@ -489,10 +493,6 @@ async function mount(root,init){
    M+=card('When comments arrived','Real letters cover early 2025; simulated emails cover fall 2026. Gaps are months with no ingested data.',`<div class="tbars">${mk.map(m=>{const v=months[m];return `<div ${tipA(`${m}: ${v.L} letters, ${v.E} simulated emails`)}><i style="height:${v.E/mm*100}%;background:#E8957D"></i><i style="height:${v.L/mm*100}%;background:#8E2A1C"></i><span>${m.slice(2)}</span></div>`}).join('')}</div><div class="pblg"><span><i style="background:#8E2A1C"></i>letters (real)</span><span><i style="background:#E8957D"></i>emails (simulated)</span></div>`);
    const conc=D.catDefs.map(c=>c.key).map(k=>{const L=loc.filter(c=>c.catKey===k);if(L.length<5)return null;const o=cnt(L,c=>c.tract);const [tid,n]=Object.entries(o).sort((a,b)=>b[1]-a[1])[0];return {k,tid,n,N:L.length}}).filter(Boolean).sort((a,b)=>b.n/b.N-a.n/a.N);
    M+=card('Local or citywide?',conc.length?`<b>${esc(secLabel(conc[0].k))}</b> is the most local: ${P(conc[0].n/conc[0].N)} of its located comments come from one census tract.`:'Too few located comments.',`<div class="mix">${conc.map(r=>`<div class="mxr" ${tipA(`${secLabel(r.k)}: ${r.n} of ${r.N} located comments from ${D.byTract[r.tid].nbhd}`)}><span>${esc(secLabel(r.k))}</span><div><i style="width:${r.n/r.N*100}%;background:${secCol(r.k)}"></i></div><b><a class="link" data-act="seltract" data-t="${r.tid}">${esc(D.byTract[r.tid].nbhd)}</a></b><em>${P(r.n/r.N)}</em></div>`).join('')}</div><div class="note">Share of a section’s located comments from its busiest tract.</div>`)}
-  /* ---- trust ---- */
-  const confs=W.map(c=>c.conf).filter(x=>x!=null);const mean=confs.length?confs.reduce((a,b)=>a+b,0)/confs.length:null;
-  const meter=(l,v,s)=>`<div class="mt" ${tipA(`${l}: ${P(v)}`)}><div class="mtl"><span>${l}</span><b>${P(v)}</b></div><div class="mtb"><i style="width:${(v||0)*100}%"></i></div>${s?`<em>${s}</em>`:''}</div>`;
-  M+=card('How much to trust these numbers','',`<div class="mts">${meter('Placed on the map',scope.length?loc.length/scope.length:null,'the rest gave no usable location')}${meter('Real (not simulated)',W.length?1-W.filter(c=>c.mock).length/W.length:null,'simulated emails make numbers illustrative')}${meter('Average AI label confidence',mean,'every label cites an exact quote')}${meter('Labeled by the AI assistant',W.length?W.filter(c=>c.engine==='bob').length/W.length:null,'not yet checked against human review')}</div>`,'span2');
   /* ---- missing voices ---- */
   if(kind!=='tract'){const mode=t=>{const o={};D.comments.forEach(c=>{if(c.tract===t.id)o[c.cat]=(o[c.cat]||0)+1});const e=Object.entries(o).sort((a,b)=>b[1]-a[1])[0];return e?CATN[e[0]]:'—'};
    const under=tr.filter(t=>{const r=t.exp>0?t.n/t.exp:1;return r<C.underrepresented_ratio});const sortK=S.mvSort||'pop';

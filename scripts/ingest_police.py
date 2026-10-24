@@ -28,6 +28,10 @@ RAW = ROOT / "data" / "raw"
 OUT = ROOT / "public" / "data" / "police_by_tract.json"
 FILES = [RAW / "police" / f"policecalls{y}.csv" for y in (2025, 2026)]
 
+# IBM Bob labels every call type (data/taxonomy_police_bob.json, written by bob_police.py); these keyword rules only cover a
+# call type Bob has not labeled yet
+BOB = ROOT / "data" / "taxonomy_police_bob.json"
+BOB_LABELS = json.loads(BOB.read_text())["labels"] if BOB.exists() else {}
 GROUPS = [  # first match wins; labels are what staff see
     ("violence", "Violence and weapons", r"ASSAULT|BATTERY|SHOOT|SHOTS|ROBBERY|STAB|WEAPON|ADW|HOMICIDE|RAPE|SEXUAL|KIDNAP|BRANDISH|CARJACK|GUN"),
     ("theft_property", "Theft and property", r"THEFT|BURGLARY|STOLEN|VANDAL|MALICIOUS MISCHIEF|SHOPLIFT|LOOT|EMBEZZ|FRAUD|FORGERY"),
@@ -54,6 +58,9 @@ def norm(name: str) -> str:
 
 
 def group(call_type: str) -> str:
+    lab = BOB_LABELS.get((call_type or "").strip())
+    if lab:
+        return lab["group"]
     for k, _, rx in GRX:
         if rx.search(call_type or ""):
             return k
@@ -146,6 +153,8 @@ def main() -> int:
            "by_tract": {t: {g: dict(m) for g, m in gs.items()} for t, gs in by.items()},
            "totals": {t: sum(sum(m.values()) for m in gs.values()) for t, gs in by.items()},
            "city_monthly": {g: dict(m) for g, m in city.items()},
+           "labels": {"engine": "IBM Bob Shell (data/taxonomy_police_bob.json)", "call_types_labeled_by_bob": len(BOB_LABELS),
+                      "sections": {s: sum(v["count"] for v in BOB_LABELS.values() if v["section"] == s) for s in sorted({v["section"] for v in BOB_LABELS.values()})}},
            "coverage": {"calls": seen["calls"], "located": seen["located"],
                         "unlocated": {k: seen[k] for k in ("block", "intersection", "blank")}}}
     OUT.write_text(json.dumps(out, separators=(",", ":")))

@@ -1,0 +1,1197 @@
+{
+ "engine": "IBM Bob Shell",
+ "bob_task_id": "feb46fdd0d9de1860b9d2d4cf03b0905",
+ "call_types": 198,
+ "labeled": 198,
+ "unlabeled": [],
+ "labels": {
+  "VEHICLE STOP": {
+   "group": "traffic",
+   "section": "public_safety_emergency_response",
+   "reason": "Traffic enforcement stop by officers",
+   "count": 34634
+  },
+  "DISTURBANCE": {
+   "group": "disturbance",
+   "section": "public_safety_emergency_response",
+   "reason": "General public disturbance call",
+   "count": 33984
+  },
+  "WELFARE CHECK": {
+   "group": "welfare",
+   "section": "public_safety_emergency_response",
+   "reason": "Check on person's wellbeing",
+   "count": 26173
+  },
+  "ALARM, AUDIBLE": {
+   "group": "alarm",
+   "section": "public_safety_emergency_response",
+   "reason": "Audible security alarm activation",
+   "count": 24163
+  },
+  "PARKING VIOLATION": {
+   "group": "traffic",
+   "section": "infrastructure_streets",
+   "reason": "Illegal parking on public street",
+   "count": 17560
+  },
+  "TRESPASSING": {
+   "group": "suspicious",
+   "section": "public_safety_emergency_response",
+   "reason": "Person on property without permission",
+   "count": 12743
+  },
+  "DISTURBANCE, MUSIC": {
+   "group": "disturbance",
+   "section": "public_safety_emergency_response",
+   "reason": "Loud music noise disturbance",
+   "count": 12236
+  },
+  "SUSPICIOUS PERSON": {
+   "group": "suspicious",
+   "section": "public_safety_emergency_response",
+   "reason": "Suspicious individual reported by resident",
+   "count": 11898
+  },
+  "DISTURBANCE, FAMILY": {
+   "group": "disturbance",
+   "section": "public_safety_emergency_response",
+   "reason": "Family argument or domestic disturbance",
+   "count": 11688
+  },
+  "SUSPICIOUS VEHICLE": {
+   "group": "suspicious",
+   "section": "public_safety_emergency_response",
+   "reason": "Suspicious vehicle reported by resident",
+   "count": 9762
+  },
+  "SUSPICIOUS CIRCUMSTANCES": {
+   "group": "suspicious",
+   "section": "public_safety_emergency_response",
+   "reason": "Unspecified suspicious activity reported",
+   "count": 9574
+  },
+  "STOLEN VEHICLE": {
+   "group": "theft_property",
+   "section": "public_safety_emergency_response",
+   "reason": "Vehicle reported stolen by owner",
+   "count": 8190
+  },
+  "RECKLESS DRIVING": {
+   "group": "traffic",
+   "section": "infrastructure_streets",
+   "reason": "Dangerous driving on public roads",
+   "count": 8095
+  },
+  "THEFT": {
+   "group": "theft_property",
+   "section": "public_safety_emergency_response",
+   "reason": "Property stolen from person or place",
+   "count": 7479
+  },
+  "UNK TYPE 911 CALL": {
+   "group": "other",
+   "section": "public_safety_emergency_response",
+   "reason": "Unknown 911 call type received",
+   "count": 6802
+  },
+  "VEHICLE ACCIDENT, PROPERTY DAMAGE": {
+   "group": "traffic",
+   "section": "infrastructure_streets",
+   "reason": "Crash causing property damage only",
+   "count": 6613
+  },
+  "PEDESTRIAN STOP": {
+   "group": "traffic",
+   "section": "public_safety_emergency_response",
+   "reason": "Officer stops pedestrian for investigation",
+   "count": 5759
+  },
+  "MEET THE CITIZEN": {
+   "group": "other",
+   "section": "governance_civic_rights",
+   "reason": "Officer community engagement meeting",
+   "count": 5617
+  },
+  "TRAFFIC HAZARD": {
+   "group": "traffic",
+   "section": "infrastructure_streets",
+   "reason": "Hazard blocking or endangering traffic",
+   "count": 5093
+  },
+  "MISDEMEANOR HIT AND RUN": {
+   "group": "traffic",
+   "section": "infrastructure_streets",
+   "reason": "Driver fled minor collision scene",
+   "count": 4367
+  },
+  "WELFARE CHECK (COMBINED EVENT)": {
+   "group": "welfare",
+   "section": "public_safety_emergency_response",
+   "reason": "Combined welfare check dispatch event",
+   "count": 3875
+  },
+  "RECOVERED STOLEN VEHICLE": {
+   "group": "theft_property",
+   "section": "public_safety_emergency_response",
+   "reason": "Previously stolen vehicle located",
+   "count": 3865
+  },
+  "FIRE DEPARTMENT REQUEST FOR PD": {
+   "group": "other",
+   "section": "public_safety_emergency_response",
+   "reason": "Fire dept requests police assistance",
+   "count": 3557
+  },
+  "MALICIOUS MISCHIEF": {
+   "group": "theft_property",
+   "section": "public_safety_emergency_response",
+   "reason": "Vandalism or property damage caused",
+   "count": 3332
+  },
+  "BATTERY": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Physical assault on another person",
+   "count": 3245
+  },
+  "ALARM, SILENT": {
+   "group": "alarm",
+   "section": "public_safety_emergency_response",
+   "reason": "Silent security alarm activation",
+   "count": 3044
+  },
+  "BURGLARY  REPORT  (460)": {
+   "group": "theft_property",
+   "section": "public_safety_emergency_response",
+   "reason": "Break-in and theft from building",
+   "count": 2912
+  },
+  "DISTURBANCE, UNKNOWN": {
+   "group": "disturbance",
+   "section": "public_safety_emergency_response",
+   "reason": "Unknown type disturbance reported",
+   "count": 2539
+  },
+  "VEHICLE BURGLARY": {
+   "group": "theft_property",
+   "section": "public_safety_emergency_response",
+   "reason": "Break-in and theft from vehicle",
+   "count": 2312
+  },
+  "EXPIRED REGISTRATION": {
+   "group": "traffic",
+   "section": "infrastructure_streets",
+   "reason": "Vehicle with expired registration tag",
+   "count": 2276
+  },
+  "DISTURBANCE, NEIGHBOR": {
+   "group": "disturbance",
+   "section": "public_safety_emergency_response",
+   "reason": "Neighbor-to-neighbor dispute or noise",
+   "count": 2218
+  },
+  "VEHICLE ACCIDENT, MINOR INJURIES": {
+   "group": "traffic",
+   "section": "infrastructure_streets",
+   "reason": "Crash with minor injuries reported",
+   "count": 2047
+  },
+  "DISTURBANCE, WEAPON": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Disturbance involving a weapon",
+   "count": 2025
+  },
+  "VEHICLE ACCIDENT, AMB DISPATCHED": {
+   "group": "traffic",
+   "section": "infrastructure_streets",
+   "reason": "Serious crash ambulance dispatched",
+   "count": 1921
+  },
+  "MENTALLY DISTURBED PERSON": {
+   "group": "welfare",
+   "section": "public_safety_emergency_response",
+   "reason": "Mental health crisis response needed",
+   "count": 1887
+  },
+  "VIOLATION OF PROTECTIVE ORDER": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Restraining or protective order violated",
+   "count": 1835
+  },
+  "BURGLARY (460)": {
+   "group": "theft_property",
+   "section": "public_safety_emergency_response",
+   "reason": "Break-in and theft from building",
+   "count": 1736
+  },
+  "FOUND PROPERTY": {
+   "group": "other",
+   "section": "public_safety_emergency_response",
+   "reason": "Lost or abandoned property turned in",
+   "count": 1547
+  },
+  "NARCOTICS": {
+   "group": "other",
+   "section": "public_safety_emergency_response",
+   "reason": "Drug-related activity reported",
+   "count": 1505
+  },
+  "CRIMINAL THREATS": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Person threatened with bodily harm",
+   "count": 1462
+  },
+  "DISTURBANCE, FIRECRACKERS": {
+   "group": "disturbance",
+   "section": "public_safety_emergency_response",
+   "reason": "Illegal fireworks or firecrackers noise",
+   "count": 1419
+  },
+  "SUSPICIOUS PERSON W/ WEAPON": {
+   "group": "suspicious",
+   "section": "public_safety_emergency_response",
+   "reason": "Armed suspicious person reported",
+   "count": 1369
+  },
+  "PUBLIC SAFETY ASSISTANCE": {
+   "group": "other",
+   "section": "public_safety_emergency_response",
+   "reason": "General public safety assist call",
+   "count": 1360
+  },
+  "ALARM": {
+   "group": "alarm",
+   "section": "public_safety_emergency_response",
+   "reason": "Security alarm activation reported",
+   "count": 1220
+  },
+  "ASSAULT WITH DEADLY WEAPON": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Attack with deadly weapon reported",
+   "count": 1193
+  },
+  "MENTALLY DISTURBED FEMALE": {
+   "group": "welfare",
+   "section": "public_safety_emergency_response",
+   "reason": "Female in mental health crisis",
+   "count": 1191
+  },
+  "CORONERS CASE": {
+   "group": "other",
+   "section": "public_safety_emergency_response",
+   "reason": "Death scene requires coroner response",
+   "count": 1175
+  },
+  "DISTURBANCE, FIGHT": {
+   "group": "disturbance",
+   "section": "public_safety_emergency_response",
+   "reason": "Physical fight in progress",
+   "count": 1150
+  },
+  "VEHICLE STOP ON FEMALE": {
+   "group": "traffic",
+   "section": "public_safety_emergency_response",
+   "reason": "Traffic stop involving female driver",
+   "count": 1026
+  },
+  "INDECENT EXPOSURE": {
+   "group": "other",
+   "section": "public_safety_emergency_response",
+   "reason": "Person exposing themselves publicly",
+   "count": 999
+  },
+  "BRANDISHING A WEAPON": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Person displaying weapon threateningly",
+   "count": 896
+  },
+  "MISDEMEANOR DUI": {
+   "group": "traffic",
+   "section": "infrastructure_streets",
+   "reason": "Drunk driving misdemeanor arrest",
+   "count": 882
+  },
+  "ABANDONED VEHICLE": {
+   "group": "traffic",
+   "section": "infrastructure_streets",
+   "reason": "Vehicle abandoned on public street",
+   "count": 870
+  },
+  "DISTURBANCE, JUVENILE": {
+   "group": "disturbance",
+   "section": "public_safety_emergency_response",
+   "reason": "Juvenile causing disturbance",
+   "count": 857
+  },
+  "GRAND THEFT": {
+   "group": "theft_property",
+   "section": "public_safety_emergency_response",
+   "reason": "Theft of high-value property",
+   "count": 851
+  },
+  "FELONY WANT": {
+   "group": "other",
+   "section": "public_safety_emergency_response",
+   "reason": "Person wanted for felony offense",
+   "count": 847
+  },
+  "FIREARMS DISCHARGED": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Gunshots fired in area",
+   "count": 811
+  },
+  "VEHICLE ACCIDENT, UNKNOWN INJURIES": {
+   "group": "traffic",
+   "section": "infrastructure_streets",
+   "reason": "Crash with unknown injury status",
+   "count": 798
+  },
+  "MISSING PERSON": {
+   "group": "welfare",
+   "section": "public_safety_emergency_response",
+   "reason": "Person reported missing by family",
+   "count": 786
+  },
+  "DISTURBANCE (COMBINED EVENT)": {
+   "group": "disturbance",
+   "section": "public_safety_emergency_response",
+   "reason": "Combined disturbance dispatch event",
+   "count": 734
+  },
+  "TAMPERING WITH A VEHICLE": {
+   "group": "theft_property",
+   "section": "public_safety_emergency_response",
+   "reason": "Person interfering with parked vehicle",
+   "count": 720
+  },
+  "COMMUNITY POLICING MEETING": {
+   "group": "other",
+   "section": "governance_civic_rights",
+   "reason": "Police community engagement meeting",
+   "count": 714
+  },
+  "MISDEMEANOR WANT": {
+   "group": "other",
+   "section": "public_safety_emergency_response",
+   "reason": "Person wanted for misdemeanor offense",
+   "count": 706
+  },
+  "SUSPICIOUS PACKAGE": {
+   "group": "suspicious",
+   "section": "public_safety_emergency_response",
+   "reason": "Unattended suspicious package found",
+   "count": 697
+  },
+  "MISSING JUVENILE": {
+   "group": "welfare",
+   "section": "public_safety_emergency_response",
+   "reason": "Juvenile reported missing",
+   "count": 696
+  },
+  "FELONY HIT AND RUN": {
+   "group": "traffic",
+   "section": "infrastructure_streets",
+   "reason": "Driver fled serious injury crash",
+   "count": 667
+  },
+  "CIVIL MATTER": {
+   "group": "other",
+   "section": "governance_civic_rights",
+   "reason": "Non-criminal civil dispute reported",
+   "count": 652
+  },
+  "MISSING FEMALE JUVENILE": {
+   "group": "welfare",
+   "section": "public_safety_emergency_response",
+   "reason": "Female juvenile reported missing",
+   "count": 583
+  },
+  "SUSPICIOUS FEMALE": {
+   "group": "suspicious",
+   "section": "public_safety_emergency_response",
+   "reason": "Suspicious female individual reported",
+   "count": 559
+  },
+  "VAGRANT": {
+   "group": "welfare",
+   "section": "public_safety_emergency_response",
+   "reason": "Homeless or vagrant person reported",
+   "count": 529
+  },
+  "STRONG ARM ROBBERY": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Robbery by force without weapon",
+   "count": 520
+  },
+  "BATTERY (COMBINED EVENT)": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Combined battery dispatch event",
+   "count": 484
+  },
+  "ELDER/DEPENDENT ADULT ABUSE": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Abuse of elderly or dependent adult",
+   "count": 456
+  },
+  "RESISTING ARREST": {
+   "group": "other",
+   "section": "public_safety_emergency_response",
+   "reason": "Person resisting police arrest",
+   "count": 445
+  },
+  "ANIMAL COMPLAINT": {
+   "group": "other",
+   "section": "none",
+   "reason": "Animal-related complaint reported",
+   "count": 431
+  },
+  "PETTY THEFT (BROADCAST ONLY)": {
+   "group": "theft_property",
+   "section": "public_safety_emergency_response",
+   "reason": "Minor theft broadcast to officers",
+   "count": 424
+  },
+  "TRAFFIC CONTROL": {
+   "group": "traffic",
+   "section": "infrastructure_streets",
+   "reason": "Officer directing or controlling traffic",
+   "count": 420
+  },
+  "MISSING PERSON, MENTAL HANDICAP": {
+   "group": "welfare",
+   "section": "public_safety_emergency_response",
+   "reason": "Mentally impaired person reported missing",
+   "count": 416
+  },
+  "ROBBERY": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Robbery of person or property",
+   "count": 409
+  },
+  "PROWLER": {
+   "group": "suspicious",
+   "section": "public_safety_emergency_response",
+   "reason": "Person lurking suspiciously outside home",
+   "count": 408
+  },
+  "DISTURBANCE, FAMILY (COMBINED EVENT)": {
+   "group": "disturbance",
+   "section": "public_safety_emergency_response",
+   "reason": "Combined family disturbance event",
+   "count": 395
+  },
+  "FOUND, MISSING PERSON": {
+   "group": "welfare",
+   "section": "public_safety_emergency_response",
+   "reason": "Previously missing person located",
+   "count": 383
+  },
+  "CHILD ABUSE": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Physical abuse of a child",
+   "count": 338
+  },
+  "MISSING FEMALE": {
+   "group": "welfare",
+   "section": "public_safety_emergency_response",
+   "reason": "Female person reported missing",
+   "count": 331
+  },
+  "FEMALE CALLING FOR HELP": {
+   "group": "welfare",
+   "section": "public_safety_emergency_response",
+   "reason": "Female in distress calling for help",
+   "count": 323
+  },
+  "OPEN DOOR": {
+   "group": "suspicious",
+   "section": "public_safety_emergency_response",
+   "reason": "Unsecured open door at property",
+   "count": 283
+  },
+  "SUSPICIOUS CIRCUMSTANCES (COMBINED EVENT)": {
+   "group": "suspicious",
+   "section": "public_safety_emergency_response",
+   "reason": "Combined suspicious circumstances event",
+   "count": 231
+  },
+  "VICIOUS ANIMAL": {
+   "group": "other",
+   "section": "none",
+   "reason": "Aggressive dangerous animal reported",
+   "count": 229
+  },
+  "ARMED ROBBERY": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Robbery committed with a weapon",
+   "count": 227
+  },
+  "POSSESSION OF NARCOTICS": {
+   "group": "other",
+   "section": "public_safety_emergency_response",
+   "reason": "Person in possession of drugs",
+   "count": 226
+  },
+  "THROWING SUBSTANCES AT VEHICLE": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Objects thrown at moving vehicle",
+   "count": 215
+  },
+  "INJURED ANIMAL": {
+   "group": "other",
+   "section": "none",
+   "reason": "Injured animal requiring assistance",
+   "count": 207
+  },
+  "ILLEGAL WEAPONS": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Person in possession of illegal weapon",
+   "count": 203
+  },
+  "PERSON CALLING FOR HELP": {
+   "group": "welfare",
+   "section": "public_safety_emergency_response",
+   "reason": "Person in distress calling for help",
+   "count": 199
+  },
+  "DISTURBANCE, FIGHT (COMBINED EVENT)": {
+   "group": "disturbance",
+   "section": "public_safety_emergency_response",
+   "reason": "Combined fight disturbance event",
+   "count": 197
+  },
+  "ARSON (447A)": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Intentional fire set to property",
+   "count": 190
+  },
+  "EXPLOSION": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Explosion reported in area",
+   "count": 182
+  },
+  "EXTORTION": {
+   "group": "theft_property",
+   "section": "public_safety_emergency_response",
+   "reason": "Coercion to obtain money or property",
+   "count": 169
+  },
+  "REGISTRATION OF SEX OFFENDER": {
+   "group": "other",
+   "section": "public_safety_emergency_response",
+   "reason": "Sex offender registration compliance check",
+   "count": 167
+  },
+  "HANDICAPPED PARKING VIOLATION": {
+   "group": "traffic",
+   "section": "infrastructure_streets",
+   "reason": "Vehicle illegally in handicapped space",
+   "count": 161
+  },
+  "CRUELTY TO ANIMALS": {
+   "group": "other",
+   "section": "none",
+   "reason": "Animal mistreatment or abuse reported",
+   "count": 160
+  },
+  "DISTURBANCE, MOTORCYCLE": {
+   "group": "disturbance",
+   "section": "public_safety_emergency_response",
+   "reason": "Loud or reckless motorcycle disturbance",
+   "count": 159
+  },
+  "DRUNK IN PUBLIC": {
+   "group": "welfare",
+   "section": "public_safety_emergency_response",
+   "reason": "Intoxicated person in public space",
+   "count": 152
+  },
+  "COMMUNIT POLICING BIKE": {
+   "group": "other",
+   "section": "governance_civic_rights",
+   "reason": "Community policing bicycle patrol",
+   "count": 151
+  },
+  "COMMUNITY POLICING SCHOOL": {
+   "group": "other",
+   "section": "governance_civic_rights",
+   "reason": "Police community engagement at school",
+   "count": 147
+  },
+  "1091AB          - VICIOUS ANIMAL (COMBINED EVENT)": {
+   "group": "other",
+   "section": "none",
+   "reason": "Combined vicious animal event",
+   "count": 142
+  },
+  "MALICIOUS MISCHIEF, GANG RELATED": {
+   "group": "theft_property",
+   "section": "public_safety_emergency_response",
+   "reason": "Gang-related vandalism or property damage",
+   "count": 135
+  },
+  "VEHICLE ACCIDENT, MAJOR INJURIES": {
+   "group": "traffic",
+   "section": "infrastructure_streets",
+   "reason": "Crash with major injuries reported",
+   "count": 129
+  },
+  "STALKING": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Person being stalked or followed",
+   "count": 125
+  },
+  "PETTY THEFT": {
+   "group": "theft_property",
+   "section": "public_safety_emergency_response",
+   "reason": "Minor value theft reported",
+   "count": 124
+  },
+  "ASSAULT": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Physical attack on another person",
+   "count": 122
+  },
+  "PERSON STABBED": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Person stabbed with sharp object",
+   "count": 120
+  },
+  "GARBAGE COMPLAINT": {
+   "group": "other",
+   "section": "sanitation_environment_quality",
+   "reason": "Illegal dumping or garbage complaint",
+   "count": 119
+  },
+  "POSSESSION OF CONTROLLED SUBSTANCE": {
+   "group": "other",
+   "section": "public_safety_emergency_response",
+   "reason": "Person possessing controlled drugs",
+   "count": 117
+  },
+  "ASSAULT WITH DEADLY WEAPON (COMBINED EVENT)": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Combined deadly weapon assault event",
+   "count": 117
+  },
+  "DEFRAUDING AN INKEEPER": {
+   "group": "theft_property",
+   "section": "public_safety_emergency_response",
+   "reason": "Defrauding hotel or innkeeper",
+   "count": 117
+  },
+  "USE OF CONTROLLED SUBSTANCE": {
+   "group": "other",
+   "section": "public_safety_emergency_response",
+   "reason": "Person using controlled substance",
+   "count": 113
+  },
+  "DISTURBANCE, WEAPON (COMBINED EVENT)": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Combined weapon disturbance event",
+   "count": 112
+  },
+  "FELONY DUI": {
+   "group": "traffic",
+   "section": "infrastructure_streets",
+   "reason": "Drunk driving causing serious injury",
+   "count": 111
+  },
+  "CARRYING A CONCEALED WEAPON": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Person illegally carrying concealed weapon",
+   "count": 101
+  },
+  "HATE CRIMES": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Bias-motivated crime against person",
+   "count": 97
+  },
+  "SICK PERSON": {
+   "group": "welfare",
+   "section": "public_safety_emergency_response",
+   "reason": "Person ill or unwell needing help",
+   "count": 93
+  },
+  "DEAD ANIMAL": {
+   "group": "other",
+   "section": "none",
+   "reason": "Dead animal requiring removal",
+   "count": 90
+  },
+  "SHOOTING INTO OCCP VEH OR DWELLING": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Shooting into occupied vehicle or building",
+   "count": 88
+  },
+  "SOLICITING FOR PROSTITUTION": {
+   "group": "other",
+   "section": "public_safety_emergency_response",
+   "reason": "Solicitation for prostitution reported",
+   "count": 86
+  },
+  "OBSCENE OR HARASSING PH CALLS": {
+   "group": "disturbance",
+   "section": "public_safety_emergency_response",
+   "reason": "Harassing or obscene phone calls made",
+   "count": 81
+  },
+  "MOLEST/ANNOY UNDER 18YRS": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Sexual offense against minor",
+   "count": 81
+  },
+  "OBSTRUCT STREETS OR SIDEWALK": {
+   "group": "traffic",
+   "section": "infrastructure_streets",
+   "reason": "Street or sidewalk illegally obstructed",
+   "count": 76
+  },
+  "BATTERY ON AN OFFICER": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Physical attack on police officer",
+   "count": 76
+  },
+  "UNLICENSED DRIVER": {
+   "group": "traffic",
+   "section": "infrastructure_streets",
+   "reason": "Driver operating without valid license",
+   "count": 75
+  },
+  "CHILD BEATING": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Child physically beaten or assaulted",
+   "count": 64
+  },
+  "PETTY THEFT PRIOR CONVICTION": {
+   "group": "theft_property",
+   "section": "public_safety_emergency_response",
+   "reason": "Petty theft with prior criminal history",
+   "count": 63
+  },
+  "THEFT OF RECYCLABLES": {
+   "group": "theft_property",
+   "section": "sanitation_environment_quality",
+   "reason": "Theft of recyclable materials",
+   "count": 61
+  },
+  "ILLEGAL WEAPONS, GANG RELATED": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Gang-related illegal weapon possession",
+   "count": 54
+  },
+  "PEDESTRIAN STOP ON FEMALE": {
+   "group": "traffic",
+   "section": "public_safety_emergency_response",
+   "reason": "Officer stops female pedestrian",
+   "count": 54
+  },
+  "EMBEZZLEMENT": {
+   "group": "theft_property",
+   "section": "public_safety_emergency_response",
+   "reason": "Theft by employee or trusted person",
+   "count": 52
+  },
+  "PERSON SHOT": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Person struck by gunfire",
+   "count": 49
+  },
+  "FORGERY": {
+   "group": "theft_property",
+   "section": "public_safety_emergency_response",
+   "reason": "Forged or falsified document reported",
+   "count": 45
+  },
+  "PAROLE VIOLATION": {
+   "group": "other",
+   "section": "public_safety_emergency_response",
+   "reason": "Person violated parole conditions",
+   "count": 45
+  },
+  "INJURED PERSON": {
+   "group": "welfare",
+   "section": "public_safety_emergency_response",
+   "reason": "Person injured needing assistance",
+   "count": 44
+  },
+  "STRONG ARM ROBBERY (COMBINED EVENT)": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Combined strong arm robbery event",
+   "count": 44
+  },
+  "BATTERY, SERIOUS INJURY": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Battery causing serious bodily injury",
+   "count": 42
+  },
+  "RECEIVE/POSSESS STOLEN PROP": {
+   "group": "theft_property",
+   "section": "public_safety_emergency_response",
+   "reason": "Possessing known stolen property",
+   "count": 41
+  },
+  "SPEED CONTEST": {
+   "group": "traffic",
+   "section": "infrastructure_streets",
+   "reason": "Illegal street racing reported",
+   "count": 39
+  },
+  "FIRE (SPECIFY TYPE)": {
+   "group": "other",
+   "section": "public_safety_emergency_response",
+   "reason": "Fire of unspecified type reported",
+   "count": 38
+  },
+  "SPEEDING": {
+   "group": "traffic",
+   "section": "infrastructure_streets",
+   "reason": "Vehicle exceeding posted speed limit",
+   "count": 36
+  },
+  "KIDNAPPING": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Person abducted against their will",
+   "count": 35
+  },
+  "DRIVING W/SUSPENDED LICENSE": {
+   "group": "traffic",
+   "section": "infrastructure_streets",
+   "reason": "Driving with suspended license",
+   "count": 34
+  },
+  "POSSESSION OF MARIJUANA": {
+   "group": "other",
+   "section": "public_safety_emergency_response",
+   "reason": "Person possessing marijuana",
+   "count": 32
+  },
+  "DOMESTIC VIOLENCE  (COMBINED EVENT)": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Combined domestic violence event",
+   "count": 31
+  },
+  "NARCOTICS, GANG RELATED": {
+   "group": "other",
+   "section": "public_safety_emergency_response",
+   "reason": "Gang-related narcotics activity",
+   "count": 30
+  },
+  "FALSE IMPRISONMENT": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Person unlawfully detained or confined",
+   "count": 29
+  },
+  "DISTURBANCE, UNKNOWN (COMBINED EVENT)": {
+   "group": "disturbance",
+   "section": "public_safety_emergency_response",
+   "reason": "Combined unknown disturbance event",
+   "count": 29
+  },
+  "MURDER": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Homicide reported",
+   "count": 27
+  },
+  "ASSAULT WITH DEADLY WEAPON, GANG": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Gang-related deadly weapon assault",
+   "count": 24
+  },
+  "REFUSAL TO LEAVE PROPERTY": {
+   "group": "suspicious",
+   "section": "public_safety_emergency_response",
+   "reason": "Person refusing to vacate property",
+   "count": 22
+  },
+  "DISTURBANCE, GANG": {
+   "group": "disturbance",
+   "section": "public_safety_emergency_response",
+   "reason": "Gang-related disturbance reported",
+   "count": 20
+  },
+  "ARMED ROBBERY (COMBINED EVENT)": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Combined armed robbery event",
+   "count": 20
+  },
+  "RESISTING ARREST, GANG RELATED": {
+   "group": "other",
+   "section": "public_safety_emergency_response",
+   "reason": "Gang member resisting police arrest",
+   "count": 17
+  },
+  "PURSE SNATCH ROBBERY": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Purse snatched from victim",
+   "count": 17
+  },
+  "ALARM, SVRN": {
+   "group": "alarm",
+   "section": "public_safety_emergency_response",
+   "reason": "Surveillance alarm activation",
+   "count": 17
+  },
+  "OPEN WINDOW": {
+   "group": "suspicious",
+   "section": "public_safety_emergency_response",
+   "reason": "Unsecured open window at property",
+   "count": 16
+  },
+  "VEHICLE STOP, SEND FILL": {
+   "group": "traffic",
+   "section": "public_safety_emergency_response",
+   "reason": "Vehicle stop requesting backup unit",
+   "count": 16
+  },
+  "INTOXICATED PERSON": {
+   "group": "welfare",
+   "section": "public_safety_emergency_response",
+   "reason": "Intoxicated person needing assistance",
+   "count": 14
+  },
+  "DROWNING": {
+   "group": "welfare",
+   "section": "public_safety_emergency_response",
+   "reason": "Person drowning or near-drowning",
+   "count": 12
+  },
+  "BATTERY ON A PEACE OFFICER": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Physical attack on peace officer",
+   "count": 11
+  },
+  "NOISY ANIMAL": {
+   "group": "disturbance",
+   "section": "none",
+   "reason": "Animal causing noise disturbance",
+   "count": 11
+  },
+  "BAD CHECKS": {
+   "group": "theft_property",
+   "section": "public_safety_emergency_response",
+   "reason": "Fraudulent check issued",
+   "count": 10
+  },
+  "BATTERY, GANG RELATED": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Gang-related battery assault",
+   "count": 10
+  },
+  "HI-TECH CRIMES": {
+   "group": "theft_property",
+   "section": "public_safety_emergency_response",
+   "reason": "Technology-based fraud or cybercrime",
+   "count": 9
+  },
+  "ASSAULT AND BATTERY": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Combined assault and battery",
+   "count": 9
+  },
+  "COMMUNITY POLICING OFFICE": {
+   "group": "other",
+   "section": "governance_civic_rights",
+   "reason": "Community policing office activity",
+   "count": 9
+  },
+  "ASSAULT ON AN OFFICER": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Physical attack on police officer",
+   "count": 8
+  },
+  "SOLICITING FOR LEWD CONDUCT": {
+   "group": "other",
+   "section": "public_safety_emergency_response",
+   "reason": "Solicitation for lewd acts reported",
+   "count": 8
+  },
+  "BREACH OF AOA": {
+   "group": "other",
+   "section": "public_safety_emergency_response",
+   "reason": "Breach of airport operations area",
+   "count": 7
+  },
+  "CARJACKING (COMBINED EVENT)": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Combined vehicle carjacking event",
+   "count": 5
+  },
+  "BOMB THREAT": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Bomb threat received",
+   "count": 4
+  },
+  "POSSESSION OF CONTROLLED SUBSTANCE, GANG RELATED": {
+   "group": "other",
+   "section": "public_safety_emergency_response",
+   "reason": "Gang-related controlled substance possession",
+   "count": 4
+  },
+  "STRAY HORSE": {
+   "group": "other",
+   "section": "none",
+   "reason": "Stray horse on roadway or property",
+   "count": 4
+  },
+  "BAR CHECK": {
+   "group": "other",
+   "section": "public_safety_emergency_response",
+   "reason": "Officer checks bar for compliance",
+   "count": 3
+  },
+  "TAKE A REPORT": {
+   "group": "other",
+   "section": "public_safety_emergency_response",
+   "reason": "Officer taking crime report only",
+   "count": 3
+  },
+  "MINOR IN POSSESSION OF ALCOHOL": {
+   "group": "other",
+   "section": "public_safety_emergency_response",
+   "reason": "Juvenile possessing alcohol illegally",
+   "count": 3
+  },
+  "BRANDISHING A WEAPON, GANG": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Gang member brandishing weapon",
+   "count": 3
+  },
+  "W&I-UNDER JURIS OF JUV COURT": {
+   "group": "other",
+   "section": "governance_civic_rights",
+   "reason": "Juvenile under court jurisdiction",
+   "count": 2
+  },
+  "COMMUNITY POLICING -CITZ ASSIST": {
+   "group": "other",
+   "section": "governance_civic_rights",
+   "reason": "Community policing citizen assistance",
+   "count": 2
+  },
+  "SELL OR FURN ALCOHOL TO MINOR": {
+   "group": "other",
+   "section": "public_safety_emergency_response",
+   "reason": "Selling alcohol to underage person",
+   "count": 2
+  },
+  "THEFT, GANG RELATED": {
+   "group": "theft_property",
+   "section": "public_safety_emergency_response",
+   "reason": "Gang-related theft reported",
+   "count": 2
+  },
+  "ROBBERY, GANG RELATED": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Gang-related robbery reported",
+   "count": 2
+  },
+  "DISTURBANCE, FIGHT GANG": {
+   "group": "disturbance",
+   "section": "public_safety_emergency_response",
+   "reason": "Gang fight disturbance reported",
+   "count": 1
+  },
+  "CONTROLLED SUBSTANCE AT RESIDENCE": {
+   "group": "other",
+   "section": "public_safety_emergency_response",
+   "reason": "Controlled substance found at home",
+   "count": 1
+  },
+  "VEHICLE STOP-CURFEW VIOLATION": {
+   "group": "traffic",
+   "section": "public_safety_emergency_response",
+   "reason": "Vehicle stop for curfew violation",
+   "count": 1
+  },
+  "JUVENILE VIOLATING COURT ORDER": {
+   "group": "other",
+   "section": "governance_civic_rights",
+   "reason": "Juvenile violating court order",
+   "count": 1
+  },
+  "STOLEN VEHICLE, GANG RELATED": {
+   "group": "theft_property",
+   "section": "public_safety_emergency_response",
+   "reason": "Gang-related vehicle theft",
+   "count": 1
+  },
+  "CURFEW TRANS/CURF CTR TO RESD": {
+   "group": "other",
+   "section": "governance_civic_rights",
+   "reason": "Juvenile curfew transport to residence",
+   "count": 1
+  },
+  "BOMB REMOVAL, STANDBY": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Bomb squad standby for device removal",
+   "count": 1
+  },
+  "ARMED ROBBERY, GANG RELATED": {
+   "group": "violence",
+   "section": "public_safety_emergency_response",
+   "reason": "Gang-related armed robbery",
+   "count": 1
+  },
+  "INJURE, OBSTRUCT A BUSINESS": {
+   "group": "other",
+   "section": "public_safety_emergency_response",
+   "reason": "Business obstructed or damaged",
+   "count": 1
+  },
+  "DRIVING W/SUS LIC-VEH IMPOUNDED": {
+   "group": "traffic",
+   "section": "infrastructure_streets",
+   "reason": "Driving suspended license vehicle impounded",
+   "count": 1
+  }
+ }
+}

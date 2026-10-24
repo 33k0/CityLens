@@ -1,27 +1,27 @@
 {
- "generated_at": "2026-10-23T21:20:45-07:00",
+ "generated_at": "2026-10-23T21:34:59-07:00",
  "scope": "citywide, all items, no filters",
  "metrics": {
   "H1": {
    "id": "H1",
    "name": "Voice comments (rows)",
-   "value": 820,
+   "value": 1299,
    "formula": "|V|",
    "label": "illustrative",
    "by_channel": {
     "letter": 271,
-    "email": 549
+    "email": 1028
    }
   },
   "H2": {
    "id": "H2",
    "name": "Unique voices",
-   "value": 621.0,
+   "value": 1100.0,
    "formula": "Σ u(r)",
    "label": "illustrative",
    "by_channel": {
     "letter": 105.0,
-    "email": 516.0
+    "email": 995.0
    }
   },
   "H3": {
@@ -36,14 +36,14 @@
    "id": "H4",
    "name": "Category share, voice (%)",
    "value": {
-    "Housing & Affordability Policy": 16.3,
-    "Public Safety & Emergency Response": 10.0,
-    "Streets & Infrastructure": 27.7,
-    "Environment & Development Review": 4.7,
-    "Code Enforcement & Permitting": 12.4,
-    "Governance & Civic Rights": 14.2,
-    "Sanitation & Environmental Quality": 7.4,
-    "Other / General": 7.4
+    "Housing & Affordability Policy": 15.1,
+    "Public Safety & Emergency Response": 12.0,
+    "Streets & Infrastructure": 20.6,
+    "Environment & Development Review": 7.2,
+    "Code Enforcement & Permitting": 13.3,
+    "Governance & Civic Rights": 12.5,
+    "Sanitation & Environmental Quality": 11.5,
+    "Other / General": 7.8
    },
    "formula": "100·U(cat=c)/U(V)",
    "label": "illustrative"
@@ -66,52 +66,52 @@
    "name": "Subcategory share within category (%)",
    "value": {
     "Housing & Affordability Policy": {
-     "Zoning & Density Reform": 24.8,
-     "Rent Stabilization & Caps": 52.5,
-     "Tenant Protections & Eviction": 7.9,
-     "Affordable Housing Financing": 2.0,
-     "Housing Supply & Infrastructure Readiness": 12.9
+     "Zoning & Density Reform": 24.1,
+     "Rent Stabilization & Caps": 41.0,
+     "Tenant Protections & Eviction": 13.9,
+     "Affordable Housing Financing": 7.2,
+     "Housing Supply & Infrastructure Readiness": 13.9
     },
     "Public Safety & Emergency Response": {
-     "Patrol & Sworn Officer Staffing": 69.4,
-     "Alternative & Co-Response Programs": 9.7,
-     "Cameras, Surveillance & Privacy": 9.7,
-     "Crime Prevention & Youth Programs": 11.3
+     "Patrol & Sworn Officer Staffing": 51.5,
+     "Alternative & Co-Response Programs": 15.9,
+     "Cameras, Surveillance & Privacy": 13.6,
+     "Crime Prevention & Youth Programs": 18.9
     },
     "Streets & Infrastructure": {
-     "Pothole & Pavement Repair": 36.0,
-     "Streetlight Outages & Reliability": 39.0,
-     "Storm Drain & Flooding": 11.6,
-     "Infrastructure Equity & Accountability": 13.4
+     "Pothole & Pavement Repair": 33.9,
+     "Streetlight Outages & Reliability": 38.3,
+     "Storm Drain & Flooding": 13.2,
+     "Infrastructure Equity & Accountability": 14.5
     },
     "Environment & Development Review": {
-     "EIR & Environmental Review": 10.3,
-     "Flood & Water Risk": 44.8,
-     "Traffic & Neighborhood Character": 34.5,
-     "Conditional Approval & Community Benefits": 10.3
+     "EIR & Environmental Review": 22.8,
+     "Flood & Water Risk": 29.1,
+     "Traffic & Neighborhood Character": 31.6,
+     "Conditional Approval & Community Benefits": 16.5
     },
     "Code Enforcement & Permitting": {
-     "Habitability Failures": 35.1,
-     "Derelict Buildings & Blight": 16.9,
-     "Permit Backlog & Delays": 35.1,
-     "Permit Fees & Staffing": 13.0
+     "Habitability Failures": 39.0,
+     "Derelict Buildings & Blight": 25.3,
+     "Permit Backlog & Delays": 25.3,
+     "Permit Fees & Staffing": 10.3
     },
     "Governance & Civic Rights": {
-     "Voter Threshold & Prop 13": 9.1,
-     "Immigrant Protection & Sanctuary Policy": 26.1,
-     "Council Appointments & Special Elections": 58.0,
-     "Boards, Commissions & Appointments Fairness": 6.8
+     "Voter Threshold & Prop 13": 13.0,
+     "Immigrant Protection & Sanctuary Policy": 27.5,
+     "Council Appointments & Special Elections": 44.2,
+     "Boards, Commissions & Appointments Fairness": 15.2
     },
     "Sanitation & Environmental Quality": {
-     "Illegal Dumping & Creek Pollution": 67.4,
-     "Dumping Prevention & Free Disposal Access": 6.5,
-     "Freeway Air Quality & Noise": 26.1
+     "Illegal Dumping & Creek Pollution": 52.4,
+     "Dumping Prevention & Free Disposal Access": 26.2,
+     "Freeway Air Quality & Noise": 21.4
     },
     "Other / General": {
-     "Personal Financial Hardship": 6.5,
-     "Cover Note / Forwarded Attachment": 32.6,
-     "General Cost-of-Living Frustration": 26.1,
-     "Senior Services (General)": 34.8
+     "Personal Financial Hardship": 17.4,
+     "Cover Note / Forwarded Attachment": 17.4,
+     "General Cost-of-Living Frustration": 32.6,
+     "Senior Services (General)": 32.6
     }
    },
    "formula": "100·U(cat=c∩sub=s)/U(cat=c)",
@@ -121,17 +121,17 @@
    "id": "H7",
    "name": "Stance distribution (% of unique voices)",
    "value": {
-    "support": 71.5,
-    "oppose": 20.8,
-    "neutral": 2.4,
-    "unclear": 5.3
+    "support": 47.8,
+    "oppose": 18.5,
+    "neutral": 30.6,
+    "unclear": 3.0
    },
    "formula": "100·U(stance=k)/U(V)",
    "label": "illustrative",
    "raw_rows": {
-    "support": 638,
-    "oppose": 134,
-    "neutral": 15,
+    "support": 720,
+    "oppose": 209,
+    "neutral": 337,
     "unclear": 33
    }
   },
@@ -150,23 +150,23 @@
      }
     },
     "email": {
-     "located_pct": 67.4,
+     "located_pct": 62.3,
      "by_precision_pct": {
-      "address": 43.0,
-      "none": 32.1,
-      "neighborhood": 23.3,
-      "zip": 1.1,
-      "district": 0.5
+      "address": 42.9,
+      "none": 37.5,
+      "neighborhood": 18.8,
+      "zip": 0.6,
+      "district": 0.3
      }
     },
     "all": {
-     "located_pct": 50.4,
+     "located_pct": 52.6,
      "by_precision_pct": {
-      "none": 47.8,
-      "address": 31.1,
-      "neighborhood": 17.6,
-      "district": 1.8,
-      "zip": 1.7
+      "none": 46.3,
+      "address": 35.4,
+      "neighborhood": 16.1,
+      "district": 1.2,
+      "zip": 1.1
      }
     }
    },
@@ -177,10 +177,10 @@
    "id": "H9",
    "name": "Voice participation rate per 1k (tract)",
    "value": {
-    "tracts_above_zero": 182,
-    "median": 0.265,
+    "tracts_above_zero": 184,
+    "median": 0.55,
     "max": 2.594,
-    "city_median": 0.2652519893899204,
+    "city_median": 0.5496015388843088,
     "basis": "residence"
    },
    "formula": "1000·U(Res∩t)/pop(t)",
@@ -202,7 +202,7 @@
    "id": "H11",
    "name": "Voice and 311 percentiles (tract)",
    "value": {
-    "voice_pct_0_tracts": 33,
+    "voice_pct_0_tracts": 31,
     "voice_pct_max": 99.5,
     "problem_pct_ge_70_tracts": 64
    },
@@ -215,20 +215,20 @@
    "value": {
     "voice": {
      "low_income": {
-      "unweighted": 0.358,
-      "population_weighted": 0.345
+      "unweighted": 0.603,
+      "population_weighted": 0.621
      },
      "majority_nonwhite": {
-      "unweighted": 0.463,
-      "population_weighted": 0.467
+      "unweighted": 0.608,
+      "population_weighted": 0.587
      },
      "renter_majority": {
       "unweighted": 0.455,
-      "population_weighted": 0.476
+      "population_weighted": 0.446
      },
      "high_lep": {
-      "unweighted": 0.342,
-      "population_weighted": 0.338
+      "unweighted": 0.486,
+      "population_weighted": 0.551
      }
     },
     "311": {
@@ -260,20 +260,20 @@
    "value": {
     "voice": {
      "low_income": {
-      "unweighted": -0.47,
-      "population_weighted": -0.475
+      "unweighted": -0.247,
+      "population_weighted": -0.233
      },
      "majority_nonwhite": {
-      "unweighted": -0.537,
-      "population_weighted": -0.533
+      "unweighted": -0.308,
+      "population_weighted": -0.34
      },
      "renter_majority": {
       "unweighted": -0.338,
-      "population_weighted": -0.32
+      "population_weighted": -0.344
      },
      "high_lep": {
-      "unweighted": -0.393,
-      "population_weighted": -0.397
+      "unweighted": -0.294,
+      "population_weighted": -0.255
      }
     },
     "311": {
@@ -303,7 +303,7 @@
    "id": "H14",
    "name": "Problems without voice",
    "value": {
-    "tracts": 23,
+    "tracts": 26,
     "top5": [
      {
       "tract_id": "06085501402",
@@ -380,9 +380,9 @@
    "id": "A2",
    "name": "Silent tracts",
    "value": {
-    "tracts": 31,
+    "tracts": 29,
     "of": 215,
-    "residents": 119813
+    "residents": 110505
    },
    "formula": "tracts with U(L∩t)=0; Σ pop",
    "label": "illustrative"
@@ -392,10 +392,10 @@
    "name": "Campaign share of item (%)",
    "value": {
     "25-081": 88.8,
-    "MOCK-26-902": 13.0,
-    "MOCK-26-903": 8.8,
-    "MOCK-26-906": 16.0,
-    "MOCK-26-907": 10.5
+    "MOCK-26-902": 9.9,
+    "MOCK-26-903": 7.0,
+    "MOCK-26-906": 11.5,
+    "MOCK-26-907": 4.9
    },
    "formula": "100·|campaign rows|/|item rows|",
    "label": "illustrative"
@@ -405,10 +405,10 @@
    "name": "Commenter type share (%)",
    "value": {
     "voices": {
-     "resident": 92.3,
-     "organization": 7.1,
-     "developer_or_counsel": 0.3,
-     "government": 0.3
+     "resident": 95.6,
+     "organization": 4.0,
+     "developer_or_counsel": 0.2,
+     "government": 0.2
     },
     "letter_pages": {
      "resident": 79.1,
@@ -424,11 +424,11 @@
    "id": "A5",
    "name": "Non-English share (%)",
    "value": {
-    "all": 19.8,
-    "es": 11.3,
-    "tl": 0.5,
-    "vi": 7.4,
-    "zh-cn": 0.6
+    "all": 24.2,
+    "es": 13.5,
+    "tl": 1.0,
+    "vi": 8.5,
+    "zh-cn": 1.1
    },
    "formula": "100·U(lang≠en)/U(V)",
    "label": "illustrative"
@@ -437,8 +437,8 @@
    "id": "A6",
    "name": "Residents in silent / problems-without-voice tracts (%)",
    "value": {
-    "silent": 11.9,
-    "problems_without_voice": 9.6
+    "silent": 11.0,
+    "problems_without_voice": 10.3
    },
    "formula": "100·Σ_S pop/Σ pop",
    "label": "illustrative"
@@ -484,12 +484,12 @@
    "name": "Net support index (−100..+100)",
    "value": {
     "by_category": {
-     "Housing & Affordability Policy": 39,
-     "Public Safety & Emergency Response": 54,
+     "Housing & Affordability Policy": 40,
+     "Public Safety & Emergency Response": 41,
      "Streets & Infrastructure": 65,
-     "Environment & Development Review": -79,
-     "Code Enforcement & Permitting": 54,
-     "Governance & Civic Rights": 73,
+     "Environment & Development Review": -65,
+     "Code Enforcement & Permitting": 51,
+     "Governance & Civic Rights": 62,
      "Sanitation & Environmental Quality": 91,
      "Other / General": 88
     },
@@ -545,58 +545,58 @@
       "title": "Options for Expanding Alternative Response and Co-Response Programs to"
      },
      "MOCK-26-901": {
-      "net": -67,
-      "n_unique": 19.0,
+      "net": -71,
+      "n_unique": 23.0,
       "title": "Terra Verde data center: EIR certification and site development permit"
      },
      "MOCK-26-902": {
-      "net": 59,
-      "n_unique": 67.0,
+      "net": 57,
+      "n_unique": 91.0,
       "title": "Streetlight reliability program and maintenance contract (Story/King c"
      },
      "MOCK-26-903": {
       "net": 37,
-      "n_unique": 52.0,
+      "n_unique": 66.0,
       "title": "Pavement maintenance: emergency repair on Alma Avenue and road funding"
      },
      "MOCK-26-904": {
-      "net": 45,
-      "n_unique": 23.0,
+      "net": 42,
+      "n_unique": 31.0,
       "title": "Proactive rental inspection and habitability enforcement"
      },
      "MOCK-26-905": {
-      "net": 8,
-      "n_unique": 38.0,
+      "net": 4,
+      "n_unique": 51.0,
       "title": "Citywide fourplex zoning reform"
      },
      "MOCK-26-906": {
-      "net": 61,
-      "n_unique": 63.0,
+      "net": 53,
+      "n_unique": 92.0,
       "title": "Apartment Rent Ordinance amendment: annual rent-increase cap"
      },
      "MOCK-26-908": {
-      "net": 25,
-      "n_unique": 33.0,
+      "net": 30,
+      "n_unique": 53.0,
       "title": "Permitting modernization and fee schedule"
      },
      "MOCK-26-907": {
-      "net": 88,
-      "n_unique": 35.0,
+      "net": 79,
+      "n_unique": 79.0,
       "title": "Illegal dumping response and Coyote Creek cleanup"
      },
      "MOCK-26-909": {
-      "net": 65,
-      "n_unique": 52.0,
+      "net": 51,
+      "n_unique": 90.0,
       "title": "Public safety budget: patrols, community service officers, cameras"
      },
      "MOCK-GEN": {
-      "net": 98,
-      "n_unique": 123.0,
+      "net": 54,
+      "n_unique": 407.0,
       "title": "General correspondence (no agenda item)"
      },
      "MOCK-26-910": {
       "net": -82,
-      "n_unique": 11.0,
+      "n_unique": 12.0,
       "title": "Rezoning application: Blossom Hill Road retail parcel"
      }
     }
@@ -608,9 +608,9 @@
    "id": "A10",
    "name": "Representation ratio / participation gap",
    "value": {
-    "tracts_over_represented": 88,
-    "tracts_gap_1": 33,
-    "max_ratio": 8.2
+    "tracts_over_represented": 98,
+    "tracts_gap_1": 31,
+    "max_ratio": 4.4
    },
    "formula": "ratio=obs/exp; gap=(exp−obs)/exp",
    "label": "illustrative"
@@ -619,14 +619,14 @@
    "id": "A11",
    "name": "Attention gap by category (pp, 311 share − voice share)",
    "value": {
-    "Housing & Affordability Policy": -16.3,
-    "Public Safety & Emergency Response": -4.9,
-    "Streets & Infrastructure": 2.6,
-    "Environment & Development Review": -4.7,
-    "Code Enforcement & Permitting": -12.2,
-    "Governance & Civic Rights": -14.2,
-    "Sanitation & Environmental Quality": 50.6,
-    "Other / General": -1.0
+    "Housing & Affordability Policy": -15.1,
+    "Public Safety & Emergency Response": -6.9,
+    "Streets & Infrastructure": 9.7,
+    "Environment & Development Review": -7.2,
+    "Code Enforcement & Permitting": -13.1,
+    "Governance & Civic Rights": -12.5,
+    "Sanitation & Environmental Quality": 46.5,
+    "Other / General": -1.4
    },
    "formula": "H5_c − H4_c",
    "label": "mixed: 311 real, voice illustrative"
@@ -635,8 +635,8 @@
    "id": "A12",
    "name": "Voice concentration",
    "value": {
-    "top_10pct_tracts_share": 36.8,
-    "gini_over_215_tracts": 0.469
+    "top_10pct_tracts_share": 30.3,
+    "gini_over_215_tracts": 0.453
    },
    "formula": "share of U(L) from top 10% of tracts; Gini",
    "label": "illustrative"
@@ -646,16 +646,16 @@
    "name": "Corrected weights (low_income)",
    "value": {
     "aif360_reweighing": {
-     "privileged|favorable": 0.68,
-     "privileged|unfavorable": 1.871,
-     "unprivileged|favorable": 1.902,
-     "unprivileged|unfavorable": 0.68
+     "privileged|favorable": 0.802,
+     "privileged|unfavorable": 1.323,
+     "unprivileged|favorable": 1.331,
+     "unprivileged|unfavorable": 0.802
     },
     "population_weight_range": [
-     0.123,
-     21.816
+     0.225,
+     40.105
     ],
-    "population_weight_null_tracts": 33
+    "population_weight_null_tracts": 31
    },
    "formula": "W(g,l)=P(g)P(l)/P(g,l); w_t=(pop share)/(voice share)",
    "label": "illustrative"
@@ -665,20 +665,12 @@
    "name": "Underheard ranking (top 5)",
    "value": [
     {
-     "tract_id": "06085505014",
-     "gap": 1.0,
-     "relevance": 1.0,
-     "score": 1.0,
-     "observed": 0.0,
-     "expected": 2.060362454028964
-    },
-    {
      "tract_id": "06085506304",
      "gap": 1.0,
      "relevance": 1.0,
      "score": 1.0,
      "observed": 0.0,
-     "expected": 1.894337569650588
+     "expected": 3.482394075605521
     },
     {
      "tract_id": "06085505013",
@@ -686,7 +678,7 @@
      "relevance": 1.0,
      "score": 1.0,
      "observed": 0.0,
-     "expected": 1.792877918086025
+     "expected": 3.295879013463453
     },
     {
      "tract_id": "06085504102",
@@ -694,7 +686,7 @@
      "relevance": 1.0,
      "score": 1.0,
      "observed": 0.0,
-     "expected": 1.6771057764888433
+     "expected": 3.0830530491383334
     },
     {
      "tract_id": "06085506305",
@@ -702,7 +694,15 @@
      "relevance": 1.0,
      "score": 1.0,
      "observed": 0.0,
-     "expected": 1.665019673794632
+     "expected": 3.060834953961535
+    },
+    {
+     "tract_id": "06085505015",
+     "gap": 1.0,
+     "relevance": 1.0,
+     "score": 1.0,
+     "observed": 0.0,
+     "expected": 3.022245630759728
     }
    ],
    "formula": "gap × relevance",
@@ -740,17 +740,17 @@
      },
      {
       "rank": 6,
-      "category": "Governance & Civic Rights",
+      "category": "Other / General",
       "rank_change": 0
      },
      {
       "rank": 7,
-      "category": "Environment & Development Review",
+      "category": "Governance & Civic Rights",
       "rank_change": 0
      },
      {
       "rank": 8,
-      "category": "Other / General",
+      "category": "Environment & Development Review",
       "rank_change": 0
      }
     ],
@@ -772,28 +772,28 @@
      },
      {
       "rank": 4,
-      "category": "Governance & Civic Rights",
-      "rank_change": 2
+      "category": "Public Safety & Emergency Response",
+      "rank_change": 0
      },
      {
       "rank": 5,
-      "category": "Public Safety & Emergency Response",
-      "rank_change": -1
+      "category": "Sanitation & Environmental Quality",
+      "rank_change": 0
      },
      {
       "rank": 6,
-      "category": "Sanitation & Environmental Quality",
-      "rank_change": -1
+      "category": "Governance & Civic Rights",
+      "rank_change": 1
      },
      {
       "rank": 7,
       "category": "Other / General",
-      "rank_change": 1
+      "rank_change": -1
      },
      {
       "rank": 8,
       "category": "Environment & Development Review",
-      "rank_change": -1
+      "rank_change": 0
      }
     ],
     "population_reweighted": [
@@ -804,38 +804,38 @@
      },
      {
       "rank": 2,
-      "category": "Housing & Affordability Policy",
-      "rank_change": 0
+      "category": "Code Enforcement & Permitting",
+      "rank_change": 1
      },
      {
       "rank": 3,
-      "category": "Code Enforcement & Permitting",
-      "rank_change": 0
+      "category": "Housing & Affordability Policy",
+      "rank_change": -1
      },
      {
       "rank": 4,
-      "category": "Public Safety & Emergency Response",
-      "rank_change": 0
+      "category": "Sanitation & Environmental Quality",
+      "rank_change": 1
      },
      {
       "rank": 5,
-      "category": "Sanitation & Environmental Quality",
-      "rank_change": 0
+      "category": "Public Safety & Emergency Response",
+      "rank_change": -1
      },
      {
       "rank": 6,
-      "category": "Governance & Civic Rights",
+      "category": "Other / General",
       "rank_change": 0
      },
      {
       "rank": 7,
-      "category": "Other / General",
-      "rank_change": 1
+      "category": "Governance & Civic Rights",
+      "rank_change": 0
      },
      {
       "rank": 8,
       "category": "Environment & Development Review",
-      "rank_change": -1
+      "rank_change": 0
      }
     ]
    },
@@ -908,8 +908,8 @@
    "name": "Comment timing (days before meeting)",
    "value": {
     "email": {
-     "median_days": 34.0,
-     "within_2_days_pct": 0.9
+     "median_days": 83,
+     "within_2_days_pct": 1.0
     },
     "letter": {
      "median_days": 22,
@@ -927,7 +927,7 @@
     "summary": {
      "attribute": "low_income",
      "city_median_rate_per_1k": {
-      "voice": 0.2652519893899204,
+      "voice": 0.5496015388843088,
       "problems": 150.60544904137234
      },
      "counts": {
@@ -937,10 +937,10 @@
        "unprivileged": 19
       },
       "voice": {
-       "count": 48.0,
-       "count_raw": 54.0,
+       "count": 64.0,
+       "count_raw": 70.0,
        "by_channel": {
-        "email": 48.0
+        "email": 64.0
        }
       },
       "requests_311": {
@@ -951,14 +951,16 @@
      "voice": {
       "family": "voice",
       "outcome": "comment participation above median",
-      "count": 48.0,
+      "count": 64.0,
       "category_shares": {
-       "infrastructure_streets": 0.5097345132743362,
-       "code_enforcement_habitability": 0.21238938053097345,
-       "housing_affordability_policy": 0.12920353982300886,
-       "sanitation_environment_quality": 0.08495575221238938,
-       "other": 0.04247787610619469,
-       "environment_development_review": 0.021238938053097345
+       "infrastructure_streets": 0.44385733157199464,
+       "code_enforcement_habitability": 0.190224570673712,
+       "housing_affordability_policy": 0.11228533685601057,
+       "sanitation_environment_quality": 0.095112285336856,
+       "other": 0.047556142668428,
+       "environment_development_review": 0.047556142668428,
+       "public_safety_emergency_response": 0.031704095112285335,
+       "governance_civic_rights": 0.031704095112285335
       },
       "unweighted": {
        "attribute": "low_income",
@@ -972,20 +974,20 @@
        },
        "unprivileged": {
         "n": 19,
-        "favorable": 5,
+        "favorable": 8,
         "weight": 19.0,
-        "weight_favorable": 5.0,
-        "base_rate": 0.2631578947368421
+        "weight_favorable": 8.0,
+        "base_rate": 0.42105263157894735
        },
-       "di": 0.39473684210526316,
-       "spd": -0.40350877192982454,
+       "di": 0.631578947368421,
+       "spd": -0.24561403508771928,
        "aif360": {
-        "di": 0.39473684210526316,
-        "spd": -0.40350877192982454
+        "di": 0.631578947368421,
+        "spd": -0.24561403508771928
        },
        "pandas": {
-        "di": 0.39473684210526316,
-        "spd": -0.40350877192982454
+        "di": 0.631578947368421,
+        "spd": -0.24561403508771928
        },
        "crosscheck_tolerance": 1e-09
       },
@@ -1001,20 +1003,20 @@
        },
        "unprivileged": {
         "n": 19,
-        "favorable": 5,
+        "favorable": 8,
         "weight": 80563.0,
-        "weight_favorable": 19458.0,
-        "base_rate": 0.24152526594094062
+        "weight_favorable": 36576.0,
+        "base_rate": 0.4540049402331095
        },
-       "di": 0.3509931545974566,
-       "spd": -0.4465943249323875,
+       "di": 0.6597762165976243,
+       "spd": -0.23411465064021858,
        "aif360": {
-        "di": 0.3509931545974566,
-        "spd": -0.4465943249323875
+        "di": 0.6597762165976243,
+        "spd": -0.23411465064021858
        },
        "pandas": {
-        "di": 0.3509931545974566,
-        "spd": -0.4465943249323875
+        "di": 0.6597762165976243,
+        "spd": -0.23411465064021858
        },
        "crosscheck_tolerance": 1e-09
       }
@@ -1098,8 +1100,8 @@
    "id": "Q1",
    "name": "Labeling engine share (%)",
    "value": {
-    "bob": 53.0,
-    "build-agent": 47.0
+    "bob": 33.5,
+    "build-agent": 66.5
    },
    "formula": "100·|engine=k|/|V|",
    "label": "real"
@@ -1109,8 +1111,8 @@
    "name": "Low-confidence share (%)",
    "value": {
     "below_0.6": 0.0,
-    "below_0.8": 0.7,
-    "mean_confidence": 0.921
+    "below_0.8": 0.5,
+    "mean_confidence": 0.9
    },
    "formula": "100·|conf<0.6|/|V|",
    "label": "real"
@@ -1119,7 +1121,7 @@
    "id": "Q3",
    "name": "Inherited and aligned labels",
    "value": {
-    "inherited_pct": 23.8,
+    "inherited_pct": 15.0,
     "inherited": 195,
     "aligned": 102
    },
@@ -1131,20 +1133,20 @@
    "name": "Location quality mix (% of located)",
    "value": {
     "source": {
-     "intersection": 43.8,
-     "body": 20.1,
-     "signature": 18.4,
-     "street_anchor": 13.6,
-     "landmark": 2.4,
-     "field": 1.5,
-     "subject": 0.2
+     "intersection": 56.1,
+     "body": 18.4,
+     "signature": 14.2,
+     "street_anchor": 8.6,
+     "landmark": 1.5,
+     "field": 0.9,
+     "subject": 0.3
     },
     "basis": {
-     "residence": 78.7,
-     "issue": 18.4,
-     "both": 2.9
+     "residence": 86.7,
+     "issue": 11.4,
+     "both": 1.9
     },
-    "multi_tract": 37.8
+    "multi_tract": 30.9
    },
    "formula": "shares among L",
    "label": "illustrative"
@@ -1160,8 +1162,8 @@
    "id": "Q6",
    "name": "Simulated share (%)",
    "value": {
-    "rows": 67.0,
-    "unique_voices": 83.1
+    "rows": 79.1,
+    "unique_voices": 90.5
    },
    "formula": "100·|mock|/|V|",
    "label": "real"
@@ -1182,7 +1184,7 @@
    "name": "Bob cost",
    "value": {
     "total_usd": 8.99,
-    "per_comment_usd": 0.011,
+    "per_comment_usd": 0.0069,
     "runs": 19
    },
    "formula": "Σ session_costs / |V|",

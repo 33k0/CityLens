@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "note": "One record per pipeline step, latest run. Bob run history: data/bob_runs.json.",
-  "updated_at": "2026-10-24T04:20:42+00:00",
+  "updated_at": "2026-10-24T04:34:55+00:00",
   "records": [
     {
       "step": "bob_categorize",
@@ -88,16 +88,16 @@
       "engine": "bob",
       "model": "IBM Bob Shell",
       "reason": "per-comment labels by IBM Bob in batches; Granite/rules only for rows Bob could not label validly",
-      "started_at": "2026-10-24T04:20:40+00:00",
-      "finished_at": "2026-10-24T04:20:42+00:00",
-      "wall_seconds": 1.0,
+      "started_at": "2026-10-24T04:34:54+00:00",
+      "finished_at": "2026-10-24T04:34:55+00:00",
+      "wall_seconds": 1.2,
       "counts": {
-        "rows": 820,
-        "units_labeled": 617,
+        "rows": 1299,
+        "units_labeled": 1096,
         "inherited": 195,
         "by_engine": {
           "bob": 435,
-          "build-agent": 385
+          "build-agent": 864
         },
         "bob_spent_total_usd": 8.9935
       },

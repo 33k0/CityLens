@@ -420,3 +420,35 @@ details.mapkey .kr .ramp{margin-bottom:3px}
 details.mapkey .kr .ramp div{height:7px}
 .anside .kv{display:grid;grid-template-columns:1fr 1fr;gap:14px 12px}
 .anside .stat b{font-size:18px}
+
+/* analytics v2 */
+.topsum{font-size:12.5px;color:var(--ink2);white-space:nowrap}.topsum b{color:var(--ink);font-weight:600}.topsum span{color:var(--ink2)}
+.anside{gap:14px}.anside h1{font-size:22px}
+.facts{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.fact{display:grid;grid-template-columns:1fr auto;gap:0 10px;padding:9px 0;border-bottom:1px solid #EEEEEA;font-size:12.5px;align-items:baseline}
+.fact span{color:var(--ink2)}.fact b{font-size:17px;font-weight:600;font-variant-numeric:tabular-nums}
+.fact em{grid-column:1/-1;font-style:normal;font-size:11.5px;color:var(--ink2);margin-top:1px}
+.card .lead{font-size:15px;line-height:1.45;margin:0 0 14px}.card .lead b{font-weight:600}
+.stats4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:4px 0 6px}
+.card:not(.span2) .stats4{grid-template-columns:repeat(2,minmax(0,1fr))}
+.stats4 .stat b{font-size:20px}.stats4 .stat .sub{font-size:11px;color:var(--ink2);line-height:1.3}
+.note{font-size:11.5px;color:var(--ink2);margin-top:10px;line-height:1.45}
+.cmpbars{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.cmpbars>div{display:grid;grid-template-columns:230px minmax(0,1fr) 60px;gap:10px;align-items:center;font-size:12.5px}.cmpbars b{text-align:right;font-variant-numeric:tabular-nums}
+.srow2{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) 140px 150px;gap:12px;align-items:center;padding:8px 0;border-bottom:1px solid #F0F0EC;font-size:12.5px}
+.srow2.head{font-size:11px;color:var(--ink2);padding-top:0}.srow2 .subs{font-size:11px;color:var(--ink2);margin-top:2px}
+.srow2 .sbars{display:flex;flex-direction:column;gap:3px}.srow2 .snum{font-variant-numeric:tabular-nums}.srow2 .snum em,.srow2 .sst em{display:block;font-style:normal;font-size:11px;color:var(--ink2)}
+.mini-st{display:flex;height:8px;gap:1px}.mini-st i{display:block;height:100%}
+.mixrow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) 90px 44px;gap:10px;align-items:center;font-size:12.5px;padding:4px 0}.mixrow b{text-align:right;font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mixrow em{font-style:normal;color:var(--ink2);text-align:right;font-size:11.5px}
+.lang{margin-top:12px}.lang .lh,.lang .lr{display:grid;grid-template-columns:140px minmax(0,1fr) 50px;gap:10px;align-items:center;font-size:12px;padding:3px 0}.lang .lh{font-size:11px;color:var(--ink2)}.lang .lr>div{display:flex;flex-direction:column;gap:2px}.lang .lr>span:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.sw{display:inline-block;width:10px;height:8px;margin-right:4px}
+.tbars{display:flex;align-items:flex-end;gap:4px;height:120px}.tbars>div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;height:100%}.tbars i{display:block}.tbars span{font-size:10px;color:var(--ink2);text-align:center;margin-top:2px}
+/* pop card v2 */
+.prow b{font-size:17px}
+.pfoot{padding:8px 14px 2px;font-size:12px;line-height:1.5;color:var(--ink);border-top:1px solid #EEEEEA}.pfoot b{font-weight:600}
+
+/* area facts live in the main panel; the side column is just the map and name */
+.card .facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 24px;border-top:0}
+.card .fact{grid-template-columns:1fr auto}
+.an{grid-template-columns:240px minmax(0,1fr)}
+.anside .mini{height:180px}

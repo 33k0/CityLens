@@ -519,3 +519,16 @@ Dates are absolute. Newest at the bottom of each section.
   (distinct writers, comments per writer, form-letter share, actionable, organizations), 311, AI confidence.
 - **Map key**: the legend has a "Map key · all colors" section explaining Voice, Problems and Underheard together.
   The pop card shows residents (and households for a tract) first.
+
+### Analytics and pop card, round 3 (2026-10-23)
+
+- Analytics are organized as questions with a one-sentence answer first: About this area (residents, households,
+  English-only and limited-English households, renters, median income level, Equity Priority status) → Is this area
+  being heard? → What do people write about? (sections with top subsections, here vs city, support/oppose for policy
+  sections only) → What do people report to 311? → Who is writing? (writers, comments per writer, form letters,
+  organizations, simulated share, languages vs households) → citywide only: When did comments arrive? and Is each
+  issue local or citywide? → How much should you trust these numbers? → Who are we not hearing from? (with the full
+  tract table collapsed). The side column holds only the mini map and the name; all facts moved into the main panel.
+- The map pop card leads with residents, English-only households, renters and median income (each with the citywide
+  value), followed by one small line each for comments vs expected, the top issue and 311 reports.
+- The top-bar section picker was briefly replaced by a summary line and then restored at the user's request.

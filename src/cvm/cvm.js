@@ -372,133 +372,113 @@ async function mount(root,init){
  <details class="sec bx"><summary><h4>Outreach brief</h4><button class="btn" data-act="copy">Copy brief</button></summary><p style="margin:10px 0 0;line-height:1.6;text-wrap:pretty">${briefFor(t,D.comments)}</p></details>`}
  function regionBrief(tr,cs,silent){const pop=tr.reduce((s,t)=>s+t.pop,0);const ren=tr.reduce((s,t)=>s+t.renter*t.pop,0)/pop;const lep=tr.reduce((s,t)=>s+t.lep*t.pop,0)/pop;const tot=catTotals(cs,'raw').sort((a,b)=>b.tot-a.tot)[0];const ex=cs.find(c=>c.cat===tot.k);const sp=silent.reduce((s,t)=>s+t.pop,0);
  return `This area has ${H.src(fmt(pop)+' residents across '+tr.length+' tracts','ACS 5-year B01003 · total population')}, ${H.src(pct(ren)+' in renter households','ACS 5-year B25003')} and ${H.src(pct(lep)+' in limited-English households','ACS 5-year C16002')}. ${H.src(silent.length+' tracts with '+fmt(sp)+' residents','Pipeline · tracts with 0 comments or gap below −55%')} sent few or no comments. Among comments that were received, the most frequent topic is ${H.src(tot.n.toLowerCase(),'Comment '+(ex?ex.id:'')+' and '+(tot.count-1)+' others')}. A translated mailer and a session at a school in the area would reach the tracts listed above.`}
- /* ---------- analytics: area info first, then the picked metrics (docs/METRICS.md) ---------- */
- function analyticsView(){
-  const C=D.cfg;const kind=S.tractDetail?'tract':(S.region&&S.region.poly==='city')?'city':'region';
-  const reg=S.tractDetail?{name:D.byTract[S.tractDetail].nbhd,sub:'Tract '+S.tractDetail,poly:{tract:S.tractDetail}}:S.region;
-  const tr=regionTracts(reg.poly);const ids=new Set(tr.map(t=>t.id));
-  const scope=kind==='city'?D.itemAll:D.itemAll.filter(c=>c.tract&&ids.has(c.tract));const located=scope.filter(c=>c.t);
-  const pop=tr.reduce((s,t)=>s+t.pop,0)||1,hh=tr.reduce((s,t)=>s+(t.households||0),0)||1;
-  const wavg=(L,f,w)=>{let a=0,b=0;L.forEach(t=>{const v=f(t);if(v!=null&&!isNaN(v)){a+=v*w(t);b+=w(t)}});return b?a/b:null};
-  const byPop=t=>t.pop,byHH=t=>t.households||0;const CT=D.tracts;
-  const P=(x,d=0)=>x==null?'—':(x*100).toFixed(d)+'%';const pp=x=>(x>0?'+':'')+(x*100).toFixed(1)+' pts';
-  const cmp=(here,city,f=P)=>kind==='city'?'':`<span class="small muted">city ${f(city)}</span>`;
-  const info=(v,l,sub)=>`<div class="stat"><b>${v}</b><span>${l}</span>${sub?`<span class="small muted" style="font-size:11px">${sub}</span>`:''}</div>`;
-  /* --- general area info --- */
-  const inc=kind==='tract'?tr[0].income:wavg(tr,t=>t.income,byPop);const incR=inc/D.medInc-1;
-  const incWord=incR>=0.1?'High':incR<=-0.1?'Low':'Average';
-  const eng=wavg(tr,t=>t.lang&&t.lang.english_only,byHH),engC=wavg(CT,t=>t.lang&&t.lang.english_only,byHH);
-  const lep=wavg(tr,t=>t.lep,byHH),lepC=wavg(CT,t=>t.lep,byHH);
-  const ren=wavg(tr,t=>t.renter,byPop),renC=wavg(CT,t=>t.renter,byPop);
-  const nw=wavg(tr,t=>t.nonwhite,byPop),nwC=wavg(CT,t=>t.nonwhite,byPop);
-  const isEPC=t=>['High','Higher','Highest'].includes(t.epc);const epcT=tr.filter(isEPC),epcPop=epcT.reduce((s,t)=>s+t.pop,0);
-  const p311=tr.reduce((s,t)=>s+t.p311,0);const p311rate=p311/pop*1000*12/D.m311;const p311C=CT.reduce((s,t)=>s+t.p311,0)/D.totPop*1000*12/D.m311;
-  const dists=[...new Set(tr.map(t=>t.district).filter(Boolean))].sort((a,b)=>a-b);
-  const areaCard=`<div class="kv">
-   ${info(fmt(pop),'residents',kind==='city'?'ACS 5-year '+D.acsYears:`${(pop/D.totPop*100).toFixed(1)}% of the city`)}
-   ${kind!=='tract'?info(fmt(tr.length),'census tracts',''):''}
-   ${info(fmt(Math.round(hh)),'households','')}
-   ${info(fmt(scope.length),'comments',`${ITEM.title}${kind==='city'?` · ${fmt(D.itemAll.filter(c=>c.mock).length)} simulated`:''}`)}
-   ${ITEM.n311?info(fmt(p311),'311 problem reports',`${p311rate.toFixed(0)} per 1,000 / yr${kind==='city'?'':' · city '+p311C.toFixed(0)}`):info('—','311 problem reports','none for this section')}
-   ${info(incWord,'median income',`${Math.abs(incR*100).toFixed(0)}% ${incR>=0?'above':'below'} the city tract median ($${fmt(Math.round(D.medInc))})${kind==='tract'?'':' · population-weighted'}`)}
-   ${info(P(eng),'English-only households',kind==='city'?'':'city '+P(engC))}
-   ${info(P(lep),'limited-English households',kind==='city'?'':'city '+P(lepC))}
-   ${info(P(ren),'renter households',kind==='city'?'':'city '+P(renC))}
-   ${info(P(nw),'residents not non-Hispanic white',kind==='city'?'':'city '+P(nwC))}
-   ${kind==='tract'?info(isEPC(tr[0])?tr[0].epc:'No','Equity Priority Community','MTC 2024'):info(`${epcT.length} of ${tr.length}`,'Equity Priority tracts',`${(epcPop/pop*100).toFixed(0)}% of residents · MTC 2024`)}
-   ${dists.length?info(dists.length>3?dists.length+' districts':'D'+dists.join(', D'),'council district',''):''}
-  </div>`;
-  /* --- shared pieces --- */
-  const small=n=>n<C.small_n?` <span class="nodata" title="Fewer than ${C.small_n} comments: read as a hint, not a measure"><i></i>small sample (${n})</span>`:'';
-  const bar=(w,col)=>`<i style="display:block;height:8px;width:${Math.max(1,Math.min(100,w))}%;background:${col}"></i>`;
-  const secOf=c=>c.catKey;const secLabel=k=>(ITEMS[k]||{}).title||k;
-  const share=(L,f)=>{const o={};L.forEach(c=>{const k=f(c);o[k]=(o[k]||0)+1});return o};
-  const sectionRows=(L,ref)=>{const here=share(L,secOf),city=share(ref,secOf);const ks=[...new Set([...Object.keys(here),...Object.keys(city)])];
-   return ks.map(k=>({k,n:here[k]||0,s:(here[k]||0)/Math.max(1,L.length),c:(city[k]||0)/Math.max(1,ref.length)})).sort((a,b)=>b.n-a.n||b.c-a.c)};
-  const subRows=L=>{const o={};L.forEach(c=>{const k=c.catKey+'|'+c.subKey;o[k]=(o[k]||0)+1});return Object.entries(o).map(([k,n])=>{const [ck,sk]=k.split('|');const cd=D.catDefs.find(x=>x.key===ck);return {ck,sk,n,l:(cd&&cd.subcategories.find(s=>s.key===sk)||{}).label||sk}}).sort((a,b)=>b.n-a.n)};
-  const conf=L=>{const v=L.map(c=>c.conf).filter(x=>x!=null);return {mean:v.length?v.reduce((a,b)=>a+b,0)/v.length:null,low:v.length?v.filter(x=>x<C.low_confidence).length/v.length:null,ai:L.filter(c=>c.engine==='bob').length,n:L.length,inh:L.filter(c=>c.inherited).length}};
-  const card=(title,body,span)=>`<section class="card${span?' span2':''}"><h4>${title}</h4>${body}</section>`;
-  const mix311=()=>{const o={};const keys=Object.keys(D.p311).filter(k=>k!=='all');keys.forEach(k=>{o[k]=tr.reduce((s,t)=>s+((D.p311[k]||{})[t.id]||0),0)});const tot=Object.values(o).reduce((a,b)=>a+b,0)||1;
-   return Object.entries(o).filter(x=>x[1]>0).sort((a,b)=>b[1]-a[1]).map(([k,n])=>`<div class="xrow" style="grid-template-columns:220px minmax(0,1fr) 120px"><span>${esc(D.p311Labels[k]||k)}</span><div class="xbars">${bar(n/tot*100,'#22877C')}</div><span class="num">${fmt(n)} · ${P(n/tot)}</span></div>`).join('')};
-  const c311=card('311 problem reports',`<p class="lead">${p311rate.toFixed(0)} problem reports per 1,000 residents per year${kind==='city'?'':` <span class="small muted">· city ${p311C.toFixed(0)}</span>`}</p><div class="small muted" style="margin:-6px 0 8px">All 311 problem types in this area (billing and account requests excluded). 311 is a separate family: never added to comment counts.</div>${mix311()}`);
-  const cf=conf(scope);const act=scope.filter(c=>c.actionable!=null),actY=act.filter(c=>c.actionable).length;
-  const cAI=card('How sure the AI labels are',`<div class="stats" style="grid-template-columns:repeat(3,1fr)">${stat(cf.mean==null?'—':(cf.mean*100).toFixed(0)+'%','average label confidence')}${stat(P(cf.low),'below '+(C.low_confidence*100)+'% confidence')}${stat(P(cf.n?cf.ai/cf.n:null),'labeled by the AI assistant')}</div><div class="small muted" style="margin-top:8px">Every section and stance label cites an exact quote from its comment (open any comment to see it highlighted). ${cf.inh?`${fmt(cf.inh)} form-letter copies reuse the label of their original after the quote was re-checked in each copy. `:''}Labels are not yet audited against human review.</div>`);
-  const cAct=`${stat(act.length?P(actY/act.length):'—','actionable')}`;
-  let main='';
-  if(kind==='city'){
-   const raw=ITEM.id==='all'?D.rawRows:null;const unk=scope.filter(c=>!c.t).length;
-   const sim=scope.filter(c=>c.mock).length;
-   main+=card('Public input',`<div class="stats" style="grid-template-columns:repeat(4,1fr)">${stat(fmt(scope.length),'comments (no copies)')}${raw!=null?stat(fmt(raw),'submissions incl. copies'):stat(fmt(located.length),'on the map')}${stat(P(unk/Math.max(1,scope.length)),'location unknown')}${cAct}</div><div class="small muted" style="margin-top:8px">${fmt(sim)} of ${fmt(scope.length)} comments are simulated emails; numbers that include them are illustrative. Actionable = reports a specific problem or asks for a specific city action, not just a vote position.</div>`,1);
-   /* comments per section, with subsections */
-   const secs=sectionRows(scope,scope);const subs=subRows(scope);const mx=Math.max(1,...secs.map(r=>r.n));
-   main+=card(ITEM.id==='all'?'Comments by section and subsection':'Comments by subsection',ITEM.id==='all'?secs.map(r=>`<div class="xrow" style="grid-template-columns:230px minmax(0,1fr) 110px"><span><a class="link" data-act="pickitem" data-id="${r.k}" style="font-size:12.5px">${esc(secLabel(r.k))}</a></span><div class="xbars">${bar(r.n/mx*100,'#7357B4')}</div><span class="num">${fmt(r.n)} · ${P(r.s)}</span></div><div class="small muted" style="margin:-3px 0 6px 0">${subs.filter(s=>s.ck===r.k).slice(0,3).map(s=>`${esc(s.l)} ${s.n}`).join(' · ')}</div>`).join(''):subs.map(s=>`<div class="xrow" style="grid-template-columns:260px minmax(0,1fr) 110px"><span>${esc(s.l)}</span><div class="xbars">${bar(s.n/Math.max(1,subs[0].n)*100,'#7357B4')}</div><span class="num">${s.n} · ${P(s.n/scope.length)}</span></div>`).join(''),1);
-   /* stance, policy sections only */
-   const pol=C.policy_sections.filter(k=>scope.some(c=>c.catKey===k));
-   main+=card('Support and opposition · policy sections',pol.length?pol.map(k=>{const L=scope.filter(c=>c.catKey===k);const n=L.length;const st=s=>L.filter(c=>c.stance===s).length;const S_=st('support'),O=st('oppose');const net=S_+O?Math.round((S_-O)/(S_+O)*100):null;
-    return `<div style="margin-bottom:10px"><div class="bl" style="display:flex;justify-content:space-between;font-size:12.5px"><span>${esc(secLabel(k))}</span><span class="num muted">${n} · net ${net==null?'—':sgn(net)}</span></div><div class="sbar" style="display:flex;height:9px;gap:1px">${STANCES.map(s=>`<i title="${stLabel[s]} ${st(s)}" style="flex:0 0 ${st(s)/n*100}%;background:${COL[s]}"></i>`).join('')}</div></div>`}).join('')+`<div class="stkey" style="border:0;padding-top:0">${STANCES.map(s=>`<span>${stIco(s,9)}${stLabel[s]}</span>`).join('')}</div><div class="small muted">Net = (support − oppose) ÷ (support + oppose). Service sections (streets, sanitation, other) are about problems, so no stance is shown for them.</div>`:'<div class="small muted">No policy section in view. Stance is shown only for policy sections.</div>');
-   /* volume over time */
-   const months={};scope.forEach(c=>{if(!c.when)return;const m=c.when.toISOString().slice(0,7);(months[m]=months[m]||{L:0,E:0})[c.src==='Letter'?'L':'E']++});const mk=Object.keys(months).sort();const mm=Math.max(1,...mk.map(m=>months[m].L+months[m].E));
-   const trend=mk.length>1?(()=>{const a=months[mk[mk.length-1]],b=months[mk[mk.length-2]];const x=a.L+a.E,y=b.L+b.E;return y?Math.round((x-y)/y*100):null})():null;
-   main+=card('Comment volume over time',`<div style="display:flex;align-items:flex-end;gap:4px;height:110px">${mk.map(m=>{const v=months[m];return `<div title="${m}: ${v.L} letters, ${v.E} emails" style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;height:100%"><i style="display:block;height:${v.E/mm*100}%;background:#E8957D"></i><i style="display:block;height:${v.L/mm*100}%;background:#8E2A1C"></i><span style="font-size:10px;color:var(--ink2);text-align:center">${m.slice(2)}</span></div>`}).join('')}</div><div class="stkey" style="border:0"><span><i class="sw" style="background:#8E2A1C;width:10px;height:8px;display:inline-block"></i>letters (real)</span><span><i class="sw" style="background:#E8957D;width:10px;height:8px;display:inline-block"></i>emails (simulated)</span>${trend!=null?`<span>last month ${sgn(trend)}% vs the month before</span>`:''}</div><div class="small muted">Real letters cover Jan–Feb 2025 (the PDFs ingested so far); simulated emails cover Aug–Oct 2026. Gaps are missing data, not quiet months.</div>`);
-   /* representation */
-   const locN=located.length||1;const ratio=t=>{const n=located.filter(c=>c.tract===t.id).length;return (n/locN)/(t.pop/D.totPop)};
-   const under=CT.filter(t=>ratio(t)<C.underrepresented_ratio);const uPop=under.reduce((s,t)=>s+t.pop,0);
-   const epcC=located.filter(c=>isEPC(c.t)).length/locN,epcP=CT.filter(isEPC).reduce((s,t)=>s+t.pop,0)/D.totPop;
-   main+=card('Who is represented',`<div class="stats" style="grid-template-columns:repeat(3,1fr)">${stat(P(under.length/CT.length),'tracts under-represented')}${stat(fmt(uPop),'residents in them')}${stat(P(uPop/D.totPop),'of residents')}</div>
-    <div class="small muted" style="margin:6px 0 10px">Under-represented = a tract's share of located comments is below ${C.underrepresented_ratio}× its share of residents (team setting). Based on the ${P(located.length/Math.max(1,scope.length))} of comments that could be located.</div>
-    <div class="stats" style="grid-template-columns:repeat(3,1fr)">${stat(P(epcC),'comments from Equity Priority tracts')}${stat(P(epcP),'residents in those tracts')}${stat((epcC/epcP).toFixed(2),'representation ratio')}</div><div class="small muted" style="margin-top:6px">1.0 = proportional, below 1 = under-represented. Equity Priority Communities: MTC 2024. These compare areas, not people.</div>${small(located.length)}`);
-   /* geographic concentration */
-   const conc=Object.keys(ITEMS).filter(k=>k!=='all').map(k=>{const L=located.filter(c=>c.catKey===k);if(L.length<5)return null;const o=share(L,c=>c.tract);const [tid,n]=Object.entries(o).sort((a,b)=>b[1]-a[1])[0];return {k,tid,n,N:L.length}}).filter(Boolean).sort((a,b)=>b.n/b.N-a.n/a.N);
-   main+=card('Where each section’s comments concentrate',conc.length?conc.map(r=>`<div class="xrow" style="grid-template-columns:220px minmax(0,1fr) 150px"><span>${esc(secLabel(r.k))}</span><div class="xbars">${bar(r.n/r.N*100,'#B3412B')}</div><span class="small"><a class="link" data-act="seltract" data-t="${r.tid}">${esc(D.byTract[r.tid].nbhd)}</a> · ${P(r.n/r.N)}</span></div>`).join('')+'<div class="small muted">Share of a section’s located comments that come from its single busiest tract. High = one neighborhood’s issue, not a citywide one. Sections with fewer than 5 located comments are left out.</div>':'<div class="small muted">Too few located comments to measure.</div>');
-   if(ITEM.n311)main+=c311;
-   main+=cAI;
-  }else{
-   /* per tract / drawn area */
-   const locN=D.comments.length||1;const cs=located;const cShare=cs.length/locN,pShare=pop/D.totPop;const rr=pShare?cShare/pShare:null;
-   main+=card('Comments from here',`<div class="stats" style="grid-template-columns:repeat(4,1fr)">${stat(fmt(cs.length),'comments located here')}${stat(P(cShare,1),'of the city’s located comments')}${stat(P(pShare,1),'of the city’s residents')}${stat(rr==null?'—':rr.toFixed(2),'representation ratio')}</div><div class="small muted" style="margin-top:8px">${rr==null?'':rr>=1?`Sends ${rr.toFixed(1)}× its population share of comments.`:rr<C.underrepresented_ratio?`Under-represented: below ${C.underrepresented_ratio}× its population share (team setting).`:'Below its population share.'} Only the ${ITEM.pct}% of comments that could be located count; silence can also mean a writer didn't say where they live.${small(cs.length)}</div>`,1);
-   const secs=sectionRows(cs,D.comments);
-   main+=card('What people here wrote about',cs.length?`<div class="xrow xh" style="grid-template-columns:220px minmax(0,1fr) 110px 70px"><span></span><span><i class="sw" style="background:#B3412B"></i>here <i class="sw" style="background:#B6B0A5;margin-left:8px"></i>citywide</span><span>share</span><span>gap</span></div>${secs.filter(r=>r.n||r.c>0.04).map(r=>`<div class="xrow" style="grid-template-columns:220px minmax(0,1fr) 110px 70px"><span>${esc(secLabel(r.k))}</span><div class="xbars">${bar(r.s*100,'#B3412B')}${bar(r.c*100,'#B6B0A5')}</div><span class="num">${P(r.s)} vs ${P(r.c)}</span><span class="num" style="color:${r.s-r.c>0.1?'#8E2A1C':'var(--ink2)'}">${pp(r.s-r.c)}</span></div>`).join('')}<div class="small muted">Gap = share here minus share citywide, in percentage points.${small(cs.length)}</div>`:'<div class="small muted">No comments located here — unknown, not absent.</div>',1);
-   /* languages */
-   const L5=['english_only','spanish','asian_pacific','other_indo_european','other'];const LN={english_only:'English only',spanish:'Spanish',asian_pacific:'Asian & Pacific Island',other_indo_european:'Other Indo-European',other:'Other'};
-   const hhS=k=>wavg(tr,t=>t.lang&&t.lang[k],byHH);const cl={english_only:cs.filter(c=>c.langCode==='en').length,spanish:cs.filter(c=>c.langCode==='es').length,asian_pacific:cs.filter(c=>c.langCode==='vi').length};
-   main+=card('Languages',`<div class="xrow xh" style="grid-template-columns:170px minmax(0,1fr) 140px 80px"><span></span><span><i class="sw" style="background:#5C5C58"></i>households <i class="sw" style="background:#B3412B;margin-left:8px"></i>comments</span><span>share</span><span>ratio</span></div>${L5.map(k=>{const h=hhS(k)||0;const c=cs.length&&cl[k]!=null?cl[k]/cs.length:null;const r=c!=null&&h>0?c/h:null;return `<div class="xrow" style="grid-template-columns:170px minmax(0,1fr) 140px 80px"><span>${LN[k]}</span><div class="xbars">${bar(h*100,'#5C5C58')}${c!=null?bar(c*100,'#B3412B'):''}</div><span class="num">${P(h)}${c!=null?' · '+P(c):''}</span><span class="num">${r==null?'—':r.toFixed(2)}</span></div>`}).join('')}<div class="small muted">Households by language spoken at home (ACS C16002) vs the language comments were written in. Ratio = comment share ÷ household share. Vietnamese is counted under Asian &amp; Pacific Island. Compares languages, not people.${small(cs.length)}</div>`);
-   /* participation, actionable, 311, AI */
-   const parts=new Set(cs.map(c=>c.participant||c.id)).size;const camp=cs.filter(c=>c.camp).length;
-   main+=card('Who is writing',`<div class="stats" style="grid-template-columns:repeat(3,1fr)">${stat(fmt(parts),'distinct writers')}${stat(parts?(cs.length/parts).toFixed(2):'—','comments per writer')}${stat(P(cs.length?camp/cs.length:null),'form-letter copies')}</div><div class="stats" style="grid-template-columns:repeat(3,1fr);margin-top:10px">${cAct}${stat(fmt(cs.filter(c=>c.commenter==='organization').length),'from organizations')}${stat(fmt(cs.filter(c=>c.mock).length),'simulated')}</div><div class="small muted" style="margin-top:8px">Writers are matched by an anonymous code; names and emails were removed at ingest. Actionable = reports a specific problem or asks for a specific city action.</div>`);
-   if(ITEM.n311)main+=c311;
-   main+=cAI;
-  }
-  if(kind!=='tract'){
-   const mode=t=>{const o={};D.comments.forEach(c=>{if(c.tract===t.id)o[c.cat]=(o[c.cat]||0)+1});const e=Object.entries(o).sort((a,b)=>b[1]-a[1])[0];return e?CATN[e[0]]:'—'};
-   main+=card('Missing voices',`<div class="small muted" style="margin:-6px 0 10px">Tracts sending the fewest comments relative to population. No comments located — unknown, not absent.</div>${[...tr].sort((a,b)=>(b.exp-b.n)-(a.exp-a.n)).slice(0,5).map((t,i)=>`<div class="mvl" data-act="seltract" data-t="${t.id}"><span class="rankn">${i+1}</span><div><b style="font-weight:600">${t.nbhd}</b> <span class="tid">${t.id}</span></div><div class="gbar"><div class="b"><i style="width:${Math.min(100,Math.abs(Math.min(0,t.gap)))}%;background:${t.n===0?`repeating-linear-gradient(45deg,${GAP[4]} 0 3px,#7B62B8 3px 4.5px)`:GAPM[gapBin(t)]}"></i></div></div><span class="num small">${t.n} of ${t.exp<1?t.exp.toFixed(1):Math.round(t.exp)}</span><div class="chips">${H.acs(t)}</div></div>`).join('')}`,1);
-   main+=card('Tracts in this area',`<table class="ht tt"><thead><tr><th>Tract</th><th>Residents</th><th>Comments</th><th>Expected</th><th>Gap</th><th>Top issue</th></tr></thead><tbody>${[...tr].sort((a,b)=>a.gap-b.gap).slice(0,14).map(t=>`<tr><td><a class="link" data-act="seltract" data-t="${t.id}" style="font-size:12px">${t.nbhd}</a> <span class="tid">${t.id}</span></td><td>${fmt(t.pop)}</td><td>${t.n}</td><td>${Math.round(t.exp)}</td><td style="color:var(--g4);font-weight:500">${sgn(t.gap)}%</td><td>${mode(t)}</td></tr>`).join('')}</tbody></table>${tr.length>14?`<div class="small muted" style="margin-top:6px">+ ${tr.length-14} more tracts</div>`:''}`,1);
-  }
-  return `<div class="body"><div class="an"><aside class="anside" style="overflow:auto"><div class="mini" data-act="back" title="Back to map"><div class="map" id="mini"></div><span>← Back to map</span></div><div><h1>${esc(reg.name)}</h1><div class="small muted">${reg.sub?reg.sub+' · ':''}${esc(ITEM.title)}</div></div>${areaCard}</aside>
-  <div class="anmain">${main}</div></div></div>`}
+ /* ---------- shared area facts (pop card + analytics) ---------- */
+ function areaFacts(tr){const CT=D.tracts;const wavg=(L,f,w)=>{let a=0,b=0;L.forEach(t=>{const v=f(t);if(v!=null&&!isNaN(v)){a+=v*w(t);b+=w(t)}});return b?a/b:null};
+  const byPop=t=>t.pop,byHH=t=>t.households||0;const pop=tr.reduce((s,t)=>s+t.pop,0)||1;
+  const inc=tr.length===1?tr[0].income:wavg(tr,t=>t.income,byPop);const incR=inc/D.medInc-1;
+  const isEPC=t=>['High','Higher','Highest'].includes(t.epc);const epcT=tr.filter(isEPC);
+  return {pop,hh:tr.reduce((s,t)=>s+(t.households||0),0),inc,incR,incWord:incR>=0.1?'High':incR<=-0.1?'Low':'Average',
+   eng:wavg(tr,t=>t.lang&&t.lang.english_only,byHH),engC:wavg(CT,t=>t.lang&&t.lang.english_only,byHH),
+   lep:wavg(tr,t=>t.lep,byHH),lepC:wavg(CT,t=>t.lep,byHH),ren:wavg(tr,t=>t.renter,byPop),renC:wavg(CT,t=>t.renter,byPop),
+   nw:wavg(tr,t=>t.nonwhite,byPop),nwC:wavg(CT,t=>t.nonwhite,byPop),epcT,epcPop:epcT.reduce((s,t)=>s+t.pop,0),isEPC,
+   dists:[...new Set(tr.map(t=>t.district).filter(Boolean))].sort((a,b)=>a-b),wavg,byHH}}
+ const P0=(x,d=0)=>x==null?'—':(x*100).toFixed(d)+'%';
+ const incLine=f=>`${Math.abs(f.incR*100).toFixed(0)}% ${f.incR>=0?'above':'below'} city median ($${fmt(Math.round(D.medInc))})`;
+ /* ---------- pop card ---------- */
  function popBlock(){
   const isT=!!S.tractDetail;const reg=S.region;const t0=isT?D.byTract[S.tractDetail]:null;const city=!isT&&reg&&reg.poly==='city';
   const tr=isT?[t0]:regionTracts(reg.poly);const ids=new Set(tr.map(t=>t.id));const cs=D.comments.filter(c=>ids.has(c.tract));
-  const pop=tr.reduce((s,t)=>s+t.pop,0)||1,exp=tr.reduce((s,t)=>s+t.exp,0);const gap=exp?Math.round((cs.length-exp)/exp*100):0;
-  const wavg=(L,k)=>L.reduce((s,t)=>s+t[k]*t.pop,0)/Math.max(1,L.reduce((s,t)=>s+t.pop,0));
-  const cR=wavg(D.tracts,'renter'),cL=wavg(D.tracts,'lep'),rR=wavg(tr,'renter'),rL=wavg(tr,'lep');
-  const cnt=L=>{const o={};L.forEach(c=>o[c.cat]=(o[c.cat]||0)+1);return o};const rc=cnt(cs),cc=cnt(D.comments);
-  const topK=Object.entries(rc).sort((a,b)=>b[1]-a[1])[0];const silent=tr.filter(t=>t.n===0);const sPop=silent.reduce((s,t)=>s+t.pop,0);
+  const f=areaFacts(tr);const exp=tr.reduce((s,t)=>s+t.exp,0);
   const row=(v,l,sm)=>`<div class="prow"><b>${v}</b><div><div class="pl">${l}</div>${sm?`<div class="ps">${sm}</div>`:''}</div></div>`;
-  const vs=(a,b)=>`${pct(a)} citywide${a>0&&b/a>=1.25?` · ${(b/a).toFixed(1)}× higher here`:''}`;
   let rows='';
-  rows+=row(fmt(pop),'residents',isT?`${(pop/D.totPop*100).toFixed(2)}% of the city · ${t0.households?fmt(t0.households)+' households':''}`:city?'ACS 5-year '+D.acsYears:`${tr.length} tracts · ${(pop/D.totPop*100).toFixed(1)}% of the city`);
-  if(city){const rk=ranks(D.comments,S.attr);rows+=row(fmt(D.located),'comments on the map',`${ITEM.pct}% of ${fmt(ITEM.total)} received could be located`);
-   rows+=row(CATN[topK[0]],'top issue, raw count',`Population-weighted, the top issue is ${(rk.find(r=>r.pop===1)||{}).n}`);
-   rows+=row(`${silent.length}`,'tracts with no comments',`${fmt(sPop)} residents · unknown, not absent`);}
-  else{
-   rows+=row(`${cs.length}<small> / ${Math.round(exp)}</small>`,'comments / expected',cs.length===0?'No comments located — unknown, not absent':gap<0?`${Math.abs(gap)}% fewer than population share predicts`:`${gap}% more than population share predicts`);
-   if(topK)rows+=row(CATN[topK[0]],'top issue',`${pct(topK[1]/cs.length)} of comments here vs ${pct((cc[topK[0]]||0)/D.comments.length)} citywide`);
-   if(!isT)rows+=row(`${silent.length}<small> / ${tr.length}</small>`,'tracts with no comments',`${fmt(sPop)} residents`);
-   rows+=row(pct(rR),'renter households',vs(cR,rR));
-   rows+=row(pct(rL),'limited-English households',vs(cL,rL));
-   if(isT)rows+=row('',incLabel(t0),'');}
-  const title=isT?t0.nbhd:reg.name;const sub=isT?`Tract ${t0.id} · ${fmt(t0.pop)} residents`:`${tr.length} tracts · ${fmt(pop)} residents`;
-  return `<div class="rmh"><div style="min-width:0">${isT&&reg?`<button class="link" data-act="untract" style="font-size:11.5px">← ${esc(reg.name)}</button>`:''}<div class="pt">${esc(title)}</div><div class="small muted">${sub}</div></div><button class="colbtn" data-act="closemodal" aria-label="Close">×</button></div><div class="prows">${rows}</div><div class="rmf"><button class="btn pri" data-act="analytics" style="width:100%;justify-content:center;height:32px">Open analytics</button></div>`}
+  rows+=row(fmt(f.pop),'residents',city?`${fmt(tr.length)} census tracts`:isT?`${fmt(f.hh)} households · ${(f.pop/D.totPop*100).toFixed(2)}% of the city`:`${tr.length} tracts · ${(f.pop/D.totPop*100).toFixed(1)}% of the city`);
+  rows+=row(P0(f.eng),'English-only households',city?'':`${P0(f.engC)} citywide`);
+  rows+=row(P0(f.ren),'renter households',city?'':`${P0(f.renC)} citywide`);
+  rows+=row(f.incWord,'median income',incLine(f));
+  const cnt={};cs.forEach(c=>cnt[c.cat]=(cnt[c.cat]||0)+1);const top=Object.entries(cnt).sort((a,b)=>b[1]-a[1])[0];
+  const cc={};D.comments.forEach(c=>cc[c.cat]=(cc[c.cat]||0)+1);
+  const gap=exp?Math.round((cs.length-exp)/exp*100):0;
+  const foot=`<div class="pfoot"><div><b>${fmt(cs.length)}</b> comment${cs.length===1?'':'s'} located here${city?'':` · ${exp<1?exp.toFixed(1):Math.round(exp)} expected from population${cs.length?` (${sgn(gap)}%)`:''}`}</div>${top?`<div>Top issue: <b>${esc(CATN[top[0]])}</b> · ${P0(top[1]/cs.length)} here${city?'':` vs ${P0((cc[top[0]]||0)/Math.max(1,D.comments.length))} citywide`}</div>`:cs.length?'':'<div class="muted">No comments located here — unknown, not absent.</div>'}${ITEM.n311?`<div>${fmt(tr.reduce((s,t)=>s+t.p311,0))} 311 problem reports</div>`:''}</div>`;
+  const title=isT?t0.nbhd:reg.name;const sub=isT?`Tract ${t0.id}`:`${tr.length} tracts`;
+  return `<div class="rmh"><div style="min-width:0">${isT&&reg?`<button class="link" data-act="untract" style="font-size:11.5px">← ${esc(reg.name)}</button>`:''}<div class="pt">${esc(title)}</div><div class="small muted">${sub}</div></div><button class="colbtn" data-act="closemodal" aria-label="Close">×</button></div><div class="prows">${rows}</div>${foot}<div class="rmf"><button class="btn pri" data-act="analytics" style="width:100%;justify-content:center;height:32px">Open analytics</button></div>`}
+ /* ---------- analytics: one question per card, answer first ---------- */
+ function analyticsView(){
+  const C=D.cfg;const kind=S.tractDetail?'tract':(S.region&&S.region.poly==='city')?'city':'region';
+  const reg=S.tractDetail?{name:D.byTract[S.tractDetail].nbhd,sub:'Tract '+S.tractDetail,poly:{tract:S.tractDetail}}:S.region;
+  const tr=regionTracts(reg.poly);const ids=new Set(tr.map(t=>t.id));const CT=D.tracts;
+  const scope=kind==='city'?D.itemAll:D.itemAll.filter(c=>c.tract&&ids.has(c.tract));const loc=scope.filter(c=>c.t);
+  const f=areaFacts(tr);const pop=f.pop;const P=P0;const pp=x=>(x>0?'+':'')+(x*100).toFixed(0)+' pts';
+  const bar=(w,col,h=8)=>`<i style="display:block;height:${h}px;width:${Math.max(.5,Math.min(100,w))}%;background:${col};border-radius:1px"></i>`;
+  const small=n=>n<C.small_n?`<span class="nodata" style="margin-left:6px"><i></i>small sample · ${n}</span>`:'';
+  const secLabel=k=>(ITEMS[k]||{}).title||k;const isPolicy=k=>C.policy_sections.includes(k);
+  const cnt=(L,fn)=>{const o={};L.forEach(c=>{const k=fn(c);o[k]=(o[k]||0)+1});return o};
+  const card=(q,lead,body,span)=>`<section class="card${span?' span2':''}"><h4>${q}</h4>${lead?`<p class="lead">${lead}</p>`:''}${body}</section>`;
+  const kv=(v,l,s)=>`<div class="stat"><b>${v}</b><span>${l}</span>${s?`<span class="sub">${s}</span>`:''}</div>`;
+  /* left: the place */
+  const fact=(l,v,s)=>`<div class="fact"><span>${l}</span><b>${v}</b>${s?`<em>${s}</em>`:''}</div>`;
+  const side=`<aside class="anside"><div class="mini" data-act="back" title="Back to map"><div class="map" id="mini"></div><span>← Back to map</span></div>
+   <div><h1>${esc(reg.name)}</h1><div class="small muted">${kind==='tract'?reg.sub:kind==='city'?`${fmt(CT.length)} census tracts`:`${tr.length} tracts`}${f.dists.length?` · council district${f.dists.length>1?'s':''} ${f.dists.join(', ')}`:''}</div></div>
+   ${ITEM.id!=='all'?`<div class="small" style="margin-top:4px">Showing <b>${esc(ITEM.title)}</b> only · <button class="link" data-act="pickitem" data-id="all">show all sections</button></div>`:''}</aside>`;
+  let M=`<section class="card span2"><h4>About this area</h4><div class="facts">${fact('Residents',fmt(pop),kind==='city'?`${fmt(f.hh)} households`:`${fmt(f.hh)} households · ${(pop/D.totPop*100).toFixed(1)}% of city`)}
+   ${fact('English-only households',P(f.eng),kind==='city'?'':`city ${P(f.engC)}`)}
+   ${fact('Limited-English households',P(f.lep),kind==='city'?'':`city ${P(f.lepC)}`)}
+   ${fact('Renter households',P(f.ren),kind==='city'?'':`city ${P(f.renC)}`)}
+   ${fact('Median income',f.incWord,incLine(f))}
+   ${fact('Equity Priority Community',kind==='tract'?(f.isEPC(tr[0])?tr[0].epc+' priority':'No'):`${f.epcT.length} of ${tr.length} tracts`,kind==='tract'?'MTC 2024':`${P(f.epcPop/pop)} of residents · MTC 2024`)}</div></section>`;
+  /* 1. heard? */
+  const locAll=D.comments.length||1;const cShare=loc.length/locAll,pShare=pop/D.totPop,rr=pShare?cShare/pShare:null;
+  if(kind==='city'){const ratio=t=>(D.comments.filter(c=>c.tract===t.id).length/locAll)/(t.pop/D.totPop);const under=CT.filter(t=>ratio(t)<C.underrepresented_ratio);const uPop=under.reduce((s,t)=>s+t.pop,0);
+   const silent=CT.filter(t=>t.n===0);const epcC=loc.filter(c=>f.isEPC(c.t)).length/locAll,epcP=CT.filter(f.isEPC).reduce((s,t)=>s+t.pop,0)/D.totPop;
+   M+=card('Is everyone being heard?',`<b>${P(uPop/D.totPop)}</b> of residents live in tracts that are under-represented in comments.`,
+    `<div class="stats4">${kv(fmt(under.length),'under-represented tracts',`of ${CT.length} · below ${C.underrepresented_ratio}× population share`)}${kv(fmt(silent.length),'tracts with no comments',`${fmt(silent.reduce((s,t)=>s+t.pop,0))} residents`)}${kv((epcC/epcP).toFixed(2),'Equity Priority ratio',`${P(epcC)} of comments vs ${P(epcP)} of residents`)}${kv(P(loc.length/Math.max(1,scope.length)),'comments placed on map','the rest gave no location')}</div>
+    <div class="note">Representation compares a tract’s share of located comments with its share of residents (1.0 = proportional). The cutoff is a team setting. These compare areas, not people.</div>`,1)}
+  else{const lead=loc.length===0?'No comments were located here. That means unknown, not absent.':rr>=1?`Sends <b>${rr.toFixed(1)}×</b> its share of comments.`:rr<C.underrepresented_ratio?`<b>Under-represented</b>: ${rr.toFixed(2)}× its population share of comments.`:`Slightly below its share: <b>${rr.toFixed(2)}×</b>.`;
+   M+=card('Is this area being heard?',lead+small(loc.length),`<div class="cmpbars"><div><span>Share of the city’s residents</span>${bar(pShare/Math.max(pShare,cShare,1e-9)*100,'#B6B0A5',10)}<b>${P(pShare,1)}</b></div><div><span>Share of the city’s located comments</span>${bar(cShare/Math.max(pShare,cShare,1e-9)*100,'#B3412B',10)}<b>${P(cShare,1)}</b></div></div>
+    <div class="stats4">${kv(fmt(loc.length),'comments located here')}${kv(rr==null?'—':rr.toFixed(2),'representation ratio','1.0 = proportional')}${kind==='region'?kv(fmt(tr.filter(t=>t.n===0).length),'tracts with no comments',`${fmt(tr.filter(t=>t.n===0).reduce((s,t)=>s+t.pop,0))} residents`):kv(f.isEPC(tr[0])?'Yes':'No','Equity Priority tract','MTC 2024')}${kv(P(ITEM.pct/100),'of all comments could be located','silence can mean no address given')}</div>`,1)}
+  /* 2. what people write about */
+  const here=cnt(loc.length||kind==='city'?(kind==='city'?scope:loc):[],c=>c.catKey),city=cnt(D.itemAll,c=>c.catKey);const N=kind==='city'?scope.length:loc.length;
+  const keys=[...new Set([...Object.keys(here),...(kind==='city'?[]:Object.keys(city))])].sort((a,b)=>(here[b]||0)-(here[a]||0)||(city[b]||0)-(city[a]||0));
+  const topK=keys[0];const subsOf=(L,k)=>{const o=cnt(L.filter(c=>c.catKey===k),c=>c.subKey);const cd=D.catDefs.find(x=>x.key===k);return Object.entries(o).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([s,n])=>`${esc((cd&&cd.subcategories.find(x=>x.key===s)||{}).label||s)} ${n}`).join(' · ')};
+  const rowsSrc=kind==='city'?scope:loc;const totC=D.itemAll.length||1;
+  const secRows=keys.filter(k=>(here[k]||0)>0||(kind!=='city'&&(city[k]||0)/totC>0.04)).map(k=>{const s=(here[k]||0)/Math.max(1,N),c=(city[k]||0)/totC;const L=rowsSrc.filter(x=>x.catKey===k);
+   const st=s_=>L.filter(x=>x.stance===s_).length;const S_=st('support'),O=st('oppose');const net=isPolicy(k)&&S_+O?Math.round((S_-O)/(S_+O)*100):null;
+   return `<div class="srow2"><div class="sname"><a class="link" data-act="pickitem" data-id="${k}">${esc(secLabel(k))}</a><div class="subs">${subsOf(rowsSrc,k)}</div></div>
+    <div class="sbars">${bar(s*100,'#7357B4',9)}${kind==='city'?'':bar(c*100,'#C9C4BA',5)}</div>
+    <div class="snum"><b>${here[k]||0}</b> · ${P(s)}${kind==='city'?'':`<em>city ${P(c)} · ${pp(s-c)}</em>`}</div>
+    <div class="sst">${isPolicy(k)&&L.length?`<div class="mini-st">${STANCES.map(x=>`<i style="flex:0 0 ${st(x)/L.length*100}%;background:${COL[x]}" title="${stLabel[x]} ${st(x)}"></i>`).join('')}</div><em>${net==null?'':'net '+sgn(net)}</em>`:`<em class="muted">${isPolicy(k)?'no comments here':'service section · no stance'}</em>`}</div></div>`}).join('');
+  M+=card('What do people write about?',N?`Most comments are about <b>${esc(secLabel(topK))}</b> (${P((here[topK]||0)/N)}${kind==='city'?'':`, vs ${P((city[topK]||0)/totC)} citywide`}).`:'No comments located here.',
+   N?`<div class="srow2 head"><span></span><span>${kind==='city'?'share of comments':'<i class="sw" style="background:#7357B4"></i>here <i class="sw" style="background:#C9C4BA;margin-left:8px"></i>citywide'}</span><span>comments</span><span>support / oppose · policy only</span></div>${secRows}<div class="stkey" style="border:0">${STANCES.map(s=>`<span>${stIco(s,9)}${stLabel[s]}</span>`).join('')}<span class="muted">net = (support − oppose) ÷ (support + oppose)</span></div>`:'',1);
+  /* 3. 311 */
+  if(ITEM.n311){const by={};Object.keys(D.p311).filter(k=>k!=='all').forEach(k=>{by[k]=tr.reduce((s,t)=>s+((D.p311[k]||{})[t.id]||0),0)});const tot=Object.values(by).reduce((a,b)=>a+b,0);
+   const rate=tot/pop*1000*12/D.m311,rateC=CT.reduce((s,t)=>s+((D.p311.all||{})[t.id]||0),0)/D.totPop*1000*12/D.m311;const tk=Object.entries(by).sort((a,b)=>b[1]-a[1]);
+   const pwv=kind==='city'?CT.filter(t=>t.pwv).length:tr.filter(t=>t.pwv).length;
+   M+=card('What do people report to 311?',`<b>${rate.toFixed(0)}</b> problem reports per 1,000 residents a year${kind==='city'?'':`, vs ${rateC.toFixed(0)} citywide`}. Most are <b>${esc((D.p311Labels[tk[0][0]]||tk[0][0]).toLowerCase())}</b>.`,
+    tk.filter(x=>x[1]>0).map(([k,n])=>`<div class="mixrow"><span>${esc(D.p311Labels[k]||k)}</span>${bar(n/Math.max(1,tk[0][1])*100,'#22877C',8)}<b>${fmt(n)}</b><em>${P(n/Math.max(1,tot))}</em></div>`).join('')+
+    `<div class="note">${pwv?`<b>${pwv}</b> tract${pwv===1?'':'s'} ${kind==='city'?'citywide':'here'} report many problems but send few comments (311 rank ≥ 70, comment rank ≤ 30). `:''}311 is counted separately and never added to comments. Billing and account requests are excluded.</div>`)}
+  /* 4. who is writing */
+  const W=kind==='city'?scope:loc;const parts=new Set(W.map(c=>c.participant||c.id)).size;const act=W.filter(c=>c.actionable!=null);const actY=act.filter(c=>c.actionable).length;
+  const L5=['english_only','spanish','asian_pacific','other_indo_european','other'];const LN={english_only:'English',spanish:'Spanish',asian_pacific:'Asian & Pacific Isl.',other_indo_european:'Other Indo-European',other:'Other'};
+  const cl={english_only:W.filter(c=>c.langCode==='en').length,spanish:W.filter(c=>c.langCode==='es').length,asian_pacific:W.filter(c=>c.langCode==='vi').length};
+  const lrows=L5.map(k=>{const h=f.wavg(tr,t=>t.lang&&t.lang[k],f.byHH)||0;const c=W.length&&cl[k]!=null?cl[k]/W.length:null;return {k,h,c,r:c!=null&&h>0?c/h:null}});
+  const sp=lrows.find(x=>x.k==='spanish');
+  M+=card('Who is writing?',W.length?`<b>${fmt(parts)}</b> distinct writers${actY?`, and <b>${P(actY/Math.max(1,act.length))}</b> of comments ask for something specific`:''}.${sp&&sp.r!=null&&sp.h>0.1?` Spanish is ${P(sp.h)} of households but ${P(sp.c)} of comments.`:''}`:'No comments located here.',
+   W.length?`<div class="stats4">${kv((W.length/Math.max(1,parts)).toFixed(2),'comments per writer','1.00 = everyone wrote once')}${kv(P(W.filter(c=>c.camp).length/W.length),'form-letter copies')}${kv(fmt(W.filter(c=>c.commenter==='organization').length),'from organizations')}${kv(P(W.filter(c=>c.mock).length/W.length),'simulated emails')}</div>
+   <div class="lang"><div class="lh"><span>Language</span><span><i class="sw" style="background:#5C5C58"></i>households <i class="sw" style="background:#B3412B;margin-left:8px"></i>comments</span><span>ratio</span></div>${lrows.map(x=>`<div class="lr"><span>${LN[x.k]}</span><div>${bar(x.h*100,'#5C5C58',6)}${x.c!=null?bar(x.c*100,'#B3412B',6):''}</div><span>${x.r==null?'—':x.r.toFixed(2)}</span></div>`).join('')}</div>
+   <div class="note">Households by language at home (ACS C16002) vs the language comments were written in. Vietnamese counts under Asian &amp; Pacific Island. Writers are matched by an anonymous code. “Asks for something specific” = reports a specific problem or requests a specific city action.${small(W.length)}</div>`:'',kind==='city');
+  /* city extras: time + concentration */
+  if(kind==='city'){const months={};scope.forEach(c=>{if(!c.when)return;const m=c.when.toISOString().slice(0,7);(months[m]=months[m]||{L:0,E:0})[c.src==='Letter'?'L':'E']++});const mk=Object.keys(months).sort();const mm=Math.max(1,...mk.map(m=>months[m].L+months[m].E));
+   M+=card('When did comments arrive?','Real letters cover early 2025; simulated emails cover fall 2026.',`<div class="tbars">${mk.map(m=>{const v=months[m];return `<div title="${m}: ${v.L} letters, ${v.E} emails"><i style="height:${v.E/mm*100}%;background:#E8957D"></i><i style="height:${v.L/mm*100}%;background:#8E2A1C"></i><span>${m.slice(2)}</span></div>`}).join('')}</div><div class="stkey" style="border:0"><span><i class="sw" style="background:#8E2A1C"></i>letters (real)</span><span><i class="sw" style="background:#E8957D"></i>emails (simulated)</span></div><div class="note">Gaps are months with no ingested data, not quiet months.</div>`);
+   const conc=Object.keys(ITEMS).filter(k=>k!=='all').map(k=>{const L=loc.filter(c=>c.catKey===k);if(L.length<5)return null;const o=cnt(L,c=>c.tract);const [tid,n]=Object.entries(o).sort((a,b)=>b[1]-a[1])[0];return {k,tid,n,N:L.length}}).filter(Boolean).sort((a,b)=>b.n/b.N-a.n/a.N);
+   M+=card('Is each issue local or citywide?',conc.length?`<b>${esc(secLabel(conc[0].k))}</b> is the most local: ${P(conc[0].n/conc[0].N)} of its located comments come from one tract.`:'Too few located comments to tell.',conc.map(r=>`<div class="mixrow"><span>${esc(secLabel(r.k))}</span>${bar(r.n/r.N*100,'#B3412B',8)}<b><a class="link" data-act="seltract" data-t="${r.tid}">${esc(D.byTract[r.tid].nbhd)}</a></b><em>${P(r.n/r.N)}</em></div>`).join('')+'<div class="note">Share of a section’s located comments from its busiest tract. Sections with fewer than 5 located comments are left out.</div>')}
+  /* 5. trust */
+  const confs=W.map(c=>c.conf).filter(x=>x!=null);const mean=confs.length?confs.reduce((a,b)=>a+b,0)/confs.length:null;const low=confs.length?confs.filter(x=>x<C.low_confidence).length/confs.length:null;
+  M+=card('How much should you trust these numbers?',`${P(ITEM.pct/100)} of comments could be placed on the map, ${P(scope.filter(c=>c.mock).length/Math.max(1,scope.length))} are simulated, and the AI was ${mean==null?'—':P(mean)} confident on average.`,
+   `<div class="stats4">${kv(P(mean),'average label confidence')}${kv(P(low),`below ${C.low_confidence*100}% confidence`)}${kv(P(W.filter(c=>c.engine==='bob').length/Math.max(1,W.length)),'labeled by the AI assistant')}${kv(fmt(W.filter(c=>c.inherited).length),'form-letter labels reused','quote re-checked in each copy')}</div><div class="note">Every label cites an exact quote from its comment; open any comment to see it highlighted. Labels have not yet been checked against human review. Numbers that include simulated emails are illustrative.</div>`,kind==='city');
+  /* missing voices / tracts */
+  if(kind!=='tract'){const mode=t=>{const o={};D.comments.forEach(c=>{if(c.tract===t.id)o[c.cat]=(o[c.cat]||0)+1});const e=Object.entries(o).sort((a,b)=>b[1]-a[1])[0];return e?CATN[e[0]]:'—'};
+   M+=card('Who are we not hearing from?','The tracts furthest below their population share of comments.',`${[...tr].sort((a,b)=>(b.exp-b.n)-(a.exp-a.n)).slice(0,5).map((t,i)=>`<div class="mvl" data-act="seltract" data-t="${t.id}"><span class="rankn">${i+1}</span><div><b style="font-weight:600">${t.nbhd}</b> <span class="tid">${t.id}</span></div><div class="gbar"><div class="b"><i style="width:${Math.min(100,Math.abs(Math.min(0,t.gap)))}%;background:${t.n===0?`repeating-linear-gradient(45deg,${GAP[4]} 0 3px,#7B62B8 3px 4.5px)`:GAPM[gapBin(t)]}"></i></div></div><span class="num small">${t.n} of ${t.exp<1?t.exp.toFixed(1):Math.round(t.exp)}</span><div class="chips">${H.acs(t)}</div></div>`).join('')}
+    <details class="bx" style="margin-top:12px"><summary><h4>All tracts in this area</h4></summary><table class="ht tt" style="margin-top:8px"><thead><tr><th>Tract</th><th>Residents</th><th>Comments</th><th>Expected</th><th>Gap</th><th>Top issue</th></tr></thead><tbody>${[...tr].sort((a,b)=>a.gap-b.gap).map(t=>`<tr><td><a class="link" data-act="seltract" data-t="${t.id}" style="font-size:12px">${t.nbhd}</a> <span class="tid">${t.id}</span></td><td>${fmt(t.pop)}</td><td>${t.n}</td><td>${Math.round(t.exp)}</td><td style="color:var(--g4);font-weight:500">${sgn(t.gap)}%</td><td>${mode(t)}</td></tr>`).join('')}</tbody></table></details>`,1)}
+  return `<div class="body"><div class="an">${side}<div class="anmain">${M}</div></div></div>`}
  function placePop(){const el=document.querySelector('.rmodal');const m=maps[0];if(!el||!m)return;let b;
   if(S.tractDetail){const cb=D.byTract[S.tractDetail].cb;const p0=m.screen([cb[0],cb[3]]),p1=m.screen([cb[2],cb[1]]);b=[p0[0],p0[1],p1[0],p1[1]]}
   else if(S.region&&Array.isArray(S.region.poly)){const P=S.region.poly.map(p=>m.screen(p));b=[Math.min(...P.map(p=>p[0])),Math.min(...P.map(p=>p[1])),Math.max(...P.map(p=>p[0])),Math.max(...P.map(p=>p[1]))]}

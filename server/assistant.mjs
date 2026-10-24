@@ -8,15 +8,19 @@
 //          502 agent failed / unparseable · 503 agent not available · 504 timeout
 import { spawn } from 'node:child_process'
 import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs'
-import { homedir } from 'node:os'
+import { homedir, tmpdir } from 'node:os'
 import { delimiter, dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { sanitize, isCountQuestion } from '../src/cvm/assistant.js'
 
 const REPO = dirname(dirname(fileURLToPath(import.meta.url)))
-const RUNS_PATH = join(REPO, 'data', 'bob_chat_runs.json')
+// Serverless (Vercel): the code directory is read-only, so Bob gets a writable home and the run log lives in /tmp
+// (per instance, not persistent). Locally everything stays as before.
+const SERVERLESS = !!process.env.VERCEL || process.env.ASSISTANT_SERVERLESS === '1'
+const HOME = SERVERLESS ? join(tmpdir(), 'bobhome') : homedir()
+const RUNS_PATH = SERVERLESS ? join(tmpdir(), 'bob_chat_runs.json') : join(REPO, 'data', 'bob_chat_runs.json')
 const PIPELINE_RUNS_PATH = join(REPO, 'data', 'bob_runs.json')
-const TIMEOUT_MS = 180_000
+const TIMEOUT_MS = SERVERLESS ? 52_000 : 180_000
 
 /* ---------- env (.env.local, tiny parser) ---------- */
 function loadEnvLocal() {
@@ -40,15 +44,29 @@ function redact(s) {
 }
 
 /* ---------- agent binary + consent ---------- */
+/** -> {cmd, pre}: an installed `bob`, or the official package installed as a dependency (node_modules/bobshell). */
 function findBob() {
-  for (const dir of (process.env.PATH || '').split(delimiter)) if (dir && existsSync(join(dir, 'bob'))) return join(dir, 'bob')
-  const local = join(homedir(), '.local', 'bin', 'bob')
-  return existsSync(local) ? local : null
+  if (!SERVERLESS) {
+    for (const dir of (process.env.PATH || '').split(delimiter)) if (dir && existsSync(join(dir, 'bob'))) return { cmd: join(dir, 'bob'), pre: [] }
+    const local = join(homedir(), '.local', 'bin', 'bob')
+    if (existsSync(local)) return { cmd: local, pre: [] }
+  }
+  const pkg = join(REPO, 'node_modules', 'bobshell', 'dist', 'bob.js')
+  return existsSync(pkg) ? { cmd: process.execPath, pre: [pkg] } : null
 }
 function readJson(p, d) { try { return JSON.parse(readFileSync(p, 'utf8')) } catch { return d } }
 // The repo rule (.bob/rules/civic-data.md #6) forbids passing --accept-license on the user's behalf: we only run when
 // the user has accepted it themselves (recorded in ~/.bob/settings/settings.json).
-const licenseAccepted = () => readJson(join(homedir(), '.bob', 'settings', 'settings.json'), {}).licenseConsent === true
+// On a serverless host the user records their own acceptance with the env var BOB_LICENSE_ACCEPTED=true (set by them in
+// the host's settings); we copy that into Bob's settings file in its temporary home.
+function licenseAccepted() {
+  const f = join(HOME, '.bob', 'settings', 'settings.json')
+  if (SERVERLESS && envGet('BOB_LICENSE_ACCEPTED') === 'true' && readJson(f, {}).licenseConsent !== true) {
+    mkdirSync(dirname(f), { recursive: true })
+    writeFileSync(f, JSON.stringify({ ...readJson(f, {}), licenseConsent: true }, null, 2))
+  }
+  return readJson(f, {}).licenseConsent === true
+}
 
 /* ---------- validation sources (loaded once, reloaded when the file changes) ---------- */
 const cache = new Map()
@@ -379,7 +397,7 @@ export function validate(parsed, question) {
 function runAgent(bin, prompt) {
   return new Promise((resolve) => {
     const args = ['run', '--mode', 'agent', '--format', 'json', '-w', REPO, '--trust', '--max-turns', envGet('BOB_CHAT_MAX_TURNS', '12'), '--max-cost', envGet('BOB_CHAT_MAX_COST', '0.9'), prompt]
-    const child = spawn(bin, args, { cwd: REPO, env: { ...process.env, BOB_API_KEY: envGet('BOB_API_KEY') }, stdio: ['ignore', 'pipe', 'pipe'] })
+    const child = spawn(bin.cmd, [...bin.pre, ...args], { cwd: REPO, env: { ...process.env, HOME, BOB_API_KEY: envGet('BOB_API_KEY') }, stdio: ['ignore', 'pipe', 'pipe'] })
     let out = '', err = '', timedOut = false
     const timer = setTimeout(() => { timedOut = true; child.kill('SIGTERM'); setTimeout(() => child.kill('SIGKILL'), 3000) }, TIMEOUT_MS)
     child.stdout.on('data', (d) => { out += d })

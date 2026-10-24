@@ -10,10 +10,12 @@ button{font:inherit;color:inherit}
 .brand{display:flex;flex-direction:column;line-height:1.15;min-width:150px}
 .brand b{font-weight:600;font-size:16px;letter-spacing:-.005em}.brand span{font-size:12px;color:var(--ink2)}
 .vsep{width:1px;height:28px;background:var(--line)}
-.picker{display:flex;align-items:center;gap:10px;padding:6px 10px;border:1px solid var(--line);border-radius:4px;background:var(--panel);cursor:pointer;text-align:left;min-width:0;max-width:440px}
+.picker{display:flex;align-items:center;gap:10px;padding:6px 10px;border:1px solid var(--line);border-radius:4px;background:var(--panel);cursor:pointer;text-align:left;min-width:0;max-width:560px}
 .picker:hover{border-color:#C9C9C3}
 .picker .t{font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.picker .m{font-size:12px;color:var(--ink2);white-space:nowrap}
+.picker .m{font-size:12px;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.picker>div{flex:1 1 auto;min-width:0}
+.picker .badge,.picker .caret{flex:none}
 .badge{font-size:12px;font-weight:500;padding:1px 7px;border-radius:3px;border:1px solid var(--line);background:var(--bg);white-space:nowrap}
 .caret{width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid var(--ink2);flex:none}
 .seg{display:inline-flex;border:1px solid var(--line);border-radius:4px;background:var(--bg);padding:2px;gap:2px}

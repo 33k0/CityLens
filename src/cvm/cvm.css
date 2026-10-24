@@ -581,3 +581,10 @@ details.mapkey .kr .ramp div{height:7px}
 .subnest .subrow.nested:hover{background:#F2F2EF}
 .subnest .subrow.nested.on{background:#F4F2FA}
 .scroll{scrollbar-gutter:stable}
+/* assistant answers: markdown-lite */
+.ma .md p{margin:0 0 8px}
+.ma .md .mdh{margin:12px 0 4px;font-size:11.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--ink2)}
+.ma .md .mdh:first-child{margin-top:2px}
+.ma .md .mdl{margin:0 0 8px;padding-left:18px}
+.ma .md .mdl li{margin:0 0 5px;line-height:1.45}
+.ma .md b{font-weight:600}

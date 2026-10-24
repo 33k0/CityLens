@@ -165,17 +165,17 @@ export function searchAnswer({ question, scopeLabel, sectionTitle, comments, num
   return { ...out, engine: 'search', note: 'Keyword search summary — the written answer is unavailable right now.' }
 }
 
-const ACTION_TYPES = new Set(['select_section', 'set_scheme', 'zoom_tract', 'open_analytics', 'open_comment', 'filter_stance'])
+const ACTION_TYPES = new Set(['select_section', 'set_scheme', 'zoom_tract', 'open_analytics', 'open_comment', 'filter_stance', 'set_view', 'select_district', 'select_area', 'select_tracts'])
 
 /* ---------- main entry ----------
    askAssistant({question, scopeLabel, sectionTitle, comments, numbers, history, regionTracts})
    -> Promise<{text, cited, refs, actions, engine:'assistant'|'search', note?, seconds?, cost?}>  (never rejects)
    actions: server-validated UI actions, e.g. {type:'set_scheme', id:'prob'} (see server/assistant.mjs). */
-export async function askAssistant({ question, scopeLabel, sectionTitle, comments = [], numbers = {}, history = [], regionTracts = [], timeoutMs = 130000, endpoint = '/api/assistant' } = {}) {
+export async function askAssistant({ question, scopeLabel, sectionTitle, sectionKey, comments = [], numbers = {}, history = [], regionTracts = [], timeoutMs = 190000, endpoint = '/api/assistant' } = {}) {
   const hits = retrieve(question, comments, 12)
   const fallback = (note) => { const r = searchAnswer({ question, scopeLabel, sectionTitle, comments, numbers }); if (note && r.text) r.note = note; return { refs: [], actions: [], ...r } }
   const context = hits.map(c => ({ id: c.id, section: c.section || '', subsection: c.subsection || '', stance: c.stance || 'unclear', lang: c.lang || 'en', simulated: !!c.mock, place: c.nbhd || '', tract: c.tract || null, text: clip([c.subject, c.text].filter(Boolean).join(' — ')) }))
-  const body = { question, scopeLabel, sectionTitle, numbers, regionTracts: (regionTracts || []).slice(0, 250), history: (history || []).slice(-3).map(h => ({ q: String(h.q || ''), text: String(h.text || '').slice(0, 800) })), context }
+  const body = { question, scopeLabel, sectionTitle, sectionKey, numbers, regionTracts: (regionTracts || []).slice(0, 250), history: (history || []).slice(-3).map(h => ({ q: String(h.q || ''), text: String(h.text || '').slice(0, 800) })), context }
   const ctl = typeof AbortController !== 'undefined' ? new AbortController() : null
   const timer = setTimeout(() => ctl?.abort(), timeoutMs)
   try {

@@ -1,0 +1,497 @@
+{
+ "method": "Spearman rank correlation across San Jos\u00e9 census tracts with residents (n\u2248213).",
+ "read_as": "Census tract-level association between a place's ACS profile and what was measured there. It does not describe individuals, does not show cause, and 311 volume also reflects who uses 311.",
+ "caveat_voice": "Most comments are simulated emails (see metrics Q6), so voice associations are illustrative.",
+ "results": [
+  {
+   "attribute": "income",
+   "attribute_label": "median household income",
+   "outcome": "p311_sanitation_environment_quality_per_1k_yr",
+   "outcome_label": "311 reports per 1,000 a year: sanitation_environment_quality",
+   "rho": -0.522,
+   "p": 1.9e-16,
+   "n": 215,
+   "strength": "strong"
+  },
+  {
+   "attribute": "income",
+   "attribute_label": "median household income",
+   "outcome": "p311_public_safety_emergency_response_per_1k_yr",
+   "outcome_label": "311 reports per 1,000 a year: public_safety_emergency_response",
+   "rho": -0.514,
+   "p": 7.2e-16,
+   "n": 215,
+   "strength": "strong"
+  },
+  {
+   "attribute": "spanish",
+   "attribute_label": "Spanish-speaking households",
+   "outcome": "p311_sanitation_environment_quality_per_1k_yr",
+   "outcome_label": "311 reports per 1,000 a year: sanitation_environment_quality",
+   "rho": 0.508,
+   "p": 1.7e-15,
+   "n": 215,
+   "strength": "strong"
+  },
+  {
+   "attribute": "income",
+   "attribute_label": "median household income",
+   "outcome": "p311_per_1k_yr",
+   "outcome_label": "311 problem reports per 1,000 a year (all)",
+   "rho": -0.494,
+   "p": 1.3e-14,
+   "n": 215,
+   "strength": "moderate"
+  },
+  {
+   "attribute": "spanish",
+   "attribute_label": "Spanish-speaking households",
+   "outcome": "p311_per_1k_yr",
+   "outcome_label": "311 problem reports per 1,000 a year (all)",
+   "rho": 0.464,
+   "p": 7.4e-13,
+   "n": 215,
+   "strength": "moderate"
+  },
+  {
+   "attribute": "renter",
+   "attribute_label": "renter share",
+   "outcome": "p311_public_safety_emergency_response_per_1k_yr",
+   "outcome_label": "311 reports per 1,000 a year: public_safety_emergency_response",
+   "rho": 0.448,
+   "p": 5.1e-12,
+   "n": 215,
+   "strength": "moderate"
+  },
+  {
+   "attribute": "renter",
+   "attribute_label": "renter share",
+   "outcome": "voice_per_1k",
+   "outcome_label": "comments per 1,000 (voice)",
+   "rho": -0.432,
+   "p": 3.5e-11,
+   "n": 215,
+   "strength": "moderate"
+  },
+  {
+   "attribute": "spanish",
+   "attribute_label": "Spanish-speaking households",
+   "outcome": "p311_public_safety_emergency_response_per_1k_yr",
+   "outcome_label": "311 reports per 1,000 a year: public_safety_emergency_response",
+   "rho": 0.418,
+   "p": 1.8e-10,
+   "n": 215,
+   "strength": "moderate"
+  },
+  {
+   "attribute": "renter",
+   "attribute_label": "renter share",
+   "outcome": "p311_per_1k_yr",
+   "outcome_label": "311 problem reports per 1,000 a year (all)",
+   "rho": 0.414,
+   "p": 2.7e-10,
+   "n": 215,
+   "strength": "moderate"
+  },
+  {
+   "attribute": "lep",
+   "attribute_label": "limited-English share",
+   "outcome": "voice_per_1k",
+   "outcome_label": "comments per 1,000 (voice)",
+   "rho": -0.398,
+   "p": 1.4e-09,
+   "n": 215,
+   "strength": "moderate"
+  },
+  {
+   "attribute": "renter",
+   "attribute_label": "renter share",
+   "outcome": "p311_sanitation_environment_quality_per_1k_yr",
+   "outcome_label": "311 reports per 1,000 a year: sanitation_environment_quality",
+   "rho": 0.389,
+   "p": 3.7e-09,
+   "n": 215,
+   "strength": "moderate"
+  },
+  {
+   "attribute": "epc",
+   "attribute_label": "Equity Priority Community",
+   "outcome": "p311_public_safety_emergency_response_per_1k_yr",
+   "outcome_label": "311 reports per 1,000 a year: public_safety_emergency_response",
+   "rho": 0.36,
+   "p": 5.4e-08,
+   "n": 215,
+   "strength": "moderate"
+  },
+  {
+   "attribute": "lep",
+   "attribute_label": "limited-English share",
+   "outcome": "p311_per_1k_yr",
+   "outcome_label": "311 problem reports per 1,000 a year (all)",
+   "rho": 0.349,
+   "p": 1.5e-07,
+   "n": 215,
+   "strength": "moderate"
+  },
+  {
+   "attribute": "lep",
+   "attribute_label": "limited-English share",
+   "outcome": "p311_public_safety_emergency_response_per_1k_yr",
+   "outcome_label": "311 reports per 1,000 a year: public_safety_emergency_response",
+   "rho": 0.342,
+   "p": 2.8e-07,
+   "n": 215,
+   "strength": "moderate"
+  },
+  {
+   "attribute": "income",
+   "attribute_label": "median household income",
+   "outcome": "voice_per_1k",
+   "outcome_label": "comments per 1,000 (voice)",
+   "rho": 0.333,
+   "p": 6e-07,
+   "n": 215,
+   "strength": "moderate"
+  },
+  {
+   "attribute": "lep",
+   "attribute_label": "limited-English share",
+   "outcome": "p311_sanitation_environment_quality_per_1k_yr",
+   "outcome_label": "311 reports per 1,000 a year: sanitation_environment_quality",
+   "rho": 0.329,
+   "p": 7.8e-07,
+   "n": 215,
+   "strength": "moderate"
+  },
+  {
+   "attribute": "renter",
+   "attribute_label": "renter share",
+   "outcome": "p311_infrastructure_streets_per_1k_yr",
+   "outcome_label": "311 reports per 1,000 a year: infrastructure_streets",
+   "rho": 0.294,
+   "p": 1.2e-05,
+   "n": 215,
+   "strength": "weak"
+  },
+  {
+   "attribute": "income",
+   "attribute_label": "median household income",
+   "outcome": "p311_infrastructure_streets_per_1k_yr",
+   "outcome_label": "311 reports per 1,000 a year: infrastructure_streets",
+   "rho": -0.293,
+   "p": 1.2e-05,
+   "n": 215,
+   "strength": "weak"
+  },
+  {
+   "attribute": "spanish",
+   "attribute_label": "Spanish-speaking households",
+   "outcome": "p311_infrastructure_streets_per_1k_yr",
+   "outcome_label": "311 reports per 1,000 a year: infrastructure_streets",
+   "rho": 0.277,
+   "p": 3.7e-05,
+   "n": 215,
+   "strength": "weak"
+  },
+  {
+   "attribute": "epc",
+   "attribute_label": "Equity Priority Community",
+   "outcome": "p311_per_1k_yr",
+   "outcome_label": "311 problem reports per 1,000 a year (all)",
+   "rho": 0.277,
+   "p": 3.9e-05,
+   "n": 215,
+   "strength": "weak"
+  },
+  {
+   "attribute": "epc",
+   "attribute_label": "Equity Priority Community",
+   "outcome": "p311_sanitation_environment_quality_per_1k_yr",
+   "outcome_label": "311 reports per 1,000 a year: sanitation_environment_quality",
+   "rho": 0.275,
+   "p": 4.3e-05,
+   "n": 215,
+   "strength": "weak"
+  },
+  {
+   "attribute": "lep",
+   "attribute_label": "limited-English share",
+   "outcome": "p311_infrastructure_streets_per_1k_yr",
+   "outcome_label": "311 reports per 1,000 a year: infrastructure_streets",
+   "rho": 0.255,
+   "p": 0.00015,
+   "n": 215,
+   "strength": "weak"
+  },
+  {
+   "attribute": "asian_pacific",
+   "attribute_label": "Asian/Pacific-language households",
+   "outcome": "p311_sanitation_environment_quality_per_1k_yr",
+   "outcome_label": "311 reports per 1,000 a year: sanitation_environment_quality",
+   "rho": -0.244,
+   "p": 0.0003,
+   "n": 215,
+   "strength": "weak"
+  },
+  {
+   "attribute": "spanish",
+   "attribute_label": "Spanish-speaking households",
+   "outcome": "voice_per_1k",
+   "outcome_label": "comments per 1,000 (voice)",
+   "rho": -0.237,
+   "p": 0.00045,
+   "n": 215,
+   "strength": "weak"
+  },
+  {
+   "attribute": "nonwhite",
+   "attribute_label": "non-white share",
+   "outcome": "p311_infrastructure_streets_per_1k_yr",
+   "outcome_label": "311 reports per 1,000 a year: infrastructure_streets",
+   "rho": 0.216,
+   "p": 0.0015,
+   "n": 215,
+   "strength": "weak"
+  },
+  {
+   "attribute": "nonwhite",
+   "attribute_label": "non-white share",
+   "outcome": "p311_public_safety_emergency_response_per_1k_yr",
+   "outcome_label": "311 reports per 1,000 a year: public_safety_emergency_response",
+   "rho": 0.205,
+   "p": 0.0025,
+   "n": 215,
+   "strength": "weak"
+  },
+  {
+   "attribute": "nonwhite",
+   "attribute_label": "non-white share",
+   "outcome": "p311_per_1k_yr",
+   "outcome_label": "311 problem reports per 1,000 a year (all)",
+   "rho": 0.19,
+   "p": 0.0052,
+   "n": 215,
+   "strength": "weak"
+  },
+  {
+   "attribute": "nonwhite",
+   "attribute_label": "non-white share",
+   "outcome": "voice_per_1k",
+   "outcome_label": "comments per 1,000 (voice)",
+   "rho": -0.189,
+   "p": 0.0055,
+   "n": 215,
+   "strength": "weak"
+  },
+  {
+   "attribute": "epc",
+   "attribute_label": "Equity Priority Community",
+   "outcome": "p311_infrastructure_streets_per_1k_yr",
+   "outcome_label": "311 reports per 1,000 a year: infrastructure_streets",
+   "rho": 0.184,
+   "p": 0.0069,
+   "n": 215,
+   "strength": "weak"
+  },
+  {
+   "attribute": "asian_pacific",
+   "attribute_label": "Asian/Pacific-language households",
+   "outcome": "p311_per_1k_yr",
+   "outcome_label": "311 problem reports per 1,000 a year (all)",
+   "rho": -0.174,
+   "p": 0.011,
+   "n": 215,
+   "strength": "weak"
+  },
+  {
+   "attribute": "asian_pacific",
+   "attribute_label": "Asian/Pacific-language households",
+   "outcome": "p311_code_enforcement_habitability_per_1k_yr",
+   "outcome_label": "311 reports per 1,000 a year: code_enforcement_habitability",
+   "rho": -0.155,
+   "p": 0.023,
+   "n": 215,
+   "strength": "weak"
+  },
+  {
+   "attribute": "epc",
+   "attribute_label": "Equity Priority Community",
+   "outcome": "voice_per_1k",
+   "outcome_label": "comments per 1,000 (voice)",
+   "rho": -0.148,
+   "p": 0.03,
+   "n": 215,
+   "strength": "weak"
+  },
+  {
+   "attribute": "nonwhite",
+   "attribute_label": "non-white share",
+   "outcome": "p311_sanitation_environment_quality_per_1k_yr",
+   "outcome_label": "311 reports per 1,000 a year: sanitation_environment_quality",
+   "rho": 0.145,
+   "p": 0.034,
+   "n": 215,
+   "strength": "weak"
+  },
+  {
+   "attribute": "spanish",
+   "attribute_label": "Spanish-speaking households",
+   "outcome": "p311_code_enforcement_habitability_per_1k_yr",
+   "outcome_label": "311 reports per 1,000 a year: code_enforcement_habitability",
+   "rho": 0.113,
+   "p": 0.099,
+   "n": 215,
+   "strength": "weak"
+  },
+  {
+   "attribute": "asian_pacific",
+   "attribute_label": "Asian/Pacific-language households",
+   "outcome": "p311_other_per_1k_yr",
+   "outcome_label": "311 reports per 1,000 a year: other",
+   "rho": -0.112,
+   "p": 0.1,
+   "n": 215,
+   "strength": "weak"
+  },
+  {
+   "attribute": "asian_pacific",
+   "attribute_label": "Asian/Pacific-language households",
+   "outcome": "p311_public_safety_emergency_response_per_1k_yr",
+   "outcome_label": "311 reports per 1,000 a year: public_safety_emergency_response",
+   "rho": -0.101,
+   "p": 0.14,
+   "n": 215,
+   "strength": "weak"
+  },
+  {
+   "attribute": "renter",
+   "attribute_label": "renter share",
+   "outcome": "p311_code_enforcement_habitability_per_1k_yr",
+   "outcome_label": "311 reports per 1,000 a year: code_enforcement_habitability",
+   "rho": 0.086,
+   "p": 0.21,
+   "n": 215,
+   "strength": "none"
+  },
+  {
+   "attribute": "renter",
+   "attribute_label": "renter share",
+   "outcome": "p311_other_per_1k_yr",
+   "outcome_label": "311 reports per 1,000 a year: other",
+   "rho": 0.086,
+   "p": 0.21,
+   "n": 215,
+   "strength": "none"
+  },
+  {
+   "attribute": "income",
+   "attribute_label": "median household income",
+   "outcome": "p311_code_enforcement_habitability_per_1k_yr",
+   "outcome_label": "311 reports per 1,000 a year: code_enforcement_habitability",
+   "rho": -0.066,
+   "p": 0.33,
+   "n": 215,
+   "strength": "none"
+  },
+  {
+   "attribute": "income",
+   "attribute_label": "median household income",
+   "outcome": "p311_other_per_1k_yr",
+   "outcome_label": "311 reports per 1,000 a year: other",
+   "rho": -0.052,
+   "p": 0.44,
+   "n": 215,
+   "strength": "none"
+  },
+  {
+   "attribute": "lep",
+   "attribute_label": "limited-English share",
+   "outcome": "p311_other_per_1k_yr",
+   "outcome_label": "311 reports per 1,000 a year: other",
+   "rho": 0.046,
+   "p": 0.5,
+   "n": 215,
+   "strength": "none"
+  },
+  {
+   "attribute": "nonwhite",
+   "attribute_label": "non-white share",
+   "outcome": "p311_other_per_1k_yr",
+   "outcome_label": "311 reports per 1,000 a year: other",
+   "rho": -0.039,
+   "p": 0.57,
+   "n": 215,
+   "strength": "none"
+  },
+  {
+   "attribute": "lep",
+   "attribute_label": "limited-English share",
+   "outcome": "p311_code_enforcement_habitability_per_1k_yr",
+   "outcome_label": "311 reports per 1,000 a year: code_enforcement_habitability",
+   "rho": -0.037,
+   "p": 0.59,
+   "n": 215,
+   "strength": "none"
+  },
+  {
+   "attribute": "epc",
+   "attribute_label": "Equity Priority Community",
+   "outcome": "p311_other_per_1k_yr",
+   "outcome_label": "311 reports per 1,000 a year: other",
+   "rho": 0.031,
+   "p": 0.65,
+   "n": 215,
+   "strength": "none"
+  },
+  {
+   "attribute": "asian_pacific",
+   "attribute_label": "Asian/Pacific-language households",
+   "outcome": "voice_per_1k",
+   "outcome_label": "comments per 1,000 (voice)",
+   "rho": -0.028,
+   "p": 0.68,
+   "n": 215,
+   "strength": "none"
+  },
+  {
+   "attribute": "nonwhite",
+   "attribute_label": "non-white share",
+   "outcome": "p311_code_enforcement_habitability_per_1k_yr",
+   "outcome_label": "311 reports per 1,000 a year: code_enforcement_habitability",
+   "rho": -0.022,
+   "p": 0.74,
+   "n": 215,
+   "strength": "none"
+  },
+  {
+   "attribute": "spanish",
+   "attribute_label": "Spanish-speaking households",
+   "outcome": "p311_other_per_1k_yr",
+   "outcome_label": "311 reports per 1,000 a year: other",
+   "rho": 0.02,
+   "p": 0.77,
+   "n": 215,
+   "strength": "none"
+  },
+  {
+   "attribute": "epc",
+   "attribute_label": "Equity Priority Community",
+   "outcome": "p311_code_enforcement_habitability_per_1k_yr",
+   "outcome_label": "311 reports per 1,000 a year: code_enforcement_habitability",
+   "rho": -0.019,
+   "p": 0.78,
+   "n": 215,
+   "strength": "none"
+  },
+  {
+   "attribute": "asian_pacific",
+   "attribute_label": "Asian/Pacific-language households",
+   "outcome": "p311_infrastructure_streets_per_1k_yr",
+   "outcome_label": "311 reports per 1,000 a year: infrastructure_streets",
+   "rho": 0.002,
+   "p": 0.98,
+   "n": 215,
+   "strength": "none"
+  }
+ ]
+}

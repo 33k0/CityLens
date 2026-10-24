@@ -16,3 +16,4 @@ run export_comments.py                # h  (voice export: letters + email + site
 run fairness.py                       # f/g (reads the export, so it runs last)
 run build_ui.py                       # j  (tract layer for the map UI)
 run metrics.py                        # i  (every metric in docs/METRICS.md -> public/data/metrics.json)
+run chat_context.py                   # k  (tract profiles, area index, associations for the staff chat)

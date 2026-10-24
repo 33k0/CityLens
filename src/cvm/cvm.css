@@ -665,3 +665,14 @@ button.cite{font:inherit;cursor:pointer}
 .tour.nohl .tourblock{background:rgba(24,22,30,.58)}.tour.nohl .tourhl{opacity:0}
 .tbtn.tourbtn{background:var(--g3);border-color:var(--g3);color:#fff;font-weight:500}
 .tbtn.tourbtn:hover{background:var(--g4);border-color:var(--g4)}
+/* Who we are not hearing from: fit the card (name + tags wrap; headers wrap; tighter cells) */
+.mvt{overflow-x:auto}
+.mvtab th{white-space:normal;padding:8px 8px;font-size:11.5px;line-height:1.25}
+.mvtab th em{font-size:10.5px;max-width:120px;margin-left:auto}
+.mvtab th.l em,.mvtab th.rt em{margin-right:auto}
+.mvtab td{padding:9px 8px;font-size:12.5px}
+.mvtab td b{font-size:13px}
+.mvtab td.l{white-space:normal;min-width:150px}
+.mvtab td.l b{display:block;font-size:13px;margin-bottom:3px}
+.mvtab td.l .why,.mvtab td.l .epc{margin:0 4px 2px 0;font-size:10px;padding:1px 5px;white-space:nowrap}
+.mvtab .thl{white-space:nowrap}

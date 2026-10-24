@@ -451,7 +451,7 @@ async function mount(root,init){
    ${tile(city?'Comments (no copies)':'Comments located here',fmt(city?scope.length:loc.length),city?`${fmt(D.rawRows)} incl. copies · ${P(loc.length/Math.max(1,scope.length))} on the map`:`${expN<1?expN.toFixed(1):Math.round(expN)} expected from population`,'', 'hero')}
    ${city?tile('Residents where we heard nothing',P(silent.reduce((s,t)=>s+t.pop,0)/D.totPop),`${fmt(silent.length)} of ${CT.length} census tracts sent no located comment`,'','hero'):tile('Representation ratio',rr==null?'—':rr.toFixed(2),rr==null?'':rr>=1?`sends ${rr.toFixed(1)}× its share of comments`:`gets ${P(rr)} of its fair share`,`<div class="bullet" ${tipA(`1.0 = comment share equals population share`)}><i style="width:${Math.min(100,(rr||0)/3*100)}%"></i><b style="left:${100/3}%"></b><span>0</span><span style="left:${100/3}%">1.0</span><span style="right:0">3+</span></div>`,'hero')}
    ${ITEM.n311?tile('311 problem reports / 1,000 / yr',rate311.toFixed(0),city?`${fmt(tr.reduce((s,t)=>s+((D.p311.all||{})[t.id]||0),0))} reports in ${ms.length} months`:delta(rate311,rate311C,{fmtv:v=>v.toFixed(0)}),spark(areaM,'#22877C')):tile('311 problem reports','—','no 311 data for this section')}
-   ${tile('Asking for something specific',P(actR),city?`${fmt(actY)} of ${fmt(act.length)} comments`:delta(actR,actRC,{fmtv:v=>P(v)}))}
+   ${tile('Ask for a specific fix',P(actR),city?`${fmt(actY)} of ${fmt(act.length)} report a problem or request an action, not just a vote`:delta(actR,actRC,{fmtv:v=>P(v)}))}
   </section>`;
   /* ---- trust ---- */
   const confs=W.map(c=>c.conf).filter(x=>x!=null);const mean=confs.length?confs.reduce((a,b)=>a+b,0)/confs.length:null;

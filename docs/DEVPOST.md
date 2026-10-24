@@ -131,17 +131,20 @@ Every number is computed in code, never by an AI model. The unit is the census t
 
 Repeat submissions are removed (RapidFuzz), and form-letter campaigns (MinHash) count once in the fairness checks. Billing and account requests are left out of 311. Police calls are calls, not crimes.
 
-### Rankings
+### Rankings: putting voice and problems on the same scale
 
-With about 217,000 311 reports and a few hundred real comments, raw counts can't be compared, so each family is ranked on the same 0–100 scale.
+San José has about 217,000 311 reports but only a few hundred real comments, so the raw numbers can't be compared directly. Instead, CityLens ranks every census tract twice, like a percentile on a test score: once for how much it **writes in** and once for how many **problems it reports**, each per resident. Both ranks run from 0 to 100, so they can be compared side by side.
 
-| Metric | How we get it |
-|---|---|
-| **Comment rank / problems rank** | Share of census tracts with a lower rate; 94 = higher than 94% of them |
-| **Underheard map score** | Problems rank − comment rank |
-| **Problems without voice** | Problems rank ≥ 70 and comment rank ≤ 30 |
-| **Voice for its problems** | Comments-to-311 ratio ÷ the city's ratio; 1.0 = city level, 0 = no voice |
-| **Underheard census tract** | Under half its expected comments, plus 311 at or above the city rate or limited English at 1.5× the city share (otherwise **quiet**) |
+| Metric | What it means | How we get it |
+|---|---|---|
+| **Comment rank** (0–100) | How much a census tract writes in, compared with the rest of the city | The share of census tracts with a lower comment rate. 10 = writes in more than only 10% of census tracts. No comments = 0. |
+| **Problems rank** (0–100) | How many problems it reports, compared with the rest of the city | The same, using 311 reports per resident (or police calls, if selected). 90 = reports more than 90% of census tracts. |
+| **Underheard map score** | How far problems outpace voice; the darker the purple, the bigger the gap | Problems rank − comment rank. |
+| **Problems without voice** | The starkest gaps, highlighted on the map | Problems rank of 70 or more **and** comment rank of 30 or less. |
+| **Voice for its problems** (the red-to-yellow column) | How much a place speaks up for each problem it reports, compared with the city | (comments per resident ÷ 311 reports per resident) ÷ the same ratio for the whole city. 1.0 = city level; 0.25 = a quarter of the city's voice per problem; 0 = no voice at all. |
+| **Underheard census tract** (the final label) | The places worth outreach | Sends under half the comments its population predicts, **and** either reports 311 problems at or above the city rate or has limited-English households at 1.5× the city share. Few comments with few problems is labeled **quiet** instead. |
+
+**Example:** a census tract with a problems rank of 90 and a comment rank of 10 gets an underheard map score of 80, so it shows as dark purple. It also counts as "problems without voice". If it sends under half its expected comments, it is labeled underheard and appears in the "Who we are not hearing from" table.
 
 ### Fairness (IBM AI Fairness 360)
 

@@ -541,3 +541,4 @@ details.mapkey .kr .ramp div{height:7px}
 .secmenu .mi.sec{border:0;margin:1px 0}
 .picker .m span{white-space:nowrap;flex:none}
 .secmenu .sn b{font-family:inherit;font-weight:600}
+.lbl .lbln{font-weight:400;color:var(--ink2);margin-left:6px;font-size:11px;text-transform:none;letter-spacing:0}

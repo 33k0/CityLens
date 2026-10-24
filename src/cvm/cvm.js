@@ -6,7 +6,7 @@ import * as d3 from 'd3'
 import './cvm.css'
 import { askAssistant } from './assistant.js'
 
-const COL={support:'#1F7A6E',oppose:'#B3412B',neutral:'#6B7280',unclear:'#8A6D3B',amber:'#B7791F'};
+const COL={support:'#1F7A6E',oppose:'#B3412B',neutral:'#6B7280',unclear:'#8A6D3B',none:'#9A9A94',amber:'#B7791F'};
 const GAP=['#EDE9F7','#C9BEE8','#9F8AD3','#7357B4','#4A2C8C'];
 const GAPM=['#D9D6CE','#CDC2EC','#9F8AD3','#7357B4','#4A2C8C'];
 const RAW=['#E4E0D8','#F6CFC2','#E8957D','#C8553D','#8E2A1C'];
@@ -37,6 +37,7 @@ const ICON={
  support:(s=10)=>`<svg width="${s}" height="${s}" viewBox="0 0 10 10" aria-hidden="true"><circle cx="5" cy="5" r="4.2" fill="${COL.support}"/></svg>`,
  oppose:(s=10)=>`<svg width="${s}" height="${s}" viewBox="0 0 10 10" aria-hidden="true"><polygon points="5,0.8 9.6,9.2 0.4,9.2" fill="${COL.oppose}"/></svg>`,
  neutral:(s=10)=>`<svg width="${s}" height="${s}" viewBox="0 0 10 10" aria-hidden="true"><rect x="1.2" y="1.2" width="7.6" height="7.6" fill="${COL.neutral}"/></svg>`,
+ none:(s=10)=>`<svg width="${s}" height="${s}" viewBox="0 0 10 10" aria-hidden="true"><circle cx="5" cy="5" r="2.6" fill="${COL.none}"/></svg>`,
  unclear:(s=10)=>`<svg width="${s}" height="${s}" viewBox="0 0 10 10" aria-hidden="true"><polygon points="5,0.6 9.4,5 5,9.4 0.6,5" fill="none" stroke="${COL.unclear}" stroke-width="1.6"/></svg>`,
  chevL:'<svg width="12" height="12" viewBox="0 0 12 12"><path d="M7.5 2.5 4 6l3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>',
  chevR:'<svg width="12" height="12" viewBox="0 0 12 12"><path d="M4.5 2.5 8 6l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>',
@@ -49,7 +50,7 @@ const ICON={
  list:'<svg width="16" height="16" viewBox="0 0 16 16"><path d="M2 4h12M2 8h12M2 12h8" stroke="currentColor" stroke-width="1.4"/></svg>',
  gapI:'<svg width="16" height="16" viewBox="0 0 16 16"><rect x="2" y="2" width="5" height="5" fill="currentColor"/><rect x="9" y="2" width="5" height="5" fill="none" stroke="currentColor"/><rect x="2" y="9" width="5" height="5" fill="none" stroke="currentColor"/><rect x="9" y="9" width="5" height="5" fill="currentColor" opacity=".5"/></svg>',
  chat:'<svg width="16" height="16" viewBox="0 0 16 16"><path d="M2.5 3h11v7.5H7L4 13v-2.5H2.5z" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>'};
-const stLabel={support:'Support',oppose:'Oppose',neutral:'Neutral',unclear:'Unclear'};
+const stLabel={support:'Support',oppose:'Oppose',neutral:'Neutral',unclear:'Unclear',none:'Report or request'};
 const stIco=(s,z)=>(ICON[s]||ICON.unclear)(z);
 
 /* ---------- data ---------- */
@@ -76,9 +77,9 @@ async function load(){
  /* voice comments: one record per unique comment (duplicate_of rows are counted in raw totals only) */
  const att={};(inbox.emails||[]).forEach(e=>{att[e.comment_id]=e.attachments||[]});
  const campSize={};voice.comments.forEach(c=>{if(c.campaign_id)campSize[c.campaign_id]=(campSize[c.campaign_id]||0)+1});
- D.rawRows=voice.comments.length;D.catDefs=voice.categories;
+ D.rawRows=voice.comments.length;D.catDefs=voice.categories;const POL=new Set(D.cfg.policy_sections);
  D.voice=voice.comments.filter(c=>!c.duplicate_of).map(c=>{const t=c.tract_id?D.byTract[c.tract_id]:null;const a=att[c.comment_id]||[];
-  return {id:c.comment_id,catKey:c.category,subKey:c.subcategory,tract:t?t.id:null,t,stance:STANCES.includes(c.stance)?c.stance:'unclear',
+  return {id:c.comment_id,catKey:c.category,subKey:c.subcategory,tract:t?t.id:null,t,stance:!POL.has(c.category)?'none':STANCES.includes(c.stance)?c.stance:'unclear',
    text:c.text||'',subject:c.subject||'',lang:LANG[c.language]||c.language||'Unknown',langCode:c.language,tier:c.location_precision||'none',locSrc:c.location_source||'',basis:c.location_basis||'',
    src:c.channel==='letter'?'Letter':c.channel==='email'?'Email':'Site',mock:!!c.mock,when:c.received_at?new Date(c.received_at):null,
    attach:a,photo:a.some(x=>x.kind==='image'),camp:c.campaign_id||null,campSize:c.campaign_id?campSize[c.campaign_id]:0,
@@ -129,7 +130,7 @@ function weights(comments,mode,ak){
  if(mode==='pop')return comments.map(c=>c.t.pop/Math.max(1,c.t.n)/400);
  const f=ATTRS[ak||'renter'].f;const T=D.tracts;const popU=T.filter(f).reduce((s,t)=>s+t.pop,0)/D.totPop;const cu=D.comments.filter(c=>f(c.t)).length/Math.max(1,D.comments.length);
  const wu=popU/Math.max(.01,cu),wp=(1-popU)/Math.max(.01,1-cu);return comments.map(c=>f(c.t)?wu:wp)}
-function catTotals(comments,mode,ak){const w=weights(comments,mode,ak);const o={};CATS.forEach(c=>o[c.k]={k:c.k,n:c.n,tot:0,support:0,oppose:0,neutral:0,unclear:0,count:0});comments.forEach((c,i)=>{const x=o[c.cat];if(!x)return;x.tot+=w[i];x[c.stance]+=w[i];x.count++});return Object.values(o)}
+function catTotals(comments,mode,ak){const w=weights(comments,mode,ak);const o={};CATS.forEach(c=>o[c.k]={k:c.k,n:c.n,tot:0,support:0,oppose:0,neutral:0,unclear:0,none:0,count:0});comments.forEach((c,i)=>{const x=o[c.cat];if(!x)return;x.tot+=w[i];x[c.stance]+=w[i];x.count++});return Object.values(o)}
 function ranks(comments,ak){const m={};['raw','rw','pop'].forEach(mode=>{const t=catTotals(comments,mode,ak).sort((a,b)=>b.tot-a.tot);t.forEach((x,i)=>{(m[x.k]=m[x.k]||{k:x.k,n:x.n})[mode]=i+1})});return Object.values(m).sort((a,b)=>a.raw-b.raw)}
 function gapBin(t){const g=t.gap;return g>=0?0:g>-30?1:g>-55?2:g>-80?3:4}
 function rawBin(t){const n=t.n;return n===0?0:n<5?1:n<10?2:n<18?3:4}
@@ -164,7 +165,7 @@ function MapView(el,o){
   .on('dblclick',function(ev,d){if(self.armed||self.drawing||!self.o.onPick||Date.now()-(window.__drawEnd||0)<600)return;ev.stopPropagation();clearTimeout(self._ct);self.o.onPick(d,true)});
  const outer=(g=>({type:'MultiPolygon',coordinates:(g.type==='Polygon'?[g.coordinates]:g.coordinates).map(p=>[p[0]])}))(D.city.geometry);this.gCity.append('path').attr('d',this.path(outer)).attr('fill','none').attr('stroke','#5C5C58').attr('stroke-width',1.2).attr('vector-effect','non-scaling-stroke');
  this.base=D.comments.map(c=>this.proj(c.ll));
- const sym={support:'M0,-2.1a2.1,2.1 0 1,0 0.01,0z',oppose:'M0,-2.6L2.4,1.8L-2.4,1.8z',neutral:'M-1.8,-1.8h3.6v3.6h-3.6z',unclear:'M0,-2.4L2.4,0L0,2.4L-2.4,0z'};
+ const sym={support:'M0,-2.1a2.1,2.1 0 1,0 0.01,0z',oppose:'M0,-2.6L2.4,1.8L-2.4,1.8z',neutral:'M-1.8,-1.8h3.6v3.6h-3.6z',unclear:'M0,-2.4L2.4,0L0,2.4L-2.4,0z',none:'M0,-1.6a1.6,1.6 0 1,0 0.01,0z'};
  this.dp=this.gD.selectAll('path').data([]).join('path').attr('d',c=>sym[c.stance]).attr('fill',c=>COL[c.stance]).attr('pointer-events','none');
  this.k=d3.zoomIdentity;
  if(!o.static){
@@ -291,7 +292,7 @@ async function mount(root,init){
   stage.style.setProperty('--rp',Math.round(Math.min(620,288+(W-BW)*0.65))+'px')};
  fit();addEventListener('resize',()=>{fit();clearTimeout(_rt);_rt=setTimeout(()=>{if(typeof render==='function')render()},120)});
  let maps=[];
- const dotFilter=c=>S.stance[c.stance]&&(!Object.keys(S.cats).length||S.cats[c.cat]);
+ const dotFilter=c=>(c.stance==='none'||S.stance[c.stance])&&(!Object.keys(S.cats).length||S.cats[c.cat]);
  const filtered=()=>D.comments.filter(dotFilter);
  const city=fairness(D.tracts,S.attr);
  const R=()=>S.region?regionTracts(S.region.poly):null;
@@ -310,7 +311,7 @@ async function mount(root,init){
  function filters(){const fc=filtered();const cc={};D.comments.forEach(c=>cc[c.cat]=(cc[c.cat]||0)+1);const sc={};D.comments.forEach(c=>sc[c.stance]=(sc[c.stance]||0)+1);
  return `<div class="sec"><div class="sech"><h4>Filters</h4><button class="link" data-act="togglefilters">${S.filtersOpen?'Hide':'Show'}</button></div>${S.filtersOpen?`
  <div class="lbl" style="margin-top:0">Subcategory</div><div class="sublist">${(()=>{const mx=Math.max(1,CATS.reduce((t,c)=>t+(cc[c.k]||0),0));const any=Object.keys(S.cats).length;return CATS.map(c=>{const on=!!S.cats[c.k];const n=cc[c.k]||0;return `<button class="subrow ${on?'on':''} ${any&&!on?'dim':''}" data-act="cat" data-v="${c.k}" aria-pressed="${on}"><span class="sbx">${on?'✓':''}</span><span class="snm">${c.n}</span><span class="sct num">${n}</span><span class="sbar"><i style="width:${n/mx*100}%"></i></span></button>`}).join('')})()}</div>
- <div class="lbl">Stance</div><div class="chips">${STANCES.map(s=>`<button class="fchip ${S.stance[s]?'on':''}" data-act="stance" data-v="${s}" aria-pressed="${!!S.stance[s]}">${stIco(s,9)}${stLabel[s]}<span class="ct num">${sc[s]||0}</span></button>`).join('')}</div>
+ ${!D.comments.some(c=>c.stance!=='none')?'':`<div class="lbl">Stance${D.comments.some(c=>c.stance==='none')?'<span class="lbln">policy sections only</span>':''}</div><div class="chips">${STANCES.map(s=>`<button class="fchip ${S.stance[s]?'on':''}" data-act="stance" data-v="${s}" aria-pressed="${!!S.stance[s]}">${stIco(s,9)}${stLabel[s]}<span class="ct num">${sc[s]||0}</span></button>`).join('')}</div>`}
  <div class="small muted" style="margin-top:10px"><b class="num" style="color:var(--ink)">${fmt(fc.length)}</b> of ${fmt(D.located)} shown</div>`:`<div class="small muted">${fmt(fc.length)} of ${fmt(D.located)} shown</div>`}</div>`}
 
  function fairCard(){const f=fairness(D.tracts,S.attr);const A=ATTRS[S.attr];const rk=ranks(D.comments,S.attr);

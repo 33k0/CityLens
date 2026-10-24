@@ -87,7 +87,7 @@ const metricIds = () => new Set(Object.keys(cachedJson('public/data/metrics.json
 const FILES = ['public/data/comments.json', 'public/data/requests_311_by_tract.json', 'public/data/metrics.json',
   'public/data/fairness/voice_city.json', 'public/data/fairness/311_city.json', 'public/data/fairness/meta.json',
   'public/data/fairness/problems_without_voice.json', 'public/data/coverage.json', 'public/data/ui.json',
-  'public/data/inbox.json', 'data/campaigns.json', 'DECISIONS.md', 'docs/METRICS.md',
+  'public/data/inbox.json', 'data/campaigns.json', 'docs/METRICS.md',
   'public/data/tract_profiles.csv', 'public/data/police_by_tract.json', 'public/data/requests_311_types.json', 'public/data/area_index.json', 'public/data/associations.json', 'docs/CONTEXT_SAN_JOSE.md']
 function validRef(ref) {
   const m = /^(metric|file):(.+)$/i.exec(String(ref || '').trim())

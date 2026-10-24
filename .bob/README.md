@@ -7,7 +7,7 @@
 | `skills/categorize-comments/taxonomy-rules.md` | How voice categories are made: 5–8, derived from the text, `maps_311`, stable keys, multilingual keywords, stance definition. |
 | `skills/council-query/SKILL.md` | `/council-query <question>`: grounded answers for staff with `comment_id` citations and separate `voice` / `requests_311` numbers. |
 
-The four files were written to the addendum's description, because the original addendum was never supplied (see DECISIONS.md).
+The four files were written to the addendum's description, because the original addendum was never supplied.
 
 ## How Bob is invoked
 

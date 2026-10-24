@@ -3,7 +3,7 @@
     "api/assistant.mjs": {
       "maxDuration": 60,
       "memory": 1024,
-      "includeFiles": "{node_modules/bobshell/**,.bob/**,public/data/**,docs/**,data/campaigns.json,data/bob_runs.json,DECISIONS.md,src/cvm/assistant.js}"
+      "includeFiles": "{node_modules/bobshell/**,.bob/**,public/data/**,docs/**,data/campaigns.json,data/bob_runs.json,src/cvm/assistant.js}"
     }
   }
 }

@@ -119,7 +119,7 @@ def inventory_api(cli: Client, since: str, until: str, log) -> list[dict]:
 
 def inventory_html(cli: Client, since: str, until: str, log) -> list[dict]:
     """HTML fallback. Only exercised if the API is disabled for this client; selectors are kept in
-    one place so they can be fixed after inspection (see DECISIONS.md)."""
+    one place so they can be fixed after inspection."""
     from bs4 import BeautifulSoup
     rows = []
     cal = cli.get(f"{SITE}/Calendar.aspx")

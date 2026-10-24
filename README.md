@@ -84,7 +84,7 @@ rankings, never added together. Nothing finer than a census tract is ever stored
 - `server/assistant.mjs`, `api/assistant.mjs`: the chat server (dev and Vercel)
 - `scripts/`: the data pipeline
 - `public/data/`: the data the app reads
-- `docs/METRICS.md`: every metric with its formula · `DECISIONS.md`: design decisions and why
+- `docs/METRICS.md`: every metric with its formula
 
 ## Limitations
 

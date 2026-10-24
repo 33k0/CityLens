@@ -566,3 +566,14 @@ Dates are absolute. Newest at the bottom of each section.
 - Labels and actionable flags come from the build agent (engine `build-agent`), with no Bob calls
   (`BOB_BUDGET_USD=0`). Bob spend is unchanged at $8.99 over 19 runs. The labels are in
   `data/bob_work/agent_labels.json` and `actionable_agent.json`, which are gitignored.
+
+## Second batch of simulated emails (479, written per section by small AI writers)
+
+To give every section enough comments to analyze, four Haiku writers each drafted 120 emails from a fixed template
+(section, subcategory, language, persona, issue, detail, ask, stance). The topic mix follows real San José demand: the
+city's own 311 data is dominated by junk pickup, graffiti, vehicle complaints and illegal dumping, then streetlights,
+encampments and potholes, so sanitation, code enforcement and public safety get the most new emails. Writers were not
+allowed to name places or people. `scripts/mock_emails/batch2.py` rejects any that do (and any repeated openings), then adds a
+location sentence, sender, date and recipient, placing emails with the same per-resident census tract weights as the first batch.
+Labels are the section and subcategory each writer was asked for; the evidence quote is the issue sentence, an exact
+substring of the email. IBM Bob was not called. All rows are `mock=true, generated=true`.

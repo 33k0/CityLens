@@ -529,3 +529,14 @@ details.mapkey .kr .ramp div{height:7px}
 .vs.hi{background:#FBE3D6;color:#9A3A12}.vs.md{background:#FDF1DC;color:#8A5A0B}.vs.lo{background:#F0F0EC;color:#6B6B66}
 .mvkey .vs{margin:0 2px;min-width:0}
 .dfl[data-def]{cursor:help;text-decoration:underline dotted #B5B5AE;text-underline-offset:3px}
+/* open drawings, under the zoom buttons */
+.drawlist{position:absolute;right:14px;top:122px;width:190px;background:var(--panel);border:1px solid var(--line);border-radius:4px;z-index:5;padding:6px 0 4px;box-shadow:0 4px 14px rgba(27,27,27,.06)}
+.drawlist .dlh{display:flex;justify-content:space-between;align-items:center;padding:0 10px 4px;font-size:11px;color:var(--ink2);text-transform:uppercase;letter-spacing:.05em}
+.drawlist .dlh .link{font-size:11px;text-transform:none;letter-spacing:0}
+.drawlist .dli{display:flex;align-items:center;gap:8px;padding:5px 6px 5px 10px}
+.drawlist .dli i{width:10px;height:10px;border:2px solid #4A2C8C;background:rgba(74,44,140,.12);border-radius:2px;flex:none}
+.drawlist .dli span{flex:1;min-width:0;line-height:1.25}
+.drawlist .dli b{display:block;font-size:12.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.drawlist .dli em{font-style:normal;font-size:11px;color:var(--ink2)}
+.drawlist .dli button{border:0;background:none;width:22px;height:22px;border-radius:3px;cursor:pointer;color:var(--ink2);font-size:16px;line-height:1;flex:none}
+.drawlist .dli button:hover{background:var(--bg);color:var(--ink)}

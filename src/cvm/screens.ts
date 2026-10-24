@@ -1,4 +1,4 @@
-/* The design's screen states (docs/design/*.html), reachable as ?screen=<key> for review and demos. */
+/* Preset screen states, reachable as ?screen=<key> for review and demos. */
 export const SCREENS: Record<string, Record<string, unknown>> = {
   '01': { scheme: 'voice', tab: 'comments' },
   '02': { scheme: 'gap', tab: 'missing', pin: { kind: 'under' } },

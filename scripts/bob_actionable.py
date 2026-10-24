@@ -61,6 +61,11 @@ def main() -> int:
                                                "engine": "bob", "bob_task_id": prev_task.get(o["comment_id"], "")}
         except Exception:  # noqa: BLE001
             pass
+    if OUT.exists():  # rows already labeled in the committed output stay as they are (the scratch batch files are not kept)
+        prev = pd.read_csv(OUT, dtype=str, keep_default_na=False)
+        for r in prev.itertuples():
+            if r.actionable in ("True", "False") and r.engine == "bob" and r.comment_id not in labels:
+                labels[r.comment_id] = {"actionable": r.actionable == "True", "reason": r.reason, "engine": r.engine, "bob_task_id": r.bob_task_id}
     todo = [u for u in units if u["comment_id"] not in labels]
     left = []
     for i in range(0, len(todo), BATCH):
@@ -90,7 +95,7 @@ def main() -> int:
         B.log(f"  actionable batch {n}: {len(got)}/{len(rows)}, ${float(rec.get('session_costs') or 0):.3f}, total ${B.spent():.2f}")
     agent = json.loads(AGENT.read_text()) if AGENT.exists() else {}
     for cid, o in agent.items():
-        if cid not in labels:
+        if cid not in labels and cid not in follower_of:  # campaign copies inherit their representative's label
             labels[cid] = {"actionable": bool(o["actionable"]), "reason": str(o.get("reason", ""))[:80],
                            "engine": "build-agent", "bob_task_id": ""}
     pending = [r for r in left if r["comment_id"] not in labels]

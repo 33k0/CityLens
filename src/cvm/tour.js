@@ -25,7 +25,7 @@ export function startTour({ S, D, ITEM, render, maps }) {
     { el: 'section.heard', title: 'Who gets heard', text: 'IBM AI Fairness 360 results in plain language. <b>Purple bars</b> are under-represented groups, <b>grey</b> is everyone else. Renter and limited-English neighborhoods are heard about half as often.', run: home },
     { el: '.maps', title: 'Side-by-side', text: 'Compare two map types or two places at once. The link button lets both maps zoom together or separately.', run: () => { home(); S.sbs = true; S.drawer = false } },
     { el: () => cardWith('How much to trust'), title: 'Analytics', text: 'Open analytics for the city, a region or one census tract. Start with <b>How much to trust these numbers</b>: how many comments were placed on the map, how many are real, and how sure the labels are.', run: () => { home(); S.view = 'analytics' } },
-    { el: () => cardWith('Who we are not hearing from'), title: 'Who we are not hearing from', text: 'Every underheard census tract, sortable. The color runs from <b>red (almost no voice for its problems)</b> to yellow (city level).', run: () => { home(); S.view = 'analytics' } },
+    { el: () => cardWith('Who we are not hearing from'), until: '.mvtab tbody tr:nth-child(4)', title: 'Who we are not hearing from', text: 'The underheard census tracts, sortable by any column. The color runs from <b>red (almost no voice for its problems)</b> to yellow (city level).', run: () => { home(); S.view = 'analytics' } },
     { el: '.rpanel', title: 'Ask IBM Bob', text: 'Ask questions in plain English. Every claim comes with a <b>clickable source</b>, and Bob can move the map for you. We typed an example below. Press <b>Enter</b> to ask it, or write your own.', run: home, after: () => { const ta = qs('.cbox textarea'); if (ta) ta.value = EX } },
     { el: '.top [data-act="tour"]', title: 'You are all set', text: 'Replay this tour any time from the <b>Tour</b> button.' },
   ]
@@ -46,6 +46,8 @@ export function startTour({ S, D, ITEM, render, maps }) {
     let r = t.getBoundingClientRect(), p = 6
     const t2 = s.also && qs(s.also)
     if (t2) { const r2 = t2.getBoundingClientRect(); r = { left: Math.min(r.left, r2.left), top: Math.min(r.top, r2.top), right: Math.max(r.right, r2.right), bottom: Math.max(r.bottom, r2.bottom) } }
+    const t3 = s.until && qs(s.until) /* stop the spotlight here: the header and first rows are enough */
+    if (t3) r = { left: r.left, top: r.top, right: r.right, bottom: Math.min(r.bottom, t3.getBoundingClientRect().bottom) }
     const x = Math.max(4, r.left - p), y = Math.max(4, r.top - p), w = Math.min(W - 8, r.right + p) - x, h = Math.min(Hh - 8, r.bottom + p) - y
     hl.style.cssText = `left:${x}px;top:${y}px;width:${w}px;height:${h}px`
     const ch = card.offsetHeight, g = 14
@@ -71,7 +73,7 @@ export function startTour({ S, D, ITEM, render, maps }) {
     const t = typeof s.el === 'function' ? s.el() : s.el ? qs(s.el) : null
     if (t) { /* bring it into view inside its own scroll panel; the stage itself must never scroll */
       let sc = t.parentElement; while (sc && sc !== document.body && !/(auto|scroll)/.test(getComputedStyle(sc).overflowY)) sc = sc.parentElement
-      if (sc && sc !== document.body) { const a = sc.getBoundingClientRect(), b = t.getBoundingClientRect(); if (b.top < a.top || b.bottom > a.bottom) sc.scrollTop += b.top - a.top - 24 } }
+      if (sc && sc !== document.body) { const a = sc.getBoundingClientRect(), b = t.getBoundingClientRect(); if (b.top < a.top || b.bottom > a.bottom) sc.scrollTop += (b.top - a.top - 24) * sc.clientHeight / a.height } /* the stage is CSS-scaled */ }
     place(); clearTimeout(tid); tid = setTimeout(place, 120) /* maps fit after render */
     card.querySelector('.btn.pri').focus({ preventScroll: true })
   }

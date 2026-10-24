@@ -445,3 +445,40 @@ Dates are absolute. Newest at the bottom of each section.
   (06085501402, 06085501601, 06085506305) sit at the 97th–99th 311 percentile with no located comment.
 - `web/fairness.js` is a dependency-free port used for drawn regions; `web/fairness.test.mjs` checks it against the
   AIF360 outputs in `public/data/fairness/parity_fixtures.json` to 1e-9 (weighted and unweighted, every attribute).
+
+## Milestone 7 — the CityLens map UI from the team's design (2026-10-23)
+
+- The UI is the team's design (`docs/design/*.html`, `cvm.js`, `cvm.css`, kept verbatim for reference) running on
+  pipeline data. `src/cvm/cvm.js` = a new data layer (`src/cvm/header.js`) + the design's map, panels, region drawing,
+  fairness card, analytics, inspector and chat, with targeted edits. `npm run dev` opens it; `?screen=<key>` opens any
+  of the design's screen states (01 … 08c); the plain data viewer moved to `#data`. Tailwind is not loaded on the map
+  UI because its base styles restyle the design's inline SVG icons.
+- **Everything synthetic in the design was replaced:** the generated comments, tract scatter, made-up 311 counts,
+  canned quotes, invented email headers ("Lucretia", iPhone mailer), fake attachments and the pitch frames with
+  hard-coded claims (the pitch pages were dropped). Picker items are IBM Bob's 8 sections plus "All sections"; the
+  sidebar lists Bob's subsections; counts are unique comments (duplicates removed, campaign letters counted
+  individually and tagged).
+- `scripts/build_ui.py` writes `public/data/ui.json`: the 215 tracts with geometry, ACS 2020–2024 profile, council
+  district, a display neighborhood from the city's neighborhoods layer, the city outline, and the attribute cutoffs
+  from `fairness/meta.json`. Comments, 311 and fairness are read from their own files (one source of truth).
+- **Rule changes forced by our rules, not the design's:**
+  - Fairness "heard" = comment rate above the citywide median (as in `fairness.py`), replacing the design's
+    40th-percentile "high-volume" rule. DI shows "—" when undefined.
+  - Underheard with 311 = 311 rank − comment rank (0–100 percentiles of per-1,000 rates, share strictly below), and
+    the tooltip shows both ranks plus the problems-without-voice flag; the design's share-difference mixed the two
+    families. 311 rates are annualized.
+  - Quotes everywhere are Bob's exact evidence quotes. Non-English comments are shown as written and labeled "not
+    translated"; nothing is machine-translated or paraphrased.
+  - Photos: listed from email metadata but withheld ("withheld until faces and plates are redacted") because no
+    redaction step has run.
+  - Outreach briefs state only ACS and pipeline facts; the design's claim about which languages are spoken was removed
+    (we have no language-at-home table).
+  - Unclear stance is a fourth stance with its own diamond shape, so stance is never color alone.
+- **Chat** answers by retrieval over the ingested comments of the current section, narrowed to a drawn area or tract,
+  citing comment ids; with no match it says so and points to matches in other sections. The LLM assistant bridge from
+  the spec is not wired yet.
+- Map dots: the design draws no comment dots (its dot layer is empty by design), so comments are shown through the
+  choropleth, region panels and inspector; comment positions are still jittered inside their tract (seeded by
+  comment id) for the pulse highlight, never at true coordinates.
+- Bug found during wiring: an earlier test overwrote the label cache, so a cache replay restored only 427 of 435 Bob
+  labels. `bob_label.py` now reuses every label Bob wrote in `data/bob_work/`; replay gives 435/435 Bob, no new calls.

@@ -1,0 +1,20 @@
+/* The design's screen states (docs/design/*.html), reachable as ?screen=<key> for review and demos. */
+export const SCREENS: Record<string, Record<string, unknown>> = {
+  '01': { scheme: 'voice', tab: 'comments' },
+  '02': { scheme: 'gap', tab: 'missing', pin: { kind: 'under' } },
+  '03': { sbs: true, tab: 'missing' },
+  '04': { scheme: 'gap', fairOpen: true, filtersOpen: false, tab: 'missing' },
+  '04b': { scheme: 'gap', fairOpen: true, filtersOpen: false, drawer: true, tab: 'missing' },
+  '05': { scheme: 'gap', tab: 'missing', mvOpen: 0 },
+  '05b': { initZoom: { c: [-121.835, 37.336], k: 3.4 }, scheme: 'gap', tab: 'missing', armed: true, preDraw: true, hint: 'Click the first point or double-click to finish · Backspace undoes · Esc cancels' },
+  '05c': { initZoom: { c: [-121.85, 37.325], k: 2.6 }, scheme: 'gap', region: 'east', tab: 'region' },
+  '05d': { initZoom: { c: [-121.87, 37.315], k: 1.7 }, scheme: 'gap', compareInit: true, tab: 'region' },
+  '05e': { initZoom: { c: [-121.85, 37.33], k: 1.8 }, scheme: 'gap', region: 'tiny', tab: 'region' },
+  '05f': { scheme: 'gap', region: 'empty', tab: 'region' },
+  '05g': { initZoom: { c: [-121.85, 37.325], k: 2.6 }, scheme: 'gap', region: 'east', tab: 'region', regionState: 'loading' },
+  '06': { scheme: 'voice', tab: 'comments', inspectKind: 'email' },
+  '07': { initZoom: { c: [-121.85, 37.325], k: 2.4 }, scheme: 'gap', region: 'east', tab: 'chat' },
+  '08a': { state: 'noitem', tab: 'comments' },
+  '08b': { state: 'loading', tab: 'comments' },
+  '08c': { state: 'fallback', scheme: 'gap', tab: 'missing', pin: { kind: 'zero' } },
+}

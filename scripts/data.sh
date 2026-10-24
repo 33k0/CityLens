@@ -14,3 +14,5 @@ run resolve_locations.py "$@"         # d
 run bob_label.py "$@"                  # e  (IBM Bob labels every voice comment; --offline replays the cache; run_bob.mjs rebuilds the taxonomy on request)
 run export_comments.py                # h  (voice export: letters + email + site, joined with locations and classifications)
 run fairness.py                       # f/g (reads the export, so it runs last)
+run build_ui.py                       # j  (tract layer for the map UI)
+run metrics.py                        # i  (every metric in docs/METRICS.md -> public/data/metrics.json)

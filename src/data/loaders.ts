@@ -35,3 +35,8 @@ async function getJson<T>(urls: string[]): Promise<T> {
 
 export const load311ByTract = () => getJson<Requests311ByTract>([`${base}/data/requests_311_by_tract.json`, `${base}/data/fixtures/requests_311_by_tract.json`])
 export const load311Sample = () => getJson<Request311Sample>([`${base}/data/requests_311_sample.json`])
+
+import type { InboxEmail, VoicePayload } from './types'
+
+export const loadVoice = () => getJson<VoicePayload>([`${base}/data/comments.json`])
+export const loadInbox = () => getJson<{ mock: true; source: string; emails: InboxEmail[] }>([`${base}/data/inbox.json`])

@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import type { RawComment } from '../data/types'
+import type { VoiceComment } from '../data/types'
 import type { Requests311ByTract } from '../data/types311'
 import { PROBLEM_PCT_MIN, VOICE_PCT_MAX, percentileRanks, problemsWithoutVoice, ratePer1k } from '../data/families'
 
@@ -7,20 +7,27 @@ import { PROBLEM_PCT_MIN, VOICE_PCT_MAX, percentileRanks, problemsWithoutVoice, 
  * "Problems without voice": tracts in the top 30% of 311 reporting per resident and the bottom 30% of
  * written comment per resident. Compared by citywide percentile only; raw counts are never shown side by side.
  */
-export default function ProblemsWithoutVoice({ data311, voice }: { data311: Requests311ByTract; voice: RawComment[] }) {
+export default function ProblemsWithoutVoice({ data311, voice }: { data311: Requests311ByTract; voice: VoiceComment[] }) {
   const result = useMemo(() => {
     const problemRates: Record<string, number | null> = {}
     for (const t of Object.keys(data311.population)) problemRates[t] = ratePer1k(data311.totals[t] ?? 0, data311.population[t], data311.months_covered)
     const problemPct = percentileRanks(problemRates)
 
-    const located = voice.filter((c) => c.tract_id)
-    if (located.length === 0) return { problemPct, voicePct: null, rows: [], located: 0 }
+    // one voice per person: drop duplicates, count each form-letter campaign once
+    const seen = new Set<string>()
+    const unique = voice.filter((c) => {
+      if (c.duplicate_of) return false
+      if (c.campaign_id) { if (seen.has(c.campaign_id)) return false; seen.add(c.campaign_id) }
+      return true
+    })
+    const located = unique.filter((c) => c.tract_id)
+    if (located.length === 0) return { problemPct, voicePct: null, rows: [], located: 0, simulated: 0 }
     const counts: Record<string, number> = {}
     for (const c of located) counts[c.tract_id as string] = (counts[c.tract_id as string] ?? 0) + 1
     const voiceRates: Record<string, number | null> = {}
     for (const t of Object.keys(data311.population)) voiceRates[t] = ratePer1k(counts[t] ?? 0, data311.population[t])
     const voicePct = percentileRanks(voiceRates)
-    return { problemPct, voicePct, rows: problemsWithoutVoice(problemPct, voicePct), located: located.length }
+    return { problemPct, voicePct, rows: problemsWithoutVoice(problemPct, voicePct), located: located.length, simulated: located.filter((c) => c.mock).length }
   }, [data311, voice])
 
   const highProblem = Object.entries(result.problemPct)
@@ -38,7 +45,7 @@ export default function ProblemsWithoutVoice({ data311, voice }: { data311: Requ
       {result.voicePct === null ? (
         <>
           <div className="mb-2 rounded-md border border-dashed border-stone-300 bg-stone-50 p-2 text-xs text-stone-700">
-            Voice percentiles are pending: none of the {voice.length} letters has been located to a tract yet. That happens in the location-resolution step. Until then this lists
+            Voice percentiles are pending: none of the {voice.length} voice comments has been located to a tract yet. That happens in the location-resolution step. Until then this lists
             the {highProblem.length} tracts that meet the 311 side of the rule, with the voice column left empty.
           </div>
           <PctTable rows={highProblem.slice(0, 25).map(([t, p]) => ({ tract_id: t, problem_pct: p as number, voice_pct: null }))} />
@@ -47,7 +54,10 @@ export default function ProblemsWithoutVoice({ data311, voice }: { data311: Requ
         <div className="rounded-md border border-dashed border-stone-300 p-3 text-center text-xs text-stone-500">No tract meets both thresholds with the data loaded.</div>
       ) : (
         <>
-          <p className="mb-1 text-xs text-stone-500">{result.rows.length} tracts meet both thresholds ({result.located} letters located so far).</p>
+          <p className="mb-1 text-xs text-stone-500">
+            {result.rows.length} tracts meet both thresholds. Voice side built from {result.located} located comments (duplicates removed, campaigns counted once)
+            {result.simulated > 0 && <>; <strong>{result.simulated} of them are simulated emails, so the voice percentiles are illustrative</strong></>}.
+          </p>
           <PctTable rows={result.rows} />
         </>
       )}

@@ -67,3 +67,82 @@ export interface CommentsRawPayload {
   items: ItemMeta[]
   comments: RawComment[]
 }
+
+/** Joined voice record from public/data/comments.json (export_comments.py). Voice family only. */
+export interface VoiceComment {
+  comment_id: string
+  item: string
+  item_title: string
+  meeting_date: string
+  channel: 'letter' | 'email' | 'site'
+  mock: boolean
+  family: 'voice'
+  received_at: string
+  subject: string
+  text: string
+  language: string
+  commenter_type: CommenterType
+  duplicate_of: string | null
+  campaign_id: string | null
+  after_deadline: boolean | null
+  source_url: string
+  submitted_via: string
+  to_office: string
+  ocr: boolean
+  pdf_page_start: number | null
+  pdf_page_end: number | null
+  pages_total: number | null
+  pages_exhibit: number | null
+  tract_id: string | null
+  location_precision: 'address' | 'neighborhood' | 'zip' | 'none' | string
+  location_source?: string
+  multi_tract: boolean
+  council_district: number | null
+  matched_name?: string
+  category: string
+  confidence: number | null
+  evidence_quote: string
+  stance: Stance
+  stance_source: string
+  stance_evidence: string
+  engine: string
+}
+
+export interface VoiceItem {
+  item: string
+  title: string
+  meeting_date: string
+  mock: boolean
+  source: string
+  source_url: string | null
+  pages_summary: string | null
+  count: number
+  count_unique: number
+  channels: string[]
+}
+
+export interface VoicePayload {
+  generated_at: string
+  family: 'voice'
+  note: string
+  categories: { key: string; label: string; description: string }[]
+  campaigns: unknown
+  channels: Record<string, { count: number; mock: boolean; precision: Record<string, number> }>
+  items: VoiceItem[]
+  comments: VoiceComment[]
+}
+
+export interface InboxEmail {
+  comment_id: string
+  mock: true
+  received_at: string
+  from: string
+  to: string
+  subject: string
+  body: string
+  language: string
+  submitted_via: string
+  item: string
+  item_title: string
+  attachments: { file: string; kind: string; description?: string; redacted: boolean; served: boolean }[]
+}

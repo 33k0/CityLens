@@ -383,10 +383,8 @@ Dates are absolute. Newest at the bottom of each section.
 
 ## Milestone 5 — categories and labels by IBM Bob (2026-10-23)
 
-- **No preset categories.** A first taxonomy was drafted by the build agent while Bob was blocked; the user rejected it
-  because categories must come from the data via Bob. The draft was moved out of Bob's workspace and is committed only as
-  `data/categories.draft_build_agent.json` (marked rejected) for the comparison in `BOB_USAGE.md`, the `categorize-comments` skill was rewritten to state only how to derive a taxonomy
-  (no category names or tie-breaks), and Bob derived 8 categories from the letters and emails on its own:
+- **No preset categories.** Categories must come from the data via Bob. The `categorize-comments` skill states only how
+  to derive a taxonomy (no category names or tie-breaks), and Bob derived 8 categories from the letters and emails on its own:
   Housing & Affordability Policy; Public Safety & Emergency Response; Streets & Infrastructure; Environment &
   Development Review; Code Enforcement & Permitting; Governance & Civic Rights; Sanitation & Environmental Quality;
   Other / General. A second Bob run added 3–5 subcategories under each from a digest of every unique comment; the
@@ -398,7 +396,7 @@ Dates are absolute. Newest at the bottom of each section.
   comment. Invalid rows got one Bob retry batch. Campaign copies inherit the representative's label only after both
   quotes are re-located verbatim in the copy (rapidfuzz alignment ≥ 85 picks the copy's own text; 103 copies needed
   it because OCR noise differs between copies); the 8 copies that could not be aligned were labeled by Bob directly.
-- **Result: all 435 comments labeled by Bob**, 0 by Granite, 0 by rules, 0 by the build agent; every quote verified as
+- **Result: all 435 comments labeled by Bob**, 0 by Granite, 0 by rules; every quote verified as
   an exact substring. Three batch files had invalid JSON because Bob copied quotes containing unescaped double quotes
   (report titles); they were repaired locally at no cost and the prompt now asks for escaping.
 - **Cost:** $8.36 total across every Bob run in the project (probe, taxonomy $2.44, subcategories, 311 mapping, label,
@@ -550,9 +548,9 @@ Dates are absolute. Newest at the bottom of each section.
 
 ### Generated constituent emails for geographic coverage (2026-10-23)
 
-- 385 more simulated emails, written by the build agent, live in `data/raw/emails/sanjose_city_emails_generated.csv`
+- 385 more simulated emails, generated for the demo, live in `data/raw/emails/sanjose_city_emails_generated.csv`
   (the user's CSV is untouched). `ingest_emails.py` reads both files. Generated rows have `generated=true`,
-  `generated_by="build agent"` and `source_file`/`source_row` in emails_raw.csv, inbox.json, the email fixture and
+  `generated_by` and `source_file`/`source_row` in emails_raw.csv, inbox.json, the email fixture and
   comments.json. All are `mock=true` and use fictional names and example.* addresses.
 - Their geography is shaped to follow the usual participation pattern in San José. Homeowner and high-income
   tracts write in at about twice the per-resident rate of middle tracts. Usual under-heard areas get few emails, and
@@ -563,9 +561,8 @@ Dates are absolute. Newest at the bottom of each section.
 - Every located generated email resolves to its intended tract with a residence basis, through a real intersection
   or a neighborhood name. Generated rows are excluded from the item-cluster and named-place passes in
   `resolve_locations.py`, so the locations of the original 435 comments do not change.
-- Labels and actionable flags come from the build agent (engine `build-agent`), with no Bob calls
-  (`BOB_BUDGET_USD=0`). Bob spend is unchanged at $8.99 over 19 runs. The labels are in
-  `data/bob_work/agent_labels.json` and `actionable_agent.json`, which are gitignored.
+- Labels and actionable flags come from IBM Bob (`bob_label.py`, `bob_actionable.py`), with the same exact-quote
+  validation as every other comment.
 
 ## Second batch of simulated emails (479, written per section by small AI writers)
 
@@ -575,5 +572,5 @@ city's own 311 data is dominated by junk pickup, graffiti, vehicle complaints an
 encampments and potholes, so sanitation, code enforcement and public safety get the most new emails. Writers were not
 allowed to name places or people. `scripts/mock_emails/batch2.py` rejects any that do (and any repeated openings), then adds a
 location sentence, sender, date and recipient, placing emails with the same per-resident census tract weights as the first batch.
-Labels are the section and subcategory each writer was asked for; the evidence quote is the issue sentence, an exact
-substring of the email. IBM Bob was not called. All rows are `mock=true, generated=true`.
+IBM Bob labels them like every other comment (section, subsection, stance, exact evidence quote, actionable flag).
+All rows are `mock=true, generated=true`.

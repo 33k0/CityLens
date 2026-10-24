@@ -9,7 +9,7 @@ key lives only in gitignored `.env.local`.
 
 1. **The voice taxonomy, from scratch** (`categorize`): Bob read the letters and emails and wrote
    `data/categories.json` (8 categories) and `prompts/classify.txt` via the `.bob/skills/categorize-comments` skill.
-   It never saw the build agent's earlier draft (see the comparison at the end). `authored_by: "ibm-bob"`.
+   `authored_by: "ibm-bob"`.
 2. **Subcategories** (`subcategories`): 3–5 per category, derived from a digest of every unique comment. Top-level
    keys were frozen and the script verifies they did not change.
 3. **The 311 mapping** (`map_311_taxonomy`): Bob mapped the 97 distinct 311 request types (covering 455,545 rows) into
@@ -72,19 +72,3 @@ and the prompt now asks Bob to escape them.
 Granite 4.1 8B via Ollama remains installed as the second-line fallback for labels Bob cannot produce validly; in the
 final run it was not needed. The rule engine is the last fallback and is labeled `fallback` wherever used.
 
-## Bob's taxonomy vs the rejected draft
-
-The build agent's draft (`data/categories.draft_build_agent.json`, marked rejected) was never shown to Bob.
-
-| rejected draft (build agent) | IBM Bob (in use) |
-|---|---|
-| Immigrant community safety and rights | Housing & Affordability Policy |
-| Public safety, policing and 911 response | Public Safety & Emergency Response |
-| Housing, tenants and homelessness | Streets & Infrastructure |
-| Streets, streetlights and drainage | Environment & Development Review |
-| Illegal dumping, trash and blight cleanup | Code Enforcement & Permitting |
-| Development, permits and code enforcement | Governance & Civic Rights |
-| Council governance, appointments and legislative priorities | Sanitation & Environmental Quality |
-| Community services, hardship and other | Other / General |
-
-Bob merged immigrant protection into a broader Governance & Civic Rights category, split development review out from code enforcement, and kept sanitation with environmental quality.

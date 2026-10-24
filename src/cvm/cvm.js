@@ -5,6 +5,7 @@
 import * as d3 from 'd3'
 import './cvm.css'
 import { askAssistant } from './assistant.js'
+import { union as tUnion, polygon as tPoly, featureCollection as tFC } from '@turf/turf'
 
 const COL={support:'#1F7A6E',oppose:'#B3412B',neutral:'#6B7280',unclear:'#8A6D3B',none:'#9A9A94',amber:'#B7791F'};
 const GAP=['#EDE9F7','#C9BEE8','#9F8AD3','#7357B4','#4A2C8C'];
@@ -22,6 +23,16 @@ const EAST_REGION=(()=>{const pts=[];const cx=-121.832,cy=37.334;for(let i=0;i<4
 const WG_REGION=(()=>{const pts=[];const cx=-121.902,cy=37.298;for(let i=0;i<36;i++){const a=i/36*Math.PI*2;const r=1+0.06*Math.sin(a*4)+0.04*Math.cos(a*9);pts.push([+(cx+Math.cos(a)*0.028*r).toFixed(4),+(cy+Math.sin(a)*0.019*r).toFixed(4)])}return pts})();
 function rng(s){return function(){s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
 function seedOf(str){let h=2166136261;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
+/* a drawn region is one ring [[lon,lat],…] or several disjoint rings [[[lon,lat],…],…] */
+const isMulti=poly=>Array.isArray(poly)&&Array.isArray(poly[0])&&Array.isArray(poly[0][0]);
+const ringsOf=poly=>!Array.isArray(poly)?[]:isMulti(poly)?poly:[poly];
+const ptsOf=poly=>ringsOf(poly).flat();
+const inPoly=(p,poly)=>ringsOf(poly).some(r=>inRing(p,r));
+function mergeRings(list,ring){/* union the new ring with every ring it overlaps; disjoint rings stay separate */
+ const close=r=>[...r,r[0]];let cur=ring,rest=[...list],changed=true;
+ while(changed){changed=false;for(let i=0;i<rest.length;i++){let u=null;try{u=tUnion(tFC([tPoly([close(cur)]),tPoly([close(rest[i])])]))}catch(e){u=null}
+  if(u&&u.geometry.type==='Polygon'){cur=u.geometry.coordinates[0].slice(0,-1);rest.splice(i,1);changed=true;break}}}
+ return [...rest,cur]}
 function inRing(p,r){let x=p[0],y=p[1],ins=false;for(let i=0,j=r.length-1;i<r.length;j=i++){const xi=r[i][0],yi=r[i][1],xj=r[j][0],yj=r[j][1];if(((yi>y)!=(yj>y))&&(x<(xj-xi)*(y-yi)/(yj-yi)+xi))ins=!ins}return ins}
 function inGeom(p,g){const P=g.type==='Polygon'?[g.coordinates]:g.coordinates;return P.some(pl=>inRing(p,pl[0])&&!pl.slice(1).some(h=>inRing(p,h)))}
 function bbox(g){const P=g.type==='Polygon'?[g.coordinates]:g.coordinates;let a=[1e9,1e9,-1e9,-1e9];P.forEach(pl=>pl[0].forEach(c=>{a[0]=Math.min(a[0],c[0]);a[1]=Math.min(a[1],c[1]);a[2]=Math.max(a[2],c[0]);a[3]=Math.max(a[3],c[1])}));return a}
@@ -139,7 +150,7 @@ function popBin(t){const r=t.n/t.pop*1000;return r===0?0:r<0.6?1:r<1.2?2:r<2.2?3
 /* percentile = share of census tracts with a strictly lower rate (same rule as scripts/families.py) */
 function pctRanks(vals){const s=[...vals].sort((a,b)=>a-b);const n=s.length;return vals.map(v=>{let lo=0,hi=n;while(lo<hi){const m=(lo+hi)>>1;if(s[m]<v)lo=m+1;else hi=m}return 100*lo/n})}
 const _rtc=new WeakMap();
-function regionTracts(poly){if(poly==='city')return D.tracts;if(poly&&poly.tract)return [D.byTract[poly.tract]];if(_rtc.has(poly)&&_rtc.get(poly).T===D.tracts)return _rtc.get(poly).r;
+function regionTracts(poly){if(poly==='city')return D.tracts;if(poly&&poly.tract)return [D.byTract[poly.tract]];if(isMulti(poly)){const seen=new Set();return poly.flatMap(r=>regionTracts(r)).filter(t=>!seen.has(t.id)&&seen.add(t.id))}if(_rtc.has(poly)&&_rtc.get(poly).T===D.tracts)return _rtc.get(poly).r;
  const r=D.tracts.filter(t=>{if(inRing(t.c,poly))return true;const P=t.geometry.type==='Polygon'?[t.geometry.coordinates]:t.geometry.coordinates;let n=0,k=0;P.forEach(pl=>pl[0].forEach(v=>{n++;if(inRing(v,poly))k++}));return n&&k/n>=0.3});_rtc.set(poly,{T:D.tracts,r});return r}
 
 /* ---------- map ---------- */
@@ -205,7 +216,7 @@ MapView.prototype.select=function(t){this.selT=t;this.selClip.attr('d',t?this.pa
 MapView.prototype.placeSel=function(){const lb=this.el.querySelector('.sellabel');if(!lb||!this.selT)return;const cb=this.selT.cb||[this.selT.c[0],this.selT.c[1],this.selT.c[0],this.selT.c[1]];const p=this.k.apply(this.proj([(cb[0]+cb[2])/2,cb[3]]));lb.style.left=p[0]+'px';lb.style.top=(p[1]-8)+'px'};
 MapView.prototype.regions=function(list){list=list.filter(r=>r.poly!=='city');const self=this;this.gR.raise();const at=ev=>{const ll=self.toLL(d3.pointer(ev,self.svg.node()));return D.tracts.find(t=>inGeom(ll,t.geometry))};
  const line=d3.line().curve(d3.curveLinearClosed);
- this.gR.selectAll('path').data(list).join('path').attr('d',r=>line(r.poly.map(p=>this.proj(p)))).attr('fill',GAP[4]).attr('fill-opacity',.1).attr('stroke',GAP[4]).attr('stroke-width',2).attr('vector-effect','non-scaling-stroke').attr('pointer-events','none');
+ this.gR.selectAll('path').data(list).join('path').attr('d',r=>ringsOf(r.poly).map(g=>line(g.map(p=>this.proj(p)))).join('')).attr('fill',GAP[4]).attr('fill-opacity',.1).attr('stroke',GAP[4]).attr('stroke-width',2).attr('vector-effect','non-scaling-stroke').attr('pointer-events','none');
  this.gR.selectAll('path').attr('pointer-events',this.o.static?'none':'all').style('cursor','pointer')
   .on('mousemove',function(ev,r){if(self.armed||self.drawing)return;const open=self.o.regionOpen&&self.o.regionOpen(r);d3.select(this).attr('fill-opacity',open?.1:.2);if(!open){if(self.o.onHover)self.o.onHover(null,null,self);return}const t=at(ev);if(self.o.onHover)self.o.onHover(t||null,t?d3.pointer(ev,self.svg.node()):null,self)})
   .on('mouseleave',function(){d3.select(this).attr('fill-opacity',.1);if(self.o.onHover)self.o.onHover(null,null,self)})
@@ -518,7 +529,7 @@ async function mount(root,init){
   return `<div class="body"><div class="an">${side}<div class="anmain dash">${M}</div></div></div>`}
  function placePop(){const el=document.querySelector('.rmodal');const m=maps[0];if(!el||!m)return;let b;
   if(S.tractDetail){const cb=D.byTract[S.tractDetail].cb;const p0=m.screen([cb[0],cb[3]]),p1=m.screen([cb[2],cb[1]]);b=[p0[0],p0[1],p1[0],p1[1]]}
-  else if(S.region&&Array.isArray(S.region.poly)){const P=S.region.poly.map(p=>m.screen(p));b=[Math.min(...P.map(p=>p[0])),Math.min(...P.map(p=>p[1])),Math.max(...P.map(p=>p[0])),Math.max(...P.map(p=>p[1]))]}
+  else if(S.region&&Array.isArray(S.region.poly)){const P=ptsOf(S.region.poly).map(p=>m.screen(p));b=[Math.min(...P.map(p=>p[0])),Math.min(...P.map(p=>p[1])),Math.max(...P.map(p=>p[0])),Math.max(...P.map(p=>p[1]))]}
   else{el.style.left=(m.w-el.offsetWidth-60)+'px';el.style.top='70px';return}
   const w=el.offsetWidth,h=el.offsetHeight;let y=b[3]+12;if(y+h>m.h-10){const up=b[1]-12-h;y=up>=10?up:Math.max(10,m.h-h-10)}
   const x=Math.max(10,Math.min(m.w-w-56,(b[0]+b[2])/2-w/2));el.style.left=x+'px';el.style.top=y+'px'}
@@ -592,20 +603,20 @@ async function mount(root,init){
   const qq=a=>{a=a.filter(x=>x>0).sort((x,y)=>x-y);return a.length?[.25,.5,.75].map(p=>a[Math.floor(a.length*p)]):[1,2,3]};
   D.qb={voice:qq(T.map(t=>t.vrate)),prob:qq(T.map(t=>t.prate)),gap:qq(T.map(t=>t.pgap))};return o}
  function styleMaps(){const fcnt=heatTh();const inR=S.region&&S.region.poly!=='city'?new Set(regionTracts(S.region.poly).map(t=>t.id)):null;const inAll=S.compare&&S.regions.length>1?new Set(S.regions.flatMap(r=>regionTracts(r.poly).map(t=>t.id))):inR;
-  maps.forEach((m,i)=>{if(S.selTract===undefined&&S.mvOpen>=0)S.selTract=missingTop()[S.mvOpen].id;m.select(S.selTract?D.byTract[S.selTract]:null);m.style({cnt:fcnt,scheme:S.sbs?(i?'gap':'voice'):S.scheme,polys:(S.compare?S.regions:S.region?[S.region]:[]).map(r=>r.poly).filter(p=>Array.isArray(p)),dotFilter,empty:S.state==='noitem'||S.state==='loading'});m.regions(S.compare?S.regions:S.region?[S.region]:[])});placeHandle()}
- function placeHandle(){document.querySelectorAll('.rhandle').forEach(e=>e.remove());if(!maps[0]||S.sbs)return;const list=(S.compare?S.regions:S.region?[S.region]:[]).filter(r=>r.poly!=='city');list.forEach((r,i)=>{const m=maps[0];const pts=r.poly.map(p=>m.screen(p));const xs=pts.map(p=>p[0]),ys=pts.map(p=>p[1]);const x=Math.max(...xs),y=Math.min(...ys);const h=document.createElement('div');h.className='rhandle';h.innerHTML=`<span class="nm"><i></i>${esc(r.name)}</span>${S.compare?'':'<span class="sep"></span><button data-act="rename">Rename</button>'+(S.saved.includes(r)?'<button disabled style="opacity:.6;cursor:default">Saved</button>':'<button data-act="save">Save</button>')+'<button data-act="del">Delete</button>'}`;m.el.appendChild(h);h.style.left=Math.max(8,Math.min(m.w-h.offsetWidth-56,x-h.offsetWidth/2))+'px';h.style.top=Math.max(8,y-40)+'px'})}
+  maps.forEach((m,i)=>{if(S.selTract===undefined&&S.mvOpen>=0)S.selTract=missingTop()[S.mvOpen].id;m.select(S.selTract?D.byTract[S.selTract]:null);m.style({cnt:fcnt,scheme:S.sbs?(i?'gap':'voice'):S.scheme,polys:(S.compare?S.regions:S.region?[S.region]:[]).flatMap(r=>ringsOf(r.poly)),dotFilter,empty:S.state==='noitem'||S.state==='loading'});m.regions(S.compare?S.regions:S.region?[S.region]:[])});placeHandle()}
+ function placeHandle(){document.querySelectorAll('.rhandle').forEach(e=>e.remove());if(!maps[0]||S.sbs)return;const list=(S.compare?S.regions:S.region?[S.region]:[]).filter(r=>r.poly!=='city');list.forEach((r,i)=>{const m=maps[0];const pts=ptsOf(r.poly).map(p=>m.screen(p));const xs=pts.map(p=>p[0]),ys=pts.map(p=>p[1]);const x=Math.max(...xs),y=Math.min(...ys);const h=document.createElement('div');h.className='rhandle';h.innerHTML=`<span class="nm"><i></i>${esc(r.name)}</span>${S.compare?'':'<span class="sep"></span><button data-act="rename">Rename</button>'+(S.saved.includes(r)?'<button disabled style="opacity:.6;cursor:default">Saved</button>':'<button data-act="save">Save</button>')+'<button data-act="del">Delete</button>'}`;m.el.appendChild(h);h.style.left=Math.max(8,Math.min(m.w-h.offsetWidth-56,x-h.offsetWidth/2))+'px';h.style.top=Math.max(8,y-40)+'px'})}
 
  function render(){
   if(S.view==='analytics'&&(S.region||S.tractDetail)){heatTh();stage.innerHTML=top()+analyticsView()+footer();const el=stage.querySelector('#mini');const sel=S.tractDetail?[D.byTract[S.tractDetail]]:regionTracts(S.region.poly);const ids=new Set(sel.map(t=>t.id));const whole=sel.length===D.tracts.length;let focus=null;
    if(!whole){const b=[1e9,1e9,-1e9,-1e9];sel.forEach(t=>{const bb=bbox(t.geometry);b[0]=Math.min(b[0],bb[0]);b[1]=Math.min(b[1],bb[1]);b[2]=Math.max(b[2],bb[2]);b[3]=Math.max(b[3],bb[3])});const px=(b[2]-b[0])*0.35+0.004,py=(b[3]-b[1])*0.35+0.003;focus=[b[0]-px,b[1]-py,b[2]+px,b[3]+py]}
    const m=new MapView(el,{static:true,pad:12,focus});const drawnA=!S.tractDetail&&S.region&&Array.isArray(S.region.poly);const qb=(D.qb||{voice:[1,2,3]}).voice;const hq=t=>{const v=t.vrate||0;return v===0?'url(#hatchRaw)':RAW[v<qb[0]?1:v<qb[1]?2:v<qb[2]?3:4]};
-   if(drawnA){const cid='mc'+Math.random().toString(36).slice(2,7);m.svg.select('defs').append('clipPath').attr('id',cid).append('path').attr('d',d3.line().curve(d3.curveLinearClosed)(S.region.poly.map(p=>m.proj(p))));m.gT.attr('clip-path',null);const bg=m.gT.node().cloneNode(true);m.gT.node().parentNode.insertBefore(bg,m.gT.node());d3.select(bg).selectAll('path').attr('fill','#ECEBE7').attr('stroke','#FFFFFF').attr('stroke-width',.6);m.gT.attr('clip-path',`url(#${cid})`);m.regions([S.region])}
+   if(drawnA){const cid='mc'+Math.random().toString(36).slice(2,7);m.svg.select('defs').append('clipPath').attr('id',cid).append('path').attr('d',ringsOf(S.region.poly).map(g=>d3.line().curve(d3.curveLinearClosed)(g.map(p=>m.proj(p)))).join(''));m.gT.attr('clip-path',null);const bg=m.gT.node().cloneNode(true);m.gT.node().parentNode.insertBefore(bg,m.gT.node());d3.select(bg).selectAll('path').attr('fill','#ECEBE7').attr('stroke','#FFFFFF').attr('stroke-width',.6);m.gT.attr('clip-path',`url(#${cid})`);m.regions([S.region])}
    m.tp.attr('fill',t=>drawnA?hq(t):ids.has(t.id)?'#7357B4':'#ECEBE7').attr('stroke','#FFFFFF').attr('stroke-width',.6).attr('opacity',1);m.dp.attr('display','none');maps=[];return}
   heatTh();const keepM=document.querySelector('.rmodal .scroll');const stM=keepM?keepM.scrollTop:0;
   const keep=document.querySelector('.rpanel .scroll');const st=keep?keep.scrollTop:0;const keepL=document.querySelector('.rail .scroll');const stL=keepL?keepL.scrollTop:0;
   stage.innerHTML=top()+((S.state==='fallback'||ITEM.fallback>ITEM.total/2)?`<div class="banner"><span class="dia"></span><span>Running rule-based classification; AI labels unavailable.</span></div>`:'')+`<div class="body">${S.sbs?'':leftRail()}${mapArea()}${rightPanel()}${S.drawer&&!S.sbs?drawer():''}</div>`+footer()+(S.inspector?inspector():'')+(S.lightbox?lightbox():'');
   const prevT=maps[0]?maps[0].k:null;
-  maps=[...stage.querySelectorAll('.map')].map((el,i)=>new MapView(el,{padTop:S.sbs?72:52,onHover,regionOpen:r=>S.modal&&!S.tractDetail&&S.region===r&&!S.compare,onRegion:r=>{if(S.compare){const k=S.regions.indexOf(r);if(k>=0){S.region=r;S.regions=[r];S.compare=false}}S.selTract=null;S.tractDetail=null;S.modal=true;S.right=true;render()},onPick:(t,dbl)=>{const drawn=S.region&&Array.isArray(S.region.poly)&&!S.compare;if(drawn&&!dbl&&inRing(t.c,S.region.poly)){S.selTract=null;S.tractDetail=null;S.modal=true;S.right=true;render();return}const off=S.selTract===t.id;S.selTract=off?null:t.id;S.tractDetail=off?null:t.id;if(!off){S.modal=true;S.right=true}render()},onZoom:(t,src)=>{maps.forEach(m=>{if(m!==src)m.setT(t)});tip.style.display='none';placeHandle()}}));
+  maps=[...stage.querySelectorAll('.map')].map((el,i)=>new MapView(el,{padTop:S.sbs?72:52,onHover,regionOpen:r=>S.modal&&!S.tractDetail&&S.region===r&&!S.compare,onRegion:r=>{if(S.compare){const k=S.regions.indexOf(r);if(k>=0){S.region=r;S.regions=[r];S.compare=false}}S.selTract=null;S.tractDetail=null;S.modal=true;S.right=true;render()},onPick:(t,dbl)=>{const drawn=S.region&&Array.isArray(S.region.poly)&&!S.compare;if(drawn&&!dbl&&inPoly(t.c,S.region.poly)){S.selTract=null;S.tractDetail=null;S.modal=true;S.right=true;render();return}const off=S.selTract===t.id;S.selTract=off?null:t.id;S.tractDetail=off?null:t.id;if(!off){S.modal=true;S.right=true}render()},onZoom:(t,src)=>{maps.forEach(m=>{if(m!==src)m.setT(t)});tip.style.display='none';placeHandle()}}));
   if(prevT&&prevT.k!==1)maps.forEach(m=>m.setT(prevT));
   else if(S.initZoom&&!S._z){S._z=1;const m=maps[0];const [x,y]=m.proj(S.initZoom.c);const k=S.initZoom.k;const t=d3.zoomIdentity.translate(m.w/2-x*k,m.h/2-y*k).scale(k);maps.forEach(mm=>mm.setT(t))}
   maps.forEach(m=>m.onApply=()=>{placeHandle();placePop()});
@@ -613,7 +624,7 @@ async function mount(root,init){
   if(S.armed)armDraw();
   if(S.hint){const h=document.createElement('div');h.className='hint';h.textContent=S.hint;maps[0].el.appendChild(h)}
   if(S.pin&&!S.pinShown){const t=(S.pin.kind==='under'?D.tracts.filter(x=>x.n>=2&&x.gap<-55).sort((a,b)=>b.pop-a.pop)[0]:S.pin.kind==='zero'?D.tracts.filter(x=>x.n===0).sort((a,b)=>b.exp-a.exp)[0]:D.byTract[S.pin.id])||D.tracts[0];maps.forEach(m=>m.hover(t));const m=maps[S.pin.map||0];showTip(t,m.screen(t.c),m)}
-  if(S.modal&&maps[0]&&!S.sbs){const tg=S.tractDetail?{pts:(b=>[[b[0],b[1]],[b[2],b[3]]])(D.byTract[S.tractDetail].cb)}:S.region&&Array.isArray(S.region.poly)?{pts:S.region.poly}:null;const key=S.tractDetail||(S.region&&S.region.name+(Array.isArray(S.region.poly)?S.region.poly.length:''));if(tg&&key!==S._fitKey&&!S.regionState){S._fitKey=key;const m=maps[0];const mw=(S.compare&&!S.tractDetail?640:380)+70;setTimeout(()=>m.fitTo(tg,[40,40,m.w-60,m.h*0.48]),0)}}
+  if(S.modal&&maps[0]&&!S.sbs){const tg=S.tractDetail?{pts:(b=>[[b[0],b[1]],[b[2],b[3]]])(D.byTract[S.tractDetail].cb)}:S.region&&Array.isArray(S.region.poly)?{pts:ptsOf(S.region.poly)}:null;const key=S.tractDetail||(S.region&&S.region.name+(Array.isArray(S.region.poly)?S.region.poly.length:''));if(tg&&key!==S._fitKey&&!S.regionState){S._fitKey=key;const m=maps[0];const mw=(S.compare&&!S.tractDetail?640:380)+70;setTimeout(()=>m.fitTo(tg,[40,40,m.w-60,m.h*0.48]),0)}}
   if(!S.modal)S._fitKey=null;placePop();
   if(S.toast&&maps[0]){const h=document.createElement('div');h.className='hint maptoast';h.textContent=S.toast;h.style.background='#1B1B1B';maps[0].el.appendChild(h)}
   if(S.preDraw)preDraw();
